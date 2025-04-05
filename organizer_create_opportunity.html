@@ -131,6 +131,33 @@
         body.dark .toggle-icon svg {
             transform: rotate(180deg);
         }
+
+        /* Sticky Wizard Steps */
+        #wizard-steps {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: #ffffff; /* Ensure it matches the background */
+            padding: 1rem 2rem; /* Increased padding for better appearance */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #e5e7eb; /* Add a subtle border for separation */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #wizard-steps span {
+            flex: 1; /* Make each step take equal space */
+            text-align: center;
+            padding: 0.5rem 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #wizard-steps span:hover {
+            background-color: #f3f4f6; /* Tailwind's gray-100 */
+            border-radius: 0.375rem; /* Tailwind's rounded-md */
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -139,29 +166,29 @@
         <!-- Organizer Sidebar (Copy from organizer_dashboard.html) -->
         <aside class="w-64 bg-white shadow-md flex-shrink-0">
             <div class="p-6 border-b">
-                 <a href="index.html" class="text-2xl font-bold text-blue-600">HackaPlatform</a>
-                 <span class="block text-sm text-gray-500 mt-1">Organizer Panel</span>
+                <a href="index.html" class="text-2xl font-bold text-blue-600">HackaPlatform</a>
+                <span class="block text-sm text-gray-500 mt-1">Organizer Panel</span>
             </div>
             <nav class="p-4 space-y-2">
-                <a href="organizer_dashboard.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
+                <a href="organizer_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-building w-6 mr-2"></i> Organization Profile</a>
+                <a href="organizer_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
                 <a href="organizer_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-list-alt w-6 mr-2"></i> My Opportunities</a>
                 <a href="organizer_create_opportunity.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-plus-circle w-6 mr-2"></i> Create New</a>
                 <a href="organizer_analytics.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-chart-bar w-6 mr-2"></i> Analytics</a>
-                <a href="organizer_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-building w-6 mr-2"></i> Organization Profile</a>
                 <a href="organizer_settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
-                 <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
             </nav>
         </aside>
         <!-- Main Content Area -->
         <main class="flex-1 overflow-y-auto p-8">
             <h1 class="text-3xl font-bold mb-6">Create New Opportunity</h1>
 
-            <!-- Wizard Steps Indicator -->
-            <div id="wizard-steps" class="mb-8 flex justify-between text-sm text-gray-500 max-w-2xl mx-auto">
-                <span id="step-1" class="step text-blue-600 font-semibold border-b-2 border-blue-600 pb-1 cursor-pointer">1. Type & Basic Info</span>
-                <span id="step-2" class="step cursor-pointer">2. Details & Rules</span>
-                <span id="step-3" class="step cursor-pointer">3. Rounds & Evaluation</span>
-                <span id="step-4" class="step cursor-pointer">4. Review & Publish</span>
+            <!-- Extended Sticky Wizard Steps Indicator -->
+            <div id="wizard-steps">
+                <span id="step-1" class="step text-blue-600 font-semibold border-b-2 border-blue-600">1. Type & Basic Info</span>
+                <span id="step-2" class="step">2. Details & Rules</span>
+                <span id="step-3" class="step">3. Rounds & Evaluation</span>
+                <span id="step-4" class="step">4. Review & Publish</span>
             </div>
 
             <!-- Form Sections -->
