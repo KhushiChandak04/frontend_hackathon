@@ -3,228 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Hackathon Platform</title> <!-- Change title per page -->
+    <title>Create New Opportunity</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Optional: For Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* Optional: Add custom base styles or component overrides here if needed */
         body {
-            font-family: 'Inter', sans-serif; /* Example font - include Google Font link if needed */
-        }
-        /* Basic Rich Text Editor Placeholder Style */
-        .rich-text-placeholder {
-            border: 1px solid #e2e8f0; /* Tailwind's gray-300 */
-            padding: 0.75rem;
-            min-height: 150px;
-            background-color: #f9fafb; /* Tailwind's gray-50 */
-            border-radius: 0.375rem; /* Tailwind's rounded-md */
-            color: #6b7280; /* Tailwind's gray-500 */
+            font-family: 'Inter', sans-serif;
         }
     </style>
-    <!-- If using Google Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-    <!-- Include Organizer Sidebar and Header/Nav if desired, or make it a full-page form -->
-     <div class="flex h-screen">
-        <!-- Organizer Sidebar (Copy from organizer_dashboard.html) -->
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">...</aside>
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md flex-shrink-0">
+            <div class="p-6 border-b">
+                <a href="index.html" class="text-2xl font-bold text-blue-600">HackaPlatform</a>
+                <span class="block text-sm text-gray-500 mt-1">Organizer Panel</span>
+            </div>
+            <nav class="p-4 space-y-2">
+                <a href="organizer_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
+                <a href="organizer_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-list-alt w-6 mr-2"></i> My Opportunities</a>
+                <a href="organizer_create_opportunity.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-plus-circle w-6 mr-2"></i> Create New</a>
+                <a href="organizer_analytics.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-chart-bar w-6 mr-2"></i> Analytics</a>
+                <a href="organizer_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-building w-6 mr-2"></i> Organization Profile</a>
+                <a href="organizer_settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
+                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+            </nav>
+        </aside>
 
         <!-- Main Content Area -->
         <main class="flex-1 overflow-y-auto p-8">
             <h1 class="text-3xl font-bold mb-6">Create New Opportunity</h1>
+            <p class="text-lg text-gray-600 mb-8">Fill out the details below to create a new opportunity.</p>
 
-            <!-- Wizard Steps Indicator (Optional Visual) -->
-            <div class="mb-8 flex justify-between text-sm text-gray-500 max-w-2xl mx-auto">
-                <span class="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1">1. Type & Basic Info</span>
-                <span>2. Details & Rules</span>
-                <span>3. Rounds & Evaluation</span>
-                <span>4. Review & Publish</span>
-            </div>
+            <!-- Form Section -->
+            <form class="bg-white p-6 rounded-lg shadow space-y-6">
+                <!-- Opportunity Title -->
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700">Opportunity Title</label>
+                    <input type="text" id="title" name="title" placeholder="Enter the opportunity title" class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
 
-            <!-- Form Sections -->
-            <form action="#" method="POST" class="space-y-8 bg-white p-8 rounded-lg shadow">
+                <!-- Opportunity Type -->
+                <div>
+                    <label for="type" class="block text-sm font-medium text-gray-700">Opportunity Type</label>
+                    <select id="type" name="type" class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select Type</option>
+                        <option value="hackathon">Hackathon</option>
+                        <option value="coding_contest">Coding Contest</option>
+                        <option value="case_study">Case Study</option>
+                        <option value="quiz">Quiz</option>
+                        <option value="hiring_challenge">Hiring Challenge</option>
+                    </select>
+                </div>
 
-                <!-- Section 1: Type & Basic Info -->
-                <section>
-                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">1. Opportunity Type & Basic Information</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="opportunity-type" class="block text-sm font-medium text-gray-700 mb-1">Opportunity Type *</label>
-                            <select id="opportunity-type" name="opportunity_type" required class="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="">Select Type...</option>
-                                <option value="hackathon">Hackathon</option>
-                                <option value="coding_contest">Coding Contest</option>
-                                <option value="case_study">Case Study</option>
-                                <option value="quiz">Quiz</option>
-                                <option value="hiring_challenge">Hiring Challenge</option>
-                                <option value="scholarship">Scholarship</option>
-                                <option value="workshop">Workshop</option>
-                                <!-- Add other types -->
-                            </select>
-                        </div>
-                         <div>
-                            <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Opportunity Title *</label>
-                            <input type="text" id="title" name="title" required placeholder="e.g., Innovate for Tomorrow Hackathon" class="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                    </div>
-                     <div class="mt-6">
-                        <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description * (Supports Markdown/Rich Text)</label>
-                        <textarea id="description" name="description" rows="5" required placeholder="Provide a detailed description of the opportunity..." class="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        <!-- Or use a placeholder for a real Rich Text Editor -->
-                        <!-- <div class="rich-text-placeholder">Rich Text Editor Placeholder</div> -->
-                    </div>
-                </section>
+                <!-- Description -->
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Provide a detailed description of the opportunity" class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                </div>
 
-                 <!-- Section 2: Eligibility, Timelines, Rules -->
-                <section>
-                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">2. Details, Rules & Branding</h2>
-                    <!-- Eligibility Fields -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Eligibility Criteria</label>
-                        <input type="text" name="eligibility_details" placeholder="e.g., Students from XYZ University, Final Year Only" class="w-full border border-gray-300 rounded-md p-2 mb-2">
-                        <input type="text" name="required_skills" placeholder="Required Skills (comma-separated): Python, ML, UI/UX" class="w-full border border-gray-300 rounded-md p-2">
-                        <!-- Add more specific fields: Checkboxes for Year, Dropdown for Location etc. -->
-                    </div>
-
-                    <!-- Timelines -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-                         <div>
-                            <label for="reg_start" class="block text-sm font-medium text-gray-700 mb-1">Registration Start *</label>
-                            <input type="datetime-local" id="reg_start" name="reg_start" required class="w-full border border-gray-300 rounded-md p-2">
-                        </div>
-                         <div>
-                            <label for="reg_end" class="block text-sm font-medium text-gray-700 mb-1">Registration End *</label>
-                            <input type="datetime-local" id="reg_end" name="reg_end" required class="w-full border border-gray-300 rounded-md p-2">
-                        </div>
-                         <div>
-                            <label for="event_start" class="block text-sm font-medium text-gray-700 mb-1">Event Start *</label>
-                            <input type="datetime-local" id="event_start" name="event_start" required class="w-full border border-gray-300 rounded-md p-2">
-                        </div>
-                         <div>
-                            <label for="event_end" class="block text-sm font-medium text-gray-700 mb-1">Event End *</label>
-                            <input type="datetime-local" id="event_end" name="event_end" required class="w-full border border-gray-300 rounded-md p-2">
-                        </div>
-                        <!-- Add fields for Submission Deadlines, Result Dates -->
-                    </div>
-
-                    <!-- Rules & Guidelines -->
-                    <div class="mb-4">
-                        <label for="rules" class="block text-sm font-medium text-gray-700 mb-1">Rules & Guidelines * (Rich Text)</label>
-                        <div class="rich-text-placeholder">Placeholder for Rules Rich Text Editor</div>
-                    </div>
-
-                    <!-- Branding -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                        <div>
-                            <label for="logo" class="block text-sm font-medium text-gray-700 mb-1">Organization Logo</label>
-                            <input type="file" id="logo" name="logo" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                        </div>
-                        <div>
-                            <label for="banner" class="block text-sm font-medium text-gray-700 mb-1">Event Banner Image</label>
-                            <input type="file" id="banner" name="banner" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                        </div>
-                         <!-- Add Color Picker input if needed -->
-                    </div>
-
-                     <!-- Themes/Tracks -->
-                    <div class="mb-4">
-                        <label for="themes" class="block text-sm font-medium text-gray-700 mb-1">Themes/Tracks (Optional, one per line)</label>
-                        <textarea id="themes" name="themes" rows="3" placeholder="e.g., Fintech
-Sustainability
-Healthcare AI" class="w-full border border-gray-300 rounded-md p-2"></textarea>
-                    </div>
-                </section>
-
-                <!-- Section 3: Rounds, Submissions, Evaluation -->
-                 <section>
-                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">3. Rounds, Submissions & Evaluation</h2>
-                    <!-- Round Configuration (Needs JS for dynamic adding/removing rounds) -->
-                    <div class="mb-4 p-4 border border-dashed border-gray-300 rounded">
-                         <h3 class="text-md font-medium mb-2">Round 1 (Example: Quiz Round)</h3>
-                         <input type="text" name="round1_name" value="Quiz Round" class="w-full border border-gray-300 rounded-md p-2 mb-2">
-                         <textarea name="round1_description" placeholder="Round 1 description..." rows="2" class="w-full border border-gray-300 rounded-md p-2 mb-2"></textarea>
-                         <label class="block text-sm font-medium text-gray-700 mb-1">Submission Type:</label>
-                         <select name="round1_submission_type" class="w-full border border-gray-300 rounded-md p-2 mb-2">
-                             <option value="quiz">Quiz / MCQ</option>
-                             <option value="code">Code Repository</option>
-                              <option value="link">Link</option>
-                              <option value="document">Document Upload</option>
-                         </select>
-                         <label class="block text-sm font-medium text-gray-700 mb-1">Deadline:</label>
-                         <input type="datetime-local" name="round1_deadline" class="w-full border border-gray-300 rounded-md p-2">
-                    </div>
-                     <button type="button" class="text-sm text-blue-600 hover:underline">+ Add Another Round</button>
-
-                    <!-- Prizes -->
-                    <div class="mt-6 mb-4">
-                        <label for="prizes" class="block text-sm font-medium text-gray-700 mb-1">Prizes & Rewards *</label>
-                        <textarea id="prizes" name="prizes" rows="3" required placeholder="Describe prizes: Cash, Internships, PPIs, Goodies..." class="w-full border border-gray-300 rounded-md p-2"></textarea>
-                    </div>
-
-                    <!-- Team Size -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Team Size Rules *</label>
-                         <div class="flex items-center space-x-4">
-                             <span>Min:</span> <input type="number" name="min_team_size" min="1" value="1" class="w-16 border border-gray-300 rounded-md p-1">
-                             <span>Max:</span> <input type="number" name="max_team_size" min="1" value="1" class="w-16 border border-gray-300 rounded-md p-1">
-                         </div>
-                    </div>
-
-                     <!-- Evaluation Criteria -->
-                    <div class="mb-4">
-                        <label for="evaluation_criteria" class="block text-sm font-medium text-gray-700 mb-1">Evaluation Criteria / Rubrics (Rich Text)</label>
-                        <div class="rich-text-placeholder">Placeholder for Evaluation Criteria Editor</div>
-                    </div>
-
-                    <!-- Invite Judges -->
+                <!-- Dates -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="judges" class="block text-sm font-medium text-gray-700 mb-1">Invite Judges/Evaluators (Enter emails, comma-separated)</label>
-                        <input type="text" id="judges" name="judges" placeholder="judge1@example.com, judge2@example.com" class="w-full border border-gray-300 rounded-md p-2">
+                        <label for="start-date" class="block text-sm font-medium text-gray-700">Start Date</label>
+                        <input type="date" id="start-date" name="start-date" class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
-                 </section>
+                    <div>
+                        <label for="end-date" class="block text-sm font-medium text-gray-700">End Date</label>
+                        <input type="date" id="end-date" name="end-date" class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
 
-                <!-- Section 4: Optional Settings -->
-                 <section>
-                     <h2 class="text-xl font-semibold mb-4 border-b pb-2">4. Optional Settings</h2>
-                    <!-- Ticketing -->
-                    <div class="mb-4 flex items-center space-x-4">
-                        <input type="checkbox" id="enable_fees" name="enable_fees" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="enable_fees" class="text-sm font-medium text-gray-700">Enable Participation Fees</label>
-                        <input type="number" name="fee_amount" placeholder="Amount (USD)" class="w-24 border border-gray-300 rounded-md p-1 hidden"> <!-- Show with JS -->
-                    </div>
-                     <!-- Sponsor Showcasing -->
-                    <div class="mb-4">
-                        <label for="sponsors" class="block text-sm font-medium text-gray-700 mb-1">Sponsor Logos & Links (Add fields dynamically with JS)</label>
-                         <div class="flex items-center space-x-2">
-                            <input type="file" name="sponsor_logo[]" class="text-sm">
-                            <input type="url" name="sponsor_link[]" placeholder="Sponsor Website Link" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
-                         </div>
-                         <button type="button" class="text-sm text-blue-600 hover:underline mt-1">+ Add Sponsor</button>
-                    </div>
-                    <!-- Custom Registration Fields -->
-                    <div class="mb-4">
-                         <label class="block text-sm font-medium text-gray-700 mb-1">Custom Registration Questions (Add fields dynamically with JS)</label>
-                          <div class="flex items-center space-x-2 mb-1">
-                             <input type="text" name="custom_field_label[]" placeholder="Question Label (e.g., T-Shirt Size)" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
-                             <select name="custom_field_type[]" class="border border-gray-300 rounded-md p-1 text-sm">
-                                 <option value="text">Text</option>
-                                 <option value="select">Dropdown</option>
-                                 <option value="checkbox">Checkbox</option>
-                             </select>
-                         </div>
-                         <button type="button" class="text-sm text-blue-600 hover:underline mt-1">+ Add Custom Field</button>
-                    </div>
-                 </section>
-
-                <!-- Action Buttons -->
-                <div class="flex justify-end space-x-4 pt-6 border-t">
-                     <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded font-medium">Save Draft</button>
-                     <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">Preview & Publish</button>
-                     <!-- Or add Next/Previous buttons for multi-step -->
-                 </div>
+                <!-- Submission Button -->
+                <div class="flex justify-end">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">Create Opportunity</button>
+                </div>
             </form>
         </main>
     </div>
