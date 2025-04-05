@@ -8,17 +8,27 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style> body { font-family: 'Inter', sans-serif; } </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Optional: Add a subtle background pattern or gradient */
+        .gradient-bg {
+           background-color: #f3f4f6; /* bg-gray-100 */
+           background-image: linear-gradient(to bottom right, #f3f4f6, #e5e7eb); /* Slightly darker gray */
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body class="gradient-bg">
 
-    <!-- Header/Navbar -->
+    <!-- Header/Navbar (kept the same for consistency) -->
     <nav class="bg-gray-900 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-bold text-blue-400">Hackverse</a>
             <div class="hidden md:flex space-x-6 items-center">
-                <a href="login.html" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded transition duration-300">Login</a>
+                <!-- Maybe highlight Login is active or disable it here -->
+                <a href="login.html" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded transition duration-300 ring-2 ring-blue-300">Login</a>
                 <a href="signup.html" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded transition duration-300">Sign Up</a>
             </div>
             <button class="md:hidden focus:outline-none"><i class="fas fa-bars text-xl"></i></button>
@@ -26,41 +36,140 @@
     </nav>
 
     <!-- Main Login Content -->
-    <main class="flex items-center justify-center min-h-screen pt-10 pb-20 px-4">
-        <div class="bg-white p-8 md:p-10 rounded-lg shadow-xl w-full max-w-md">
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Login to Hackverse</h1>
-            <form action="/perform_login" method="POST"> <!-- Action needs backend endpoint -->
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email Address</label>
-                    <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="you@example.com">
+    <main class="flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-lg border border-gray-200">
+
+            <!-- Form Header -->
+            <div class="text-center mb-8">
+                <!-- Optional: Add Logo Image here -->
+                <!-- <img src="path/to/logo.png" alt="Hackverse Logo" class="mx-auto h-12 w-auto mb-4"> -->
+                <h1 class="text-3xl font-extrabold text-gray-900">
+                    Welcome Back!
+                </h1>
+                <p class="mt-2 text-sm text-gray-600">
+                    Login to continue your Hackverse journey.
+                </p>
+            </div>
+
+            <!-- Placeholder for Login Error Messages -->
+            <div id="error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6 text-sm" role="alert">
+                <strong class="font-bold">Oops!</strong>
+                <span class="block sm:inline"> Invalid email or password. Please try again.</span>
+                <!-- Add a close button if needed -->
+            </div>
+
+
+            <form action="/perform_login" method="POST" class="space-y-6"> <!-- Use space-y for consistent spacing -->
+                <!-- Email Input with Icon -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <div class="relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-envelope text-gray-400"></i>
+                        </div>
+                        <input type="email" id="email" name="email" required autocomplete="email"
+                               class="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                               placeholder="you@example.com">
+                    </div>
                 </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
-                    <input type="password" id="password" name="password" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••">
-                    <a href="#" class="text-xs text-blue-600 hover:underline mt-1 block text-right">Forgot Password?</a>
+
+                <!-- Password Input with Icon -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative rounded-md shadow-sm">
+                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <input type="password" id="password" name="password" required autocomplete="current-password"
+                               class="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                               placeholder="••••••••">
+                        <!-- Optional: Add Show/Hide Password Toggle Button Here -->
+                    </div>
                 </div>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300">
-                    Login
-                </button>
-                <p class="text-center text-gray-600 text-sm mt-6">
-                    Don't have an account? <a href="signup.html" class="text-blue-600 hover:underline font-medium">Sign Up</a>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="flex items-center justify-between text-sm">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-gray-900">
+                            Remember me
+                        </label>
+                    </div>
+                    <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit"
+                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                        <i class="fas fa-sign-in-alt mr-2 mt-0.5"></i> <!-- Login Icon -->
+                        Login
+                    </button>
+                </div>
+
+                <!-- Divider (for social logins) -->
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-3 bg-white text-gray-500">
+                            Or continue with
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Social Login Buttons -->
+                <div>
+                    <div class="grid grid-cols-1 gap-3">
+                        <!-- Google Button -->
+                        <button type="button" class="w-full inline-flex justify-center py-2.5 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <i class="fab fa-google text-red-500 mr-2 text-lg"></i> Continue with Google
+                        </button>
+
+                        
+                    </div>
+                </div>
+
+                <!-- Link to Sign Up -->
+                <p class="text-center text-gray-600 text-sm mt-8"> <!-- Added margin-top -->
+                    Don't have an account?
+                    <a href="signup.html" class="font-medium text-blue-600 hover:text-blue-700 hover:underline">
+                        Sign Up Here
+                    </a>
                 </p>
             </form>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-10">
+    <!-- Footer (kept the same) -->
+    <footer class="bg-gray-900 text-gray-400 py-10 mt-12"> <!-- Added margin-top -->
         <div class="container mx-auto px-6 text-center">
-             <p>© 2023 Hackverse. All rights reserved.</p>
             <div class="mt-4 space-x-6">
-                <a href="about.html" class="hover:text-white">About</a>
-                <a href="contact.html" class="hover:text-white">Contact</a>
-                <a href="privacy.html" class="hover:text-white">Privacy Policy</a>
-                <a href="terms.html" class="hover:text-white">Terms of Service</a>
+                <a href="about.html" class="hover:text-white text-sm">About</a>
+                <a href="contact.html" class="hover:text-white text-sm">Contact</a>
+                <a href="privacy.html" class="hover:text-white text-sm">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-white text-sm">Terms of Service</a>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Simple script to show the error message (for demonstration)
+        // In a real app, this would be controlled by backend response/JS validation
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            if (errorDiv) {
+                errorDiv.classList.remove('hidden');
+                // You might want to set the specific message here too
+                // errorDiv.querySelector('span').textContent = message;
+            }
+        }
+        // Example: Uncomment to test showing the error
+        // showError('Invalid credentials provided.');
+    </script>
 
 </body>
 </html>
