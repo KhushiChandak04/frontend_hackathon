@@ -3,130 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile</title>
-    <!-- Link to your CSS file -->
-    <link rel="stylesheet" href="style.css">
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <!-- Changed Title -->
+    <title>My Profile - HackaPlatform</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS (from Profile HTML) - Might cause conflicts with Tailwind, use carefully -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Internal Styles -->
     <style>
-        /* Basic inline styles for demonstration - move to style.css */
-        body { font-family: sans-serif; margin: 0; background-color: #f4f7f6; }
-        .profile-header-banner { background-color: #6c757d; /* Example gray */ height: 150px; margin-bottom: -50px; /* Pull content up */ }
-        .profile-container { max-width: 960px; margin: 0 auto; padding: 2rem; }
+        /* Base Tailwind styles */
+        body {
+            font-family: 'Inter', sans-serif; /* Keep Inter from Dashboard */
+            background-color: #f3f4f6; /* Tailwind bg-gray-100 */
+            margin: 0; /* Reset margin */
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        /* Styles from Profile HTML - Prefixed/Adjusted slightly to avoid major conflicts */
+        /* Note: Using both Bootstrap and Tailwind can lead to style inconsistencies.
+           It's generally better to choose one framework or carefully manage overrides.
+           These styles are kept for demonstration but might need refinement. */
+        .profile-body { font-family: sans-serif; /* Overridden by body style above, kept for context */ }
+        .profile-header-banner { background-color: #6c757d; height: 150px; margin-bottom: -50px; }
+        .profile-container { max-width: 960px; margin-left: auto; margin-right: auto; padding: 2rem; } /* Removed margin: 0 auto as main tag handles centering */
         .profile-header { display: flex; align-items: flex-end; margin-bottom: 2rem; }
-        .profile-picture { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; background-color: #ccc; /* Placeholder */ margin-right: 1.5rem; object-fit: cover; /* If using img tag */ }
-        .profile-info h1 { margin: 0 0 0.25rem 0; font-size: 1.8rem; }
-        .profile-info p { margin: 0 0 0.5rem 0; color: #555; }
-        .profile-actions { margin-left: auto; align-self: flex-start; /* Align button top right-ish */ }
-        .edit-button { padding: 0.5rem 1rem; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
-        .profile-section { background-color: white; padding: 1.5rem; border-radius: 5px; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: relative; /* For edit button positioning */ }
-        .profile-section h2 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 0.75rem; margin-bottom: 1rem; font-size: 1.3rem; color: #333; }
-        .section-edit-button { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 0.8rem; background: none; border: none; color: #007bff; cursor: pointer; }
-        .skills-list span { display: inline-block; background-color: #e9ecef; color: #333; padding: 0.3rem 0.8rem; margin: 0.2rem; border-radius: 15px; font-size: 0.9rem; }
-        .experience-item { border-bottom: 1px dashed #eee; padding-bottom: 1rem; margin-bottom: 1rem; }
+        .profile-picture { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; background-color: #ccc; /* Placeholder */ margin-right: 1.5rem; object-fit: cover; flex-shrink: 0; }
+        .profile-info { flex-grow: 1; } /* Allow info to take space */
+        .profile-info h1 { margin: 0 0 0.25rem 0; font-size: 1.8rem; color: #1f2937; /* Tailwind text-gray-800 */}
+        .profile-info p { margin: 0 0 0.5rem 0; color: #4b5563; /* Tailwind text-gray-600 */ }
+        .profile-info a { color: #2563eb; /* Tailwind text-blue-600 */ text-decoration: underline;}
+        .profile-actions { margin-left: auto; align-self: flex-start; }
+        /* Using Tailwind classes for the button instead of custom .edit-button */
+        .profile-section { background-color: white; padding: 1.5rem; border-radius: 8px; /* Tailwind rounded-lg */ margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: relative; }
+        .profile-section h2 { margin-top: 0; border-bottom: 1px solid #e5e7eb; /* Tailwind border-gray-200 */ padding-bottom: 0.75rem; margin-bottom: 1rem; font-size: 1.3rem; color: #1f2937; font-weight: 600; /* Tailwind semibold */ }
+        /* Using Tailwind for edit buttons */
+        .section-edit-button { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 0.8rem; background: none; border: none; color: #2563eb; /* Tailwind text-blue-600 */ cursor: pointer; padding: 0.25rem 0.5rem; }
+        .skills-list span { display: inline-block; background-color: #e5e7eb; /* Tailwind bg-gray-200 */ color: #374151; /* Tailwind text-gray-700 */ padding: 0.3rem 0.8rem; margin: 0.2rem; border-radius: 9999px; /* Tailwind rounded-full */ font-size: 0.9rem; }
+        .experience-item { border-bottom: 1px dashed #e5e7eb; padding-bottom: 1rem; margin-bottom: 1rem; }
         .experience-item:last-child { border-bottom: none; margin-bottom: 0; }
-        .experience-item h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; }
-        .experience-item .company { font-weight: bold; color: #555; }
-        .experience-item .dates { font-size: 0.9rem; color: #777; margin-bottom: 0.5rem; display: block; }
-        .resume-section p { margin-bottom: 0.5rem; }
-        .resume-section a, .resume-section button 
+        .experience-item h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; color: #1f2937; font-weight: 600; }
+        .experience-item .company { font-weight: bold; color: #4b5563; }
+        .experience-item .dates { font-size: 0.9rem; color: #6b7280; /* Tailwind text-gray-500 */ margin-bottom: 0.5rem; display: block; }
+        .experience-item p { color: #374151; /* Tailwind text-gray-700 */}
+        .resume-section p { margin-bottom: 0.5rem; color: #374151; }
+        /* Apply Tailwind to download button too */
+
     </style>
 </head>
-<body>
-
-    <!-- Optional Header consistent with your site -->
-    <header style="background-color: #333; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;">
-        <h1>Hackverse</h1>
-        <div>
-            <!-- Logout Form -->
-            <form action="/logout" method="POST" style="display: inline; margin-left: 1rem;">
-                 <button type="submit" style="color: white; background: none; border: none; cursor: pointer; font-size: 1rem;">Logout</button>
-            </form>
-        </div>
-    </header>
-
-    <!-- Optional Banner -->
-    <div class="profile-header-banner"></div>
-
-    <div class="profile-container">
-
-        <div class="profile-header">
-            <!-- Placeholder for profile picture -->
-            <div class="profile-picture">
-                <!-- <img src="[user-image-url]" alt="Profile Picture"> -->
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar (Remains the same, active link updated) -->
+        <aside class="w-64 bg-white shadow-md flex-shrink-0">
+            <div class="p-6 border-b">
+                <a href="index.html" class="text-2xl font-bold text-blue-600">HackaPlatform</a>
             </div>
-            <div class="profile-info">
-                <h1>[User Full Name]</h1>
-                <p>[User Headline or Current Role, e.g., Aspiring Software Developer | Computer Science Student]</p>
-                <!-- Optional basic info -->
-                <p>Location: [User Location]</p>
-                <p>Links: <a href="[LinkedIn URL]">LinkedIn</a> | <a href="[GitHub URL]">GitHub</a> | <a href="[Portfolio URL]">Portfolio</a></p>
-            </div>
-            <div class="profile-actions">
-                 <!-- This button should only be visible to the profile owner -->
-                <button class="edit-button" onclick="alert('Redirect to Edit Profile Page/Enable Editing');">Edit Profile</button>
-            </div>
-        </div>
+            <nav class="p-4 space-y-2">
+                 <!-- Updated active link -->
+                <a href="participant_profile.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
+                <a href="participant_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
+                <a href="my_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-calendar-check w-6 mr-2"></i> My Hackathons</a>
+                <a href="my_teams.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-users w-6 mr-2"></i> My Teams</a>
+                <a href="my_submissions.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-file-alt w-6 mr-2"></i> My Submissions</a>
+                <a href="my_achievements.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-trophy w-6 mr-2"></i> My Achievements</a>
+                <a href="my_certificates.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-certificate w-6 mr-2"></i> My Certificates</a>
+                <a href="settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
+                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+            </nav>
+        </aside>
 
-        <section class="profile-section about-section">
-             <!-- Edit button specific to this section, only visible to owner -->
-            <button class="section-edit-button" onclick="alert('Enable About editing');">Edit</button>
-            <h2>About Me</h2>
-            <p>
-                [User's detailed bio goes here. This text would be dynamically inserted from the database. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]
-            </p>
-        </section>
+        <!-- Main Content Area - Now contains the Profile HTML -->
+        <main class="flex-1 overflow-y-auto">
+            <!-- Profile Banner -->
+            <div class="profile-header-banner"></div>
 
-        <section class="profile-section resume-section">
-            <button class="section-edit-button" onclick="alert('Enable Resume editing/upload');">Edit</button>
-            <h2>Resume</h2>
-            <!-- Logic here depends on how you handle resumes -->
-            <!-- Example 1: Link to download -->
-            <p>View or download my latest resume:</p>
-            <a href="[link-to-user-resume.pdf]" download class="edit-button">Download Resume</a>
-        </section>
+            <!-- Profile Container (inside main for padding/scrolling) -->
+            <!-- Removed p-8 from main, using profile-container's padding -->
+            <div class="profile-container">
 
-        <section class="profile-section skills-section">
-            <button class="section-edit-button" onclick="alert('Enable Skills editing');">Edit</button>
-            <h2>Skills</h2>
-            <div class="skills-list">
-                <!-- Skills dynamically generated by backend -->
-                <span>JavaScript</span>
-                <span>React</span>
-                <span>Node.js</span>
-                <span>Express</span>
-                <span>HTML5</span>
-                <span>CSS3</span>
-                <span>Bootstrap</span>
-                <span>SQL</span>
-                <span>PostgreSQL</span>
-                <span>Git</span>
-                <span>Problem Solving</span>
-                <span>Teamwork</span>
-                <!-- End dynamic skills list -->
-            </div>
-        </section>
-
-        <section class="profile-section experience-section">
-            <button class="section-edit-button" onclick="alert('Enable Experience editing/adding');">Add/Edit</button>
-            <h2>Experience</h2>
-            <div class="experience-list">
-                <!-- Experience items dynamically generated by backend -->
-                <div class="experience-item">
-                    <h3>[Job Title / Project Name]</h3>
-                    <p class="company">[Company Name / 'Personal Project' / 'Academic Project']</p>
-                    <span class="dates">[Start Date] - [End Date or 'Present']</span>
-                    <p>[Description of responsibilities, achievements, or project details. Use bullet points if desired.]</p>
+                <div class="profile-header">
+                    <!-- Placeholder for profile picture -->
+                    <div class="profile-picture">
+                        <!-- Example: Use Tailwind for placeholder styling if needed -->
+                        <!-- <img src="[user-image-url]" alt="Profile Picture" class="w-full h-full object-cover rounded-full"> -->
+                    </div>
+                    <div class="profile-info">
+                        <!-- Data should be dynamically inserted here -->
+                        <h1 class="text-2xl font-bold text-gray-800">Khushi Chandak</h1>
+                        <p class="text-gray-600">Student at K.J. Somaiya Institute of Technology, Sion, Mumbai | Ex-Intern at L&T Technology Services | Digital Media Manager @CyberCell-KJSIT| Ex-Intern(ML&AI) @Claidroid | Tech. Member @GDSC</p>
+                        <p class="text-sm text-gray-500">Mumbai</p>
+                        <p class="text-sm text-gray-500">
+                            Links:
+                            <a href="https://www.linkedin.com/in/khushi-chandak-a48032294/" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a> |
+                            <a href="[GitHub URL]" target="_blank" class="text-blue-600 hover:underline">GitHub</a> |
+                            <a href="[Portfolio URL]" target="_blank" class="text-blue-600 hover:underline">Portfolio</a>
+                        </p>
+                    </div>
+                    <div class="profile-actions">
+                        <!-- This button should only be visible to the profile owner -->
+                        <!-- Using Tailwind classes for consistency -->
+                        <button
+                            class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            onclick="alert('Redirect to Edit Profile Page/Enable Editing');">
+                            Edit Profile
+                        </button>
+                    </div>
                 </div>
 
-                <div class="experience-item">
-                    <h3>[Previous Job Title / Project Name]</h3>
-                    <p class="company">[Previous Company Name]</p>
-                    <span class="dates">[Start Date] - [End Date]</span>
-                    <p>[Description...]</p>
-                </div>
-            </div>
-        </section>
+                <section class="profile-section about-section">
+                    <!-- Edit button specific to this section -->
+                    <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable About editing');">
+                        <i class="fas fa-pencil-alt mr-1"></i>Edit
+                    </button>
+                    <h2>About Me</h2>
+                    <p class="text-gray-700">
+                        Hi there! I'm Khushi, a curious and enthusiastic second-year computer engineering student with a passion for building innovative solutions that make a difference. When I'm not buried in textbooks or coding away, you can find me exploring the latest tech trends, tinkering with DIY projects, or binge-watching sci-fi shows (yes, I'm a fan of AI-powered robots taking over the world)😂.
 
-    </div> <!-- End profile-container -->
+As a computer engineering student, I'm constantly fascinated by the intersection of hardware and software. I'm always looking for ways to improve my skills in programming languages like C Programming and Python and I'm excited to dive deeper into the world of machine learning, artificial intelligence, and data science.
+
+Outside of academics, I'm a strong believer in the power of collaboration and community. I'm always up for a hackathon, a coding challenge, or a brainstorming session with fellow tech enthusiasts. Let's connect and create something amazing together!
+
+Feel free to reach out if you'd like to chat about the latest tech trends, discuss a project idea, or simply share your favorite coding memes.
+                    </p>
+                </section>
+
+                <section class="profile-section resume-section">
+                    <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable Resume editing/upload');">
+                       <i class="fas fa-pencil-alt mr-1"></i>Edit
+                    </button>
+                    <h2>Resume</h2>
+                    <p>View or upload my latest resume:</p>
+                    <!-- Styled download link/button using Tailwind -->
+                    <a href="[link-to-user-resume.pdf]" download
+                       class="inline-block mt-2 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                       <i class="fas fa-download mr-2"></i>View Resume
+                    </a>
+                    
+                     <button class="mt-2 px-4 py-2 bg-gray-500 text-white text-sm font-medium rounded-md hover:bg-gray-600">
+                         <i class="fas fa-upload mr-2"></i> Upload Resume
+                     </button>
+                </section>
+
+                <section class="profile-section skills-section">
+                    <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable Skills editing');">
+                        <i class="fas fa-pencil-alt mr-1"></i>Edit
+                    </button>
+                    <h2>Skills</h2>
+                    <div class="skills-list">
+                        <!-- Skills dynamically generated by backend -->
+                        <span>JavaScript</span>
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>Express</span>
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>Tailwind CSS</span> <!-- Changed Bootstrap to Tailwind -->
+                        <span>SQL</span>
+                        <span>PostgreSQL</span>
+                        <span>Git</span>
+                        <span>Problem Solving</span>
+                        <span>Teamwork</span>
+                        <!-- End dynamic skills list -->
+                    </div>
+                </section>
+
+                <section class="profile-section experience-section">
+                     <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable Experience editing/adding');">
+                        <i class="fas fa-plus mr-1"></i>Add/Edit
+                    </button>
+                    <h2>Experience</h2>
+                    <div class="experience-list">
+                        <!-- Experience items dynamically generated by backend -->
+                        <div class="experience-item">
+                            <h3>[Job Title / Project Name]</h3>
+                            <p class="company">[Company Name / 'Personal Project' / 'Academic Project']</p>
+                            <span class="dates">[Start Date] - [End Date or 'Present']</span>
+                            <p>[Description of responsibilities, achievements, or project details. Use bullet points if desired.]</p>
+                        </div>
+
+                        <div class="experience-item">
+                            <h3>[Previous Job Title / Project Name]</h3>
+                            <p class="company">[Previous Company Name]</p>
+                            <span class="dates">[Start Date] - [End Date]</span>
+                            <p>[Description...]</p>
+                        </div>
+                         <!-- Add more items as needed -->
+                    </div>
+                </section>
+
+            </div> <!-- End profile-container -->
+
+        </main>
+    </div>
 </body>
 </html>
