@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Hackathon Platform</title> <!-- Change title per page -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Optional: For Icons -->
+    <style>
+        /* Optional: Add custom base styles or component overrides here if needed */
+        body {
+            font-family: 'Inter', sans-serif; /* Example font - include Google Font link if needed */
+        }
+        /* Basic Rich Text Editor Placeholder Style */
+        .rich-text-placeholder {
+            border: 1px solid #e2e8f0; /* Tailwind's gray-300 */
+            padding: 0.75rem;
+            min-height: 150px;
+            background-color: #f9fafb; /* Tailwind's gray-50 */
+            border-radius: 0.375rem; /* Tailwind's rounded-md */
+            color: #6b7280; /* Tailwind's gray-500 */
+        }
+    </style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- Header/Navbar -->
+    <nav class="bg-gray-900 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-400">HackaPlatform</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="browse_opportunities.html" class="hover:text-blue-300">Discover</a>
+                <a href="#features" class="hover:text-blue-300">Features</a>
+                <a href="organizer_landing.html" class="hover:text-blue-300">For Organizers</a>
+                <a href="#community" class="hover:text-blue-300">Community</a>
+                <a href="login.html" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded transition duration-300">Login</a>
+                <a href="signup.html" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded transition duration-300">Sign Up</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu (Hidden by default) -->
+        <!-- Add JS later to toggle visibility -->
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-blue-600 to-purple-700 text-white text-center py-20 md:py-32">
+        <div class="container mx-auto px-6">
+            <span id="element"></span>
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">The ultimate platform to host and participate in hackathons, coding challenges, and more.</p>
+            <div class="space-x-4">
+                <a href="browse_opportunities.html" class="bg-white text-blue-600 font-semibold px-8 py-3 rounded-full hover:bg-gray-100 transition duration-300">Find Opportunities</a>
+                <a href="organizer_landing.html" class="bg-transparent border-2 border-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-blue-600 transition duration-300">Host an Event</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Opportunities Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-10">Featured Opportunities</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Sample Opportunity Card -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                    <img src="https://via.placeholder.com/400x200?text=Event+Banner" alt="Opportunity Banner" class="w-full h-40 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-blue-500 font-semibold">Hackathon</span>
+                        <h3 class="text-xl font-bold my-2">Innovate for Tomorrow Hackathon</h3>
+                        <p class="text-gray-600 text-sm mb-3">Hosted by TechCorp University</p>
+                        <p class="text-gray-700 mb-4 line-clamp-3">Join us to build solutions for sustainable living using cutting-edge tech. Great prizes await!</p>
+                        <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                            <span><i class="fas fa-calendar-alt mr-1"></i> Ends Oct 31</span>
+                            <span><i class="fas fa-users mr-1"></i> Teams of 2-4</span>
+                        </div>
+                        <a href="opportunity_detail.html" class="block w-full text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300">View Details</a>
+                    </div>
+                </div>
+                <!-- Repeat Card for other opportunities -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">...</div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">...</div>
+            </div>
+            <div class="text-center mt-10">
+                 <a href="browse_opportunities.html" class="text-blue-600 font-semibold hover:underline">View All Opportunities →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section (id="features") -->
+    <section id="features" class="py-16 bg-white">
+         <div class="container mx-auto px-6 text-center">
+             <h2 class="text-3xl font-bold mb-10">Why Choose HackaPlatform?</h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                 <!-- Feature Card -->
+                 <div class="p-6">
+                    <div class="text-blue-500 mb-4"><i class="fas fa-cogs text-4xl"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">Seamless Management</h3>
+                    <p class="text-gray-600">Organizers get a unified dashboard to create, manage, and evaluate diverse opportunities effortlessly.</p>
+                 </div>
+                 <!-- Feature Card -->
+                 <div class="p-6">
+                     <div class="text-green-500 mb-4"><i class="fas fa-users text-4xl"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">Engaging Participation</h3>
+                    <p class="text-gray-600">Participants can easily discover events, form teams, submit work, and track their progress.</p>
+                 </div>
+                 <!-- Feature Card -->
+                  <div class="p-6">
+                     <div class="text-purple-500 mb-4"><i class="fas fa-trophy text-4xl"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">Diverse Opportunities</h3>
+                    <p class="text-gray-600">From hackathons and coding contests to scholarships and workshops - find it all here.</p>
+                 </div>
+             </div>
+         </div>
+    </section>
+
+    <!-- Community/Blog Teaser (id="community") -->
+    <section id="community" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-10">Join Our Community</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">Read articles, get career tips, and connect with fellow innovators.</p>
+            <!-- Placeholder for Blog Posts/Articles -->
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="font-semibold mb-2">How to Ace Your Next Hackathon</h4>
+                    <p class="text-gray-600 text-sm mb-3">Tips and tricks from past winners...</p>
+                    <a href="#" class="text-blue-600 hover:underline text-sm">Read More →</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">...</div>
+                <div class="bg-white p-6 rounded-lg shadow-md">...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2023 HackaPlatform. All rights reserved.</p>
+            <div class="mt-4 space-x-6">
+                <a href="#" class="hover:text-white">About</a>
+                <a href="#" class="hover:text-white">Contact</a>
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+<script>
+    var typed = new Typed("#element", {
+        strings: ["Innovate","Collaborate","and Succeed."],
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 1000,
+        loop: true
+    });
+</script>
+</html>
