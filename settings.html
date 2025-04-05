@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings - HackaPlatform</title>
+    <title>Settings - Participant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
@@ -20,6 +20,7 @@
             box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 15px -6px rgba(0, 0, 0, 0.1); /* Enhanced hover shadow */
         }
 
+        /* --- Card Header --- */
         .settings-card-header {
             @apply p-6 flex items-center border-b border-gray-200;
             /* Using subtle gradients for headers */
@@ -38,11 +39,12 @@
 
         .header-title { @apply text-2xl font-semibold text-gray-800; }
 
-        .settings-card-content { @apply p-8; } /* Generous padding */
+        /* --- Card Content --- */
+        .settings-card-content { @apply p-8 lg:p-10; } /* Generous padding */
 
         /* --- Form Element Styling --- */
-        .form-label { @apply block text-sm font-medium text-gray-700 mb-1.5; }
-        .form-input, .form-textarea, .form-input-readonly {
+        .form-label { @apply block text-sm font-medium text-gray-700 mb-2; } /* Increased margin */
+        .form-input, .form-textarea, .form-input-readonly, .form-select {
              @apply block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-150 ease-in-out;
         }
         .form-textarea { @apply min-h-[120px]; }
@@ -58,15 +60,27 @@
         .switch-checkbox:checked + .switch-bg .switch-handle { @apply transform translate-x-6; }
 
         /* --- Notification Item Styling --- */
-        .notification-item { @apply flex items-center justify-between py-4 border-b border-gray-100 last:border-b-0; }
+        .notification-item { @apply flex items-center justify-between py-5 border-b border-gray-100 last:border-b-0; } /* Increased py */
         .notification-item-text { @apply flex-grow flex flex-col pr-4; }
         .notification-item-title { @apply text-sm font-medium text-gray-900; }
-        .notification-item-desc { @apply text-xs text-gray-500 mt-0.5; }
+        .notification-item-desc { @apply text-xs text-gray-500 mt-1; }
 
         /* --- Danger Zone --- */
-        .danger-zone { @apply border-2 border-red-200 bg-red-50 p-6 rounded-lg shadow-inner; }
-        .danger-zone h2 { @apply text-xl font-semibold text-red-700 mb-3 flex items-center; }
-        .danger-zone h2 i { @apply mr-2 text-red-500; } /* Added margin */
+        /* Reusing card style but with red accents */
+        .danger-zone-card {
+            @apply settings-section-card border-l-4 border-red-500; /* Red left border */
+        }
+         .danger-zone-header {
+             @apply settings-card-header bg-red-50; /* Light red header bg */
+         }
+         .danger-zone-icon-wrapper {
+             @apply header-icon-wrapper bg-red-100 text-red-600; /* Red icon bg/color */
+         }
+         .danger-zone-title {
+             @apply header-title text-red-800; /* Red title */
+         }
+         .danger-zone-content { @apply settings-card-content; }
+
 
         /* --- Button Styles --- */
         .button-base { @apply inline-flex items-center justify-center px-5 py-2.5 border text-sm font-medium rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out; }
@@ -75,8 +89,10 @@
         .button-secondary { @apply button-base border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:ring-indigo-500; }
         .button-danger { @apply button-base border-transparent text-white bg-red-600 hover:bg-red-700 focus:ring-red-500; }
 
-        /* Helper */
-        hr.subtle { @apply border-t border-gray-200 my-8; } /* Increased margin */
+        /* Clearer Horizontal Rule */
+        hr.section-divider {
+            @apply border-t border-gray-200 my-10; /* Increased margin */
+        }
 
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,7 +119,7 @@
 
         <!-- Main Content Area -->
         <main class="flex-1 overflow-y-auto p-8 lg:p-12">
-            <h1 class="text-3xl font-bold text-gray-800 mb-10">Account Settings</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-10">Settings</h1>
 
             <!-- Section: Profile Settings -->
             <section class="settings-section-card">
@@ -113,7 +129,7 @@
                     </div>
                     <h2 class="header-title">Profile Information</h2>
                 </div>
-                <form action="#" method="POST" id="profile-form" class="settings-card-content space-y-6">
+                <form action="#" method="POST" id="profile-form" class="settings-card-content space-y-8"> <!-- Increased space-y -->
                     <!-- Profile Picture Upload -->
                     <div class="flex items-center space-x-6 pb-6">
                          <img class="h-24 w-24 rounded-full object-cover ring-4 ring-offset-1 ring-blue-100" src="https://via.placeholder.com/150/92C950" alt="Current profile photo">
@@ -124,25 +140,25 @@
                          </div>
                     </div>
 
-                    <hr class="subtle">
+                    <hr class="section-divider">
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"> <!-- Increased gaps -->
                         <div> <label for="full_name_prof" class="form-label">Full Name</label> <input type="text" id="full_name_prof" name="full_name" value="[Participant Name]" class="form-input"> </div>
                         <div> <label for="username_prof" class="form-label">Username</label> <input type="text" id="username_prof" value="[participant_user]" class="form-input-readonly" readonly disabled> </div>
                     </div>
                     <div> <label for="email_prof" class="form-label">Email Address</label> <input type="email" id="email_prof" value="[participant@example.com]" class="form-input-readonly" readonly disabled> <p class="mt-1 text-xs text-gray-500">Email cannot be changed here.</p> </div>
                     <div> <label for="bio_prof" class="form-label">Bio</label> <textarea id="bio_prof" name="bio" rows="4" class="form-textarea" placeholder="Share your skills, interests..."></textarea> </div>
 
-                    <hr class="subtle">
+                    <hr class="section-divider">
 
-                    <h3 class="text-lg font-semibold text-gray-700 pt-1 mb-4">Social & Portfolio Links</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-5">Social & Portfolio Links</h3> <!-- Increased size/margin -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                         <div> <label for="location_prof" class="form-label">Location</label> <input type="text" id="location_prof" name="location" value="[City, Country]" placeholder="e.g., San Francisco, USA" class="form-input"> </div>
                         <div> <label for="website_prof" class="form-label">Website/Portfolio</label> <input type="url" id="website_prof" name="website" value="[https://portfolio.com]" placeholder="https://your-website.com" class="form-input"> </div>
                         <div> <label for="github_prof" class="form-label">GitHub URL</label> <input type="url" id="github_prof" name="github_url" value="[https://github.com/user]" placeholder="https://github.com/yourusername" class="form-input"> </div>
                         <div> <label for="linkedin_prof" class="form-label">LinkedIn URL</label> <input type="url" id="linkedin_prof" name="linkedin_url" value="[https://linkedin.com/in/user]" placeholder="https://linkedin.com/in/yourprofile" class="form-input"> </div>
                     </div>
-                    <div class="pt-8 flex justify-end"> <!-- Increased padding-top -->
+                    <div class="pt-10 flex justify-end"> <!-- Increased padding -->
                         <button type="submit" class="button-primary"> <i class="fas fa-save"></i> Save Profile Changes </button>
                     </div>
                 </form>
@@ -156,28 +172,36 @@
                     </div>
                     <h2 class="header-title">Account Security</h2>
                 </div>
-                <div class="settings-card-content space-y-8">
+                <div class="settings-card-content space-y-10"> <!-- Increased spacing -->
                     <form action="#" method="POST" id="password-form" class="space-y-6">
-                        <h3 class="text-lg font-semibold text-gray-900">Change Password</h3>
+                        <h3 class="text-xl font-semibold text-gray-800">Change Password</h3> <!-- Increased size -->
                         <div> <label for="current_password" class="form-label">Current Password</label> <input type="password" id="current_password" name="current_password" required class="form-input"> </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div> <label for="new_password" class="form-label">New Password</label> <input type="password" id="new_password" name="new_password" required class="form-input"> </div>
-                            <div> <label for="confirm_password" class="form-label">Confirm New Password</label> <input type="password" id="confirm_password" name="confirm_password" required class="form-input"> </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"> <!-- Increased gaps -->
+                            <div>
+                                <label for="new_password" class="form-label">New Password</label>
+                                <input type="password" id="new_password" name="new_password" required class="form-input">
+                                <p class="mt-1.5 text-xs text-gray-500">Minimum 8 characters recommended.</p>
+                            </div>
+                            <div>
+                                <label for="confirm_password" class="form-label">Confirm New Password</label>
+                                <input type="password" id="confirm_password" name="confirm_password" required class="form-input">
+                            </div>
                         </div>
-                        <div class="pt-2 flex justify-end">
+                        <div class="pt-4 flex justify-end"> <!-- Increased padding -->
                             <button type="submit" class="button-primary"> <i class="fas fa-key"></i> Update Password </button>
                         </div>
                     </form>
 
-                    <hr class="subtle">
+                    <hr class="section-divider">
 
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Two-Factor Authentication (2FA)</h3>
-                        <p class="text-sm text-gray-600 mb-4">Enhance your account security (Recommended).</p>
-                        <div class="flex items-center justify-between bg-gray-50 p-5 rounded-lg border border-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Two-Factor Authentication (2FA)</h3> <!-- Increased size/margin -->
+                        <p class="text-sm text-gray-600 mb-5">Enhance your account security (Recommended).</p> <!-- Increased margin -->
+                        <div class="flex items-center justify-between bg-gray-50 p-6 rounded-lg border border-gray-200"> <!-- Increased padding -->
                             <span class="flex items-center text-sm font-medium text-gray-700">
-                                <i class="fas fa-mobile-alt text-xl mr-3 text-gray-400"></i> {/* Added margin */}
+                                <i class="fas fa-mobile-alt text-2xl mr-4 text-gray-400"></i> {/* Larger icon, more margin */}
                                 Status: <span class="ml-2 font-semibold text-red-600">Disabled</span>
+                                <!-- Or: <span class="ml-2 font-semibold text-green-600">Enabled</span> -->
                             </span>
                             <button type="button" class="button-secondary">Manage 2FA</button>
                         </div>
@@ -193,8 +217,8 @@
                     </div>
                     <h2 class="header-title">Notification Preferences</h2>
                 </div>
-                <form action="#" method="POST" id="notifications-form" class="settings-card-content space-y-1">
-                    <p class="text-sm text-gray-600 mb-5">Control the emails you receive.</p> {/* Added margin */}
+                <form action="#" method="POST" id="notifications-form" class="settings-card-content space-y-3"> <!-- Adjusted list spacing -->
+                    <p class="text-sm text-gray-600 mb-6">Control the emails you receive.</p> <!-- Increased margin -->
 
                     <!-- Notification Toggle Item -->
                      <div class="notification-item">
@@ -222,19 +246,29 @@
                           <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_platform" class="switch-checkbox"> <div class="switch-bg"><div class="switch-handle"></div></div> </div> </label>
                      </div>
 
-                    <div class="pt-8 flex justify-end">
+                    <div class="pt-10 flex justify-end"> <!-- Increased padding -->
                          <button type="submit" class="button-primary"> <i class="fas fa-save"></i> Save Preferences </button>
                      </div>
                 </form>
             </section>
 
             <!-- Section: Account Management (Danger Zone) -->
-            <section class="danger-zone mt-12"> {/* Slightly increased top margin */}
-                 <h2><i class="fas fa-exclamation-triangle"></i> Danger Zone</h2>
-                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                     <div class="flex-1"> <p class="text-sm font-semibold text-red-800">Delete Your Account</p> <p class="text-sm text-red-700 mt-1">Permanently delete your account and all associated data. This action is irreversible.</p> </div>
-                     <div class="flex-shrink-0 mt-3 sm:mt-0">
-                         <button type="button" class="button-danger w-full sm:w-auto"> <i class="fas fa-trash-alt"></i> Delete My Account </button>
+            <section class="danger-zone-card"> <!-- Applied new danger card style -->
+                 <div class="danger-zone-header"> <!-- Danger header style -->
+                     <div class="danger-zone-icon-wrapper">
+                         <i class="fas fa-exclamation-triangle text-xl"></i>
+                     </div>
+                     <h2 class="danger-zone-title">Danger Zone</h2>
+                 </div>
+                 <div class="danger-zone-content">
+                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5"> <!-- Increased gap -->
+                         <div class="flex-1">
+                            <p class="text-md font-semibold text-red-800">Delete Your Account</p>
+                            <p class="text-sm text-red-700 mt-1.5 leading-relaxed">Permanently delete your account and all associated data (profile, submissions, teams, achievements, etc.). This action is irreversible and cannot be undone.</p>
+                         </div>
+                         <div class="flex-shrink-0 mt-4 sm:mt-0">
+                             <button type="button" class="button-danger w-full sm:w-auto"> <i class="fas fa-trash-alt"></i> Delete My Account </button>
+                         </div>
                      </div>
                  </div>
             </section>
