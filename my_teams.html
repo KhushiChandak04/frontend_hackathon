@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Teams - HackaPlatform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+        /* --- Card Base Style --- */
+        .team-card {
+            transition: all 0.3s ease-in-out;
+            background-color: white;
+        }
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        /* --- Stacked Avatars --- */
+        .avatar-stack { display: flex; padding-left: 10px; }
+        .avatar-stack > * { margin-left: -10px; border: 2px solid white; border-radius: 50%; transition: margin 0.2s ease-in-out; }
+        .avatar-stack:hover > * { margin-left: -2px; }
+
+        /* --- Badge Styles --- */
+        .badge { @apply inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium leading-4; }
+        .badge-green { @apply bg-green-100 text-green-800; }
+        .badge-yellow { @apply bg-yellow-100 text-yellow-800; }
+        .badge-gray { @apply bg-gray-200 text-gray-800; }
+        .badge-purple { @apply bg-purple-100 text-purple-800; }
+        .badge-blue { @apply bg-blue-100 text-blue-800; }
+
+        /* --- General Action Button Styles --- */
+        .action-button { @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out; }
+        .action-button i { @apply -ml-1 mr-2 h-4 w-4; }
+        .action-button-secondary { @apply inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out; }
+        .action-button-secondary i { @apply -ml-1 mr-2 h-4 w-4 text-gray-400; }
+        .action-button-danger { @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out; }
+        .action-button-danger i { @apply -ml-1 mr-2 h-4 w-4; }
+
+        /* --- Enhanced Invitation Button Styles --- */
+        .invite-button { @apply inline-flex items-center justify-center px-5 py-2 border text-sm font-semibold rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out; } /* Increased padding/font-weight */
+        .invite-button i { @apply mr-2 h-5 w-5; } /* Slightly larger icon */
+        .invite-accept-button { @apply invite-button border-transparent text-white bg-green-600 hover:bg-green-700 focus:ring-green-500; }
+        .invite-decline-button { @apply invite-button border-red-500 text-red-700 bg-white hover:bg-red-50 focus:ring-red-500; } /* Outline style */
+
+        /* --- Invitation Card Style --- */
+        .invitation-card {
+            background-color: #fffee0; /* Slightly different yellow */
+             border: 1px solid #fde047; /* yellow-300 border */
+        }
+
+        /* --- Empty State --- */
+        .empty-state { @apply text-center py-16 bg-white rounded-lg shadow-md border border-dashed border-gray-300; }
+        .empty-state i { @apply text-gray-400 fa-4x mb-5; }
+        .empty-state h3 { @apply text-xl font-semibold text-gray-800 mb-2; }
+        .empty-state p { @apply text-gray-500 mb-6; }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md flex-shrink-0">
+            <div class="p-6 border-b">
+               <a href="index.html" class="text-2xl font-bold text-blue-600">HackaPlatform</a>
+           </div>
+           <nav class="p-4 space-y-2">
+            <a href="participant_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
+               <a href="participant_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
+               <a href="my_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-calendar-check w-6 mr-2"></i> My Hackathons</a>
+               <!-- Set My Teams as Active -->
+               <a href="my_teams.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-users w-6 mr-2"></i> My Teams</a>
+               <a href="my_submissions.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-file-alt w-6 mr-2"></i> My Submissions</a>
+               <a href="my_achievements.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-trophy w-6 mr-2"></i> My Achievements</a>
+               
+               <a href="my_certificates.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-certificate w-6 mr-2"></i> My Certificates</a>
+               <a href="settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
+               <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+               
+           </nav>
+       </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto p-8 lg:p-10">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">My Teams</h1>
+
+            <!-- Section: Pending Invitations -->
+             <section class="mb-10" id="invitations">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-5 flex items-center">
+                    <i class="fas fa-envelope-open-text text-yellow-500 mr-3"></i> Pending Invitations
+                    <span class="ml-2 inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800" id="invitation-count-badge">
+                        [X]
+                    </span>
+                </h2>
+                 <div class="space-y-4">
+                    <!-- Invitation Card 1 -->
+                    <div class="rounded-lg shadow-sm overflow-hidden team-card invitation-card p-5">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                            <div>
+                                <p class="text-sm text-yellow-800">You have been invited to join:</p>
+                                <h4 class="text-lg font-bold text-gray-900 mt-1">Quantum Coders</h4>
+                                <p class="text-sm text-gray-600 mt-1">
+                                    For Hackathon: <a href="opportunity_detail.html?id=ai-challenge" class="text-indigo-600 hover:underline font-medium">Global AI Challenge</a>
+                                    <span class="badge badge-blue ml-2">Upcoming</span>
+                                </p>
+                            </div>
+                             <!-- Updated Accept/Decline Buttons -->
+                            <div class="mt-4 sm:mt-0 sm:ml-4 flex-shrink-0 space-x-3">
+                                <button type="button" class="invite-accept-button">
+                                     <i class="fas fa-check"></i>Accept
+                                </button>
+                                <button type="button" class="invite-decline-button">
+                                     <i class="fas fa-times"></i>Decline
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Invitation Card 2 (Example) -->
+                    <div class="rounded-lg shadow-sm overflow-hidden team-card invitation-card p-5">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                            <div>
+                                <p class="text-sm text-yellow-800">You have been invited to join:</p>
+                                <h4 class="text-lg font-bold text-gray-900 mt-1">Data Dynamos</h4>
+                                <p class="text-sm text-gray-600 mt-1">
+                                    For Hackathon: <a href="opportunity_detail.html?id=fintech-frenzy" class="text-indigo-600 hover:underline font-medium">Fintech Frenzy 2023</a>
+                                     <span class="badge badge-purple ml-2">Judging</span>
+                                </p>
+                            </div>
+                            <!-- Updated Accept/Decline Buttons -->
+                             <div class="mt-4 sm:mt-0 sm:ml-4 flex-shrink-0 space-x-3">
+                                <button type="button" class="invite-accept-button">
+                                     <i class="fas fa-check"></i>Accept
+                                </button>
+                                <button type="button" class="invite-decline-button">
+                                     <i class="fas fa-times"></i>Decline
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empty State for Invitations -->
+                    <!--
+                     <div class="text-center py-10 bg-yellow-50 border border-yellow-200 rounded-lg"> ... </div>
+                    -->
+                 </div>
+             </section>
+
+             <!-- Section: My Current Teams -->
+             <section>
+                <h2 class="text-2xl font-semibold text-gray-700 mb-5 flex items-center">
+                    <i class="fas fa-users text-blue-500 mr-3"></i> My Current Teams
+                </h2>
+                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                     <!-- Team Card 1 -->
+                     <div class="rounded-lg shadow-md overflow-hidden team-card">
+                         <div class="p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-12 w-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl font-bold"> AC </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-xl font-bold text-gray-900">Alpha Coders</h3>
+                                        <p class="text-sm text-gray-500"> For: <a href="opportunity_detail.html?id=innovate-tomorrow" class="text-indigo-600 hover:underline font-medium">Innovate for Tomorrow</a> </p>
+                                    </div>
+                                </div>
+                                <span class="badge badge-green flex-shrink-0">Ongoing</span>
+                             </div>
+                             <div class="mb-5">
+                                 <p class="text-sm font-medium text-gray-700 mb-2">Team Members ([N])</p>
+                                 <div class="flex items-center">
+                                     <div class="avatar-stack">
+                                        <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://via.placeholder.com/40/7F9CF5/FFFFFF?text=A" alt="Member Avatar 1">
+                                        <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://via.placeholder.com/40/A3BFFA/FFFFFF?text=B" alt="Member Avatar 2">
+                                        <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-100 text-xs font-medium text-gray-500 ring-2 ring-white">+[X]</span>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="border-t border-gray-200 pt-4 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+                                 <a href="opportunity_detail.html?id=innovate-tomorrow" class="action-button-secondary"> <i class="fas fa-calendar-alt"></i> View Hackathon </a>
+                                 <button type="button" class="action-button-danger"> <i class="fas fa-sign-out-alt"></i> Leave Team </button>
+                            </div>
+                         </div>
+                     </div>
+
+                      <!-- Team Card 2 - REMOVED to simulate "Leave Team" -->
+                      <!-- <div class="rounded-lg shadow-md overflow-hidden team-card"> ... Byte Brigade Card ... </div> -->
+
+                     <!-- Team Card 3: For a Past Hackathon -->
+                      <div class="rounded-lg shadow-md overflow-hidden team-card opacity-80">
+                         <div class="p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-12 w-12 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xl font-bold"> DE </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-xl font-bold text-gray-700">Data Explorers</h3>
+                                        <p class="text-sm text-gray-500"> For: <a href="opportunity_detail.html?id=datadive" class="text-indigo-600 hover:underline font-medium">Data Dive Challenge</a> (Past) </p>
+                                    </div>
+                                </div>
+                                <span class="badge badge-gray flex-shrink-0">Completed</span>
+                             </div>
+                             <div class="mb-5">
+                                 <p class="text-sm font-medium text-gray-700 mb-2">Team Members (2)</p>
+                                 <div class="flex items-center">
+                                     <div class="avatar-stack">
+                                        <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://via.placeholder.com/40/9CA3AF/FFFFFF?text=G" alt="Member Avatar 1">
+                                        <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://via.placeholder.com/40/D1D5DB/FFFFFF?text=H" alt="Member Avatar 2">
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="border-t border-gray-200 pt-4 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-start">
+                                 <a href="opportunity_detail.html?id=datadive" class="action-button-secondary mr-3"> <i class="fas fa-history"></i> View Past Hackathon </a>
+                                  <a href="my_submissions.html?hackathon_id=datadive" class="action-button-secondary"> <i class="fas fa-poll"></i> View Submission/Results </a>
+                            </div>
+                         </div>
+                     </div>
+
+                     <!-- Empty State for Teams -->
+                     <!--
+                     <div class="lg:col-span-2 empty-state"> ... </div>
+                    -->
+                 </div>
+             </section>
+
+        </main>
+    </div>
+</body>
+</html>

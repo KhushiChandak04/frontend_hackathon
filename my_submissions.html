@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Submissions - HackaPlatform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+        /* --- Card Enhancements --- */
+        .submission-card {
+            transition: all 0.3s ease-in-out;
+            background-color: white;
+            border-left-width: 4px;
+            border-left-color: transparent; /* Default */
+            position: relative; /* Needed for potential future absolute elements */
+        }
+        .submission-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04);
+        }
+        /* Status Border Colors */
+        .card-status-submitted { border-left-color: #60A5FA; } /* blue-400 */
+        .card-status-judging { border-left-color: #A78BFA; } /* violet-400 */
+        .card-status-scored { border-left-color: #34D399; } /* green-400 */
+        .card-status-winner { border-left-color: #FBBF24; } /* yellow-400 */
+        .card-status-error { border-left-color: #F87171; } /* red-400 */
+
+
+        /* --- Badge Styles --- */
+        .badge { @apply inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium leading-4; }
+        /* Submission Status Specific Badges */
+        .badge-submitted { @apply bg-blue-100 text-blue-800; }
+        .badge-judging { @apply bg-purple-100 text-purple-800; }
+        .badge-scored { @apply bg-green-100 text-green-800; }
+        .badge-winner { @apply bg-yellow-100 text-yellow-800 font-semibold; } /* Highlight winner */
+        .badge-error { @apply bg-red-100 text-red-800; }
+         /* General Badges */
+        .badge-gray { @apply bg-gray-200 text-gray-800; }
+
+
+        /* --- Action Button Styles --- */
+        .action-button { @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out; }
+        .action-button i { @apply -ml-1 mr-2 h-4 w-4; }
+        .action-button-secondary { @apply inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out; }
+        .action-button-secondary i { @apply -ml-1 mr-2 h-4 w-4 text-gray-400; }
+        .action-button-edit { @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 transition duration-150 ease-in-out; }
+        .action-button-edit i { @apply -ml-1 mr-2 h-4 w-4; }
+
+
+         /* --- Filter/Sort Area --- */
+        .filter-sort-controls { @apply bg-gradient-to-r from-white to-gray-50 p-5 rounded-lg shadow-sm mb-8 border border-gray-200; }
+        .filter-sort-controls label { @apply text-sm font-semibold text-gray-600 mr-2; }
+        .filter-sort-controls select { @apply block w-full sm:w-auto pl-3 pr-10 py-2 text-base border-gray-300 bg-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm hover:border-gray-400 transition duration-150 ease-in-out; }
+
+         /* --- Empty State --- */
+        .empty-state { @apply text-center py-16 bg-white rounded-lg shadow-md border border-dashed border-gray-300; }
+        .empty-state i { @apply text-gray-400 fa-4x mb-5; }
+        .empty-state h3 { @apply text-xl font-semibold text-gray-800 mb-2; }
+        .empty-state p { @apply text-gray-500 mb-6; }
+
+        /* --- Pagination --- */
+        .pagination-link { @apply inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 transition duration-150 ease-in-out; }
+        .pagination-link-active { @apply inline-flex items-center border-t-2 border-indigo-500 px-4 pt-4 text-sm font-medium text-indigo-600; }
+        .pagination-arrow { @apply inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 transition duration-150 ease-in-out; }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md flex-shrink-0">
+             <div class="p-6 border-b">
+                <a href="index.html" class="text-2xl font-bold text-blue-600">HackaPlatform</a>
+            </div>
+            <nav class="p-4 space-y-2">
+                <a href="participant_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
+                <a href="participant_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
+                <a href="my_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-calendar-check w-6 mr-2"></i> My Hackathons</a>
+                <a href="my_teams.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-users w-6 mr-2"></i> My Teams</a>
+                 <!-- Set My Submissions as Active -->
+                <a href="my_submissions.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-file-alt w-6 mr-2"></i> My Submissions</a>
+                <a href="my_achievements.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-trophy w-6 mr-2"></i> My Achievements</a>
+               
+                <a href="my_certificates.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-certificate w-6 mr-2"></i> My Certificates</a>
+                <a href="settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
+                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+                
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto p-8 lg:p-10">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">My Submissions</h1>
+
+            <!-- Filter and Sort Controls -->
+            <div class="filter-sort-controls flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0 sm:space-x-6">
+                <div class="flex items-center space-x-4">
+                    <label for="filter-hackathon"><i class="fas fa-filter text-gray-500 mr-1"></i>Hackathon:</label>
+                    <select id="filter-hackathon" name="filter-hackathon">
+                        <option value="all">All Hackathons</option>
+                        <option value="innovate-tomorrow">Innovate for Tomorrow</option>
+                        <option value="green-code">Green Code Challenge</option>
+                        <option value="fintech-frenzy">Fintech Frenzy 2023</option>
+                        <option value="datadive">Data Dive Challenge (Past)</option>
+                        <!-- Add more dynamically -->
+                    </select>
+                </div>
+                 <div class="flex items-center space-x-4">
+                    <label for="filter-status"><i class="fas fa-tag text-gray-500 mr-1"></i>Status:</label>
+                    <select id="filter-status" name="filter-status">
+                        <option value="all">All Statuses</option>
+                        <option value="submitted">Submitted</option>
+                        <option value="judging">Under Review / Judging</option>
+                        <option value="scored">Scored / Completed</option>
+                        <option value="winner">Winner</option>
+                    </select>
+                 </div>
+                 <div class="flex items-center space-x-4">
+                    <label for="sort-by"><i class="fas fa-sort-amount-down text-gray-500 mr-1"></i>Sort by:</label>
+                    <select id="sort-by" name="sort-by">
+                        <option value="date_desc">Submission Date (Newest)</option>
+                        <option value="date_asc">Submission Date (Oldest)</option>
+                        <option value="hackathon_name">Hackathon Name</option>
+                    </select>
+                 </div>
+            </div>
+
+            <!-- Submission List -->
+            <div class="space-y-6">
+
+                <!-- Submission Card 1: Submitted for Ongoing Hackathon (Editable?) -->
+                <div class="submission-card rounded-lg shadow-md overflow-hidden card-status-submitted">
+                    <div class="p-6">
+                         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
+                            <div>
+                                <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                     <a href="opportunity_detail.html?id=innovate-tomorrow" class="hover:underline">Innovate for Tomorrow Hackathon</a>
+                                </p>
+                                <h3 class="text-xl font-semibold text-gray-900 mt-1">Project Nightingale AI</h3>
+                                <p class="text-sm text-gray-600 mt-1">Team: <a href="my_teams.html#team-alpha-coders" class="text-indigo-600 hover:underline">Alpha Coders</a></p>
+                            </div>
+                             <!-- Status Badge -->
+                            <span class="badge badge-submitted mt-2 sm:mt-0"><i class="fas fa-paper-plane mr-1.5"></i>Submitted</span>
+                         </div>
+
+                         <div class="text-sm text-gray-500 mb-4">
+                            <i class="far fa-clock mr-1"></i> Submitted on: Oct 27, 2023, 10:15 PM PST <!-- Dynamic Date -->
+                         </div>
+
+                         <div class="border-t border-gray-200 pt-4 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-start">
+                              <!-- Contextual Edit Button: Show only if deadline not passed and editing allowed -->
+                              <a href="edit_submission.html?id=[submission_id_1]" class="action-button-edit mr-3 mb-2 sm:mb-0">
+                                  <i class="fas fa-edit"></i> Edit Submission
+                              </a>
+                              <a href="view_submission.html?id=[submission_id_1]" class="action-button-secondary mb-2 sm:mb-0">
+                                  <i class="fas fa-eye"></i> View Details
+                              </a>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Submission Card 2: Under Review/Judging -->
+                 <div class="submission-card rounded-lg shadow-md overflow-hidden card-status-judging">
+                    <div class="p-6">
+                         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
+                            <div>
+                                <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                     <a href="opportunity_detail.html?id=fintech-frenzy" class="hover:underline">Fintech Frenzy 2023</a>
+                                </p>
+                                <h3 class="text-xl font-semibold text-gray-900 mt-1">Secure Wallet Blockchain</h3>
+                                <p class="text-sm text-gray-600 mt-1">Team: <a href="my_teams.html#team-algo-aces" class="text-indigo-600 hover:underline">Algo Aces</a></p>
+                            </div>
+                             <!-- Status Badge -->
+                            <span class="badge badge-judging mt-2 sm:mt-0"><i class="fas fa-gavel mr-1.5"></i>Under Review</span>
+                         </div>
+
+                         <div class="text-sm text-gray-500 mb-4">
+                            <i class="far fa-clock mr-1"></i> Submitted on: Oct 25, 2023, 08:00 AM EST <!-- Dynamic Date -->
+                         </div>
+
+                         <div class="border-t border-gray-200 pt-4 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-start">
+                               <!-- Edit button would be hidden/disabled here -->
+                              <a href="view_submission.html?id=[submission_id_2]" class="action-button-secondary mb-2 sm:mb-0">
+                                  <i class="fas fa-eye"></i> View Submission
+                              </a>
+                              <span class="text-sm text-gray-500 sm:ml-4">Results Pending</span>
+                         </div>
+                    </div>
+                </div>
+
+                 <!-- Submission Card 3: Scored / Winner -->
+                 <div class="submission-card rounded-lg shadow-md overflow-hidden card-status-winner">
+                    <div class="p-6">
+                         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
+                            <div>
+                                <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                     <a href="opportunity_detail.html?id=datadive" class="hover:underline">Data Dive Challenge (Past)</a>
+                                </p>
+                                <h3 class="text-xl font-semibold text-gray-900 mt-1">Market Trend Predictor</h3>
+                                <p class="text-sm text-gray-600 mt-1">Team: <a href="my_teams.html#team-data-explorers" class="text-indigo-600 hover:underline">Data Explorers</a></p>
+                            </div>
+                             <!-- Status Badge -->
+                            <span class="badge badge-winner mt-2 sm:mt-0"><i class="fas fa-trophy mr-1.5"></i>1st Place Winner!</span>
+                         </div>
+
+                         <div class="text-sm text-gray-500 mb-4">
+                            <i class="far fa-clock mr-1"></i> Submitted on: Sep 02, 2023, 11:50 PM UTC <!-- Dynamic Date -->
+                         </div>
+
+                         <div class="border-t border-gray-200 pt-4 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-start">
+                              <a href="view_results.html?hackathon_id=datadive&submission_id=[submission_id_3]" class="action-button mr-3 mb-2 sm:mb-0">
+                                  <i class="fas fa-poll"></i> View Results & Score
+                              </a>
+                              <a href="view_submission.html?id=[submission_id_3]" class="action-button-secondary mb-2 sm:mb-0">
+                                  <i class="fas fa-eye"></i> View Submission
+                              </a>
+                         </div>
+                    </div>
+                 </div>
+
+                 <!-- Submission Card 4: Scored (Not Winner) -->
+                 <div class="submission-card rounded-lg shadow-md overflow-hidden card-status-scored">
+                    <div class="p-6">
+                         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3">
+                            <div>
+                                <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                     <a href="opportunity_detail.html?id=some_other_past_hackathon" class="hover:underline">Code Jam Masters (Past)</a>
+                                </p>
+                                <h3 class="text-xl font-semibold text-gray-900 mt-1">Task Automation Bot</h3>
+                                <p class="text-sm text-gray-600 mt-1">Individual Submission</p> <!-- Example for individual -->
+                            </div>
+                             <!-- Status Badge -->
+                            <span class="badge badge-scored mt-2 sm:mt-0"><i class="fas fa-check-circle mr-1.5"></i>Scored</span>
+                         </div>
+
+                         <div class="text-sm text-gray-500 mb-4">
+                            <i class="far fa-clock mr-1"></i> Submitted on: Jul 10, 2023, 09:30 AM PDT <!-- Dynamic Date -->
+                         </div>
+
+                         <div class="border-t border-gray-200 pt-4 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-start">
+                              <a href="view_results.html?hackathon_id=some_other_past_hackathon&submission_id=[submission_id_4]" class="action-button mr-3 mb-2 sm:mb-0">
+                                  <i class="fas fa-poll"></i> View Results & Score
+                              </a>
+                              <a href="view_submission.html?id=[submission_id_4]" class="action-button-secondary mb-2 sm:mb-0">
+                                  <i class="fas fa-eye"></i> View Submission
+                              </a>
+                         </div>
+                    </div>
+                 </div>
+
+
+                <!-- Empty State: Shown when no submissions exist -->
+                <!--
+                <div class="empty-state">
+                    <i class="fas fa-file-import"></i>
+                    <h3>No Submissions Yet</h3>
+                    <p>You haven't submitted any projects for hackathons yet.<br>Join a hackathon and start coding!</p>
+                    <a href="my_opportunities.html" class="action-button">
+                         <i class="fas fa-search"></i> Browse Hackathons
+                     </a>
+                </div>
+                -->
+
+            </div><!-- End Submission List -->
+
+             <!-- Pagination (Keep as is) -->
+             <nav class="mt-10 flex items-center justify-between border-t border-gray-200 pt-5 px-4 sm:px-0"> <div class="-mt-px flex w-0 flex-1"> <a href="#" class="pagination-arrow"> <i class="fas fa-arrow-left mr-3 h-5 w-5 text-gray-400"></i> Previous </a> </div> <div class="hidden md:-mt-px md:flex"> <a href="#" class="pagination-link-active" aria-current="page">1</a> <a href="#" class="pagination-link">2</a> <span class="pagination-link">...</span> <a href="#" class="pagination-link">10</a> </div> <div class="-mt-px flex w-0 flex-1 justify-end"> <a href="#" class="pagination-arrow"> Next <i class="fas fa-arrow-right ml-3 h-5 w-5 text-gray-400"></i> </a> </div> </nav>
+
+        </main>
+    </div>
+</body>
+</html>
