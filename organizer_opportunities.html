@@ -62,9 +62,20 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">350</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Oct 31, 2023</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                <a href="organizer_manage_opportunity.html" class="text-blue-600 hover:text-blue-900">Manage</a>
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
-                                <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
+                                <button class="text-indigo-600 hover:text-indigo-900 view-btn" data-id="1">View</button>
+                                <a href="organizer_manage_opportunity.html" class="text-blue-600 hover:text-blue-900 manage-btn" data-id="1">Manage</a>
+                                <a href="#" class="text-red-600 hover:text-red-900 delete-btn" data-id="1">Delete</a>
+                            </td>
+                        </tr>
+                        <tr id="details-1" class="hidden">
+                            <td colspan="6" class="bg-gray-50 px-6 py-4">
+                                <h3 class="text-lg font-semibold mb-2">Innovate for Tomorrow</h3>
+                                <p class="text-sm text-gray-600 mb-2">This is a detailed description of the opportunity. It includes information about the goals, requirements, and rewards for participants.</p>
+                                <ul class="list-disc pl-5 text-sm text-gray-600">
+                                    <li>Goal: Solve real-world problems using innovative solutions.</li>
+                                    <li>Requirements: Teams of 3-5 members, registration fee $50.</li>
+                                    <li>Rewards: $10,000 cash prize, mentorship opportunities.</li>
+                                </ul>
                             </td>
                         </tr>
                         <!-- Add more rows as needed -->
@@ -73,5 +84,25 @@
             </div>
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle View button clicks
+            document.querySelectorAll('.view-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const id = button.getAttribute('data-id');
+                    const detailsRow = document.getElementById(`details-${id}`);
+                    if (detailsRow.classList.contains('hidden')) {
+                        detailsRow.classList.remove('hidden');
+                    } else {
+                        detailsRow.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Handle Manage and Delete button clicks
+            // ...existing code...
+        });
+    </script>
 </body>
 </html>
