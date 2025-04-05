@@ -2,31 +2,212 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Hackathon Platform</title> <!-- Change title per page -->
+    <meta name="viewport"="width=device-width, initial-scale=1.0">
+    <title>Organizer Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Optional: For Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* Optional: Add custom base styles or component overrides here if needed */
         body {
-            font-family: 'Inter', sans-serif; /* Example font - include Google Font link if needed */
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        /* Basic Rich Text Editor Placeholder Style */
-        .rich-text-placeholder {
-            border: 1px solid #e2e8f0; /* Tailwind's gray-300 */
-            padding: 0.75rem;
-            min-height: 150px;
+
+        /* Light Mode */
+        body.light {
             background-color: #f9fafb; /* Tailwind's gray-50 */
-            border-radius: 0.375rem; /* Tailwind's rounded-md */
-            color: #6b7280; /* Tailwind's gray-500 */
+            color: #1f2937; /* Tailwind's gray-800 */
+        }
+
+        .light .bg-white {
+            background-color: #ffffff;
+            color: #1f2937;
+        }
+
+        .light nav a {
+            color: #1f2937;
+        }
+
+        .light nav a:hover {
+            background-color: #e5e7eb; /* Tailwind's gray-200 */
+            color: #2563eb; /* Tailwind's blue-600 */
+        }
+
+        /* Dark Mode */
+        body.dark {
+            background-color: #1f2937; /* Tailwind's gray-800 */
+            color: #f9fafb; /* Tailwind's gray-50 */
+        }
+
+        .dark .bg-white {
+            background-color: #374151; /* Tailwind's gray-700 */
+            color: #f9fafb;
+        }
+
+        .dark nav a {
+            color: #e5e7eb; /* Tailwind's gray-200 */
+        }
+
+        .dark nav a:hover {
+            background-color: #4b5563; /* Tailwind's gray-600 */
+            color: #60a5fa; /* Tailwind's blue-400 */
+        }
+
+        .dark .text-gray-500 {
+            color: #9ca3af; /* Tailwind's gray-400 */
+        }
+
+        .dark .text-gray-800 {
+            color: #d1d5db; /* Tailwind's gray-300 */
+        }
+
+        .dark .text-gray-900 {
+            color: #f3f4f6; /* Tailwind's gray-100 */
+        }
+
+        /* Sidebar active link */
+        .dark nav a.bg-blue-100 {
+            background-color: #2563eb; /* Tailwind's blue-600 */
+            color: #ffffff;
+        }
+
+        .dark nav a.bg-blue-100:hover {
+            background-color: #1d4ed8; /* Tailwind's blue-700 */
+        }
+
+        /* Toggle Icon */
+        .toggle-icon {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: #2563eb; /* Tailwind's blue-600 */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .toggle-icon:hover {
+            background-color: #1d4ed8; /* Tailwind's blue-700 */
+            transform: scale(1.1);
+        }
+
+        .toggle-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #ffffff;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .toggle-icon .sun {
+            opacity: 0;
+            transform: scale(0.8) rotate(45deg);
+        }
+
+        body.light .toggle-icon .moon {
+            opacity: 0;
+            transform: scale(0.8) rotate(-45deg);
+        }
+
+        body.light .toggle-icon .sun {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        /* Glow Effect */
+        .toggle-icon.glow {
+            box-shadow: 0 0 15px rgba(255, 223, 0, 0.8);
+        }
+
+        body.light .toggle-icon.glow {
+            box-shadow: 0 0 15px rgba(255, 223, 0, 0.8);
+        }
+
+        body.dark .toggle-icon.glow {
+            box-shadow: 0 0 15px rgba(173, 216, 230, 0.8);
+        }
+
+        /* Smooth hover transitions */
+        a, button, .card {
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover, button:hover, .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button hover effects */
+        button:hover {
+            background-color: #2563eb; /* Tailwind's blue-600 */
+            color: #ffffff;
+        }
+
+        /* Sidebar link hover effects */
+        nav a:hover {
+            background-color: #e5e7eb; /* Tailwind's gray-200 */
+            color: #2563eb; /* Tailwind's blue-600 */
+        }
+
+        /* Smooth content fade-in */
+        main {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Pop-up modal styles */
+        .modal {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .modal.hidden {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .modal:not(.hidden) {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Animated elements */
+        .animated-box {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
     </style>
-    <!-- If using Google Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> 
 </head>
-<body class="bg-gray-100">
+<body class="light bg-gray-100">
+    <div class="toggle-icon glow" id="themeToggle">
+        <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M21.752 15.002A9 9 0 0 1 8.998 2.248a7 7 0 1 0 12.754 12.754z"></path>
+        </svg>
+        <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h0a1 1 0 0 1-1-1zm0 14a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h0a1 1 0 0 1-1-1zm10-6a1 1 0 0 1-1-1h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1zm-18 0a1 1 0 0 1-1-1H2a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1zm13.071-7.071a1 1 0 0 1 1.414 0l1.414 1.414a1 1 0 0 1-1.414 1.414L15.657 4.343a1 1 0 0 1 0-1.414zm-10.142 0a1 1 0 0 1 1.414 0L7.757 5.757a1 1 0 0 1-1.414 1.414L4.93 5.757a1 1 0 0 1 0-1.414zm10.142 10.142a1 1 0 0 1 1.414 0l1.414 1.414a1 1 0 0 1-1.414 1.414l-1.414-1.414a1 1 0 0 1 0-1.414zm-10.142 0a1 1 0 0 1 1.414 0l1.414 1.414a1 1 0 0 1-1.414 1.414L4.93 16.93a1 1 0 0 1 0-1.414zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"></path>
+        </svg>
+    </div>
     <div class="flex h-screen">
         <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-md flex-shrink-0">
@@ -52,22 +233,42 @@
 
              <!-- Quick Stats/Overview -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-lg shadow">
+                <div class="card bg-white p-6 rounded-lg shadow">
                     <h3 class="text-gray-500 text-sm font-medium">Active Opportunities</h3>
                     <p class="text-3xl font-bold">5</p>
+                    <button class="text-blue-500 text-sm mt-4 hover:underline view-more-btn" data-id="active-opportunities">View Details</button>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow">
+                <div class="card bg-white p-6 rounded-lg shadow">
                     <h3 class="text-gray-500 text-sm font-medium">Total Registrations</h3>
                     <p class="text-3xl font-bold">1,284</p>
+                    <button class="text-blue-500 text-sm mt-4 hover:underline view-more-btn" data-id="total-registrations">View Details</button>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow">
+                <div class="card bg-white p-6 rounded-lg shadow">
                     <h3 class="text-gray-500 text-sm font-medium">Pending Evaluations</h3>
                     <p class="text-3xl font-bold">45</p>
+                    <button class="text-blue-500 text-sm mt-4 hover:underline view-more-btn" data-id="pending-evaluations">View Details</button>
                 </div>
             </div>
 
-            <!-- My Opportunities List -->
+            <!-- Animated Elements Section -->
             <section>
+                <h2 class="text-xl font-semibold mb-4">Interactive Features</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow p-6 animated-box">
+                        <h3 class="text-lg font-medium text-gray-700 mb-4">Upcoming Opportunities</h3>
+                        <p class="text-sm text-gray-600">Stay tuned for upcoming hackathons and challenges.</p>
+                        <a href="explore_opportunities.html" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mt-4 inline-block">Explore</a>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6 animated-box">
+                        <h3 class="text-lg font-medium text-gray-700 mb-4">Community Engagement</h3>
+                        <p class="text-sm text-gray-600">Connect with participants and mentors to grow your network.</p>
+                        <a href="community_engagement.html" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mt-4 inline-block">Join Now</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Opportunities List -->
+            <section class="mt-8">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-semibold">My Opportunities</h2>
                     <a href="organizer_create_opportunity.html" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium">
@@ -127,17 +328,62 @@
                 </div>
             </section>
 
-            <!-- Recent Activity Feed (Placeholder) -->
+            <!-- Recent Activity Section -->
             <section class="mt-8">
-                 <h2 class="text-xl font-semibold mb-4">Recent Activity</h2>
-                 <div class="bg-white rounded-lg shadow p-5">
-                     <p class="text-gray-600">Placeholder for recent registrations, submissions, messages etc.</p>
-                 </div>
+                <h2 class="text-xl font-semibold mb-4">Recent Activity</h2>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <ul class="divide-y divide-gray-200">
+                        <li class="py-4 flex justify-between items-center">
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">New registration for "Innovate for Tomorrow"</p>
+                                <p class="text-sm text-gray-500">John Doe registered on Oct 20, 2023</p>
+                            </div>
+                            <button class="text-sm text-blue-500 view-details-btn" data-id="1">View Details</button>
+                        </li>
+                        <li class="py-4 flex justify-between items-center">
+                            <div>
+                                <p class="text-sm font-medium text-gray-800">Submission received for "Data Science Challenge"</p>
+                                <p class="text-sm text-gray-500">Team Alpha submitted their project</p>
+                            </div>
+                            <button class="text-sm text-blue-500 view-details-btn" data-id="2">View Details</button>
+                        </li>
+                    </ul>
+                </div>
             </section>
         </main>
     </div>
+
+    <!-- Pop-up Modal -->
+    <div id="infoModal" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+            <h3 class="text-lg font-semibold mb-4">Details</h3>
+            <p id="modalContent" class="text-sm text-gray-600">Placeholder for detailed information.</p>
+            <div class="flex justify-end mt-4">
+                <button id="closeModalBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('infoModal');
+            const modalContent = document.getElementById('modalContent');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+
+            // Handle "View Details" button clicks
+            document.querySelectorAll('.view-more-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    modalContent.textContent = `Detailed information about ${id.replace('-', ' ')}`;
+                    modal.classList.remove('hidden');
+                });
+            });
+
+            // Handle "Close" button in modal
+            closeModalBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+
             // Handle Manage button clicks
             document.querySelectorAll('.manage-btn').forEach(button => {
                 button.addEventListener('click', (event) => {
@@ -171,6 +417,20 @@
                         // Add logic to delete the opportunity from the backend
                     }
                 });
+            });
+
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+
+            // Toggle between light and dark mode
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('light')) {
+                    body.classList.remove('light');
+                    body.classList.add('dark');
+                } else {
+                    body.classList.remove('dark');
+                    body.classList.add('light');
+                }
             });
         });
     </script>

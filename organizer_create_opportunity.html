@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Hackathon Platform</title> <!-- Change title per page -->
+    <title>Create New Opportunity</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Optional: For Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Optional: Add custom base styles or component overrides here if needed */
         body {
-            font-family: 'Inter', sans-serif; /* Example font - include Google Font link if needed */
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         /* Basic Rich Text Editor Placeholder Style */
         .rich-text-placeholder {
@@ -20,35 +23,155 @@
             border-radius: 0.375rem; /* Tailwind's rounded-md */
             color: #6b7280; /* Tailwind's gray-500 */
         }
+        /* Smooth hover transitions */
+        a, button, input, select, textarea {
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover, button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #2563eb; /* Tailwind's blue-600 */
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Smooth section transitions */
+        section {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sidebar link hover effects */
+        nav a:hover {
+            background-color: #e5e7eb; /* Tailwind's gray-200 */
+            color: #2563eb; /* Tailwind's blue-600 */
+        }
+
+        /* Light Mode */
+        body.light {
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+
+        .light .bg-white {
+            background-color: #ffffff;
+            color: #1f2937;
+        }
+
+        /* Dark Mode */
+        body.dark {
+            background-color: #1f2937;
+            color: #f9fafb;
+        }
+
+        .dark .bg-white {
+            background-color: #374151;
+            color: #f9fafb;
+        }
+
+        /* Toggle Button */
+        .toggle-btn {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: #2563eb;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Toggle Icon */
+        .toggle-icon {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: #2563eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .toggle-icon:hover {
+            background-color: #1d4ed8;
+            transform: scale(1.1);
+        }
+
+        .toggle-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: #ffffff;
+            transition: transform 0.3s ease;
+        }
+
+        body.dark .toggle-icon svg {
+            transform: rotate(180deg);
+        }
     </style>
-    <!-- If using Google Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> 
 </head>
-<body class="bg-gray-100">
-    <!-- Include Organizer Sidebar and Header/Nav if desired, or make it a full-page form -->
-     <div class="flex h-screen">
-        <!-- Organizer Sidebar (Copy from organizer_dashboard.html) -->
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">...</aside>
+<body class="light bg-gray-100">
+    <div class="toggle-icon glow" id="themeToggle">
+        <!-- ...existing SVGs for moon and sun... -->
+    </div>
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md flex-shrink-0">
+            <div class="p-6 border-b">
+                <a href="index.html" class="text-2xl font-bold text-blue-600">HackaPlatform</a>
+                <span class="block text-sm text-gray-500 mt-1">Organizer Panel</span>
+            </div>
+            <nav class="p-4 space-y-2">
+                <a href="organizer_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
+                <a href="organizer_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-list-alt w-6 mr-2"></i> My Opportunities</a>
+                <a href="organizer_create_opportunity.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-plus-circle w-6 mr-2"></i> Create New</a>
+                <a href="organizer_analytics.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-chart-bar w-6 mr-2"></i> Analytics</a>
+                <a href="organizer_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-building w-6 mr-2"></i> Organization Profile</a>
+                <a href="organizer_settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
+                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+            </nav>
+        </aside>
 
         <!-- Main Content Area -->
         <main class="flex-1 overflow-y-auto p-8">
             <h1 class="text-3xl font-bold mb-6">Create New Opportunity</h1>
 
-            <!-- Wizard Steps Indicator (Optional Visual) -->
-            <div class="mb-8 flex justify-between text-sm text-gray-500 max-w-2xl mx-auto">
-                <span class="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1">1. Type & Basic Info</span>
-                <span>2. Details & Rules</span>
-                <span>3. Rounds & Evaluation</span>
-                <span>4. Review & Publish</span>
+            <!-- Wizard Steps Indicator -->
+            <div id="wizard-steps" class="mb-8 flex justify-between text-sm text-gray-500 max-w-2xl mx-auto">
+                <span id="step-1" class="step text-blue-600 font-semibold border-b-2 border-blue-600 pb-1 cursor-pointer">1. Type & Basic Info</span>
+                <span id="step-2" class="step cursor-pointer">2. Details & Rules</span>
+                <span id="step-3" class="step cursor-pointer">3. Rounds & Evaluation</span>
+                <span id="step-4" class="step cursor-pointer">4. Review & Publish</span>
             </div>
 
             <!-- Form Sections -->
             <form action="#" method="POST" class="space-y-8 bg-white p-8 rounded-lg shadow">
 
                 <!-- Section 1: Type & Basic Info -->
-                <section>
+                <section id="section-1">
                     <h2 class="text-xl font-semibold mb-4 border-b pb-2">1. Opportunity Type & Basic Information</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -71,18 +194,18 @@
                 </section>
 
                  <!-- Section 2: Eligibility, Timelines, Rules -->
-                <section>
+                <section id="section-2">
                     <h2 class="text-xl font-semibold mb-4 border-b pb-2">2. Details, Rules & Branding</h2>
+
                     <!-- Eligibility Fields -->
-                    <div class="mb-4">
+                    <div class="mb-6">
                         <label class="block text-sm font-medium text-gray-700 mb-1">Eligibility Criteria</label>
                         <input type="text" name="eligibility_details" placeholder="e.g., Students from XYZ University, Final Year Only" class="w-full border border-gray-300 rounded-md p-2 mb-2">
                         <input type="text" name="required_skills" placeholder="Required Skills (comma-separated): Python, ML, UI/UX" class="w-full border border-gray-300 rounded-md p-2">
-                        <!-- Add more specific fields: Checkboxes for Year, Dropdown for Location etc. -->
                     </div>
 
                     <!-- Timelines -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                          <div>
                             <label for="reg_start" class="block text-sm font-medium text-gray-700 mb-1">Registration Start *</label>
                             <input type="datetime-local" id="reg_start" name="reg_start" required class="w-full border border-gray-300 rounded-md p-2">
@@ -103,13 +226,13 @@
                     </div>
 
                     <!-- Rules & Guidelines -->
-                    <div class="mb-4">
-                        <label for="rules" class="block text-sm font-medium text-gray-700 mb-1">Rules & Guidelines * (Rich Text)</label>
-                        <div class="rich-text-placeholder">Placeholder for Rules Rich Text Editor</div>
+                    <div class="mb-6">
+                        <label for="rules" class="block text-sm font-medium text-gray-700 mb-1">Rules & Guidelines *</label>
+                        <textarea id="rules" name="rules" rows="5" placeholder="Provide detailed rules and guidelines..." class="w-full border border-gray-300 rounded-md p-2"></textarea>
                     </div>
 
                     <!-- Branding -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <label for="logo" class="block text-sm font-medium text-gray-700 mb-1">Organization Logo</label>
                             <input type="file" id="logo" name="logo" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
@@ -122,16 +245,44 @@
                     </div>
 
                      <!-- Themes/Tracks -->
-                    <div class="mb-4">
+                    <div class="mb-6">
                         <label for="themes" class="block text-sm font-medium text-gray-700 mb-1">Themes/Tracks (Optional, one per line)</label>
                         <textarea id="themes" name="themes" rows="3" placeholder="e.g., Fintech
 Sustainability
 Healthcare AI" class="w-full border border-gray-300 rounded-md p-2"></textarea>
                     </div>
+
+                    <!-- Dynamic Sponsor Fields -->
+                    <div class="mb-6">
+                        <label for="sponsors" class="block text-sm font-medium text-gray-700 mb-1">Sponsor Logos & Links</label>
+                        <div id="sponsor-fields">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <input type="file" name="sponsor_logo[]" class="text-sm">
+                                <input type="url" name="sponsor_link[]" placeholder="Sponsor Website Link" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
+                            </div>
+                        </div>
+                        <button type="button" id="add-sponsor-btn" class="text-sm text-blue-600 hover:underline">+ Add Sponsor</button>
+                    </div>
+
+                    <!-- Dynamic Custom Registration Fields -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Custom Registration Questions</label>
+                        <div id="custom-fields">
+                            <div class="flex items-center space-x-2 mb-2">
+                                <input type="text" name="custom_field_label[]" placeholder="Question Label (e.g., T-Shirt Size)" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
+                                <select name="custom_field_type[]" class="border border-gray-300 rounded-md p-1 text-sm">
+                                    <option value="text">Text</option>
+                                    <option value="select">Dropdown</option>
+                                    <option value="checkbox">Checkbox</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="button" id="add-custom-field-btn" class="text-sm text-blue-600 hover:underline">+ Add Custom Field</button>
+                    </div>
                 </section>
 
                 <!-- Section 3: Rounds, Submissions, Evaluation -->
-                 <section>
+                 <section id="section-3">
                     <h2 class="text-xl font-semibold mb-4 border-b pb-2">3. Rounds, Submissions & Evaluation</h2>
                     <!-- Round Configuration (Needs JS for dynamic adding/removing rounds) -->
                     <div class="mb-4 p-4 border border-dashed border-gray-300 rounded">
@@ -178,6 +329,13 @@ Healthcare AI" class="w-full border border-gray-300 rounded-md p-2"></textarea>
                     </div>
                  </section>
 
+                <!-- Section 4: Review & Publish -->
+                <section id="section-4">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">4. Review & Publish</h2>
+                    <p class="text-gray-600 mb-4">Review all the details you have entered and click "Publish" to make your opportunity live.</p>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">Publish</button>
+                </section>
+
                 <!-- Section 4: Optional Settings -->
                  <section>
                      <h2 class="text-xl font-semibold mb-4 border-b pb-2">4. Optional Settings</h2>
@@ -220,5 +378,91 @@ Healthcare AI" class="w-full border border-gray-300 rounded-md p-2"></textarea>
             </form>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add Sponsor Field
+            const sponsorFields = document.getElementById('sponsor-fields');
+            const addSponsorBtn = document.getElementById('add-sponsor-btn');
+            addSponsorBtn.addEventListener('click', () => {
+                const sponsorField = document.createElement('div');
+                sponsorField.classList.add('flex', 'items-center', 'space-x-2', 'mb-2');
+                sponsorField.innerHTML = `
+                    <input type="file" name="sponsor_logo[]" class="text-sm">
+                    <input type="url" name="sponsor_link[]" placeholder="Sponsor Website Link" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
+                `;
+                sponsorFields.appendChild(sponsorField);
+            });
+
+            // Add Custom Registration Field
+            const customFields = document.getElementById('custom-fields');
+            const addCustomFieldBtn = document.getElementById('add-custom-field-btn');
+            addCustomFieldBtn.addEventListener('click', () => {
+                const customField = document.createElement('div');
+                customField.classList.add('flex', 'items-center', 'space-x-2', 'mb-2');
+                customField.innerHTML = `
+                    <input type="text" name="custom_field_label[]" placeholder="Question Label (e.g., T-Shirt Size)" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
+                    <select name="custom_field_type[]" class="border border-gray-300 rounded-md p-1 text-sm">
+                        <option value="text">Text</option>
+                        <option value="select">Dropdown</option>
+                        <option value="checkbox">Checkbox</option>
+                    </select>
+                `;
+                customFields.appendChild(customField);
+            });
+
+            const steps = document.querySelectorAll('.step');
+            const sections = document.querySelectorAll('section');
+
+            // Highlight the current step
+            const highlightStep = (index) => {
+                steps.forEach((step, i) => {
+                    if (i === index) {
+                        step.classList.add('text-blue-600', 'font-semibold', 'border-b-2', 'border-blue-600');
+                    } else {
+                        step.classList.remove('text-blue-600', 'font-semibold', 'border-b-2', 'border-blue-600');
+                        step.classList.add('text-gray-500');
+                    }
+                });
+            };
+
+            // Scroll to the corresponding section on step click
+            steps.forEach((step, index) => {
+                step.addEventListener('click', () => {
+                    sections[index].scrollIntoView({ behavior: 'smooth' });
+                    highlightStep(index);
+                });
+            });
+
+            // Highlight the step based on scroll position
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const index = Array.from(sections).indexOf(entry.target);
+                            highlightStep(index);
+                        }
+                    });
+                },
+                { threshold: 0.5 }
+            );
+
+            sections.forEach((section) => observer.observe(section));
+
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+
+            // Toggle between light and dark mode
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('light')) {
+                    body.classList.remove('light');
+                    body.classList.add('dark');
+                } else {
+                    body.classList.remove('dark');
+                    body.classList.add('light');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
