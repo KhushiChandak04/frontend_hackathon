@@ -3,28 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Hackathon Platform</title> <!-- Change title per page -->
+    <title>Participant Dashboard - HackaPlatform</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Optional: For Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* Optional: Add custom base styles or component overrides here if needed */
         body {
-            font-family: 'Inter', sans-serif; /* Example font - include Google Font link if needed */
+            font-family: 'Inter', sans-serif;
         }
-        /* Basic Rich Text Editor Placeholder Style */
-        .rich-text-placeholder {
-            border: 1px solid #e2e8f0; /* Tailwind's gray-300 */
-            padding: 0.75rem;
-            min-height: 150px;
-            background-color: #f9fafb; /* Tailwind's gray-50 */
-            border-radius: 0.375rem; /* Tailwind's rounded-md */
-            color: #6b7280; /* Tailwind's gray-500 */
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
     </style>
-    <!-- If using Google Fonts -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <div class="flex h-screen">
@@ -35,8 +29,8 @@
             </div>
             <nav class="p-4 space-y-2">
                 <a href="participant_dashboard.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
-                <a href="browse_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-search w-6 mr-2"></i> Discover</a>
-                <a href="my_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-calendar-check w-6 mr-2"></i> My Opportunities</a>
+                <!-- "Discover" link removed -->
+                <a href="my_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-calendar-check w-6 mr-2"></i> My Hackathons</a> <!-- Renamed for clarity -->
                 <a href="my_teams.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-users w-6 mr-2"></i> My Teams</a>
                 <a href="my_submissions.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-file-alt w-6 mr-2"></i> My Submissions</a>
                 <a href="participant_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
@@ -52,65 +46,151 @@
 
             <!-- Quick Stats/Overview -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-sm font-medium">Active Registrations</h3>
-                    <p class="text-3xl font-bold">3</p>
+                <div class="bg-white p-6 rounded-lg shadow card-hover">
+                    <h3 class="text-gray-500 text-sm font-medium">Active Hackathons</h3> <!-- Renamed -->
+                    <p class="text-3xl font-bold mt-1">3</p>
+                    <a href="my_opportunities.html" class="text-xs text-blue-500 hover:underline mt-2 inline-block">View All →</a>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow">
+                <div class="bg-white p-6 rounded-lg shadow card-hover">
                     <h3 class="text-gray-500 text-sm font-medium">Upcoming Deadlines</h3>
-                    <p class="text-3xl font-bold">2</p>
+                    <p class="text-3xl font-bold mt-1">2</p>
+                    <a href="#upcoming-deadlines" class="text-xs text-blue-500 hover:underline mt-2 inline-block">See Below →</a>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-sm font-medium">Pending Invitations</h3>
-                    <p class="text-3xl font-bold">1</p>
+                <div class="bg-white p-6 rounded-lg shadow card-hover">
+                    <h3 class="text-gray-500 text-sm font-medium">Pending Team Invitations</h3>
+                    <p class="text-3xl font-bold mt-1">1</p>
+                    <a href="my_teams.html#invitations" class="text-xs text-blue-500 hover:underline mt-2 inline-block">View Invitations →</a>
                 </div>
             </div>
 
             <!-- Upcoming Deadlines -->
-            <section class="mb-8">
+            <section class="mb-8" id="upcoming-deadlines">
                 <h2 class="text-xl font-semibold mb-4">Upcoming Deadlines</h2>
                 <div class="bg-white rounded-lg shadow overflow-hidden">
                     <ul class="divide-y divide-gray-200">
-                        <li class="p-4 flex justify-between items-center hover:bg-gray-50">
+                        <li class="p-4 flex flex-col sm:flex-row justify-between sm:items-center hover:bg-gray-50">
                             <div>
-                                <p class="font-medium text-blue-600">CodeSprint Challenge - Round 1 Submission</p>
-                                <p class="text-sm text-gray-500">Due: Oct 25, 2023, 11:59 PM</p>
+                                <p class="font-medium text-blue-600">Innovate for Tomorrow - Project Submission</p>
+                                <p class="text-sm text-gray-500">Hackathon: Innovate for Tomorrow</p>
+                                <p class="text-sm text-red-600 font-medium">Due: Oct 28, 2023, 11:59 PM PST</p>
                             </div>
-                            <a href="#" class="text-sm text-blue-500 hover:underline">View Details</a>
+                            <a href="opportunity_detail.html#submission" class="mt-2 sm:mt-0 text-sm text-blue-500 hover:underline font-medium">Go to Submit →</a>
                         </li>
-                         <li class="p-4 flex justify-between items-center hover:bg-gray-50">...</li>
+                         <li class="p-4 flex flex-col sm:flex-row justify-between sm:items-center hover:bg-gray-50">
+                            <div>
+                                <p class="font-medium text-blue-600">CodeSprint Hackathon - Team Formation Deadline</p> <!-- Renamed -->
+                                <p class="text-sm text-gray-500">Hackathon: CodeSprint Hackathon</p> <!-- Renamed -->
+                                <p class="text-sm text-red-600 font-medium">Due: Nov 05, 2023, 5:00 PM EST</p>
+                            </div>
+                            <a href="my_teams.html" class="mt-2 sm:mt-0 text-sm text-blue-500 hover:underline font-medium">Manage Team →</a>
+                        </li>
+                         <li class="p-4 text-center text-gray-500 text-sm hover:bg-gray-50">
+                            <a href="my_opportunities.html" class="hover:underline">View all deadlines on My Hackathons page...</a> <!-- Renamed -->
+                         </li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Registered Opportunities -->
+            <!-- Registered Hackathons -->
             <section class="mb-8">
-                <h2 class="text-xl font-semibold mb-4">My Registered Opportunities</h2>
+                <div class="flex justify-between items-center mb-4">
+                     <h2 class="text-xl font-semibold">My Registered Hackathons</h2> <!-- Renamed -->
+                     <a href="my_opportunities.html" class="text-sm text-blue-600 hover:underline">View All →</a>
+                </div>
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Opportunity Card (similar to landing page, maybe slightly different info) -->
-                    <div class="bg-white rounded-lg shadow p-5">
-                        <h3 class="text-lg font-bold mb-1">Innovate for Tomorrow Hackathon</h3>
-                        <p class="text-sm text-gray-600 mb-3">Hosted by TechCorp University</p>
-                        <div class="text-sm mb-3">
-                            <span class="font-medium">Status:</span> <span class="text-green-600">Registered (Team: Alpha Coders)</span>
+                    <!-- Hackathon Card 1 -->
+                    <div class="bg-white rounded-lg shadow p-5 card-hover flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold mb-1">Innovate for Tomorrow Hackathon</h3>
+                            <p class="text-sm text-gray-600 mb-3">Hosted by: <span class="font-medium">TechCorp University</span></p>
+                            <div class="text-sm mb-3 space-y-1">
+                                <p><span class="font-medium">Status:</span> <span class="text-green-600 font-semibold">Registered</span></p>
+                                <p><span class="font-medium">Team:</span> <a href="my_teams.html#team-alpha-coders" class="text-blue-600 hover:underline">Alpha Coders</a></p>
+                                <p><span class="font-medium">Submission:</span> <span class="text-orange-600">Not Submitted Yet</span></p>
+                                <!-- Prize Indicator -->
+                                <p><span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><i class="fas fa-trophy mr-1"></i> Prizes Available</span></p>
+                            </div>
+                             <!-- Updated Timeline Display -->
+                            <div class="border-t pt-3 mt-3 space-y-1.5 text-xs text-gray-600">
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar-alt w-4 mr-2 text-blue-500" title="Event Dates"></i>
+                                    <span>Event: Oct 20 - Oct 31, 2023</span> <!-- Example Start Date Added -->
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-hourglass-half w-4 mr-2 text-red-500" title="Next Deadline"></i>
+                                    <span class="font-medium text-red-600">Next Deadline: Submission (Oct 28)</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center text-xs text-gray-500 mb-3">
-                            <span><i class="fas fa-calendar-alt mr-1"></i> Ends Oct 31</span>
-                            <span><i class="fas fa-clock mr-1"></i> Next Deadline: Oct 28</span>
-                        </div>
-                        <a href="opportunity_detail.html" class="text-sm text-blue-600 hover:underline font-medium">Go to Event Page →</a>
+                        <a href="opportunity_detail.html?id=innovate-tomorrow" class="text-sm text-blue-600 hover:underline font-medium self-start mt-4">Go to Hackathon Page →</a> <!-- Renamed link text -->
                     </div>
-                     <div class="bg-white rounded-lg shadow p-5">...</div>
+                     <!-- Hackathon Card 2 -->
+                     <div class="bg-white rounded-lg shadow p-5 card-hover flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold mb-1">CodeSprint Hackathon</h3> <!-- Renamed -->
+                             <p class="text-sm text-gray-600 mb-3">Hosted by: <span class="font-medium">Dev Community Hub</span></p>
+                            <div class="text-sm mb-3 space-y-1">
+                                <p><span class="font-medium">Status:</span> <span class="text-blue-600 font-semibold">Registered</span></p>
+                                <p><span class="font-medium">Team:</span> <span class="text-gray-500">Looking for Team</span></p>
+                                 <p><span class="font-medium">Submission:</span> <span class="text-gray-500">N/A Yet</span></p>
+                                 <!-- Prize Indicator (Example: Maybe prizes not announced yet or none) -->
+                                 <p><span class="inline-block bg-gray-100 text-gray-600 text-xs font-medium mr-2 px-2.5 py-0.5 rounded"><i class="fas fa-trophy mr-1"></i> Prize Info Pending</span></p>
+                            </div>
+                            <!-- Updated Timeline Display -->
+                            <div class="border-t pt-3 mt-3 space-y-1.5 text-xs text-gray-600">
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar-alt w-4 mr-2 text-blue-500" title="Event Dates"></i>
+                                    <span>Event: Nov 10 - Nov 12, 2023</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-hourglass-half w-4 mr-2 text-red-500" title="Next Deadline"></i>
+                                    <span class="font-medium text-red-600">Next Deadline: Team Formation (Nov 05)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="opportunity_detail.html?id=codesprint-hackathon" class="text-sm text-blue-600 hover:underline font-medium self-start mt-4">Go to Hackathon Page →</a> <!-- Renamed link text -->
+                     </div>
                  </div>
             </section>
 
-            <!-- Recommended Opportunities -->
+            <!-- Recommended Hackathons -->
             <section>
-                <h2 class="text-xl font-semibold mb-4">Recommended For You</h2>
-                <!-- List or grid of recommended opportunity cards -->
-                 <div class="bg-white rounded-lg shadow p-5">
-                    <p class="text-gray-700">AI/ML Hack Challenge - Based on your skills.</p>
-                     <a href="#" class="text-sm text-blue-600 hover:underline">View Details →</a>
+                 <div class="flex justify-between items-center mb-4">
+                     <h2 class="text-xl font-semibold">Recommended Hackathons</h2> <!-- Renamed -->
+                      <a href="my_opportunities.html" class="text-sm text-blue-600 hover:underline">Browse All Hackathons →</a> <!-- Changed link text/destination -->
+                 </div>
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                     <!-- Recommendation Card 1 -->
+                     <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <h4 class="font-semibold text-md mb-1">AI/ML HealthTech Hackathon</h4> <!-- Renamed -->
+                        <p class="text-xs text-gray-500 mb-2">Hosted by Health Innovators</p>
+                        <p class="text-sm text-gray-700 mb-3">Based on your interest in AI and Healthcare.</p>
+                         <!-- Prize Indicator -->
+                         <span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded mb-3"><i class="fas fa-trophy mr-1"></i> Prizes Available</span>
+                        <div class="text-xs text-gray-500 mb-3">
+                             <span><i class="fas fa-calendar-alt mr-1"></i> Starts: Nov 15, 2023</span>
+                        </div>
+                         <a href="opportunity_detail.html?id=ai-health-hack" class="text-sm text-blue-600 hover:underline font-medium">View Details →</a>
+                     </div>
+                      <!-- Recommendation Card 2 -->
+                      <div class="bg-white rounded-lg shadow p-5 card-hover">
+                        <h4 class="font-semibold text-md mb-1">Sustainable Future Hackathon</h4> <!-- Renamed -->
+                        <p class="text-xs text-gray-500 mb-2">Hosted by Green Planet Org</p>
+                        <p class="text-sm text-gray-700 mb-3">Explore challenges related to sustainability.</p>
+                         <!-- Prize Indicator -->
+                         <span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded mb-3"><i class="fas fa-trophy mr-1"></i> Prizes Available</span>
+                         <div class="text-xs text-gray-500 mb-3">
+                             <span><i class="fas fa-calendar-alt mr-1"></i> Starts: Nov 20, 2023</span>
+                        </div>
+                         <a href="opportunity_detail.html?id=sustainable-future" class="text-sm text-blue-600 hover:underline font-medium">View Details →</a>
+                     </div>
+                     <!-- Placeholder to browse -->
+                     <div class="bg-white rounded-lg shadow p-4 flex items-center justify-center card-hover border border-dashed border-gray-300">
+                         <a href="my_opportunities.html" class="text-center text-blue-600 hover:underline"> <!-- Changed link -->
+                             <i class="fas fa-search block text-2xl mb-2"></i>
+                             <span class="text-sm font-medium">Browse All Hackathons</span> <!-- Changed text -->
+                         </a>
+                     </div>
                  </div>
             </section>
 
