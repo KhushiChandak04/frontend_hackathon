@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Opportunities - Hackverse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Inter', sans-serif; } </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header/Navbar -->
+    <nav class="bg-gray-900 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-blue-400">Hackverse</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="login.html" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded transition duration-300">Login</a>
+                <a href="signup.html" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded transition duration-300">Sign Up</a>
+            </div>
+            <button class="md:hidden focus:outline-none"><i class="fas fa-bars text-xl"></i></button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 md:px-6 py-12">
+        <h1 class="text-4xl font-bold text-center mb-10">Discover Opportunities</h1>
+
+        <!-- Filters Section (Placeholder) -->
+        <div class="bg-white p-4 rounded-lg shadow mb-8 flex flex-wrap gap-4">
+            <input type="text" placeholder="Search by keyword..." class="border p-2 rounded-md flex-grow">
+            <select class="border p-2 rounded-md">
+                <option>All Types</option>
+                <option>Hackathon</option>
+                <option>Coding Challenge</option>
+                <option>Workshop</option>
+                </select>
+            <select class="border p-2 rounded-md">
+                <option>All Domains</option>
+                <option>Web Dev</option>
+                <option>AI/ML</option>
+                <option>Sustainability</option>
+            </select>
+             <button class="bg-blue-500 text-white px-4 py-2 rounded-md">Filter</button>
+        </div>
+
+        <!-- Opportunities Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Repeat Opportunity Card Structure from index.html -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                <img src="https://via.placeholder.com/400x200?text=Event+Banner+1" alt="Opportunity Banner" class="w-full h-40 object-cover">
+                <div class="p-6">
+                    <span class="text-sm text-blue-500 font-semibold">Hackathon</span>
+                    <h3 class="text-xl font-bold my-2">Innovate for Tomorrow Hackathon</h3>
+                    <p class="text-gray-600 text-sm mb-3">Hosted by TechCorp University</p>
+                    <p class="text-gray-700 mb-4 line-clamp-3">Join us to build solutions for sustainable living using cutting-edge tech. Great prizes await!</p>
+                    <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                        <span><i class="fas fa-calendar-alt mr-1"></i> Ends Oct 31</span>
+                        <span><i class="fas fa-users mr-1"></i> Teams of 2-4</span>
+                    </div>
+                    <a href="opportunity_detail.html" class="block w-full text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300">View Details</a>
+                </div>
+            </div>
+            <!-- Card 2 -->
+             <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                 <img src="https://via.placeholder.com/400x200?text=Event+Banner+2" alt="Opportunity Banner" class="w-full h-40 object-cover">
+                 <div class="p-6">
+                    <span class="text-sm text-green-500 font-semibold">Coding Challenge</span>
+                    <h3 class="text-xl font-bold my-2">AlgoMaster Challenge</h3>
+                    <p class="text-gray-600 text-sm mb-3">Hosted by CodeHub</p>
+                    <p class="text-gray-700 mb-4 line-clamp-3">Test your algorithmic skills against the best. Weekly challenges with exciting leaderboards.</p>
+                    <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                        <span><i class="fas fa-clock mr-1"></i> Ongoing</span>
+                        <span><i class="fas fa-user mr-1"></i> Individual</span>
+                    </div>
+                    <a href="opportunity_detail.html" class="block w-full text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300">View Details</a>
+                 </div>
+             </div>
+            <!-- Card 3 -->
+             <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300">
+                 <img src="https://via.placeholder.com/400x200?text=Event+Banner+3" alt="Opportunity Banner" class="w-full h-40 object-cover">
+                 <div class="p-6">
+                    <span class="text-sm text-purple-500 font-semibold">Workshop</span>
+                    <h3 class="text-xl font-bold my-2">Intro to Web3 Development</h3>
+                    <p class="text-gray-600 text-sm mb-3">Hosted by Blockchain Experts</p>
+                    <p class="text-gray-700 mb-4 line-clamp-3">Learn the fundamentals of blockchain and smart contracts in this hands-on workshop.</p>
+                    <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                        <span><i class="fas fa-calendar-alt mr-1"></i> Nov 15</span>
+                         <span><i class="fas fa-map-marker-alt mr-1"></i> Online</span>
+                    </div>
+                    <a href="opportunity_detail.html" class="block w-full text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-300">View Details</a>
+                 </div>
+            </div>
+            <!-- Add more cards as needed -->
+        </div>
+
+        <!-- Pagination (Placeholder) -->
+        <div class="mt-12 flex justify-center">
+             <nav class="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                 <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">Prev</a>
+                 <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-blue-500 text-white text-sm font-medium">1</a>
+                 <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
+                 <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">Next</a>
+             </nav>
+         </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2023 Hackverse. All rights reserved.</p>
+           <div class="mt-4 space-x-6">
+               <a href="about.html" class="hover:text-white">About</a>
+               <a href="contact.html" class="hover:text-white">Contact</a>
+               <a href="privacy.html" class="hover:text-white">Privacy Policy</a>
+               <a href="terms.html" class="hover:text-white">Terms of Service</a>
+           </div>
+        </div>
+    </footer>
+
+</body>
+</html>

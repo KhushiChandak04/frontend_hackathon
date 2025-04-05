@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <style>
+        /* Basic inline styles for demonstration - move to style.css */
+        body { font-family: sans-serif; margin: 0; background-color: #f4f7f6; }
+        .profile-header-banner { background-color: #6c757d; /* Example gray */ height: 150px; margin-bottom: -50px; /* Pull content up */ }
+        .profile-container { max-width: 960px; margin: 0 auto; padding: 2rem; }
+        .profile-header { display: flex; align-items: flex-end; margin-bottom: 2rem; }
+        .profile-picture { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; background-color: #ccc; /* Placeholder */ margin-right: 1.5rem; object-fit: cover; /* If using img tag */ }
+        .profile-info h1 { margin: 0 0 0.25rem 0; font-size: 1.8rem; }
+        .profile-info p { margin: 0 0 0.5rem 0; color: #555; }
+        .profile-actions { margin-left: auto; align-self: flex-start; /* Align button top right-ish */ }
+        .edit-button { padding: 0.5rem 1rem; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
+        .profile-section { background-color: white; padding: 1.5rem; border-radius: 5px; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: relative; /* For edit button positioning */ }
+        .profile-section h2 { margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 0.75rem; margin-bottom: 1rem; font-size: 1.3rem; color: #333; }
+        .section-edit-button { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 0.8rem; background: none; border: none; color: #007bff; cursor: pointer; }
+        .skills-list span { display: inline-block; background-color: #e9ecef; color: #333; padding: 0.3rem 0.8rem; margin: 0.2rem; border-radius: 15px; font-size: 0.9rem; }
+        .experience-item { border-bottom: 1px dashed #eee; padding-bottom: 1rem; margin-bottom: 1rem; }
+        .experience-item:last-child { border-bottom: none; margin-bottom: 0; }
+        .experience-item h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; }
+        .experience-item .company { font-weight: bold; color: #555; }
+        .experience-item .dates { font-size: 0.9rem; color: #777; margin-bottom: 0.5rem; display: block; }
+        .resume-section p { margin-bottom: 0.5rem; }
+        .resume-section a, .resume-section button 
+    </style>
+</head>
+<body>
+
+    <!-- Optional Header consistent with your site -->
+    <header style="background-color: #333; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;">
+        <h1>Hackverse</h1>
+        <div>
+            <!-- Logout Form -->
+            <form action="/logout" method="POST" style="display: inline; margin-left: 1rem;">
+                 <button type="submit" style="color: white; background: none; border: none; cursor: pointer; font-size: 1rem;">Logout</button>
+            </form>
+        </div>
+    </header>
+
+    <!-- Optional Banner -->
+    <div class="profile-header-banner"></div>
+
+    <div class="profile-container">
+
+        <div class="profile-header">
+            <!-- Placeholder for profile picture -->
+            <div class="profile-picture">
+                <!-- <img src="[user-image-url]" alt="Profile Picture"> -->
+            </div>
+            <div class="profile-info">
+                <h1>[User Full Name]</h1>
+                <p>[User Headline or Current Role, e.g., Aspiring Software Developer | Computer Science Student]</p>
+                <!-- Optional basic info -->
+                <p>Location: [User Location]</p>
+                <p>Links: <a href="[LinkedIn URL]">LinkedIn</a> | <a href="[GitHub URL]">GitHub</a> | <a href="[Portfolio URL]">Portfolio</a></p>
+            </div>
+            <div class="profile-actions">
+                 <!-- This button should only be visible to the profile owner -->
+                <button class="edit-button" onclick="alert('Redirect to Edit Profile Page/Enable Editing');">Edit Profile</button>
+            </div>
+        </div>
+
+        <section class="profile-section about-section">
+             <!-- Edit button specific to this section, only visible to owner -->
+            <button class="section-edit-button" onclick="alert('Enable About editing');">Edit</button>
+            <h2>About Me</h2>
+            <p>
+                [User's detailed bio goes here. This text would be dynamically inserted from the database. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]
+            </p>
+        </section>
+
+        <section class="profile-section resume-section">
+            <button class="section-edit-button" onclick="alert('Enable Resume editing/upload');">Edit</button>
+            <h2>Resume</h2>
+            <!-- Logic here depends on how you handle resumes -->
+            <!-- Example 1: Link to download -->
+            <p>View or download my latest resume:</p>
+            <a href="[link-to-user-resume.pdf]" download class="edit-button">Download Resume</a>
+        </section>
+
+        <section class="profile-section skills-section">
+            <button class="section-edit-button" onclick="alert('Enable Skills editing');">Edit</button>
+            <h2>Skills</h2>
+            <div class="skills-list">
+                <!-- Skills dynamically generated by backend -->
+                <span>JavaScript</span>
+                <span>React</span>
+                <span>Node.js</span>
+                <span>Express</span>
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>Bootstrap</span>
+                <span>SQL</span>
+                <span>PostgreSQL</span>
+                <span>Git</span>
+                <span>Problem Solving</span>
+                <span>Teamwork</span>
+                <!-- End dynamic skills list -->
+            </div>
+        </section>
+
+        <section class="profile-section experience-section">
+            <button class="section-edit-button" onclick="alert('Enable Experience editing/adding');">Add/Edit</button>
+            <h2>Experience</h2>
+            <div class="experience-list">
+                <!-- Experience items dynamically generated by backend -->
+                <div class="experience-item">
+                    <h3>[Job Title / Project Name]</h3>
+                    <p class="company">[Company Name / 'Personal Project' / 'Academic Project']</p>
+                    <span class="dates">[Start Date] - [End Date or 'Present']</span>
+                    <p>[Description of responsibilities, achievements, or project details. Use bullet points if desired.]</p>
+                </div>
+
+                <div class="experience-item">
+                    <h3>[Previous Job Title / Project Name]</h3>
+                    <p class="company">[Previous Company Name]</p>
+                    <span class="dates">[Start Date] - [End Date]</span>
+                    <p>[Description...]</p>
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- End profile-container -->
+</body>
+</html>
