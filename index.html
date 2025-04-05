@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Hackathon Platform</title> <!-- Change title per page -->
+    <title>Hackverse</title> <!-- Change title per page -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Optional: For Icons -->
     <style>
@@ -31,12 +31,8 @@
     <!-- Header/Navbar -->
     <nav class="bg-gray-900 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-blue-400">HackaPlatform</a>
+            <a href="index.html" class="text-2xl font-bold text-blue-400">Hackverse</a>
             <div class="hidden md:flex space-x-6 items-center">
-                <a href="browse_opportunities.html" class="hover:text-blue-300">Discover</a>
-                <a href="#features" class="hover:text-blue-300">Features</a>
-                <a href="organizer_landing.html" class="hover:text-blue-300">For Organizers</a>
-                <a href="#community" class="hover:text-blue-300">Community</a>
                 <a href="login.html" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded transition duration-300">Login</a>
                 <a href="signup.html" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded transition duration-300">Sign Up</a>
             </div>
@@ -148,15 +144,16 @@
             </div>
         </div>
     </footer>
-
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script> 
+    <script>
+        var typed = new Typed("#element", {
+            strings: ["Innovate","Collaborate","and Succeed."],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 1000,
+            loop: true
+        });
+    </script>
 </body>
-<script>
-    var typed = new Typed("#element", {
-        strings: ["Innovate","Collaborate","and Succeed."],
-        typeSpeed: 50,
-        backSpeed: 30,
-        backDelay: 1000,
-        loop: true
-    });
-</script>
+
 </html>
