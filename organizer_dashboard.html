@@ -96,13 +96,23 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">350</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Oct 31, 2023</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                    <a href="organizer_manage_opportunity.html" class="text-blue-600 hover:text-blue-900">Manage</a>
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">View</a>
-                                    <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
+                                    <button class="text-indigo-600 hover:text-indigo-900 view-btn" data-id="1">View</button>
+                                    <a href="organizer_manage_opportunity.html" class="text-blue-600 hover:text-blue-900 manage-btn" data-id="1">Manage</a>
+                                    <a href="#" class="text-red-600 hover:text-red-900 delete-btn" data-id="1">Delete</a>
                                 </td>
                             </tr>
-                            <!-- More rows... -->
-                             <tr>
+                            <tr id="details-1" class="hidden">
+                                <td colspan="6" class="bg-gray-50 px-6 py-4">
+                                    <h3 class="text-lg font-semibold mb-2">Innovate for Tomorrow</h3>
+                                    <p class="text-sm text-gray-600 mb-2">This is a detailed description of the opportunity. It includes information about the goals, requirements, and rewards for participants.</p>
+                                    <ul class="list-disc pl-5 text-sm text-gray-600">
+                                        <li>Goal: Solve real-world problems using innovative solutions.</li>
+                                        <li>Requirements: Teams of 3-5 members, registration fee $50.</li>
+                                        <li>Rewards: $10,000 cash prize, mentorship opportunities.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Data Science Challenge</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hiring Challenge</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -126,5 +136,43 @@
             </section>
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle Manage button clicks
+            document.querySelectorAll('.manage-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const id = button.getAttribute('data-id');
+                    window.location.href = `organizer_manage_opportunity.html?id=${id}`;
+                });
+            });
+
+            // Handle View button clicks
+            document.querySelectorAll('.view-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const id = button.getAttribute('data-id');
+                    const detailsRow = document.getElementById(`details-${id}`);
+                    if (detailsRow.classList.contains('hidden')) {
+                        detailsRow.classList.remove('hidden');
+                    } else {
+                        detailsRow.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Handle Delete button clicks
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const id = button.getAttribute('data-id');
+                    if (confirm(`Are you sure you want to delete opportunity ID: ${id}?`)) {
+                        alert(`Opportunity ID: ${id} has been deleted.`);
+                        // Add logic to delete the opportunity from the backend
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
