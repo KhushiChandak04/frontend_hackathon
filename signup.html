@@ -1,279 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Hackverse</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Use the same background style as login */
-        .gradient-bg {
-           background-color: #f3f4f6; /* bg-gray-100 */
-           background-image: linear-gradient(to bottom right, #f3f4f6, #e5e7eb); /* Slightly darker gray */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hackverse Signup</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f5f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .title h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #5b3cc4;
+    }
+
+    .title p {
+      color: #555;
+      font-size: 15px;
+      margin-top: 6px;
+    }
+
+    .form h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .form p {
+      color: #666;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .user-type {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    /* Styling for the span inside the link */
+    .user-type a span {
+      margin: 0 5px; /* Keep original margin */
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      display: inline-block;
+      color: inherit;
+    }
+
+    /* Hover effect applies to the link, affecting the span */
+    .user-type a:hover span {
+      background-color: #4f46e5;
+      color: white;
+    }
+
+    /* Remove default link styling */
+    .user-type a {
+        text-decoration: none;
+        color: initial;
+        margin: 0 2px;
+    }
+    /* Optional: Style for the 'active' link if JS adds a class based on URL param */
+    /* .user-type a.active span {
+         background-color: #4f46e5;
+         color: white;
+         border-color: #4f46e5;
+    } */
+
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .checkbox input {
+      margin-right: 8px;
+    }
+
+    .checkbox a {
+      color: #4f46e5;
+      text-decoration: none;
+    }
+
+    .submit-btn {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .submit-btn:hover {
+      background-color: #1e40af;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 25px;
+      }
+      .title h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
 </head>
-<body class="gradient-bg">
+<body>
+  <div class="container">
+    <div class="title">
+      <h1>Hackverse</h1>
+      <p>Welcome to Hackverse!<br>The complete hackathon management platform</p>
+    </div>
 
-    <!-- Header/Navbar (keep consistent) -->
-    <nav class="bg-gray-900 text-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-blue-400">Hackverse</a>
-            <div class="hidden md:flex space-x-6 items-center">
-                <a href="login.html" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded transition duration-300">Login</a>
-                <!-- Highlight Sign Up button -->
-                <a href="signup.html" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded transition duration-300 ring-2 ring-green-300">Sign Up</a>
-            </div>
-            <button class="md:hidden focus:outline-none"><i class="fas fa-bars text-xl"></i></button>
-        </div>
-    </nav>
+    <div class="form">
+      <h2>Create Account</h2>
+      <p>Select your role and enter details to get started.</p>
 
-    <!-- Main Signup Content -->
-    <main class="flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-        <!-- Use the same card styling as login -->
-        <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl w-full max-w-lg border border-gray-200">
-
-            <!-- Form Header -->
-            <div class="text-center mb-8">
-                 <!-- Optional: Add Logo Image here -->
-                <!-- <img src="path/to/logo.png" alt="Hackverse Logo" class="mx-auto h-12 w-auto mb-4"> -->
-                <h1 class="text-3xl font-extrabold text-gray-900">
-                    Create Your Account
-                </h1>
-                <p class="mt-2 text-sm text-gray-600">
-                    Join the Hackverse community today!
-                </p>
-            </div>
-
-            <!-- Placeholder for Signup Error Messages -->
-            <div id="error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6 text-sm" role="alert">
-                <strong class="font-bold">Error!</strong>
-                <span class="block sm:inline"> Something went wrong. Please check your input.</span>
-                <!-- Add a close button if needed -->
-            </div>
+      <!-- **** UPDATED User Type Section with Refresh Links **** -->
+      <div class="user-type">
+        <!-- Changed href to point back to signup.html with a role parameter -->
+        <a href="signup.html?role=judge" style="text-decoration: none; color: inherit;">
+            <span>Judge</span>
+        </a>
+        <a href="signup.html?role=participant" style="text-decoration: none; color: inherit;">
+             <span>Participant</span>
+         </a>
+         <a href="signup.html?role=organizer" style="text-decoration: none; color: inherit;">
+            <span>Organizer</span>
+        </a>
+      </div>
+      <!-- **** END OF UPDATE **** -->
 
 
-            <form action="/perform_signup" method="POST" class="space-y-6"> <!-- Use space-y for consistent spacing -->
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email Address" required />
+      <input type="password" placeholder="Password" required />
+      <input type="password" placeholder="Confirm Password" required />
 
-                <!-- Full Name Input with Icon -->
-                <div>
-                    <label for="fullname" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                    <div class="relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-user text-gray-400"></i>
-                        </div>
-                        <input type="text" id="fullname" name="fullname" required autocomplete="name"
-                               class="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                               placeholder="Your Name">
-                    </div>
-                </div>
+      <div class="checkbox">
+        <input type="checkbox" required />
+        <label>I agree to the <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a>.</label>
+      </div>
 
-                <!-- Email Input with Icon -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                    <div class="relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-envelope text-gray-400"></i>
-                        </div>
-                        <input type="email" id="email" name="email" required autocomplete="email"
-                               class="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                               placeholder="you@example.com">
-                    </div>
-                </div>
+      <button class="submit-btn">Create Account</button>
+    </div>
+  </div>
 
-                <!-- Password Input with Icon -->
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <div class="relative rounded-md shadow-sm">
-                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-lock text-gray-400"></i>
-                        </div>
-                        <input type="password" id="password" name="password" required autocomplete="new-password"
-                               class="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                               placeholder="Password">
-                         <!-- Optional: Add Password Strength Meter Here -->
-                    </div>
-                </div>
+  <!-- Optional JS to highlight the active role based on URL parameter -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const role = params.get('role');
+        if (role) {
+            const activeLink = document.querySelector(`.user-type a[href$="role=${role}"]`);
+            if (activeLink) {
+                // You could add an 'active' class here if you defined styles for it
+                // activeLink.classList.add('active');
+                // Or just visually change the span directly (less ideal than CSS classes)
+                 const activeSpan = activeLink.querySelector('span');
+                 if(activeSpan){
+                    activeSpan.style.backgroundColor = '#4f46e5'; // Example active style
+                    activeSpan.style.color = 'white';
+                    activeSpan.style.borderColor = '#4f46e5';
+                 }
 
-                 <!-- Confirm Password Input with Icon -->
-                <div>
-                    <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                    <div class="relative rounded-md shadow-sm">
-                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-lock text-gray-400"></i>
-                        </div>
-                        <input type="password" id="confirm_password" name="confirm_password" required autocomplete="new-password"
-                               class="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                               placeholder="Confirm Password">
-                    </div>
-                </div>
-                <div>
-                    <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Join As</label>
-                    <div class="relative rounded-md shadow-sm">
-                        <!-- Optional: Icon for the dropdown -->
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-user-tag text-gray-400"></i> <!-- Example Icon -->
-                        </div>
-                        <select id="role" name="role" required
-                                class="w-full pl-10 pr-10 py-2.5 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none">
-                                <!-- appearance-none hides default OS dropdown arrow -->
-                            <option value="" disabled selected>Select your role...</option> <!-- Default disabled option -->
-                            <option value="participant">Participant</option>
-                            <option value="organizer">Organizer</option>
-                        </select>
-                        <!-- Custom dropdown arrow using Tailwind -->
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Terms Agreement -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0">
-                        <input id="terms" name="terms" type="checkbox" required class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                    </div>
-                    <div class="ml-3 text-sm">
-                        <label for="terms" class="font-medium text-gray-700">I agree to the</label>
-                        <a href="terms.html" target="_blank" class="ml-1 font-medium text-blue-600 hover:text-blue-500 hover:underline">Terms of Service</a>
-                        <span class="text-gray-700"> and </span>
-                        <a href="privacy.html" target="_blank" class="ml-1 font-medium text-blue-600 hover:text-blue-500 hover:underline">Privacy Policy</a>.
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <div>
-                    <button type="submit"
-                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-lg text-base font-medium text-white bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 ease-in-out transform hover:-translate-y-0.5">
-                        <i class="fas fa-user-plus mr-2 mt-0.5"></i> <!-- Sign Up Icon -->
-                        Create Account
-                    </button>
-                </div>
-
-                <!-- Divider (for social logins) -->
-                <div class="relative my-6">
-                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                        <div class="w-full border-t border-gray-300"></div>
-                    </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-3 bg-white text-gray-500">
-                            Or sign up with
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Social Login Buttons -->
-                <div>
-                    <div class="grid grid-cols-1 gap-3">
-                        <!-- Google Button -->
-                         <!-- Link this button to your Google OAuth backend route -->
-                        <a href="/auth/google/signup" class="w-full inline-flex justify-center py-2.5 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            <i class="fab fa-google text-red-500 mr-2 text-lg"></i> Sign up with Google
-                        </a>
-
-                        <!-- Add other providers like GitHub if needed -->
-                        <!--
-                        <button type="button" class="w-full inline-flex justify-center py-2.5 px-4 border border-gray-700 rounded-md shadow-sm bg-gray-800 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                             <i class="fab fa-github mr-2 text-lg"></i> Sign up with GitHub
-                        </button>
-                        -->
-                    </div>
-                </div>
-
-                <!-- Link to Login -->
-                <p class="text-center text-gray-600 text-sm mt-8"> <!-- Added margin-top -->
-                    Already have an account?
-                    <a href="login.html" class="font-medium text-blue-600 hover:text-blue-700 hover:underline">
-                        Login Here
-                    </a>
-                </p>
-            </form>
-        </div>
-    </main>
-
-    <!-- Footer (keep consistent) -->
-    <footer class="bg-gray-900 text-gray-400 py-10 mt-12"> <!-- Added margin-top -->
-        <div class="container mx-auto px-6 text-center">
-            <div class="mt-4 space-x-6">
-                <a href="about.html" class="hover:text-white text-sm">About</a>
-                <a href="contact.html" class="hover:text-white text-sm">Contact</a>
-                <a href="privacy.html" class="hover:text-white text-sm">Privacy Policy</a>
-                <a href="terms.html" class="hover:text-white text-sm">Terms of Service</a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Simple script to show error messages
-        function showError(message) {
-            const errorDiv = document.getElementById('error-message');
-            if (errorDiv) {
-                errorDiv.querySelector('span').textContent = ' ' + message; // Update message
-                errorDiv.classList.remove('hidden');
             }
+        } else {
+            // Optionally highlight participant by default if no role param exists
+             const defaultLink = document.querySelector('.user-type a[href$="role=participant"]');
+             if (defaultLink) {
+                 const defaultSpan = defaultLink.querySelector('span');
+                 if(defaultSpan){
+                    defaultSpan.style.backgroundColor = '#4f46e5'; // Example active style
+                    defaultSpan.style.color = 'white';
+                    defaultSpan.style.borderColor = '#4f46e5';
+                 }
+             }
         }
-
-        // Basic password match validation
-        const form = document.querySelector('form');
-        const passwordInput = document.getElementById('password');
-        const confirmPasswordInput = document.getElementById('confirm_password');
-
-        if (form && passwordInput && confirmPasswordInput) {
-             form.addEventListener('submit', (event) => {
-                // Clear previous error states
-                passwordInput.classList.remove('border-red-500');
-                confirmPasswordInput.classList.remove('border-red-500');
-                 const errorDiv = document.getElementById('error-message');
-                 if (errorDiv) errorDiv.classList.add('hidden');
-
-                if (passwordInput.value !== confirmPasswordInput.value) {
-                    event.preventDefault(); // Stop form submission
-                    showError('Passwords do not match. Please re-enter.');
-                    // Highlight the fields
-                    passwordInput.classList.add('border-red-500');
-                    confirmPasswordInput.classList.add('border-red-500');
-                    confirmPasswordInput.focus(); // Focus on the confirm field
-                }
-                // Add other client-side validation here (e.g., password length)
-                 else if (passwordInput.value.length < 8) {
-                     event.preventDefault();
-                     showError('Password must be at least 8 characters long.');
-                     passwordInput.classList.add('border-red-500');
-                     passwordInput.focus();
-                 }
-            });
-
-             // Optional: Remove error styling when user types
-             confirmPasswordInput.addEventListener('input', () => {
-                 if (passwordInput.classList.contains('border-red-500')) {
-                     passwordInput.classList.remove('border-red-500');
-                     confirmPasswordInput.classList.remove('border-red-500');
-                      const errorDiv = document.getElementById('error-message');
-                      if (errorDiv) errorDiv.classList.add('hidden');
-                 }
-             });
-              passwordInput.addEventListener('input', () => {
-                 if (passwordInput.classList.contains('border-red-500')) {
-                     passwordInput.classList.remove('border-red-500');
-                     confirmPasswordInput.classList.remove('border-red-500');
-                     const errorDiv = document.getElementById('error-message');
-                     if (errorDiv) errorDiv.classList.add('hidden');
-                 }
-             });
-        }
-
-        // Example: Uncomment to test showing an error
-        // showError('This email address is already registered.');
-    </script>
+    });
+  </script>
 
 </body>
 </html>

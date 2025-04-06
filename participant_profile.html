@@ -3,77 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Changed Title -->
     <title>My Profile - Hackverse</title>
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-    <!-- Google Fonts (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap CSS (from Profile HTML) - Might cause conflicts with Tailwind, use carefully -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Internal Styles -->
     <style>
-        /* Base Tailwind styles */
         body {
-            font-family: 'Inter', sans-serif; /* Keep Inter from Dashboard */
-            background-color: #f3f4f6; /* Tailwind bg-gray-100 */
-            margin: 0; /* Reset margin */
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
         }
-        .card-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
+        .profile-header-banner { background-color: #4f46e5; height: 150px; margin-bottom: -60px; border-radius: 0 0 1rem 1rem; }
+        .profile-container { max-width: 960px; margin-left: auto; margin-right: auto; padding: 0 2rem 2rem 2rem; }
+        .profile-header { display: flex; align-items: flex-end; margin-bottom: 2rem; position: relative; }
+        .profile-picture { width: 120px; height: 120px; border-radius: 50%; border: 5px solid white; background-color: #e5e7eb; margin-right: 1.5rem; object-fit: cover; flex-shrink: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .profile-info { flex-grow: 1; padding-top: 10px; }
+        .profile-info h1 { margin: 0 0 0.25rem 0; font-size: 1.75rem; color: #1f2937; font-weight: 700; }
+        .profile-info .tagline { margin: 0 0 0.5rem 0; color: #4b5563; font-size: 1rem; }
+        .profile-info .location { margin: 0 0 0.75rem 0; color: #6b7280; font-size: 0.9rem; }
+        .profile-info .links a { color: #4f46e5; text-decoration: none; font-weight: 500; margin-right: 0.75rem; }
+        .profile-info .links a:hover { text-decoration: underline; }
+        .profile-actions { margin-left: auto; align-self: flex-end; padding-bottom: 0.5rem; }
 
-        /* Styles from Profile HTML - Prefixed/Adjusted slightly to avoid major conflicts */
-        /* Note: Using both Bootstrap and Tailwind can lead to style inconsistencies.
-           It's generally better to choose one framework or carefully manage overrides.
-           These styles are kept for demonstration but might need refinement. */
-        .profile-body { font-family: sans-serif; /* Overridden by body style above, kept for context */ }
-        .profile-header-banner { background-color: #6c757d; height: 150px; margin-bottom: -50px; }
-        .profile-container { max-width: 960px; margin-left: auto; margin-right: auto; padding: 2rem; } /* Removed margin: 0 auto as main tag handles centering */
-        .profile-header { display: flex; align-items: flex-end; margin-bottom: 2rem; }
-        .profile-picture { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; background-color: #ccc; /* Placeholder */ margin-right: 1.5rem; object-fit: cover; flex-shrink: 0; }
-        .profile-info { flex-grow: 1; } /* Allow info to take space */
-        .profile-info h1 { margin: 0 0 0.25rem 0; font-size: 1.8rem; color: #1f2937; /* Tailwind text-gray-800 */}
-        .profile-info p { margin: 0 0 0.5rem 0; color: #4b5563; /* Tailwind text-gray-600 */ }
-        .profile-info a { color: #2563eb; /* Tailwind text-blue-600 */ text-decoration: underline;}
-        .profile-actions { margin-left: auto; align-self: flex-start; }
-        /* Using Tailwind classes for the button instead of custom .edit-button */
-        .profile-section { background-color: white; padding: 1.5rem; border-radius: 8px; /* Tailwind rounded-lg */ margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: relative; }
-        .profile-section h2 { margin-top: 0; border-bottom: 1px solid #e5e7eb; /* Tailwind border-gray-200 */ padding-bottom: 0.75rem; margin-bottom: 1rem; font-size: 1.3rem; color: #1f2937; font-weight: 600; /* Tailwind semibold */ }
-        /* Using Tailwind for edit buttons */
-        .section-edit-button { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 0.8rem; background: none; border: none; color: #2563eb; /* Tailwind text-blue-600 */ cursor: pointer; padding: 0.25rem 0.5rem; }
-        .skills-list span { display: inline-block; background-color: #e5e7eb; /* Tailwind bg-gray-200 */ color: #374151; /* Tailwind text-gray-700 */ padding: 0.3rem 0.8rem; margin: 0.2rem; border-radius: 9999px; /* Tailwind rounded-full */ font-size: 0.9rem; }
-        .experience-item { border-bottom: 1px dashed #e5e7eb; padding-bottom: 1rem; margin-bottom: 1rem; }
-        .experience-item:last-child { border-bottom: none; margin-bottom: 0; }
-        .experience-item h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; color: #1f2937; font-weight: 600; }
-        .experience-item .company { font-weight: bold; color: #4b5563; }
-        .experience-item .dates { font-size: 0.9rem; color: #6b7280; /* Tailwind text-gray-500 */ margin-bottom: 0.5rem; display: block; }
-        .experience-item p { color: #374151; /* Tailwind text-gray-700 */}
-        .resume-section p { margin-bottom: 0.5rem; color: #374151; }
-        /* Apply Tailwind to download button too */
+        /* Button Styles */
+        .button-base { @apply inline-flex items-center justify-center px-5 py-2.5 border text-sm font-medium rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out; }
+        .button-base i { @apply mr-2 h-5 w-5; }
+        .button-primary { @apply button-base border-transparent text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500; }
+        .button-secondary { @apply button-base border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:ring-indigo-500; }
 
     </style>
 </head>
 <body class="bg-gray-100">
     <div class="flex h-screen">
-        <!-- Sidebar (Remains the same, active link updated) -->
+        <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-md flex-shrink-0">
             <div class="p-6 border-b">
                 <a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a>
             </div>
             <nav class="p-4 space-y-2">
-                 <!-- Updated active link -->
                 <a href="participant_profile.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
                 <a href="participant_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
                 <a href="my_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-calendar-check w-6 mr-2"></i> My Hackathons</a>
@@ -86,128 +55,115 @@
             </nav>
         </aside>
 
-        <!-- Main Content Area - Now contains the Profile HTML -->
+        <!-- Main Content Area - Simplified Profile View -->
         <main class="flex-1 overflow-y-auto">
             <!-- Profile Banner -->
             <div class="profile-header-banner"></div>
 
-            <!-- Profile Container (inside main for padding/scrolling) -->
-            <!-- Removed p-8 from main, using profile-container's padding -->
+            <!-- Profile Container -->
             <div class="profile-container">
 
                 <div class="profile-header">
-                    <!-- Placeholder for profile picture -->
-                    <div class="profile-picture">
-                        <!-- Example: Use Tailwind for placeholder styling if needed -->
-                        <!-- <img src="[user-image-url]" alt="Profile Picture" class="w-full h-full object-cover rounded-full"> -->
-                    </div>
+                    <!-- Profile Picture -->
+                    <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-picture"> <!-- Placeholder image -->
+                    <!-- Profile Info -->
                     <div class="profile-info">
-                        <!-- Data should be dynamically inserted here -->
-                        <h1 class="text-2xl font-bold text-gray-800">Khushi Chandak</h1>
-                        <p class="text-gray-600">Student at K.J. Somaiya Institute of Technology, Sion, Mumbai | Ex-Intern at L&T Technology Services | Digital Media Manager @CyberCell-KJSIT| Ex-Intern(ML&AI) @Claidroid | Tech. Member @GDSC</p>
-                        <p class="text-sm text-gray-500">Mumbai</p>
-                        <p class="text-sm text-gray-500">
-                            Links:
-                            <a href="https://www.linkedin.com/in/khushi-chandak-a48032294/" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a> |
-                            <a href="[GitHub URL]" target="_blank" class="text-blue-600 hover:underline">GitHub</a> |
-                            <a href="[Portfolio URL]" target="_blank" class="text-blue-600 hover:underline">Portfolio</a>
+                        <h1 id="profile-display-name">Khushi Chandak</h1>
+                        <p id="profile-display-tagline" class="tagline">Student at K.J. Somaiya Institute of Technology | Ex-Intern...</p>
+                        <p id="profile-display-location" class="location"><i class="fas fa-map-marker-alt mr-1.5 text-gray-400"></i>Mumbai</p>
+                        <p id="profile-display-links" class="links text-sm">
+                            <a href="https://www.linkedin.com/in/khushi-chandak-a48032294/" target="_blank"><i class="fab fa-linkedin mr-1"></i>LinkedIn</a>
+                            <a href="#" target="_blank"><i class="fab fa-github mr-1"></i>GitHub</a>
+                            <a href="#" target="_blank"><i class="fas fa-link mr-1"></i>Portfolio</a>
                         </p>
                     </div>
+                    <!-- Edit Profile Button -->
                     <div class="profile-actions">
-                        <!-- This button should only be visible to the profile owner -->
-                        <!-- Using Tailwind classes for consistency -->
-                        <button
-                            class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            onclick="alert('Redirect to Edit Profile Page/Enable Editing');">
-                            Edit Profile
+                        <button id="openEditProfileModalBtn" type="button" class="button-primary">
+                            <i class="fas fa-pencil-alt mr-2"></i> Edit Profile
                         </button>
                     </div>
                 </div>
 
-                <section class="profile-section about-section">
-                    <!-- Edit button specific to this section -->
-                    <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable About editing');">
-                        <i class="fas fa-pencil-alt mr-1"></i>Edit
-                    </button>
-                    <h2>About Me</h2>
-                    <p class="text-gray-700">
-                        Hi there! I'm Khushi, a curious and enthusiastic second-year computer engineering student with a passion for building innovative solutions that make a difference. When I'm not buried in textbooks or coding away, you can find me exploring the latest tech trends, tinkering with DIY projects, or binge-watching sci-fi shows (yes, I'm a fan of AI-powered robots taking over the world)😂.
-
-As a computer engineering student, I'm constantly fascinated by the intersection of hardware and software. I'm always looking for ways to improve my skills in programming languages like C Programming and Python and I'm excited to dive deeper into the world of machine learning, artificial intelligence, and data science.
-
-Outside of academics, I'm a strong believer in the power of collaboration and community. I'm always up for a hackathon, a coding challenge, or a brainstorming session with fellow tech enthusiasts. Let's connect and create something amazing together!
-
-Feel free to reach out if you'd like to chat about the latest tech trends, discuss a project idea, or simply share your favorite coding memes.
-                    </p>
-                </section>
-
-                <section class="profile-section resume-section">
-                    <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable Resume editing/upload');">
-                       <i class="fas fa-pencil-alt mr-1"></i>Edit
-                    </button>
-                    <h2>Resume</h2>
-                    <p>View or upload my latest resume:</p>
-                    <!-- Styled download link/button using Tailwind -->
-                    <a href="[link-to-user-resume.pdf]" download
-                       class="inline-block mt-2 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                       <i class="fas fa-download mr-2"></i>View Resume
-                    </a>
-                    
-                     <button class="mt-2 px-4 py-2 bg-gray-500 text-white text-sm font-medium rounded-md hover:bg-gray-600">
-                         <i class="fas fa-upload mr-2"></i> Upload Resume
-                     </button>
-                </section>
-
-                <section class="profile-section skills-section">
-                    <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable Skills editing');">
-                        <i class="fas fa-pencil-alt mr-1"></i>Edit
-                    </button>
-                    <h2>Skills</h2>
-                    <div class="skills-list">
-                        <!-- Skills dynamically generated by backend -->
-                        <span>JavaScript</span>
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>Express</span>
-                        <span>HTML5</span>
-                        <span>CSS3</span>
-                        <span>Tailwind CSS</span> <!-- Changed Bootstrap to Tailwind -->
-                        <span>SQL</span>
-                        <span>PostgreSQL</span>
-                        <span>Git</span>
-                        <span>Problem Solving</span>
-                        <span>Teamwork</span>
-                        <!-- End dynamic skills list -->
-                    </div>
-                </section>
-
-                <section class="profile-section experience-section">
-                     <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable Experience editing/adding');">
-                        <i class="fas fa-plus mr-1"></i>Add/Edit
-                    </button>
-                    <h2>Experience</h2>
-                    <div class="experience-list">
-                        <!-- Experience items dynamically generated by backend -->
-                        <div class="experience-item">
-                            <h3>[Job Title / Project Name]</h3>
-                            <p class="company">[Company Name / 'Personal Project' / 'Academic Project']</p>
-                            <span class="dates">[Start Date] - [End Date or 'Present']</span>
-                            <p>[Description of responsibilities, achievements, or project details. Use bullet points if desired.]</p>
-                        </div>
-
-                        <div class="experience-item">
-                            <h3>[Previous Job Title / Project Name]</h3>
-                            <p class="company">[Previous Company Name]</p>
-                            <span class="dates">[Start Date] - [End Date]</span>
-                            <p>[Description...]</p>
-                        </div>
-                         <!-- Add more items as needed -->
-                    </div>
-                </section>
+                 <!-- Optional Placeholder Content -->
+                 <div class="bg-white p-6 rounded-lg shadow-md text-center text-gray-500 mt-8">
+                     <i class="fas fa-info-circle text-2xl mb-2"></i>
+                     <p>Profile details can be modified by clicking the "Edit Profile" button.</p>
+                 </div>
 
             </div> <!-- End profile-container -->
-
         </main>
     </div>
+
+    <!-- **** START: Simplified Edit Profile Modal HTML **** -->
+    <div id="editProfileModal" class="fixed inset-0 bg-gray-600 bg-opacity-75 overflow-y-auto h-full w-full z-50 hidden">
+        <div class="relative top-20 mx-auto p-5 border w-full max-w-md shadow-lg rounded-xl bg-white"> <!-- Smaller max-w-md -->
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center pb-3 border-b mb-5">
+                <h3 class="text-xl font-semibold text-gray-800">Edit Profile</h3>
+                <button id="closeEditProfileModalBtn" class="text-gray-400 hover:text-gray-600 text-3xl font-light cursor-pointer p-1 -mt-2" >
+                    ×
+                </button>
+            </div>
+
+            <!-- Modal Body - Empty or Placeholder -->
+            <div class="p-4 text-center">
+                <p class="text-gray-600">
+                    <!-- Option 1: Simple Confirmation -->
+                     <!-- Editing mode enabled. Make changes directly on the page. -->
+                     <!-- Option 2: Placeholder Text -->
+                     Edit Profile functionality would be implemented here.
+                     <!-- Option 3: Link to separate edit page -->
+                     <!-- <a href="/edit-profile-page" class="button-primary">Go to Edit Page</a> -->
+                </p>
+            </div>
+
+             <!-- Modal Footer - Form Actions -->
+             <div class="flex justify-end items-center pt-4 border-t mt-5 space-x-3">
+                 <button id="cancelEditProfileBtn" type="button" class="button-secondary">
+                     Cancel
+                 </button>
+                 <!-- Removed Save button as there's no form inside, or keep it as an OK button -->
+                 <button id="okEditProfileBtn" type="button" class="button-primary"> <!-- Changed ID -->
+                    OK
+                 </button>
+             </div>
+        </div>
+    </div>
+    <!-- **** END: Edit Profile Modal HTML **** -->
+
+    <!-- **** START: Modal JS **** -->
+    <script>
+        const modal = document.getElementById('editProfileModal');
+        const openBtn = document.getElementById('openEditProfileModalBtn');
+        const closeBtn = document.getElementById('closeEditProfileModalBtn');
+        const cancelBtn = document.getElementById('cancelEditProfileBtn');
+        const okBtn = document.getElementById('okEditProfileBtn'); // Reference OK button if kept
+
+        const openModal = () => {
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        const closeModal = () => {
+             if (modal) modal.classList.add('hidden');
+        };
+
+        if (openBtn) openBtn.addEventListener('click', openModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+        if (okBtn) okBtn.addEventListener('click', closeModal); // OK button also closes
+
+        // Optional: Close modal if clicking outside the content area
+        if (modal) {
+            modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(); });
+        }
+        // Optional: Close modal on Escape key press
+        document.addEventListener('keydown', (event) => {
+            if (event.key === "Escape" && modal && !modal.classList.contains('hidden')) closeModal();
+        });
+
+    </script>
+    <!-- **** END: Modal JS **** -->
+
 </body>
 </html>
