@@ -1,132 +1,717 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Settings - M3 Style</title>
+    <!-- Font Awesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Sticky navigation for settings tabs */
-        .sticky-top {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background-color: #ffffff; /* Ensure background remains visible */
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow for better visibility */
-        }
-
-        /* Extend panel height */
-        .settings-panel {
-            min-height: 120vh; /* Extend the panel height */
-        }
-    </style>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Using Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Material Design 3 Variables (Consistent Set) --- */
+        :root {
+            /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Additional colors */
+            --md-sys-color-success-light: #177e2a; /* Green */
+            --md-sys-color-on-success-light: #ffffff;
+            --md-sys-color-success-container-light: #b4f7ae;
+            --md-sys-color-on-success-container-light: #002205;
+            --md-sys-color-warning-light: #7e5700; /* Yellow/Orange */
+            --md-sys-color-on-warning-light: #ffffff;
+            --md-sys-color-warning-container-light: #ffdea3;
+            --md-sys-color-on-warning-container-light: #281900;
+            /* Surface & Background */
+            --md-sys-color-background-light: #fefcff; /* Off-white */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-light: #ffffff; /* Pure white */
+            --md-sys-color-surface-container-low-light: #f8f2f7;
+            --md-sys-color-surface-container-light: #eeeef2;
+            --md-sys-color-surface-container-high-light: #e8e8ed;
+            --md-sys-color-surface-container-highest-light: #e2e2e6; /* Often used for TopAppBar */
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-success-dark: #99da94;
+            --md-sys-color-on-success-dark: #00390d;
+            --md-sys-color-success-container-dark: #005317;
+            --md-sys-color-on-success-container-dark: #b4f7ae;
+            --md-sys-color-warning-dark: #fbbc04;
+            --md-sys-color-on-warning-dark: #412d00;
+            --md-sys-color-warning-container-dark: #5f4200;
+            --md-sys-color-on-warning-container-dark: #ffdea3;
+            --md-sys-color-background-dark: #1a1c1e; /* Dark Gray */
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-dark: #0e1013;
+            --md-sys-color-surface-container-low-dark: #1d1f22;
+            --md-sys-color-surface-container-dark: #212326;
+            --md-sys-color-surface-container-high-dark: #2b2d30;
+            --md-sys-color-surface-container-highest-dark: #36383a; /* Often used for TopAppBar */
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+            /* Shape */
+            --md-shape-corner-none: 0px;
+            --md-shape-corner-extra-small: 4px;
+            --md-shape-corner-small: 8px;
+            --md-shape-corner-medium: 12px;
+            --md-shape-corner-large: 16px;
+            --md-shape-corner-extra-large: 28px;
+            --md-shape-corner-full: 9999px;
+
+            /* Elevation */
+            --md-sys-elevation-level-0: none;
+            --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+            /* State Layers */
+            --md-sys-state-hover-state-layer-opacity: 0.08;
+            --md-sys-state-focus-state-layer-opacity: 0.12;
+            --md-sys-state-pressed-state-layer-opacity: 0.12;
+
+            /* Typography */
+            --md-sys-typescale-font-family-name: Roboto;
+            --md-sys-typescale-body-large-font-size: 1rem;
+            --md-sys-typescale-body-large-line-height: 1.5rem;
+            --md-sys-typescale-body-large-font-weight: 400;
+            --md-sys-typescale-body-medium-font-size: 0.875rem;
+            --md-sys-typescale-body-medium-line-height: 1.25rem;
+            --md-sys-typescale-body-medium-font-weight: 400;
+            --md-sys-typescale-body-small-font-size: 0.75rem;
+            --md-sys-typescale-body-small-line-height: 1rem;
+            --md-sys-typescale-body-small-font-weight: 400;
+            --md-sys-typescale-label-large-font-size: 0.875rem;
+            --md-sys-typescale-label-large-line-height: 1.25rem;
+            --md-sys-typescale-label-large-font-weight: 500;
+            --md-sys-typescale-label-medium-font-size: 0.75rem;
+            --md-sys-typescale-label-medium-line-height: 1rem;
+            --md-sys-typescale-label-medium-font-weight: 500;
+            --md-sys-typescale-label-small-font-size: 0.6875rem;
+            --md-sys-typescale-label-small-line-height: 1rem;
+            --md-sys-typescale-label-small-font-weight: 500;
+            --md-sys-typescale-title-large-font-size: 1.375rem;
+            --md-sys-typescale-title-large-line-height: 1.75rem;
+            --md-sys-typescale-title-large-font-weight: 400;
+            --md-sys-typescale-title-medium-font-size: 1rem;
+            --md-sys-typescale-title-medium-line-height: 1.5rem;
+            --md-sys-typescale-title-medium-font-weight: 500;
+             --md-sys-typescale-title-small-font-size: 0.875rem;
+            --md-sys-typescale-title-small-line-height: 1.25rem;
+            --md-sys-typescale-title-small-font-weight: 500;
+            --md-sys-typescale-headline-medium-font-size: 1.75rem;
+            --md-sys-typescale-headline-medium-font-weight: 400;
+            --md-sys-typescale-headline-medium-line-height: 2.25rem;
+            --md-sys-typescale-headline-small-font-size: 1.5rem;
+             --md-sys-typescale-headline-small-line-height: 2rem;
+             --md-sys-typescale-headline-small-font-weight: 400;
+        }
+
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --tertiary: var(--md-sys-color-tertiary-light);
+            --on-tertiary: var(--md-sys-color-on-tertiary-light);
+            --tertiary-container: var(--md-sys-color-tertiary-container-light);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --error-container: var(--md-sys-color-error-container-light);
+            --on-error-container: var(--md-sys-color-on-error-container-light);
+            --success: var(--md-sys-color-success-light);
+            --on-success: var(--md-sys-color-on-success-light);
+            --success-container: var(--md-sys-color-success-container-light);
+            --on-success-container: var(--md-sys-color-on-success-container-light);
+            --warning: var(--md-sys-color-warning-light);
+            --on-warning: var(--md-sys-color-on-warning-light);
+            --warning-container: var(--md-sys-color-warning-container-light);
+            --on-warning-container: var(--md-sys-color-on-warning-container-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-light);
+            --surface-container-low: var(--md-sys-color-surface-container-low-light);
+            --surface-container: var(--md-sys-color-surface-container-light);
+            --surface-container-high: var(--md-sys-color-surface-container-high-light);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+            --shadow: var(--md-sys-color-shadow-light);
+            --surface-tint-color: var(--md-sys-color-surface-tint-light);
+            --inverse-surface: var(--md-sys-color-inverse-surface-light);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-light);
+            --inverse-primary: var(--md-sys-color-inverse-primary-light);
+            --primary-rgb: 0, 97, 164;
+            --shadow-rgb: 0, 0, 0;
+            --on-surface-rgb: 26, 28, 30;
+             --error-rgb: 186, 26, 26;
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --tertiary: var(--md-sys-color-tertiary-dark);
+            --on-tertiary: var(--md-sys-color-on-tertiary-dark);
+            --tertiary-container: var(--md-sys-color-tertiary-container-dark);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --error-container: var(--md-sys-color-error-container-dark);
+            --on-error-container: var(--md-sys-color-on-error-container-dark);
+            --success: var(--md-sys-color-success-dark);
+            --on-success: var(--md-sys-color-on-success-dark);
+            --success-container: var(--md-sys-color-success-container-dark);
+            --on-success-container: var(--md-sys-color-on-success-container-dark);
+            --warning: var(--md-sys-color-warning-dark);
+            --on-warning: var(--md-sys-color-on-warning-dark);
+            --warning-container: var(--md-sys-color-warning-container-dark);
+            --on-warning-container: var(--md-sys-color-on-warning-container-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-dark);
+            --surface-container-low: var(--md-sys-color-surface-container-low-dark);
+            --surface-container: var(--md-sys-color-surface-container-dark);
+            --surface-container-high: var(--md-sys-color-surface-container-high-dark);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+            --shadow: var(--md-sys-color-shadow-dark);
+            --surface-tint-color: var(--md-sys-color-surface-tint-dark);
+            --inverse-surface: var(--md-sys-color-inverse-surface-dark);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-dark);
+            --inverse-primary: var(--md-sys-color-inverse-primary-dark);
+            --primary-rgb: 160, 201, 255;
+            --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 226, 226, 230;
+             --error-rgb: 255, 180, 171;
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--md-sys-typescale-font-family-name), sans-serif;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight);
+            background-color: var(--background);
+            color: var(--on-background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Layout --- */
+        .layout-container { display: flex; height: 100vh; overflow: hidden; }
+        .main-content { flex-grow: 1; overflow-y: auto; padding: 2rem; }
+        .main-content h1 {
+            font-size: var(--md-sys-typescale-headline-medium-font-size);
+            font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+            line-height: var(--md-sys-typescale-headline-medium-line-height);
+            color: var(--on-surface);
+            margin-bottom: 0.5rem;
+        }
+        .main-content > p { /* Target direct child p for subtitle */
+             font-size: var(--md-sys-typescale-body-large-font-size);
+             color: var(--on-surface-variant);
+             margin-bottom: 2rem;
+          }
+
+        /* --- Sidebar (Consistent) --- */
+        .sidebar {
+            width: 256px; background-color: var(--surface-container-low); /* Sidebar distinct bg */
+            border-right: 1px solid var(--outline-variant); display: flex;
+            flex-direction: column; flex-shrink: 0; transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .sidebar-header { padding: 1.5rem 1rem; border-bottom: 1px solid var(--outline-variant); transition: border-color 0.3s ease; }
+        .sidebar-header a { font-size: var(--md-sys-typescale-title-large-font-size); font-weight: 700; color: var(--primary); text-decoration: none; display: block; }
+        .sidebar-header span { display: block; margin-top: 4px; font-size: var(--md-sys-typescale-body-small-font-size); color: var(--on-surface-variant); }
+        .sidebar-nav { padding: 0.5rem; flex-grow: 1; overflow-y: auto; }
+        .sidebar-nav a {
+            display: flex; align-items: center; padding: 0.75rem 1rem; margin: 0.25rem 0;
+            border-radius: var(--md-shape-corner-full); color: var(--on-surface-variant); text-decoration: none;
+            font-weight: var(--md-sys-typescale-label-large-font-weight); font-size: var(--md-sys-typescale-label-large-font-size);
+            position: relative; overflow: hidden; transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .sidebar-nav a i { width: 24px; margin-right: 1rem; text-align: center; color: var(--on-surface-variant); transition: color 0.15s ease; }
+        .sidebar-nav a::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--secondary);
+            opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .sidebar-nav a:hover { color: var(--on-secondary-container); }
+        .sidebar-nav a:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar-nav a:hover i { color: var(--on-secondary-container); }
+        .sidebar-nav a.active { background-color: var(--secondary-container); color: var(--on-secondary-container); }
+        .sidebar-nav a.active i { color: var(--on-secondary-container); }
+        .sidebar-nav a.logout-link { margin-top: 1.5rem; color: var(--error); }
+        .sidebar-nav a.logout-link i { color: var(--error); }
+        .sidebar-nav a.logout-link::before { background-color: var(--error); }
+        .sidebar-nav a.logout-link:hover { color: var(--on-error-container); }
+        .sidebar-nav a.logout-link:hover::before { background-color: var(--error-container); opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar-nav a.logout-link:hover i { color: var(--on-error-container); }
+
+         /* --- Buttons (Consistent Set) --- */
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.625rem 1.5rem; border-radius: var(--md-shape-corner-full);
+            font-family: inherit; font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            text-align: center; text-decoration: none; border: none; cursor: pointer; position: relative;
+            overflow: hidden; user-select: none; vertical-align: middle;
+             transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+        }
+        .button::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: currentColor; opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .button:hover { transform: translateY(-1px); } /* Subtle lift */
+        .button:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .button:focus { outline: none; }
+        .button:focus::before { opacity: var(--md-sys-state-focus-state-layer-opacity); }
+        .button:active { transform: translateY(0); }
+        .button:active::before { opacity: var(--md-sys-state-pressed-state-layer-opacity); }
+
+        .button-filled { background-color: var(--primary); color: var(--on-primary); box-shadow: var(--md-sys-elevation-level-0); }
+        .button-filled:hover { box-shadow: var(--md-sys-elevation-level-1); }
+
+        /* --- Settings Panel --- */
+        .settings-panel-container {
+            background-color: var(--surface-container); /* Panel background */
+            border-radius: var(--md-shape-corner-large);
+            box-shadow: var(--md-sys-elevation-level-1);
+            /* Removed min-height, let content define height */
+        }
+
+        /* Sticky Tabs */
+        .settings-tabs-sticky-wrapper {
+            position: sticky;
+            top: 0; /* Stick to the top of the main scroll container */
+            z-index: 10;
+            background-color: var(--surface-container); /* Match panel bg */
+             padding: 1rem 1.5rem 0 1.5rem; /* Padding around tabs */
+            /* Add border/shadow to separate when scrolled */
+            border-bottom: 1px solid var(--outline-variant);
+            box-shadow: none; /* Start without shadow */
+            transition: box-shadow 0.2s ease;
+        }
+        /* Add shadow when scrolled (requires JS to detect scroll or use :has pseudo class if supported) */
+         .main-content.scrolled .settings-tabs-sticky-wrapper { /* Example JS-driven class */
+              box-shadow: var(--md-sys-elevation-level-2);
+         }
+
+        .settings-tabs {
+            display: flex;
+            gap: 1.5rem; /* Space between tabs */
+            overflow-x: auto; /* Allow scrolling tabs on small screens */
+        }
+
+        .settings-tabs a {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 0.25rem 0.75rem 0.25rem; /* M3 Tab padding */
+            font-size: var(--md-sys-typescale-title-small-font-size);
+            font-weight: var(--md-sys-typescale-title-small-font-weight);
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.2s ease, border-color 0.2s ease;
+            white-space: nowrap; /* Prevent wrapping */
+        }
+         .settings-tabs a::before { /* State Layer */
+            content: ''; position: absolute; top:0; left:0; right:0; bottom:0;
+            background-color: var(--primary); opacity: 0; border-radius: var(--md-shape-corner-small); /* Radius for hover */
+            transition: opacity 0.15s ease;
+         }
+         .settings-tabs a:hover { color: var(--on-surface); }
+         .settings-tabs a:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+
+         .settings-tabs a.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+         }
+
+        /* Settings Content Area */
+        .settings-content {
+            padding: 1.5rem; /* Inner padding for content below tabs */
+        }
+
+        /* Settings Sections */
+        .settings-section {
+            margin-bottom: 2.5rem; /* Space between sections */
+             /* Hide sections by default, show active one */
+            display: none;
+        }
+        .settings-section.active {
+            display: block;
+        }
+        .settings-section h2 {
+             font-size: var(--md-sys-typescale-title-large-font-size);
+             font-weight: var(--md-sys-typescale-title-medium-font-weight); /* 500 */
+             color: var(--on-surface);
+             margin-bottom: 1.5rem; /* 24px */
+             padding-bottom: 0.5rem;
+             border-bottom: 1px solid var(--outline-variant);
+         }
+        .settings-section form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Space between form elements */
+        }
+
+        /* Form Fields inside Settings */
+        .form-field {
+             /* Container for label + input/select/checkbox group */
+        }
+        .form-field label {
+             display: block;
+             font-size: var(--md-sys-typescale-label-medium-font-size);
+             font-weight: var(--md-sys-typescale-label-medium-font-weight);
+             color: var(--on-surface-variant);
+             margin-bottom: 4px;
+             padding-left: 4px;
+        }
+         .form-field input[type="email"],
+         .form-field input[type="password"],
+         .form-field select {
+             display: block; width: 100%; padding: 1rem; font-family: inherit;
+             font-size: var(--md-sys-typescale-body-large-font-size);
+             color: var(--on-surface); background-color: var(--surface-container-lowest);
+             border: 1px solid var(--outline); border-radius: var(--md-shape-corner-extra-small);
+             transition: border-color 0.2s ease, box-shadow 0.2s ease; appearance: none;
+        }
+         .form-field input:focus,
+         .form-field select:focus {
+             outline: none; border-color: var(--primary); border-width: 2px;
+             padding: calc(1rem - 1px);
+         }
+         .form-field input::placeholder { color: var(--on-surface-variant); opacity: 0.7; }
+
+        /* Select dropdown arrow */
+        .form-field select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23${props => props.theme.onSurfaceVariant.substring(1)}'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E"); /* Needs JS/inline for dynamic color */
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2em;
+            padding-right: 3rem;
+        }
+         /* Specific SVG colors for themes */
+        [data-theme="light"] .form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2342474e'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E"); }
+        [data-theme="dark"] .form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c2c7cf'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E"); }
+
+         /* Checkbox specific styling */
+        .checkbox-field {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .checkbox-field input[type="checkbox"] {
+            appearance: none; width: 18px; height: 18px;
+            border: 2px solid var(--outline); border-radius: var(--md-shape-corner-extra-small);
+            position: relative; cursor: pointer; transition: border-color 0.2s ease, background-color 0.2s ease;
+            flex-shrink: 0;
+        }
+        .checkbox-field input[type="checkbox"]:checked { background-color: var(--primary); border-color: var(--primary); }
+        .checkbox-field input[type="checkbox"]:checked::before {
+            content: ''; position: absolute; top: 2px; left: 5px; width: 4px; height: 8px;
+            border: solid var(--on-primary); border-width: 0 2px 2px 0; transform: rotate(45deg);
+        }
+         .checkbox-field label {
+             margin: 0; padding: 0;
+             font-size: var(--md-sys-typescale-body-medium-font-size); /* Match text size */
+             color: var(--on-surface); cursor: pointer;
+         }
+
+         /* Form Actions */
+         .form-actions {
+             display: flex;
+             justify-content: flex-end;
+             padding-top: 0.5rem;
+         }
+
+        /* --- Utility --- */
+        .hidden { display: none !important; }
+
+    </style>
 </head>
-<body class="bg-gray-100">
-    <div class="flex h-screen">
+<body> <!-- Removed Tailwind class -->
+
+    <!-- Optional: Theme Toggle -->
+    <!-- <button id="themeToggle" class="theme-toggle-button" aria-label="Toggle theme"><i class="fas fa-moon"></i><i class="fas fa-sun"></i></button> -->
+
+    <div class="layout-container">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">
-            <div class="p-6 border-b">
-                <a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a>
-                <span class="block text-sm text-gray-500 mt-1">Organizer Panel</span>
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html">Hackverse</a>
+                <span>Organizer Panel</span>
             </div>
-            <nav class="p-4 space-y-2">
-                <a href="organizer_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-building w-6 mr-2"></i> Organization Profile</a>
-                <a href="organizer_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
-                <a href="organizer_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-list-alt w-6 mr-2"></i> My Opportunities</a>
-                <a href="organizer_create_opportunity.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-plus-circle w-6 mr-2"></i> Create New</a>
-                <a href="organizer_analytics.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-chart-bar w-6 mr-2"></i> Analytics</a>
-                <a href="organizer_settings.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
-                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+            <nav class="sidebar-nav">
+                <a href="organizer_profile.html"><i class="fas fa-building"></i> Organization Profile</a>
+                <a href="organizer_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="organizer_opportunities.html"><i class="fas fa-list-alt"></i> My Opportunities</a>
+                <a href="organizer_create_opportunity.html"><i class="fas fa-plus-circle"></i> Create New</a>
+                <a href="organizer_analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a>
+                <a href="organizer_settings.html" class="active"><i class="fas fa-cog"></i> Settings</a>
+                <a href="index.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto p-8">
-            <h1 class="text-3xl font-bold mb-6">Settings</h1>
-            <p class="text-lg text-gray-600 mb-8">Manage your account settings, notifications, and preferences.</p>
+        <main class="main-content">
+            <h1>Settings</h1>
+            <p>Manage your account settings, notifications, and preferences.</p>
 
-            <!-- Settings Tabs -->
-            <div class="bg-white rounded-lg shadow p-6 sticky-top settings-panel">
-                <nav class="flex space-x-6 border-b pb-4 mb-6">
-                    <a href="#account" class="text-blue-600 font-medium border-b-2 border-blue-600 pb-2">Account</a>
-                    <a href="#notifications" class="text-gray-600 hover:text-blue-600 hover:border-blue-600 font-medium border-b-2 border-transparent pb-2">Notifications</a>
-                    <a href="#preferences" class="text-gray-600 hover:text-blue-600 hover:border-blue-600 font-medium border-b-2 border-transparent pb-2">Preferences</a>
-                </nav>
+            <!-- Settings Container -->
+            <div class="settings-panel-container"> <!-- Replaced classes -->
+                <!-- Sticky Tabs Header -->
+                <div class="settings-tabs-sticky-wrapper">
+                    <nav class="settings-tabs"> <!-- Replaced classes -->
+                        <!-- JS will add 'active' class based on visible section -->
+                        <a href="#account" class="settings-tab active">Account</a>
+                        <a href="#notifications" class="settings-tab">Notifications</a>
+                        <a href="#preferences" class="settings-tab">Preferences</a>
+                    </nav>
+                </div>
 
-                <!-- Account Settings -->
-                <section id="account" class="space-y-6">
-                    <h2 class="text-xl font-semibold">Account Settings</h2>
-                    <form class="space-y-4">
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                            <input type="password" id="password" name="password" placeholder="Enter a new password" class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div class="flex justify-end">
-                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">Save Changes</button>
-                        </div>
-                    </form>
-                </section>
+                <!-- Settings Content Area -->
+                <div class="settings-content">
+                    <!-- Account Settings Section -->
+                    <section id="account" class="settings-section active"> <!-- Add ID and active class -->
+                        <h2 >Account Settings</h2> <!-- Removed classes -->
+                        <form> <!-- Removed classes -->
+                            <div class="form-field"> <!-- Added wrapper -->
+                                <label for="email">Email Address</label> <!-- Removed classes -->
+                                <input type="email" id="email" name="email" placeholder="Enter your email" value="organizer@example.com" required> <!-- Removed classes, added value example -->
+                            </div>
+                            <div class="form-field">
+                                <label for="password">New Password</label> <!-- Updated label -->
+                                <input type="password" id="password" name="password" placeholder="Enter a new password (optional)"> <!-- Removed classes -->
+                            </div>
+                            <div class="form-field">
+                                 <label for="confirm-password">Confirm New Password</label>
+                                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm new password">
+                             </div>
+                            <div class="form-actions"> <!-- Added wrapper -->
+                                <button type="submit" class="button button-filled">Save Account Changes</button> <!-- Replaced classes -->
+                            </div>
+                        </form>
+                    </section>
 
-                <!-- Notifications Settings -->
-                <section id="notifications" class="space-y-6 mt-8">
-                    <h2 class="text-xl font-semibold">Notifications</h2>
-                    <form class="space-y-4">
-                        <div class="flex items-center">
-                            <input type="checkbox" id="email-notifications" name="email-notifications" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="email-notifications" class="ml-2 text-sm text-gray-700">Receive email notifications</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="sms-notifications" name="sms-notifications" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="sms-notifications" class="ml-2 text-sm text-gray-700">Receive SMS notifications</label>
-                        </div>
-                        <div class="flex justify-end">
-                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">Save Changes</button>
-                        </div>
-                    </form>
-                </section>
+                    <!-- Notifications Settings Section -->
+                    <section id="notifications" class="settings-section"> <!-- Add ID -->
+                        <h2>Notifications</h2>
+                        <form>
+                            <div class="checkbox-field"> <!-- Replaced classes -->
+                                <input type="checkbox" id="email-notifications" name="email-notifications" checked> <!-- Removed classes, added checked example -->
+                                <label for="email-notifications">Receive email notifications for new registrations</label> <!-- Removed classes -->
+                            </div>
+                             <div class="checkbox-field">
+                                <input type="checkbox" id="email-submissions" name="email-submissions">
+                                <label for="email-submissions">Receive email notifications for new submissions</label>
+                            </div>
+                            <div class="checkbox-field">
+                                <input type="checkbox" id="sms-notifications" name="sms-notifications" disabled> <!-- Example disabled -->
+                                <label for="sms-notifications">Receive SMS notifications (Coming Soon)</label>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="button button-filled">Save Notification Settings</button>
+                            </div>
+                        </form>
+                    </section>
 
-                <!-- Preferences Settings -->
-                <section id="preferences" class="space-y-6 mt-8">
-                    <h2 class="text-xl font-semibold">Preferences</h2>
-                    <form class="space-y-4">
-                        <div>
-                            <label for="language" class="block text-sm font-medium text-gray-700">Language</label>
-                            <select id="language" name="language" class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="en">English</option>
-                                <option value="es">Spanish</option>
-                                <option value="fr">French</option>
-                                <!-- Add more languages as needed -->
-                            </select>
-                        </div>
-                        <div>
-                            <label for="timezone" class="block text-sm font-medium text-gray-700">Timezone</label>
-                            <select id="timezone" name="timezone" class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="utc">UTC</option>
-                                <option value="pst">Pacific Standard Time</option>
-                                <option value="est">Eastern Standard Time</option>
-                                <!-- Add more timezones as needed -->
-                            </select>
-                        </div>
-                        <div class="flex justify-end">
-                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">Save Changes</button>
-                        </div>
-                    </form>
-                </section>
+                    <!-- Preferences Settings Section -->
+                    <section id="preferences" class="settings-section"> <!-- Add ID -->
+                        <h2>Preferences</h2>
+                        <form>
+                            <div class="form-field">
+                                <label for="language">Language</label>
+                                <select id="language" name="language"> <!-- Removed classes -->
+                                    <option value="en">English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <!-- Add more languages as needed -->
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="timezone">Timezone</label>
+                                <select id="timezone" name="timezone">
+                                    <option value="America/New_York">Eastern Time (ET)</option>
+                                    <option value="America/Chicago">Central Time (CT)</option>
+                                    <option value="America/Denver">Mountain Time (MT)</option>
+                                    <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                                     <option value="Europe/London">London (GMT/BST)</option>
+                                    <option value="UTC">UTC</option>
+                                    <!-- Add more timezones as needed -->
+                                </select>
+                            </div>
+                             <div class="checkbox-field">
+                                <input type="checkbox" id="dark-mode-sync" name="dark-mode-sync">
+                                <label for="dark-mode-sync">Sync theme with system preference</label>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="button button-filled">Save Preferences</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
             </div>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Theme Toggle Logic (Optional) ---
+            const htmlElement = document.documentElement;
+            const themeToggleButton = document.getElementById('themeToggle'); // Make sure button exists if uncommenting
+
+            if (themeToggleButton) {
+                const setTheme = (theme) => {
+                    htmlElement.setAttribute('data-theme', theme);
+                    localStorage.setItem('theme', theme);
+                };
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                setTheme(savedTheme);
+
+                themeToggleButton.addEventListener('click', () => {
+                    const currentTheme = htmlElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                    setTheme(newTheme);
+                });
+            }
+
+            // --- Settings Tab Switching Logic ---
+            const tabs = document.querySelectorAll('.settings-tab');
+            const sections = document.querySelectorAll('.settings-section');
+
+            const activateTab = (targetId) => {
+                 sections.forEach(section => {
+                     section.classList.toggle('active', section.id === targetId);
+                 });
+                 tabs.forEach(tab => {
+                    tab.classList.toggle('active', tab.getAttribute('href') === `#${targetId}`);
+                 });
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const targetId = tab.getAttribute('href').substring(1); // Get ID from href (remove #)
+                    activateTab(targetId);
+                    // Update URL hash without page jump
+                    history.pushState(null, null, `#${targetId}`);
+                });
+            });
+
+             // Activate tab based on URL hash on initial load
+             const currentHash = window.location.hash.substring(1);
+             if (currentHash) {
+                 activateTab(currentHash);
+             } else {
+                 // Activate the first tab by default if no hash
+                 activateTab('account');
+             }
+
+             // Optional: Add scroll detection for sticky header shadow
+             const mainContent = document.querySelector('.main-content');
+             const stickyWrapper = document.querySelector('.settings-tabs-sticky-wrapper');
+             if (mainContent && stickyWrapper) {
+                 mainContent.addEventListener('scroll', () => {
+                      if (mainContent.scrollTop > 10) { // Add shadow after scrolling down a bit
+                           stickyWrapper.style.boxShadow = 'var(--md-sys-elevation-level-2)';
+                      } else {
+                           stickyWrapper.style.boxShadow = 'none';
+                      }
+                 });
+             }
+
+             // --- Form Submission Handling (Example) ---
+             const forms = document.querySelectorAll('.settings-section form');
+             forms.forEach(form => {
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const sectionId = form.closest('.settings-section').id;
+                    console.log(`Saving changes for: ${sectionId}`);
+                    // Add logic to collect form data and send to backend
+                    alert(`${sectionId.charAt(0).toUpperCase() + sectionId.slice(1)} settings saved (simulation)!`);
+                });
+             });
+
+        });
+    </script>
 </body>
 </html>

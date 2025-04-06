@@ -1,403 +1,1074 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Opportunity</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Create New Opportunity - M3 Style</title>
+    <!-- Font Awesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Using Roboto as a common M3 font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* --- Material Design 3 Color Palette (Example: Baseline Blue) --- */
+        :root {
+            /* --- Color --- */
+            /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4;
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70;
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778;
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a;
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+            --md-sys-color-background-light: #fefcff; /* Page background */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component background */
+            --md-sys-color-on-surface-light: #1a1c1e;
+            --md-sys-color-surface-variant-light: #dfe3eb; /* Subtle component background, outlines */
+            --md-sys-color-on-surface-variant-light: #42474e; /* Lower emphasis text */
+            --md-sys-color-outline-light: #73777f; /* Borders, dividers */
+            --md-sys-color-outline-variant-light: #c2c7cf; /* Decorative dividers */
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-background-dark: #1a1c1e;
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e;
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+            /* --- Shape --- */
+            --md-shape-corner-none: 0px;
+            --md-shape-corner-extra-small: 4px;
+            --md-shape-corner-small: 8px;
+            --md-shape-corner-medium: 12px;
+            --md-shape-corner-large: 16px;
+            --md-shape-corner-extra-large: 28px;
+            --md-shape-corner-full: 9999px; /* For pills */
+
+            /* --- Elevation (Simplified for Web) --- */
+            /* Based on Material Web Components - lower values more common */
+            --md-sys-elevation-level-0: none;
+            --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+            /* ... Add more levels if needed */
+
+             /* --- State Layers (Opacity) --- */
+            --md-sys-state-hover-state-layer-opacity: 0.08;
+            --md-sys-state-focus-state-layer-opacity: 0.12;
+            --md-sys-state-pressed-state-layer-opacity: 0.12;
+            --md-sys-state-dragged-state-layer-opacity: 0.16;
+
+             /* --- Typography (Simplified M3 Roles) --- */
+             /* Body */
+            --md-sys-typescale-body-large-font-family-name: Roboto;
+            --md-sys-typescale-body-large-font-weight: 400;
+            --md-sys-typescale-body-large-font-size: 1rem; /* 16px */
+            --md-sys-typescale-body-large-line-height: 1.5rem; /* 24px */
+            --md-sys-typescale-body-medium-font-family-name: Roboto;
+            --md-sys-typescale-body-medium-font-weight: 400;
+            --md-sys-typescale-body-medium-font-size: 0.875rem; /* 14px */
+            --md-sys-typescale-body-medium-line-height: 1.25rem; /* 20px */
+            --md-sys-typescale-body-small-font-family-name: Roboto;
+            --md-sys-typescale-body-small-font-weight: 400;
+            --md-sys-typescale-body-small-font-size: 0.75rem; /* 12px */
+            --md-sys-typescale-body-small-line-height: 1rem; /* 16px */
+            /* Label */
+            --md-sys-typescale-label-large-font-family-name: Roboto;
+            --md-sys-typescale-label-large-font-weight: 500;
+            --md-sys-typescale-label-large-font-size: 0.875rem; /* 14px */
+            --md-sys-typescale-label-large-line-height: 1.25rem; /* 20px */
+            --md-sys-typescale-label-medium-font-family-name: Roboto;
+            --md-sys-typescale-label-medium-font-weight: 500;
+            --md-sys-typescale-label-medium-font-size: 0.75rem; /* 12px */
+            --md-sys-typescale-label-medium-line-height: 1rem; /* 16px */
+            /* Title */
+            --md-sys-typescale-title-large-font-family-name: Roboto;
+            --md-sys-typescale-title-large-font-weight: 400; /* Sometimes 500 */
+            --md-sys-typescale-title-large-font-size: 1.375rem; /* 22px */
+            --md-sys-typescale-title-large-line-height: 1.75rem; /* 28px */
+            --md-sys-typescale-title-medium-font-family-name: Roboto;
+            --md-sys-typescale-title-medium-font-weight: 500;
+            --md-sys-typescale-title-medium-font-size: 1rem; /* 16px */
+            --md-sys-typescale-title-medium-line-height: 1.5rem; /* 24px */
+            /* Headline */
+             --md-sys-typescale-headline-medium-font-family-name: Roboto;
+            --md-sys-typescale-headline-medium-font-weight: 400;
+            --md-sys-typescale-headline-medium-font-size: 1.75rem; /* 28px */
+            --md-sys-typescale-headline-medium-line-height: 2.25rem; /* 36px */
+        }
+
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --tertiary: var(--md-sys-color-tertiary-light);
+            --on-tertiary: var(--md-sys-color-on-tertiary-light);
+            --tertiary-container: var(--md-sys-color-tertiary-container-light);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --error-container: var(--md-sys-color-error-container-light);
+            --on-error-container: var(--md-sys-color-on-error-container-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+            --shadow: var(--md-sys-color-shadow-light);
+            --surface-tint-color: var(--md-sys-color-surface-tint-light);
+            --inverse-surface: var(--md-sys-color-inverse-surface-light);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-light);
+            --inverse-primary: var(--md-sys-color-inverse-primary-light);
+
+            /* RGB values for state layers */
+            --primary-rgb: 0, 97, 164;
+            --secondary-rgb: 83, 95, 112;
+            --surface-rgb: 254, 252, 255;
+            --on-surface-rgb: 26, 28, 30;
+            --error-rgb: 186, 26, 26;
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --tertiary: var(--md-sys-color-tertiary-dark);
+            --on-tertiary: var(--md-sys-color-on-tertiary-dark);
+            --tertiary-container: var(--md-sys-color-tertiary-container-dark);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --error-container: var(--md-sys-color-error-container-dark);
+            --on-error-container: var(--md-sys-color-on-error-container-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+            --shadow: var(--md-sys-color-shadow-dark);
+            --surface-tint-color: var(--md-sys-color-surface-tint-dark);
+            --inverse-surface: var(--md-sys-color-inverse-surface-dark);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-dark);
+            --inverse-primary: var(--md-sys-color-inverse-primary-dark);
+
+            /* RGB values for state layers */
+            --primary-rgb: 160, 201, 255;
+            --secondary-rgb: 187, 199, 219;
+            --surface-rgb: 26, 28, 30;
+            --on-surface-rgb: 226, 226, 230;
+            --error-rgb: 255, 180, 171;
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--md-sys-typescale-body-medium-font-family-name), sans-serif;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight);
+            background-color: var(--background);
+            color: var(--on-background);
             transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        /* Basic Rich Text Editor Placeholder Style */
-        .rich-text-placeholder {
-            border: 1px solid #e2e8f0; /* Tailwind's gray-300 */
-            padding: 0.75rem;
-            min-height: 150px;
-            background-color: #f9fafb; /* Tailwind's gray-50 */
-            border-radius: 0.375rem; /* Tailwind's rounded-md */
-            color: #6b7280; /* Tailwind's gray-500 */
-        }
-        /* Smooth hover transitions */
-        a, button, input, select, textarea {
-            transition: all 0.3s ease-in-out;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        a:hover, button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        /* --- Layout --- */
+        .layout-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden; /* Prevent body scroll */
         }
 
-        input:focus, select:focus, textarea:focus {
-            border-color: #2563eb; /* Tailwind's blue-600 */
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        /* --- Sidebar (Navigation Drawer) --- */
+        .sidebar {
+            width: 256px; /* Standard width */
+            background-color: var(--surface);
+            /* Slightly elevated surface */
+            /* box-shadow: var(--md-sys-elevation-level-1); /* Subtle shadow */
+            border-right: 1px solid var(--outline-variant);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        /* Smooth section transitions */
-        section {
-            animation: fadeIn 0.5s ease-in-out;
+        .sidebar-header {
+            padding: 1.5rem 1rem; /* 24px 16px */
+            border-bottom: 1px solid var(--outline-variant);
+            transition: border-color 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .sidebar-header a {
+            font-size: var(--md-sys-typescale-title-large-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight); /* Use 500 */
+            color: var(--primary);
+            text-decoration: none;
+            display: block; /* Makes the whole area clickable */
         }
 
-        /* Sidebar link hover effects */
-        nav a:hover {
-            background-color: #e5e7eb; /* Tailwind's gray-200 */
-            color: #2563eb; /* Tailwind's blue-600 */
+        .sidebar-header span {
+            display: block;
+            margin-top: 4px;
+            font-size: var(--md-sys-typescale-body-small-font-size);
+            color: var(--on-surface-variant);
         }
 
-        /* Light Mode */
-        body.light {
-            background-color: #f9fafb;
-            color: #1f2937;
+        .sidebar-nav {
+            padding: 0.5rem; /* 8px */
+            flex-grow: 1;
+            overflow-y: auto;
         }
 
-        .light .bg-white {
-            background-color: #ffffff;
-            color: #1f2937;
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem; /* 12px 16px */
+            margin: 0.25rem 0; /* 4px */
+            border-radius: var(--md-shape-corner-full);
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            position: relative; /* For state layer */
+            overflow: hidden; /* For state layer */
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .sidebar-nav a i {
+            width: 24px; /* Fixed width for icon alignment */
+            margin-right: 1rem; /* 16px */
+            text-align: center;
+             color: var(--on-surface-variant); /* Match text */
+             transition: color 0.15s ease;
         }
 
-        /* Dark Mode */
-        body.dark {
-            background-color: #1f2937;
-            color: #f9fafb;
+        .sidebar-nav a::before { /* State Layer */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--secondary); /* Base color for state */
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            border-radius: inherit; /* Match parent radius */
         }
 
-        .dark .bg-white {
-            background-color: #374151;
-            color: #f9fafb;
+        .sidebar-nav a:hover {
+             color: var(--on-secondary-container); /* Content color changes */
+        }
+        .sidebar-nav a:hover::before { /* Hover state */
+            opacity: var(--md-sys-state-hover-state-layer-opacity);
+        }
+        .sidebar-nav a:hover i {
+            color: var(--on-secondary-container);
         }
 
-        /* Toggle Button */
-        .toggle-btn {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background-color: #2563eb;
-            color: #ffffff;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
+        /* Active state example (add a class 'active' via JS or server-side) */
+         .sidebar-nav a.active {
+            background-color: var(--secondary-container);
+            color: var(--on-secondary-container);
+            font-weight: var(--md-sys-typescale-label-large-font-weight); /* Ensure weight doesn't decrease */
+         }
+         .sidebar-nav a.active i {
+            color: var(--on-secondary-container);
+         }
+
+        /* Logout link specific style */
+        .sidebar-nav a.logout-link {
+            margin-top: 1.5rem; /* 24px */
+            color: var(--error);
+        }
+         .sidebar-nav a.logout-link i {
+             color: var(--error);
+         }
+        .sidebar-nav a.logout-link::before {
+            background-color: var(--error);
+        }
+        .sidebar-nav a.logout-link:hover {
+            color: var(--on-error-container);
+        }
+        .sidebar-nav a.logout-link:hover::before {
+            background-color: var(--error-container);
+            opacity: var(--md-sys-state-hover-state-layer-opacity); /* Keep subtle */
+        }
+        .sidebar-nav a.logout-link:hover i {
+            color: var(--on-error-container); /* Or keep error color if preferred */
+        }
+
+
+        /* --- Main Content Area --- */
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto; /* Enable scrolling for content */
+            padding: 2rem; /* 32px */
+        }
+
+        .main-content h1 {
+            font-size: var(--md-sys-typescale-headline-medium-font-size);
+            font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+            line-height: var(--md-sys-typescale-headline-medium-line-height);
+            color: var(--on-surface);
+            margin-bottom: 1.5rem; /* 24px */
+        }
+
+        /* --- Wizard Steps (Segmented Buttons/Tabs) --- */
+        #wizard-steps {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: var(--surface); /* Matches main form background or slightly tinted */
+            padding: 0.5rem 1rem; /* Reduced padding */
+            box-shadow: var(--md-sys-elevation-level-1); /* Subtle elevation */
+            border-bottom: 1px solid var(--outline-variant);
+            display: flex;
+            justify-content: space-around; /* Evenly spaced */
+            align-items: center;
+            margin-bottom: 2rem; /* Space below steps */
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #wizard-steps .step {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem 0.5rem; /* 12px 8px */
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            color: var(--on-surface-variant);
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            border-bottom: 2px solid transparent; /* Placeholder for active state */
+            transition: color 0.2s ease, border-color 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--md-shape-corner-extra-small) var(--md-shape-corner-extra-small) 0 0; /* Slight top rounding */
+        }
+        #wizard-steps .step::before { /* State layer */
+            content: '';
+            position: absolute;
+            top:0; left: 0; right: 0; bottom: 0;
+            background-color: var(--primary);
+            opacity: 0;
+            transition: opacity 0.15s ease;
+        }
+        #wizard-steps .step:hover::before {
+             opacity: var(--md-sys-state-hover-state-layer-opacity);
         }
 
-        .toggle-btn:hover {
-            background-color: #1d4ed8;
+        #wizard-steps .step.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
-        /* Toggle Icon */
-        .toggle-icon {
+
+        /* --- Form Styles --- */
+        .form-container {
+            background-color: var(--surface);
+            padding: 2rem; /* 32px */
+            border-radius: var(--md-shape-corner-large); /* More pronounced rounding */
+            box-shadow: var(--md-sys-elevation-level-1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Spacing between form sections */
+        .form-container section {
+            margin-bottom: 2.5rem; /* 40px */
+        }
+        .form-container section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Section Heading */
+        .section-heading {
+            font-size: var(--md-sys-typescale-title-large-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight); /* 500 */
+            color: var(--on-surface);
+            margin-bottom: 1rem; /* 16px */
+            padding-bottom: 0.5rem; /* 8px */
+            border-bottom: 1px solid var(--outline-variant);
+            transition: border-color 0.3s ease;
+        }
+
+        /* Field Layout Grids */
+        .field-grid {
+            display: grid;
+            gap: 1.5rem; /* 24px */
+        }
+        .field-grid-cols-2 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive 2-col */
+        }
+         .field-grid-cols-4 {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Responsive 4-col */
+        }
+
+        /* Margin for elements within sections/grids */
+        .mb-4 { margin-bottom: 1rem; } /* 16px */
+        .mb-6 { margin-bottom: 1.5rem; } /* 24px */
+        .mt-6 { margin-top: 1.5rem; } /* 24px */
+
+        /* --- Input Fields (M3 Outlined Text Field Style) --- */
+        .form-field {
+            margin-bottom: 1rem; /* Default spacing below field group */
+        }
+
+        .form-field label {
+            display: block;
+            font-size: var(--md-sys-typescale-label-medium-font-size); /* Smaller label */
+            font-weight: var(--md-sys-typescale-label-medium-font-weight);
+            color: var(--on-surface-variant);
+            margin-bottom: 4px;
+            padding-left: 4px; /* Slight indent */
+        }
+
+        .form-field input[type="text"],
+        .form-field input[type="url"],
+        .form-field input[type="number"],
+        .form-field input[type="datetime-local"],
+        .form-field input[type="email"], /* Add other types as needed */
+        .form-field select,
+        .form-field textarea {
+            display: block;
+            width: 100%;
+            padding: 1rem; /* 16px - M3 standard */
+            font-family: inherit;
+            font-size: var(--md-sys-typescale-body-large-font-size);
+            line-height: var(--md-sys-typescale-body-large-line-height);
+            color: var(--on-surface);
+            background-color: transparent; /* Or var(--surface) if needed */
+            border: 1px solid var(--outline);
+            border-radius: var(--md-shape-corner-extra-small); /* M3 standard */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            appearance: none; /* Remove default styling */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+         .form-field textarea {
+             min-height: 120px; /* Default height */
+             resize: vertical; /* Allow only vertical resize */
+         }
+
+        /* Placeholder styling */
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: var(--on-surface-variant);
+            opacity: 1; /* Ensure visibility */
+        }
+
+        /* Focus state */
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            border-width: 2px; /* Highlight border */
+             padding: calc(1rem - 1px); /* Adjust padding to maintain size */
+            /* Optional: Subtle shadow indicating focus */
+            /* box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2); */
+        }
+
+        /* Select dropdown arrow */
+        .form-field select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23${props => props.theme.onSurfaceVariant.substring(1)}'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E"); /* Needs dynamic color */
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2em;
+            padding-right: 3rem; /* Make space for arrow */
+            /* Hacky way to set SVG color via variable - needs JS or inline style for perfect theme switch */
+            /* Or use a fixed color: fill='%2342474e' for light, fill='%23c2c7cf' for dark */
+        }
+        [data-theme="light"] .form-field select {
+             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2342474e'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+        }
+        [data-theme="dark"] .form-field select {
+             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c2c7cf'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+        }
+
+
+        /* --- File Inputs --- */
+        .form-field input[type="file"] {
+            border: none; /* Remove default border */
+            padding: 0; /* Reset padding */
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            color: var(--on-surface-variant);
+        }
+        /* Basic styling for the file input button part */
+        .form-field input[type="file"]::file-selector-button {
+            font-family: inherit;
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            color: var(--primary);
+            background-color: transparent;
+            border: 1px solid var(--outline);
+            padding: 0.5rem 1rem; /* 8px 16px */
+            border-radius: var(--md-shape-corner-full);
+            margin-right: 1rem; /* 16px */
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+         .form-field input[type="file"]::file-selector-button:hover {
+             background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity));
+             border-color: var(--primary);
+         }
+
+        /* --- Checkboxes --- */
+        .checkbox-field {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* 12px */
+            margin-bottom: 1rem;
+        }
+        .checkbox-field input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--outline);
+            border-radius: var(--md-shape-corner-extra-small);
+            position: relative;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .checkbox-field input[type="checkbox"]:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        /* Checkmark icon */
+        .checkbox-field input[type="checkbox"]:checked::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 5px;
+            width: 4px;
+            height: 8px;
+            border: solid var(--on-primary);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+         .checkbox-field label {
+             margin: 0; /* Reset label margin */
+             padding: 0;
+             font-size: var(--md-sys-typescale-body-large-font-size);
+             color: var(--on-surface);
+             cursor: pointer;
+         }
+
+        /* --- Buttons --- */
+        .button {
+            display: inline-flex; /* Allows alignment and padding */
+            align-items: center;
+            justify-content: center;
+            padding: 0.625rem 1.5rem; /* 10px 24px - M3 standard */
+            border-radius: var(--md-shape-corner-full); /* Pill shape */
+            font-family: inherit;
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            position: relative; /* For state layer */
+            overflow: hidden; /* For state layer */
+            user-select: none;
+            vertical-align: middle;
+             transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+        }
+        .button::before { /* State Layer */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: currentColor; /* Use text color for layer base */
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            border-radius: inherit;
+        }
+        .button:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .button:focus { outline: none; } /* Remove default */
+        .button:focus::before { opacity: var(--md-sys-state-focus-state-layer-opacity); }
+        .button:active::before { opacity: var(--md-sys-state-pressed-state-layer-opacity); }
+
+        /* Filled Button (Primary) */
+        .button-filled {
+            background-color: var(--primary);
+            color: var(--on-primary);
+            box-shadow: var(--md-sys-elevation-level-0); /* No shadow by default */
+        }
+        .button-filled:hover {
+            box-shadow: var(--md-sys-elevation-level-1); /* Add shadow on hover */
+        }
+
+        /* Outlined Button */
+        .button-outlined {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--outline);
+        }
+        .button-outlined:hover {
+            background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity));
+            /* border-color: var(--primary); /* Optional: slightly darker border on hover */
+        }
+         .button-outlined::before { /* State layer based on primary color */
+            background-color: var(--primary);
+         }
+
+        /* Text Button */
+        .button-text {
+            background-color: transparent;
+            color: var(--primary);
+            padding-left: 0.75rem; /* 12px */
+            padding-right: 0.75rem; /* 12px */
+        }
+         .button-text::before { /* State layer based on primary color */
+            background-color: var(--primary);
+         }
+        .button-text:hover {
+            background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity));
+        }
+         /* Example: Add icon button */
+         .button-icon {
+            padding: 0.5rem; /* 8px */
+            border-radius: 50%;
+            line-height: 0; /* Prevent extra space */
+         }
+          .button-icon i { font-size: 1.25rem; /* 20px */ }
+
+        /* Tonal Button (alternative secondary) */
+        .button-tonal {
+            background-color: var(--secondary-container);
+            color: var(--on-secondary-container);
+        }
+        .button-tonal:hover {
+             box-shadow: var(--md-sys-elevation-level-1);
+        }
+         .button-tonal::before {
+            background-color: var(--on-secondary-container);
+         }
+
+
+        /* --- Action Buttons Container --- */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem; /* 12px */
+            padding-top: 1.5rem; /* 24px */
+            margin-top: 1.5rem; /* 24px */
+            border-top: 1px solid var(--outline-variant);
+            transition: border-color 0.3s ease;
+        }
+
+        /* --- Specific Component Styling --- */
+        /* Rich Text Placeholder */
+        .rich-text-placeholder {
+            border: 1px solid var(--outline);
+            padding: 1rem;
+            min-height: 150px;
+            background-color: var(--surface-variant);
+            border-radius: var(--md-shape-corner-extra-small);
+            color: var(--on-surface-variant);
+            font-size: var(--md-sys-typescale-body-large-font-size);
+        }
+
+        /* Round Configuration Box */
+        .round-config-box {
+            border: 1px dashed var(--outline); /* Dashed border */
+            padding: 1.5rem; /* 24px */
+            border-radius: var(--md-shape-corner-medium);
+            margin-bottom: 1rem;
+            background-color: rgba(var(--surface-rgb), 0.5); /* Slightly transparent surface */
+        }
+        .round-config-box h3 {
+            font-size: var(--md-sys-typescale-title-medium-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight);
+            color: var(--on-surface);
+            margin-bottom: 1rem;
+        }
+
+        /* Team Size Input Row */
+        .team-size-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem; /* 16px */
+        }
+        .team-size-row span {
+            font-size: var(--md-sys-typescale-body-large-font-size);
+            color: var(--on-surface-variant);
+        }
+         .team-size-row input[type="number"] {
+            width: 80px; /* Fixed small width */
+            text-align: center;
+         }
+
+        /* Dynamic Add Field Rows */
+        .dynamic-field-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* 12px */
+            margin-bottom: 0.75rem; /* 12px */
+        }
+        .dynamic-field-row input,
+        .dynamic-field-row select {
+             font-size: var(--md-sys-typescale-body-medium-font-size); /* Smaller text */
+             padding: 0.5rem 0.75rem; /* Reduced padding */
+        }
+        .dynamic-field-row input[type="text"],
+        .dynamic-field-row input[type="url"] {
+            flex-grow: 1; /* Allow text input to take space */
+        }
+        .dynamic-field-row input[type="file"] {
+            flex-grow: 0; /* Don't let file input grow excessively */
+        }
+
+
+        /* --- Theme Toggle Button --- */
+        .theme-toggle-button {
             position: fixed;
             top: 1rem;
             right: 1rem;
-            width: 3rem;
-            height: 3rem;
-            background-color: #2563eb;
+            z-index: 100;
+            background-color: var(--primary-container);
+            color: var(--on-primary-container);
+            border: none;
+            width: 48px; /* Standard icon button size */
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: var(--md-sys-elevation-level-2);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
-
-        .toggle-icon:hover {
-            background-color: #1d4ed8;
-            transform: scale(1.1);
+        .theme-toggle-button:hover {
+            box-shadow: var(--md-sys-elevation-level-3);
+            transform: scale(1.05);
         }
-
-        .toggle-icon svg {
-            width: 1.5rem;
-            height: 1.5rem;
-            fill: #ffffff;
+         .theme-toggle-button i {
+            font-size: 1.5rem; /* 24px */
             transition: transform 0.3s ease;
+         }
+         /* Rotate icon in dark mode */
+         [data-theme="dark"] .theme-toggle-button .fa-moon { display: none; }
+         [data-theme="light"] .theme-toggle-button .fa-sun { display: none; }
+
+        /* --- Animation --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        section {
+            animation: fadeIn 0.4s ease-out forwards;
         }
 
-        body.dark .toggle-icon svg {
-            transform: rotate(180deg);
-        }
+        /* --- Utility Classes (Minimal) --- */
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .space-x-2 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 0.5rem; } /* 8px */
+        .space-x-4 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 1rem; } /* 16px */
+        .text-sm { font-size: var(--md-sys-typescale-body-medium-font-size); }
+        .flex-grow { flex-grow: 1; }
+        .hidden { display: none; } /* For JS toggling */
 
-        /* Sticky Wizard Steps */
-        #wizard-steps {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background-color: #ffffff; /* Ensure it matches the background */
-            padding: 1rem 2rem; /* Increased padding for better appearance */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-bottom: 1px solid #e5e7eb; /* Add a subtle border for separation */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #wizard-steps span {
-            flex: 1; /* Make each step take equal space */
-            text-align: center;
-            padding: 0.5rem 0;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        #wizard-steps span:hover {
-            background-color: #f3f4f6; /* Tailwind's gray-100 */
-            border-radius: 0.375rem; /* Tailwind's rounded-md */
-        }
     </style>
 </head>
-<body class="bg-gray-100">
-    <!-- Include Organizer Sidebar and Header/Nav if desired, or make it a full-page form -->
-     <div class="flex h-screen">
-        <!-- Organizer Sidebar (Copy from organizer_dashboard.html) -->
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">
-            <div class="p-6 border-b">
-                <a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a>
-                <span class="block text-sm text-gray-500 mt-1">Organizer Panel</span>
+<body> <!-- Removed Tailwind class -->
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="theme-toggle-button" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i> <!-- Moon icon for switching to dark -->
+        <i class="fas fa-sun"></i>  <!-- Sun icon for switching to light -->
+    </button>
+
+    <div class="layout-container"> <!-- Replaced .flex .h-screen -->
+        <!-- Organizer Sidebar -->
+        <aside class="sidebar"> <!-- Replaced .w-64 .bg-white .shadow-md .flex-shrink-0 -->
+            <div class="sidebar-header"> <!-- Replaced .p-6 .border-b -->
+                <a href="index.html" class="sidebar-brand">Hackverse</a> <!-- Replaced .text-2xl .font-bold .text-blue-600 -->
+                <span class="sidebar-subtitle">Organizer Panel</span> <!-- Replaced .block .text-sm .text-gray-500 .mt-1 -->
             </div>
-            <nav class="p-4 space-y-2">
-                <a href="organizer_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-building w-6 mr-2"></i> Organization Profile</a>
-                <a href="organizer_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
-                <a href="organizer_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-list-alt w-6 mr-2"></i> My Opportunities</a>
-                <a href="organizer_create_opportunity.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-plus-circle w-6 mr-2"></i> Create New</a>
-                <a href="organizer_analytics.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-chart-bar w-6 mr-2"></i> Analytics</a>
-                <a href="organizer_settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
-                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+            <nav class="sidebar-nav"> <!-- Replaced .p-4 .space-y-2 -->
+                <!-- Apply 'active' class to the current page link -->
+                <a href="organizer_profile.html"><i class="fas fa-building"></i> Organization Profile</a>
+                <a href="organizer_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="organizer_opportunities.html"><i class="fas fa-list-alt"></i> My Opportunities</a>
+                <a href="organizer_create_opportunity.html" class="active"><i class="fas fa-plus-circle"></i> Create New</a>
+                <a href="organizer_analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a>
+                <a href="organizer_settings.html"><i class="fas fa-cog"></i> Settings</a>
+                <a href="index.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>
         </aside>
+
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto p-8">
-            <h1 class="text-3xl font-bold mb-6">Create New Opportunity</h1>
+        <main class="main-content"> <!-- Replaced .flex-1 .overflow-y-auto .p-8 -->
+            <h1>Create New Opportunity</h1> <!-- Replaced .text-3xl .font-bold .mb-6 -->
 
             <!-- Extended Sticky Wizard Steps Indicator -->
             <div id="wizard-steps">
-                <span id="step-1" class="step text-blue-600 font-semibold border-b-2 border-blue-600">1. Type & Basic Info</span>
+                <span id="step-1" class="step active">1. Type & Basic Info</span> <!-- Added 'active' class -->
                 <span id="step-2" class="step">2. Details & Rules</span>
                 <span id="step-3" class="step">3. Rounds & Evaluation</span>
                 <span id="step-4" class="step">4. Review & Publish</span>
             </div>
 
             <!-- Form Sections -->
-            <form action="#" method="POST" class="space-y-8 bg-white p-8 rounded-lg shadow">
+            <form action="#" method="POST" class="form-container"> <!-- Replaced .space-y-8 .bg-white .p-8 .rounded-lg .shadow -->
 
                 <!-- Section 1: Type & Basic Info -->
                 <section id="section-1">
-                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">1. Opportunity Type & Basic Information</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="opportunity-type" class="block text-sm font-medium text-gray-700 mb-1">Opportunity Type *</label>
-                            <select id="opportunity-type" name="opportunity_type" required class="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                    <h2 class="section-heading">1. Opportunity Type & Basic Information</h2> <!-- Replaced .text-xl .font-semibold .mb-4 .border-b .pb-2 -->
+                    <div class="field-grid field-grid-cols-2"> <!-- Replaced .grid .grid-cols-1 .md:grid-cols-2 .gap-6 -->
+                        <div class="form-field"> <!-- Added wrapper div -->
+                            <label for="opportunity-type">Opportunity Type *</label> <!-- Replaced .block .text-sm .font-medium .text-gray-700 .mb-1 -->
+                            <select id="opportunity-type" name="opportunity_type" required> <!-- Removed Tailwind classes -->
                                 <option value="hackathon">Hackathon</option>
+                                <!-- Add other types if needed -->
                             </select>
                         </div>
-                         <div>
-                            <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Opportunity Title *</label>
-                            <input type="text" id="title" name="title" required placeholder="e.g., Innovate for Tomorrow Hackathon" class="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                         <div class="form-field"> <!-- Added wrapper div -->
+                            <label for="title">Opportunity Title *</label>
+                            <input type="text" id="title" name="title" required placeholder="e.g., Innovate for Tomorrow Hackathon"> <!-- Removed Tailwind classes -->
                         </div>
                     </div>
-                     <div class="mt-6">
-                        <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description * (Supports Markdown/Rich Text)</label>
-                        <textarea id="description" name="description" rows="5" required placeholder="Provide a detailed description of the opportunity..." class="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
-                        <!-- Or use a placeholder for a real Rich Text Editor -->
+                     <div class="form-field mt-6"> <!-- Added wrapper div, Replaced .mt-6 -->
+                        <label for="description">Description * (Supports Markdown/Rich Text)</label>
+                        <textarea id="description" name="description" rows="5" required placeholder="Provide a detailed description of the opportunity..."></textarea> <!-- Removed Tailwind classes -->
                         <!-- <div class="rich-text-placeholder">Rich Text Editor Placeholder</div> -->
                     </div>
                 </section>
 
                  <!-- Section 2: Eligibility, Timelines, Rules -->
                 <section id="section-2">
-                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">2. Details, Rules & Branding</h2>
+                    <h2 class="section-heading">2. Details, Rules & Branding</h2>
 
                     <!-- Eligibility Fields -->
-                    <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Eligibility Criteria</label>
-                        <input type="text" name="eligibility_details" placeholder="e.g., Students from XYZ University, Final Year Only" class="w-full border border-gray-300 rounded-md p-2 mb-2">
-                        <input type="text" name="required_skills" placeholder="Required Skills (comma-separated): Python, ML, UI/UX" class="w-full border border-gray-300 rounded-md p-2">
+                    <div class="form-field mb-6"> <!-- Replaced .mb-6 -->
+                        <label>Eligibility Criteria</label> <!-- Removed class -->
+                        <input type="text" name="eligibility_details" placeholder="e.g., Students from XYZ University, Final Year Only" class="mb-4"> <!-- Removed classes, Added utility -->
+                        <input type="text" name="required_skills" placeholder="Required Skills (comma-separated): Python, ML, UI/UX"> <!-- Removed classes -->
                     </div>
 
                     <!-- Timelines -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                         <div>
-                            <label for="reg_start" class="block text-sm font-medium text-gray-700 mb-1">Registration Start *</label>
-                            <input type="datetime-local" id="reg_start" name="reg_start" required class="w-full border border-gray-300 rounded-md p-2">
+                     <div class="field-grid field-grid-cols-4 mb-6"> <!-- Replaced classes -->
+                         <div class="form-field">
+                            <label for="reg_start">Registration Start *</label>
+                            <input type="datetime-local" id="reg_start" name="reg_start" required>
                         </div>
-                         <div>
-                            <label for="reg_end" class="block text-sm font-medium text-gray-700 mb-1">Registration End *</label>
-                            <input type="datetime-local" id="reg_end" name="reg_end" required class="w-full border border-gray-300 rounded-md p-2">
+                         <div class="form-field">
+                            <label for="reg_end">Registration End *</label>
+                            <input type="datetime-local" id="reg_end" name="reg_end" required>
                         </div>
-                         <div>
-                            <label for="event_start" class="block text-sm font-medium text-gray-700 mb-1">Event Start *</label>
-                            <input type="datetime-local" id="event_start" name="event_start" required class="w-full border border-gray-300 rounded-md p-2">
+                         <div class="form-field">
+                            <label for="event_start">Event Start *</label>
+                            <input type="datetime-local" id="event_start" name="event_start" required>
                         </div>
-                         <div>
-                            <label for="event_end" class="block text-sm font-medium text-gray-700 mb-1">Event End *</label>
-                            <input type="datetime-local" id="event_end" name="event_end" required class="w-full border border-gray-300 rounded-md p-2">
+                         <div class="form-field">
+                            <label for="event_end">Event End *</label>
+                            <input type="datetime-local" id="event_end" name="event_end" required>
                         </div>
-                        <!-- Add fields for Submission Deadlines, Result Dates -->
                     </div>
 
                     <!-- Rules & Guidelines -->
-                    <div class="mb-6">
-                        <label for="rules" class="block text-sm font-medium text-gray-700 mb-1">Rules & Guidelines *</label>
-                        <textarea id="rules" name="rules" rows="5" placeholder="Provide detailed rules and guidelines..." class="w-full border border-gray-300 rounded-md p-2"></textarea>
+                    <div class="form-field mb-6">
+                        <label for="rules">Rules & Guidelines *</label>
+                        <textarea id="rules" name="rules" rows="5" placeholder="Provide detailed rules and guidelines..."></textarea>
                     </div>
 
                     <!-- Branding -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label for="logo" class="block text-sm font-medium text-gray-700 mb-1">Organization Logo</label>
-                            <input type="file" id="logo" name="logo" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    <div class="field-grid field-grid-cols-2 mb-6">
+                        <div class="form-field">
+                            <label for="logo">Organization Logo</label>
+                            <input type="file" id="logo" name="logo"> <!-- Removed file input styling classes -->
                         </div>
-                        <div>
-                            <label for="banner" class="block text-sm font-medium text-gray-700 mb-1">Event Banner Image</label>
-                            <input type="file" id="banner" name="banner" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        <div class="form-field">
+                            <label for="banner">Event Banner Image</label>
+                            <input type="file" id="banner" name="banner">
                         </div>
-                         <!-- Add Color Picker input if needed -->
                     </div>
 
                      <!-- Themes/Tracks -->
-                    <div class="mb-6">
-                        <label for="themes" class="block text-sm font-medium text-gray-700 mb-1">Themes/Tracks (Optional, one per line)</label>
+                    <div class="form-field mb-6">
+                        <label for="themes">Themes/Tracks (Optional, one per line)</label>
                         <textarea id="themes" name="themes" rows="3" placeholder="e.g., Fintech
 Sustainability
-Healthcare AI" class="w-full border border-gray-300 rounded-md p-2"></textarea>
+Healthcare AI"></textarea> <!-- Added 
+ for newlines in placeholder -->
                     </div>
 
                     <!-- Dynamic Sponsor Fields -->
                     <div class="mb-6">
-                        <label for="sponsors" class="block text-sm font-medium text-gray-700 mb-1">Sponsor Logos & Links</label>
+                        <label>Sponsor Logos & Links</label> <!-- Removed for=, used simple label -->
                         <div id="sponsor-fields">
-                            <div class="flex items-center space-x-2 mb-2">
-                                <input type="file" name="sponsor_logo[]" class="text-sm">
-                                <input type="url" name="sponsor_link[]" placeholder="Sponsor Website Link" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
+                            <div class="dynamic-field-row"> <!-- Replaced flex classes -->
+                                <input type="file" name="sponsor_logo[]">
+                                <input type="url" name="sponsor_link[]" placeholder="Sponsor Website Link">
                             </div>
                         </div>
-                        <button type="button" id="add-sponsor-btn" class="text-sm text-blue-600 hover:underline">+ Add Sponsor</button>
+                        <button type="button" id="add-sponsor-btn" class="button button-text">+ Add Sponsor</button> <!-- Replaced classes -->
                     </div>
 
                     <!-- Dynamic Custom Registration Fields -->
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Custom Registration Questions</label>
+                        <label>Custom Registration Questions</label>
                         <div id="custom-fields">
-                            <div class="flex items-center space-x-2 mb-2">
-                                <input type="text" name="custom_field_label[]" placeholder="Question Label (e.g., T-Shirt Size)" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
-                                <select name="custom_field_type[]" class="border border-gray-300 rounded-md p-1 text-sm">
+                            <div class="dynamic-field-row">
+                                <input type="text" name="custom_field_label[]" placeholder="Question Label (e.g., T-Shirt Size)">
+                                <select name="custom_field_type[]">
                                     <option value="text">Text</option>
                                     <option value="select">Dropdown</option>
                                     <option value="checkbox">Checkbox</option>
                                 </select>
                             </div>
                         </div>
-                        <button type="button" id="add-custom-field-btn" class="text-sm text-blue-600 hover:underline">+ Add Custom Field</button>
+                        <button type="button" id="add-custom-field-btn" class="button button-text">+ Add Custom Field</button>
                     </div>
                 </section>
 
                 <!-- Section 3: Rounds, Submissions, Evaluation -->
                  <section id="section-3">
-                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">3. Rounds, Submissions & Evaluation</h2>
-                    <!-- Round Configuration (Needs JS for dynamic adding/removing rounds) -->
-                    <div class="mb-4 p-4 border border-dashed border-gray-300 rounded">
-                         <h3 class="text-md font-medium mb-2">Round 1 (Example: Quiz Round)</h3>
-                         <input type="text" name="round1_name" value="Quiz Round" class="w-full border border-gray-300 rounded-md p-2 mb-2">
-                         <textarea name="round1_description" placeholder="Round 1 description..." rows="2" class="w-full border border-gray-300 rounded-md p-2 mb-2"></textarea>
-                         <label class="block text-sm font-medium text-gray-700 mb-1">Submission Type:</label>
-                         <select name="round1_submission_type" class="w-full border border-gray-300 rounded-md p-2 mb-2">
-                             <option value="quiz">Quiz / MCQ</option>
-                             <option value="code">Code Repository</option>
-                              <option value="link">Link</option>
-                              <option value="document">Document Upload</option>
-                         </select>
-                         <label class="block text-sm font-medium text-gray-700 mb-1">Deadline:</label>
-                         <input type="datetime-local" name="round1_deadline" class="w-full border border-gray-300 rounded-md p-2">
+                    <h2 class="section-heading">3. Rounds, Submissions & Evaluation</h2>
+                    <!-- Round Configuration -->
+                    <div class="round-config-box"> <!-- Added custom class -->
+                         <h3>Round 1 (Example: Quiz Round)</h3> <!-- Removed size/weight -->
+                         <div class="form-field mb-4">
+                             <input type="text" name="round1_name" value="Quiz Round" placeholder="Round Name">
+                         </div>
+                         <div class="form-field mb-4">
+                             <textarea name="round1_description" placeholder="Round description..." rows="2"></textarea>
+                         </div>
+                         <div class="form-field mb-4">
+                             <label>Submission Type:</label>
+                             <select name="round1_submission_type">
+                                 <option value="quiz">Quiz / MCQ</option>
+                                 <option value="code">Code Repository</option>
+                                  <option value="link">Link</option>
+                                  <option value="document">Document Upload</option>
+                             </select>
+                         </div>
+                         <div class="form-field">
+                             <label>Deadline:</label>
+                             <input type="datetime-local" name="round1_deadline">
+                         </div>
                     </div>
-                     <button type="button" class="text-sm text-blue-600 hover:underline">+ Add Another Round</button>
+                     <button type="button" class="button button-text">+ Add Another Round</button>
 
                     <!-- Prizes -->
-                    <div class="mt-6 mb-4">
-                        <label for="prizes" class="block text-sm font-medium text-gray-700 mb-1">Prizes & Rewards *</label>
-                        <textarea id="prizes" name="prizes" rows="3" required placeholder="Describe prizes: Cash, Internships, PPIs, Goodies..." class="w-full border border-gray-300 rounded-md p-2"></textarea>
+                    <div class="form-field mt-6 mb-4">
+                        <label for="prizes">Prizes & Rewards *</label>
+                        <textarea id="prizes" name="prizes" rows="3" required placeholder="Describe prizes: Cash, Internships, PPIs, Goodies..."></textarea>
                     </div>
 
                     <!-- Team Size -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Team Size Rules *</label>
-                         <div class="flex items-center space-x-4">
-                             <span>Min:</span> <input type="number" name="min_team_size" min="1" value="1" class="w-16 border border-gray-300 rounded-md p-1">
-                             <span>Max:</span> <input type="number" name="max_team_size" min="1" value="1" class="w-16 border border-gray-300 rounded-md p-1">
+                    <div class="form-field mb-4">
+                        <label>Team Size Rules *</label>
+                         <div class="team-size-row"> <!-- Replaced flex classes -->
+                             <span>Min:</span> <input type="number" name="min_team_size" min="1" value="1">
+                             <span>Max:</span> <input type="number" name="max_team_size" min="1" value="1">
                          </div>
                     </div>
 
                      <!-- Evaluation Criteria -->
-                    <div class="mb-4">
-                        <label for="evaluation_criteria" class="block text-sm font-medium text-gray-700 mb-1">Evaluation Criteria / Rubrics (Rich Text)</label>
+                    <div class="form-field mb-4">
+                        <label for="evaluation_criteria">Evaluation Criteria / Rubrics (Rich Text)</label>
                         <div class="rich-text-placeholder">Placeholder for Evaluation Criteria Editor</div>
                     </div>
 
                     <!-- Invite Judges -->
-                    <div>
-                        <label for="judges" class="block text-sm font-medium text-gray-700 mb-1">Invite Judges/Evaluators (Enter emails, comma-separated)</label>
-                        <input type="text" id="judges" name="judges" placeholder="judge1@example.com, judge2@example.com" class="w-full border border-gray-300 rounded-md p-2">
+                    <div class="form-field">
+                        <label for="judges">Invite Judges/Evaluators (Enter emails, comma-separated)</label>
+                        <input type="text" id="judges" name="judges" placeholder="judge1@example.com, judge2@example.com">
                     </div>
                  </section>
 
                 <!-- Section 4: Review & Publish -->
                 <section id="section-4">
-                    <h2 class="text-xl font-semibold mb-4 border-b pb-2">4. Review & Publish</h2>
-                    <p class="text-gray-600 mb-4">Review all the details you have entered and click "Publish" to make your opportunity live.</p>
-                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">Publish</button>
+                    <h2 class="section-heading">4. Review & Publish</h2>
+                    <p style="color: var(--on-surface-variant); margin-bottom: 1.5rem;">Review all the details you have entered and click "Publish" to make your opportunity live.</p> <!-- Inline style or create class -->
+                    <button type="submit" class="button button-filled">Publish</button>
                 </section>
 
-                <!-- Section 4: Optional Settings -->
-                 <section>
-                     <h2 class="text-xl font-semibold mb-4 border-b pb-2">4. Optional Settings</h2>
+                <!-- Section 5: Optional Settings (Combined from previous duplicate) -->
+                 <section id="section-5"> <!-- Renamed ID -->
+                     <h2 class="section-heading">5. Optional Settings</h2>
                     <!-- Ticketing -->
-                    <div class="mb-4 flex items-center space-x-4">
-                        <input type="checkbox" id="enable_fees" name="enable_fees" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                        <label for="enable_fees" class="text-sm font-medium text-gray-700">Enable Participation Fees</label>
-                        <input type="number" name="fee_amount" placeholder="Amount (USD)" class="w-24 border border-gray-300 rounded-md p-1 hidden"> <!-- Show with JS -->
-                    </div>
-                     <!-- Sponsor Showcasing -->
-                    <div class="mb-4">
-                        <label for="sponsors" class="block text-sm font-medium text-gray-700 mb-1">Sponsor Logos & Links (Add fields dynamically with JS)</label>
-                         <div class="flex items-center space-x-2">
-                            <input type="file" name="sponsor_logo[]" class="text-sm">
-                            <input type="url" name="sponsor_link[]" placeholder="Sponsor Website Link" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
-                         </div>
-                         <button type="button" class="text-sm text-blue-600 hover:underline mt-1">+ Add Sponsor</button>
-                    </div>
-                    <!-- Custom Registration Fields -->
-                    <div class="mb-4">
-                         <label class="block text-sm font-medium text-gray-700 mb-1">Custom Registration Questions (Add fields dynamically with JS)</label>
-                          <div class="flex items-center space-x-2 mb-1">
-                             <input type="text" name="custom_field_label[]" placeholder="Question Label (e.g., T-Shirt Size)" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
-                             <select name="custom_field_type[]" class="border border-gray-300 rounded-md p-1 text-sm">
-                                 <option value="text">Text</option>
-                                 <option value="select">Dropdown</option>
-                                 <option value="checkbox">Checkbox</option>
-                             </select>
-                         </div>
-                         <button type="button" class="text-sm text-blue-600 hover:underline mt-1">+ Add Custom Field</button>
+                    <div class="checkbox-field mb-4"> <!-- Replaced flex -->
+                        <input type="checkbox" id="enable_fees" name="enable_fees">
+                        <label for="enable_fees">Enable Participation Fees</label>
+                        <!-- JS needs to toggle the 'hidden' class -->
+                        <input type="number" name="fee_amount" placeholder="Amount" class="hidden" style="width: 100px; margin-left: 1rem;">
                     </div>
                  </section>
 
                 <!-- Action Buttons -->
-                <div class="flex justify-end space-x-4 pt-6 border-t">
-                     <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded font-medium">Save Draft</button>
-                     <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">Preview & Publish</button>
-                     <!-- Or add Next/Previous buttons for multi-step -->
+                <div class="form-actions"> <!-- Replaced flex classes -->
+                     <button type="button" class="button button-outlined">Save Draft</button> <!-- Replaced classes -->
+                     <button type="submit" class="button button-filled">Preview & Publish</button> <!-- Replaced classes -->
                  </div>
             </form>
         </main>
@@ -405,47 +1076,88 @@ Healthcare AI" class="w-full border border-gray-300 rounded-md p-2"></textarea>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Add Sponsor Field
-            const sponsorFields = document.getElementById('sponsor-fields');
-            const addSponsorBtn = document.getElementById('add-sponsor-btn');
-            addSponsorBtn.addEventListener('click', () => {
-                const sponsorField = document.createElement('div');
-                sponsorField.classList.add('flex', 'items-center', 'space-x-2', 'mb-2');
-                sponsorField.innerHTML = `
-                    <input type="file" name="sponsor_logo[]" class="text-sm">
-                    <input type="url" name="sponsor_link[]" placeholder="Sponsor Website Link" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
-                `;
-                sponsorFields.appendChild(sponsorField);
+            const htmlElement = document.documentElement;
+            const themeToggleButton = document.getElementById('themeToggle');
+
+            // Function to set theme
+            const setTheme = (theme) => {
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme); // Persist theme choice
+            };
+
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme') || 'light'; // Default to light
+            setTheme(savedTheme);
+
+             // Theme Toggle Button Click
+            themeToggleButton.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                setTheme(newTheme);
             });
+
+
+            // --- Dynamic Field Logic (Mostly Unchanged) ---
+
+             // Function to create dynamic rows easily
+             const createDynamicRow = (content) => {
+                const div = document.createElement('div');
+                div.className = 'dynamic-field-row'; // Use the M3 styled class
+                div.innerHTML = content;
+                return div;
+             };
+
+            // Add Sponsor Field
+            const sponsorFieldsContainer = document.getElementById('sponsor-fields');
+            const addSponsorBtn = document.getElementById('add-sponsor-btn');
+            if(addSponsorBtn && sponsorFieldsContainer) {
+                addSponsorBtn.addEventListener('click', () => {
+                    const sponsorRow = createDynamicRow(`
+                        <input type="file" name="sponsor_logo[]">
+                        <input type="url" name="sponsor_link[]" placeholder="Sponsor Website Link">
+                        <button type="button" class="button button-icon button-text remove-row-btn" aria-label="Remove Sponsor"><i class="fas fa-times-circle" style="color: var(--error);"></i></button>
+                    `);
+                    sponsorFieldsContainer.appendChild(sponsorRow);
+                });
+            }
 
             // Add Custom Registration Field
-            const customFields = document.getElementById('custom-fields');
+            const customFieldsContainer = document.getElementById('custom-fields');
             const addCustomFieldBtn = document.getElementById('add-custom-field-btn');
-            addCustomFieldBtn.addEventListener('click', () => {
-                const customField = document.createElement('div');
-                customField.classList.add('flex', 'items-center', 'space-x-2', 'mb-2');
-                customField.innerHTML = `
-                    <input type="text" name="custom_field_label[]" placeholder="Question Label (e.g., T-Shirt Size)" class="flex-grow border border-gray-300 rounded-md p-1 text-sm">
-                    <select name="custom_field_type[]" class="border border-gray-300 rounded-md p-1 text-sm">
-                        <option value="text">Text</option>
-                        <option value="select">Dropdown</option>
-                        <option value="checkbox">Checkbox</option>
-                    </select>
-                `;
-                customFields.appendChild(customField);
-            });
+             if(addCustomFieldBtn && customFieldsContainer) {
+                addCustomFieldBtn.addEventListener('click', () => {
+                    const customFieldRow = createDynamicRow(`
+                        <input type="text" name="custom_field_label[]" placeholder="Question Label (e.g., T-Shirt Size)">
+                        <select name="custom_field_type[]">
+                            <option value="text">Text</option>
+                            <option value="select">Dropdown</option>
+                            <option value="checkbox">Checkbox</option>
+                        </select>
+                         <button type="button" class="button button-icon button-text remove-row-btn" aria-label="Remove Field"><i class="fas fa-times-circle" style="color: var(--error);"></i></button>
+                    `);
+                    customFieldsContainer.appendChild(customFieldRow);
+                });
+             }
 
-            const steps = document.querySelectorAll('.step');
-            const sections = document.querySelectorAll('section');
+             // Add remove button functionality (Event Delegation)
+             document.body.addEventListener('click', function(event) {
+                if (event.target.closest('.remove-row-btn')) {
+                    event.target.closest('.dynamic-field-row').remove();
+                }
+             });
+
+
+            // --- Wizard Steps Navigation & Highlighting ---
+            const steps = document.querySelectorAll('#wizard-steps .step');
+            const sections = document.querySelectorAll('form section'); // Target sections inside the form
 
             // Highlight the current step
             const highlightStep = (index) => {
                 steps.forEach((step, i) => {
                     if (i === index) {
-                        step.classList.add('text-blue-600', 'font-semibold', 'border-b-2', 'border-blue-600');
+                        step.classList.add('active');
                     } else {
-                        step.classList.remove('text-blue-600', 'font-semibold', 'border-b-2', 'border-blue-600');
-                        step.classList.add('text-gray-500');
+                        step.classList.remove('active');
                     }
                 });
             };
@@ -453,39 +1165,52 @@ Healthcare AI" class="w-full border border-gray-300 rounded-md p-2"></textarea>
             // Scroll to the corresponding section on step click
             steps.forEach((step, index) => {
                 step.addEventListener('click', () => {
-                    sections[index].scrollIntoView({ behavior: 'smooth' });
-                    highlightStep(index);
+                    if (sections[index]) { // Check if section exists
+                         sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                         // Observer will handle highlighting
+                    }
                 });
             });
 
-            // Highlight the step based on scroll position
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            const index = Array.from(sections).indexOf(entry.target);
-                            highlightStep(index);
-                        }
-                    });
-                },
-                { threshold: 0.5 }
-            );
+            // Highlight the step based on scroll position using Intersection Observer
+            // Adjust threshold and rootMargin as needed for best behavior with sticky header
+            const observerOptions = {
+                root: document.querySelector('.main-content'), // Observe within the scrollable area
+                rootMargin: "-80px 0px -50% 0px", // Adjust top margin for sticky header, bottom margin to trigger earlier
+                threshold: 0 // Trigger as soon as any part enters/leaves viewport defined by rootMargin
+            };
 
-            sections.forEach((section) => observer.observe(section));
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                         const sectionId = entry.target.id; // e.g., "section-1"
+                         const stepIndex = parseInt(sectionId.split('-')[1]) - 1; // Get index (0-based)
+                         if (!isNaN(stepIndex)) {
+                            highlightStep(stepIndex);
+                         }
+                    }
+                });
+            }, observerOptions);
 
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
-
-            // Toggle between light and dark mode
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('light')) {
-                    body.classList.remove('light');
-                    body.classList.add('dark');
-                } else {
-                    body.classList.remove('dark');
-                    body.classList.add('light');
+            sections.forEach((section) => {
+                if (section.id) { // Only observe sections with IDs
+                    observer.observe(section);
                 }
             });
+
+            // --- Fee Amount Visibility Toggle ---
+             const enableFeesCheckbox = document.getElementById('enable_fees');
+             const feeAmountInput = document.querySelector('input[name="fee_amount"]');
+
+             if (enableFeesCheckbox && feeAmountInput) {
+                enableFeesCheckbox.addEventListener('change', () => {
+                    feeAmountInput.classList.toggle('hidden', !enableFeesCheckbox.checked);
+                });
+                // Initial check in case the box is pre-checked (e.g., loading draft)
+                feeAmountInput.classList.toggle('hidden', !enableFeesCheckbox.checked);
+             }
+
+
         });
     </script>
 </body>

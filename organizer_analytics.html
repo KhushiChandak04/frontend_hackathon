@@ -3,47 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics</title>
+    <title>Analytics - M3 Style</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for dynamic graphs -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Base Font */
         body {
             font-family: 'Inter', sans-serif;
         }
 
-        /* Smooth hover transitions for cards */
-        .bg-white {
-            transition: all 0.3s ease-in-out;
+        /* M3 Light Theme Color Palette (Example Blue Primary) */
+        :root {
+            /* Using CSS variables for M3 colors */
+            --md-sys-color-primary: #0B57D0;           /* Main interactive elements */
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #D3E3FD; /* Less prominent interactive elements */
+            --md-sys-color-on-primary-container: #001B3E;
+            --md-sys-color-secondary: #565E71;         /* Accent elements (can vary) */
+            --md-sys-color-on-secondary: #FFFFFF;
+            --md-sys-color-secondary-container: #DAE2F9;
+            --md-sys-color-on-secondary-container: #131B2C;
+            --md-sys-color-tertiary: #725472;          /* Contrasting accent elements (can vary) */
+            --md-sys-color-on-tertiary: #FFFFFF;
+            --md-sys-color-tertiary-container: #FDD7FA;
+            --md-sys-color-on-tertiary-container: #2A122C;
+            --md-sys-color-error: #B3261E;             /* Error states */
+            --md-sys-color-on-error: #FFFFFF;
+            --md-sys-color-error-container: #F9DEDC;
+            --md-sys-color-on-error-container: #410E0B;
+            --md-sys-color-background: #FEFBFF;        /* Page background */
+            --md-sys-color-on-background: #1B1B1F;
+            --md-sys-color-surface: #FEFBFF;           /* Component backgrounds (Cards, Sidebar) */
+            --md-sys-color-on-surface: #1B1B1F;         /* Text on surfaces */
+            --md-sys-color-surface-variant: #E1E2EC;    /* Subtle component variations, progress tracks */
+            --md-sys-color-on-surface-variant: #44474F; /* Text on variant surfaces */
+            --md-sys-color-outline: #74777F;           /* Borders, dividers */
+            --md-sys-color-outline-variant: #C4C6CF;   /* Subtle borders, dividers */
+            --md-sys-color-shadow: #000000;
+            --md-sys-color-surface-container-low: #F8F2FA; /* Slightly emphasized surface (e.g., details bg) */
+            --md-sys-color-surface-container: #F3EDF7;    /* Hover states, etc. */
+
+            /* Define specific colors for charts based on the palette */
+            --chart-color-primary: var(--md-sys-color-primary);
+            --chart-color-secondary: var(--md-sys-color-secondary); /* Or use Tertiary if more contrast needed */
+            --chart-color-tertiary: var(--md-sys-color-tertiary);   /* Or use another distinct color */
+            --chart-color-primary-bg: rgba(11, 87, 208, 0.2); /* Primary with alpha */
+            /* Define RGB version for hover effect alpha */
+            --md-sys-color-primary-rgb: 11, 87, 208;
         }
 
-        .bg-white:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        /* Apply M3 Colors */
+        body {
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
         }
+
+        /* Sidebar Styling */
+        aside {
+            background-color: var(--md-sys-color-surface);
+            /* Keep existing shadow, M3 uses elevation more subtly */
+        }
+        .sidebar-header { /* Added class for clarity */
+            border-color: var(--md-sys-color-outline-variant);
+        }
+        .sidebar-title { /* Added class for clarity */
+            color: var(--md-sys-color-primary); /* Logo/Title */
+        }
+        .sidebar-subtitle { /* Added class for clarity */
+            color: var(--md-sys-color-on-surface-variant); /* Subtitle */
+        }
+        nav a {
+            color: var(--md-sys-color-on-surface); /* Default link text */
+            border-radius: 100px; /* M3 uses fully rounded pills for nav */
+            padding-left: 1rem; /* Tailwind px-4 */
+            padding-right: 1.5rem; /* M3 nav has more padding end */
+            transition: background-color 0.2s ease, color 0.2s ease; /* Smooth transitions */
+        }
+        nav a:hover {
+            background-color: var(--md-sys-color-surface-container); /* Subtle hover */
+            color: var(--md-sys-color-on-surface); /* Keep text color on hover */
+        }
+        nav a.active-link { /* Added class for active link */
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            font-weight: 600; /* semibold */
+        }
+         nav a.active-link:hover { /* Hover for active link */
+            background-color: var(--md-sys-color-primary-container); /* Keep active background */
+            color: var(--md-sys-color-on-primary-container); /* Keep active text color */
+        }
+        nav a.logout-link { /* Added class for logout */
+            color: var(--md-sys-color-error);
+        }
+        nav a.logout-link:hover {
+            background-color: var(--md-sys-color-error-container);
+            color: var(--md-sys-color-on-error-container);
+        }
+
+        /* Main Content Styling */
+        main h1 {
+            color: var(--md-sys-color-on-background);
+        }
+        main .subheading { /* Added class */
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        /* Card Styling */
+        .m3-card { /* Added class for cards */
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant); /* M3 outlined style is common */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02); /* M3 Elevation 1 approx */
+            transition: all 0.2s ease-in-out;
+            border-radius: 12px; /* Consistent M3 radius */
+            padding: 1.5rem; /* Standard padding (Tailwind p-6) */
+        }
+        .m3-card:hover {
+             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 2px 6px 2px rgba(0, 0, 0, 0.04), 0 4px 8px 3px rgba(0, 0, 0, 0.04); /* M3 Elevation 2 approx */
+             transform: none; /* Remove translate Y for M3 feel */
+        }
+        .m3-card h3.card-title-secondary { /* Added class */
+            color: var(--md-sys-color-on-surface-variant);
+            font-weight: 500; /* medium */
+            font-size: 0.875rem; /* Tailwind text-sm */
+            margin-bottom: 0.5rem; /* Spacing */
+        }
+        .m3-card p.card-metric { /* Added class */
+             color: var(--md-sys-color-on-surface);
+             font-weight: 700; /* bold */
+             font-size: 1.875rem; /* Tailwind text-3xl */
+             line-height: 2.25rem;
+        }
+        .m3-card p.card-description { /* Added class */
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.875rem; /* Tailwind text-sm */
+            margin-top: 0.5rem; /* Tailwind mt-2 */
+        }
+        .progress-track { /* Added class */
+            background-color: var(--md-sys-color-surface-variant);
+            height: 0.5rem; /* M3 progress indicators are often taller */
+            border-radius: 9999px; /* rounded-full */
+            overflow: hidden; /* Ensure fill stays within bounds */
+            margin-top: 1rem; /* Tailwind mt-4 */
+        }
+        .progress-fill { /* Common style for fills */
+             height: 100%;
+             border-radius: 9999px;
+        }
+        .progress-fill-primary { /* Added class */
+            background-color: var(--md-sys-color-primary);
+        }
+         .progress-fill-secondary { /* Added class - Using Tertiary for green-like color */
+            background-color: #34A853; /* Example Green for 'Active' */
+            /* Or use var(--md-sys-color-tertiary) if that fits your palette better */
+        }
+         .progress-fill-tertiary { /* Added class - Using Secondary for yellow/orange-like color */
+             background-color: #FBBC04; /* Example Yellow/Orange for 'Pending' */
+            /* Or use var(--md-sys-color-secondary) if that fits your palette better */
+        }
+
+        /* Chart Section Styling */
+        section h2 {
+            color: var(--md-sys-color-on-surface);
+            font-weight: 600; /* semibold */
+            font-size: 1.25rem; /* text-xl */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .chart-container h3 { /* Added class */
+            color: var(--md-sys-color-on-surface);
+            font-weight: 500; /* medium */
+            font-size: 1.125rem; /* text-lg */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+
+        /* Detailed Insights Section Styling */
+        .insight-list { /* Added class */
+             border-top: 1px solid var(--md-sys-color-outline-variant); /* Use border-top on list */
+        }
+         .insight-list li { /* Style individual list items */
+             padding-top: 1rem; /* py-4 */
+             padding-bottom: 1rem; /* py-4 */
+             border-bottom: 1px solid var(--md-sys-color-outline-variant); /* Divider */
+         }
+         .insight-list li:first-child {
+             border-top: none; /* Remove double border on first item */
+         }
+         .insight-list li:last-child {
+             border-bottom: none; /* Remove border on last item */
+         }
+
+        .insight-list li p.item-title { /* Added class */
+             color: var(--md-sys-color-on-surface);
+             font-weight: 500; /* medium */
+             font-size: 0.875rem; /* text-sm */
+        }
+         .insight-list li p.item-subtitle { /* Added class */
+             color: var(--md-sys-color-on-surface-variant);
+             font-size: 0.875rem; /* text-sm */
+             margin-top: 0.25rem; /* Small gap */
+         }
+        .view-details-btn {
+             color: var(--md-sys-color-primary); /* Use Primary for text buttons/links */
+             font-weight: 500; /* Medium weight for text buttons */
+             transition: background-color 0.2s ease;
+             padding: 4px 8px;
+             border-radius: 4px;
+             font-size: 0.875rem; /* text-sm */
+             background-color: transparent;
+             border: none;
+             cursor: pointer;
+             text-align: right;
+         }
+         .view-details-btn:hover {
+            background-color: rgba(var(--md-sys-color-primary-rgb), 0.08); /* Primary with low alpha for hover */
+         }
+         .details-popup { /* Added class */
+            background-color: var(--md-sys-color-surface-container-low);
+            color: var(--md-sys-color-on-surface-variant);
+            border: 1px solid var(--md-sys-color-outline-variant); /* Add subtle border */
+            padding: 1rem; /* p-4 */
+            border-radius: 8px; /* rounded */
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.4;
+         }
+         .details-popup p {
+            margin-bottom: 0.5rem;
+         }
+         .details-popup p:last-child {
+            margin-bottom: 0;
+         }
+         .details-popup strong {
+            color: var(--md-sys-color-on-surface); /* Slightly stronger text for labels */
+            font-weight: 500;
+         }
+         .details-popup a {
+            color: var(--md-sys-color-primary);
+            text-decoration: underline;
+         }
+         .details-popup a:hover {
+             text-decoration: none;
+         }
+
 
         /* Smooth collapsible section transitions */
-        .hidden {
-            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        .collapsible-content { /* Use a dedicated class for transition target */
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.3s ease-in-out, visibility 0.3s ease-in-out;
             max-height: 0;
             opacity: 0;
             overflow: hidden;
+            margin-top: 0 !important; /* Ensure no margin when hidden */
+            visibility: hidden;
         }
 
-        .hidden:not(.hidden) {
+        /* Style applied when not hidden */
+        .collapsible-content.show {
             max-height: 500px; /* Adjust based on content */
             opacity: 1;
+            margin-top: 1rem !important; /* Ensure margin when visible */
+            visibility: visible;
         }
+
 
         /* Smooth chart fade-in */
         canvas {
             animation: fadeIn 0.5s ease-in-out;
+            display: block; /* Ensure canvas behaves like a block element */
+            width: 100% !important; /* Ensure canvas takes full width of container */
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.95);
+                transform: scale(0.98);
             }
             to {
                 opacity: 1;
@@ -51,142 +285,182 @@
             }
         }
 
-        /* Button hover effects */
-        button:hover {
-            background-color: #2563eb; /* Tailwind's blue-600 */
-            color: #ffffff;
-        }
+        /* --- Selectively Keep Tailwind Utility Classes --- */
+        /* Keep layout (flex, grid), spacing (p-, m-, space-y-), sizing (w-, h-), typography (font-, text-), etc. */
+        /* The CSS overrides below are mostly to counteract Tailwind colors/backgrounds */
 
-        /* Sidebar link hover effects */
-        nav a:hover {
-            background-color: #e5e7eb; /* Tailwind's gray-200 */
-            color: #2563eb; /* Tailwind's blue-600 */
-        }
+        /* --- Remove Tailwind Color Classes where Overridden --- */
+        /* Note: Prefer replacing classes in HTML, but following the minimal diff request */
+        .bg-gray-100 { background-color: transparent !important; }
+        .bg-white { background-color: transparent !important; }
+        .text-gray-700, .text-gray-800, .text-gray-600, .text-gray-500 { color: inherit !important; }
+        .text-blue-600, .text-blue-700, .text-blue-500 { color: inherit !important; }
+        .bg-blue-100 { background-color: transparent !important; }
+        .text-red-600 { color: inherit !important; }
+        .hover\:bg-gray-100:hover { background-color: transparent !important; }
+        .hover\:text-blue-600:hover { color: inherit !important; }
+        .hover\:bg-red-50:hover { background-color: transparent !important; }
+        .border-b { border-bottom-color: transparent !important; }
+        .divide-y > :not([hidden]) ~ :not([hidden]) { border-top-color: transparent !important; border-bottom-color: transparent !important; }
+        .divide-gray-200 > :not([hidden]) ~ :not([hidden]) { border-top-color: transparent !important; border-bottom-color: transparent !important; }
+        .bg-gray-200 { background-color: transparent !important; }
+        .bg-blue-500 { background-color: transparent !important; }
+        .bg-green-500 { background-color: transparent !important; }
+        .bg-yellow-500 { background-color: transparent !important; }
+        .bg-gray-50 { background-color: transparent !important; }
+        .shadow-md, .shadow { box-shadow: none !important; } /* Let M3 card styles handle shadow */
+        .rounded-lg, .rounded { border-radius: 0 !important; } /* Let M3 card/button styles handle radius */
+        /* Keep rounded-full for progress bar */
+        .rounded-full {}
+
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="light bg-gray-100">
-    <div class="toggle-icon glow" id="themeToggle">
-        <!-- ...existing SVGs for moon and sun... -->
-    </div>
+<body class="light">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">
-            <div class="p-6 border-b">
-                <a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a>
-                <span class="block text-sm text-gray-500 mt-1">Organizer Panel</span>
+        <aside class="w-64 shadow-md flex-shrink-0"> <!-- Original shadow kept, M3 surface applied -->
+            <div class="p-6 border-b sidebar-header">
+                <a href="index.html" class="text-2xl font-bold sidebar-title">Hackverse</a>
+                <span class="block text-sm mt-1 sidebar-subtitle">Organizer Panel</span>
             </div>
             <nav class="p-4 space-y-2">
-                <a href="organizer_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-building w-6 mr-2"></i> Organization Profile</a>
-                <a href="organizer_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
-                <a href="organizer_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-list-alt w-6 mr-2"></i> My Opportunities</a>
-                <a href="organizer_create_opportunity.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-plus-circle w-6 mr-2"></i> Create New</a>
-                <a href="organizer_analytics.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-chart-bar w-6 mr-2"></i> Analytics</a>
-                <a href="organizer_settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
-                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+                <!-- Applied M3 nav link styles -->
+                <a href="organizer_profile.html" class="flex items-center py-2"><i class="fas fa-building w-6 mr-2"></i> Organization Profile</a>
+                <a href="organizer_dashboard.html" class="flex items-center py-2"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
+                <a href="organizer_opportunities.html" class="flex items-center py-2"><i class="fas fa-list-alt w-6 mr-2"></i> My Opportunities</a>
+                <a href="organizer_create_opportunity.html" class="flex items-center py-2"><i class="fas fa-plus-circle w-6 mr-2"></i> Create New</a>
+                <!-- Applied active-link class -->
+                <a href="organizer_analytics.html" class="flex items-center py-2 active-link"><i class="fas fa-chart-bar w-6 mr-2"></i> Analytics</a>
+                <a href="organizer_settings.html" class="flex items-center py-2"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
+                <!-- Applied logout-link class -->
+                <a href="index.html" class="flex items-center py-2 mt-6 logout-link"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
             </nav>
         </aside>
 
         <!-- Main Content Area -->
         <main class="flex-1 overflow-y-auto p-8">
-            <h1 class="text-3xl font-bold mb-6">Analytics</h1>
-            <p class="text-lg text-gray-600 mb-8">View detailed analytics and performance metrics for your opportunities.</p>
+            <h1 class="text-3xl font-bold mb-2">Analytics</h1> <!-- Reduced mb -->
+            <p class="text-lg mb-8 subheading">View detailed analytics and performance metrics.</p>
 
             <!-- Analytics Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-sm font-medium">Total Registrations</h3>
-                    <p class="text-3xl font-bold">1,284</p>
-                    <div class="mt-4 h-2 bg-gray-200 rounded-full">
-                        <div class="h-2 bg-blue-500 rounded-full" style="width: 75%;"></div>
+                <!-- Applied m3-card class, removed p-6, rounded-lg, shadow -->
+                <div class="m3-card">
+                    <h3 class="card-title-secondary">Total Registrations</h3>
+                    <p class="card-metric">1,284</p>
+                    <div class="progress-track">
+                        <div class="progress-fill progress-fill-primary" style="width: 75%;"></div>
                     </div>
-                    <p class="text-sm text-gray-500 mt-2">75% of target achieved</p>
+                    <p class="card-description">75% of target achieved</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-sm font-medium">Active Opportunities</h3>
-                    <p class="text-3xl font-bold">5</p>
-                    <div class="mt-4 h-2 bg-gray-200 rounded-full">
-                        <div class="h-2 bg-green-500 rounded-full" style="width: 50%;"></div>
+                <div class="m3-card">
+                    <h3 class="card-title-secondary">Active Opportunities</h3>
+                    <p class="card-metric">5</p>
+                    <div class="progress-track">
+                        <div class="progress-fill progress-fill-secondary" style="width: 50%;"></div>
                     </div>
-                    <p class="text-sm text-gray-500 mt-2">50% of target achieved</p>
+                    <p class="card-description">50% of target achieved</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-sm font-medium">Pending Evaluations</h3>
-                    <p class="text-3xl font-bold">45</p>
-                    <div class="mt-4 h-2 bg-gray-200 rounded-full">
-                        <div class="h-2 bg-yellow-500 rounded-full" style="width: 30%;"></div>
+                <div class="m3-card">
+                    <h3 class="card-title-secondary">Pending Evaluations</h3>
+                    <p class="card-metric">45</p>
+                    <div class="progress-track">
+                        <div class="progress-fill progress-fill-tertiary" style="width: 30%;"></div>
                     </div>
-                    <p class="text-sm text-gray-500 mt-2">30% completed</p>
+                    <p class="card-description">30% completed</p>
                 </div>
             </div>
 
             <!-- Charts Section -->
             <section>
-                <h2 class="text-xl font-semibold mb-4">Performance Charts</h2>
+                <h2 class="text-xl mb-4">Performance Charts</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Registration Trends Chart -->
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <h3 class="text-lg font-medium text-gray-700 mb-4">Registration Trends</h3>
-                        <canvas id="registrationTrendsChart" class="h-64"></canvas>
+                    <!-- Applied m3-card and chart-container classes -->
+                    <div class="m3-card chart-container">
+                        <h3 class="text-lg mb-4">Registration Trends</h3>
+                        <div class="relative h-64"> <!-- Added relative container for canvas responsiveness -->
+                            <canvas id="registrationTrendsChart"></canvas>
+                        </div>
                     </div>
-                    <!-- Opportunity Status Chart -->
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <h3 class="text-lg font-medium text-gray-700 mb-4">Opportunity Status</h3>
-                        <canvas id="opportunityStatusChart" class="h-64"></canvas>
+                    <div class="m3-card chart-container">
+                        <h3 class="text-lg mb-4">Opportunity Status</h3>
+                         <div class="relative h-64"> <!-- Added relative container for canvas responsiveness -->
+                            <canvas id="opportunityStatusChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Detailed Insights Section -->
             <section class="mt-8">
-                <h2 class="text-xl font-semibold mb-4">Detailed Insights</h2>
+                <h2 class="text-xl mb-4">Detailed Insights</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Top Performing Opportunities -->
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <h3 class="text-lg font-medium text-gray-700 mb-4">Top Performing Opportunities</h3>
-                        <ul class="divide-y divide-gray-200">
-                            <li class="py-4">
-                                <p class="text-sm font-medium text-gray-800">Innovate for Tomorrow</p>
-                                <p class="text-sm text-gray-500">Registrations: 350</p>
+                    <!-- Applied m3-card class -->
+                    <div class="m3-card">
+                        <h3 class="text-lg mb-4">Top Performing Opportunities</h3>
+                         <!-- Applied insight-list class, removed divide-y -->
+                        <ul class="insight-list">
+                            <li> <!-- Removed py-4 -->
+                                <p class="item-title">Innovate for Tomorrow</p>
+                                <p class="item-subtitle">Registrations: 350</p>
                             </li>
-                            <li class="py-4">
-                                <p class="text-sm font-medium text-gray-800">Data Science Challenge</p>
-                                <p class="text-sm text-gray-500">Registrations: 120</p>
+                            <li>
+                                <p class="item-title">Data Science Challenge</p>
+                                <p class="item-subtitle">Registrations: 120</p>
                             </li>
-                            <!-- Add more items as needed -->
+                             <li>
+                                <p class="item-title">Code Masters Cup</p>
+                                <p class="item-subtitle">Registrations: 95</p>
+                            </li>
                         </ul>
                     </div>
-                    <!-- Recent Activity -->
-                    <div class="bg-white rounded-lg shadow p-6">
-                        <h3 class="text-lg font-medium text-gray-700 mb-4">Recent Activity</h3>
-                        <ul class="divide-y divide-gray-200">
-                            <li class="py-4 flex justify-between items-center">
+                     <!-- Applied m3-card class -->
+                    <div class="m3-card">
+                        <h3 class="text-lg mb-4">Recent Activity</h3>
+                         <!-- Applied insight-list class, removed divide-y -->
+                        <ul class="insight-list">
+                            <li class="flex justify-between items-center"> <!-- Removed py-4 -->
                                 <div>
-                                    <p class="text-sm font-medium text-gray-800">New registration for "Innovate for Tomorrow"</p>
-                                    <p class="text-sm text-gray-500">John Doe registered on Oct 20, 2023</p>
+                                    <p class="item-title">New registration for "Innovate for Tomorrow"</p>
+                                    <p class="item-subtitle">John Doe registered on Oct 20, 2023</p>
                                 </div>
-                                <button class="text-sm text-blue-500 view-details-btn" data-id="1">View Details</button>
+                                <!-- Applied view-details-btn class -->
+                                <button class="view-details-btn" data-target="details-1">View Details</button>
                             </li>
-                            <div id="details-1" class="hidden mt-4 text-sm text-gray-600 bg-gray-50 p-4 rounded">
+                             <!-- Added collapsible-content class, removed hidden, mt-4, p-4, rounded etc. -->
+                            <div id="details-1" class="collapsible-content details-popup">
                                 <p><strong>Participant Name:</strong> John Doe</p>
                                 <p><strong>Email:</strong> john.doe@example.com</p>
                                 <p><strong>Registration Date:</strong> Oct 20, 2023</p>
                                 <p><strong>Opportunity:</strong> Innovate for Tomorrow</p>
                             </div>
-                            <li class="py-4 flex justify-between items-center">
+                            <li class="flex justify-between items-center">
                                 <div>
-                                    <p class="text-sm font-medium text-gray-800">Submission received for "Data Science Challenge"</p>
-                                    <p class="text-sm text-gray-500">Team Alpha submitted their project</p>
+                                    <p class="item-title">Submission received for "Data Science Challenge"</p>
+                                    <p class="item-subtitle">Team Alpha submitted their project</p>
                                 </div>
-                                <button class="text-sm text-blue-500 view-details-btn" data-id="2">View Details</button>
+                                <button class="view-details-btn" data-target="details-2">View Details</button>
                             </li>
-                            <div id="details-2" class="hidden mt-4 text-sm text-gray-600 bg-gray-50 p-4 rounded">
+                             <!-- Added collapsible-content class -->
+                            <div id="details-2" class="collapsible-content details-popup">
                                 <p><strong>Team Name:</strong> Team Alpha</p>
                                 <p><strong>Submission Date:</strong> Oct 19, 2023</p>
                                 <p><strong>Opportunity:</strong> Data Science Challenge</p>
-                                <p><strong>Submission Link:</strong> <a href="#" class="text-blue-500 underline">View Submission</a></p>
+                                <p><strong>Submission Link:</strong> <a href="#">View Submission</a></p>
+                            </div>
+                             <li class="flex justify-between items-center">
+                                <div>
+                                    <p class="item-title">Opportunity "Innovate for Tomorrow" went live</p>
+                                    <p class="item-subtitle">Status changed on Oct 15, 2023</p>
+                                </div>
+                                <button class="view-details-btn" data-target="details-3">View Details</button>
+                            </li>
+                             <!-- Added collapsible-content class -->
+                            <div id="details-3" class="collapsible-content details-popup">
+                                <p><strong>Opportunity:</strong> Innovate for Tomorrow</p>
+                                <p><strong>Action:</strong> Status changed to Live</p>
+                                <p><strong>Date:</strong> Oct 15, 2023</p>
+                                <p><strong>Details:</strong> Opportunity is now accepting registrations.</p>
                             </div>
                         </ul>
                     </div>
@@ -196,77 +470,186 @@
     </div>
 
     <script>
+        // Function to get CSS variable value
+        function getCssVariable(variableName) {
+            // Ensure the function returns the value, trimming whitespace
+            return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Get M3 Colors for Charts ---
+            // Ensure variables are fetched correctly *after* DOM is ready and CSS is applied
+            const chartPrimaryColor = getCssVariable('--chart-color-primary');
+            const chartSecondaryColor = getCssVariable('--chart-color-secondary');
+            // Using specific hex colors for better visual distinction in demo status chart
+            const chartStatusLiveColor = '#34A853'; // Green
+            const chartStatusUpcomingColor = '#FBBC04'; // Yellow/Orange
+            const chartStatusCompletedColor = getCssVariable('--chart-color-primary'); // Blue (Primary)
+            // const chartTertiaryColor = getCssVariable('--chart-color-tertiary'); // Kept if needed elsewhere
+            const chartPrimaryBgColor = getCssVariable('--chart-color-primary-bg');
+            const chartGridColor = getCssVariable('--md-sys-color-outline-variant');
+            const chartTickColor = getCssVariable('--md-sys-color-on-surface-variant');
+            const chartLegendColor = getCssVariable('--md-sys-color-on-surface-variant');
+
             // Registration Trends Chart
-            const registrationTrendsCtx = document.getElementById('registrationTrendsChart').getContext('2d');
-            new Chart(registrationTrendsCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-                    datasets: [{
-                        label: 'Registrations',
-                        data: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                        fill: true,
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: true },
+            const registrationTrendsCtx = document.getElementById('registrationTrendsChart');
+            if (registrationTrendsCtx) {
+                new Chart(registrationTrendsCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                        datasets: [{
+                            label: 'Registrations',
+                            data: [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+                            borderColor: chartPrimaryColor,
+                            backgroundColor: chartPrimaryBgColor,
+                            fill: true,
+                            tension: 0.4, // Smoother M3 line style
+                            pointBackgroundColor: chartPrimaryColor, // M3 point style
+                            pointBorderColor: chartPrimaryColor,
+                            pointHoverBackgroundColor: chartPrimaryColor,
+                            pointHoverBorderColor: chartPrimaryColor
+                        }]
                     },
-                }
-            });
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, // IMPORTANT: Allows canvas to respect container height via CSS
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    color: chartLegendColor,
+                                    usePointStyle: true, // Use point style in legend
+                                    boxWidth: 8 // Smaller box width
+                                }
+                             },
+                            tooltip: {
+                                backgroundColor: getCssVariable('--md-sys-color-surface-container'), // M3 tooltip background
+                                titleColor: getCssVariable('--md-sys-color-on-surface-variant'),
+                                bodyColor: getCssVariable('--md-sys-color-on-surface-variant'),
+                                borderColor: getCssVariable('--md-sys-color-outline-variant'),
+                                borderWidth: 1
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true, // Start axis at 0
+                                grid: {
+                                    color: chartGridColor, // M3 grid line color
+                                    drawBorder: false // Hide axis border line
+                                },
+                                ticks: {
+                                    color: chartTickColor, // M3 tick label color
+                                    padding: 10 // Add padding
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false // Cleaner look without vertical grid lines
+                                },
+                                ticks: {
+                                    color: chartTickColor,
+                                    padding: 10
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                console.error("Canvas element with ID 'registrationTrendsChart' not found.");
+            }
 
             // Opportunity Status Chart
-            const opportunityStatusCtx = document.getElementById('opportunityStatusChart').getContext('2d');
-            new Chart(opportunityStatusCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Live', 'Upcoming', 'Completed'],
-                    datasets: [{
-                        data: [5, 3, 2],
-                        backgroundColor: ['#10b981', '#fbbf24', '#3b82f6'],
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: true },
+            const opportunityStatusCtx = document.getElementById('opportunityStatusChart');
+             if (opportunityStatusCtx) {
+                new Chart(opportunityStatusCtx.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Live', 'Upcoming', 'Completed'],
+                        datasets: [{
+                            data: [5, 3, 2],
+                            backgroundColor: [
+                                chartStatusLiveColor,
+                                chartStatusUpcomingColor,
+                                chartStatusCompletedColor
+                            ],
+                            borderWidth: 0, // M3 Doughnuts often have no border
+                            hoverOffset: 8 // Slightly larger offset on hover
+                        }]
                     },
-                }
-            });
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false, // IMPORTANT: Allows canvas to respect container height via CSS
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'bottom', // M3 common practice
+                                labels: {
+                                     color: chartLegendColor,
+                                     usePointStyle: true,
+                                     boxWidth: 8,
+                                     padding: 20 // More padding for bottom legend
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: getCssVariable('--md-sys-color-surface-container'),
+                                titleColor: getCssVariable('--md-sys-color-on-surface-variant'),
+                                bodyColor: getCssVariable('--md-sys-color-on-surface-variant'),
+                                borderColor: getCssVariable('--md-sys-color-outline-variant'),
+                                borderWidth: 1,
+                                callbacks: { // Add percentage to tooltip
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed !== null) {
+                                            const total = context.dataset.data.reduce((acc, value) => acc + value, 0);
+                                            const percentage = ((context.parsed / total) * 100).toFixed(1) + '%';
+                                            label += context.formattedValue + ' (' + percentage + ')';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '70%' // More pronounced doughnut hole typical in M3
+                    }
+                });
+            } else {
+                console.error("Canvas element with ID 'opportunityStatusChart' not found.");
+            }
+
 
             // Handle View Details button clicks
             document.querySelectorAll('.view-details-btn').forEach(button => {
                 button.addEventListener('click', (event) => {
                     event.preventDefault();
-                    const id = button.getAttribute('data-id');
-                    const detailsDiv = document.getElementById(`details-${id}`);
-                    if (detailsDiv.classList.contains('hidden')) {
-                        detailsDiv.classList.remove('hidden');
-                        button.textContent = 'Hide Details';
+                    const targetId = button.getAttribute('data-target');
+                    const detailsDiv = document.getElementById(targetId);
+
+                    if (detailsDiv) {
+                        // Use the dedicated classes for state management
+                        if (detailsDiv.classList.contains('show')) {
+                            detailsDiv.classList.remove('show');
+                            button.textContent = 'View Details';
+                        } else {
+                            // Optional: Hide other open details sections first
+                            // document.querySelectorAll('.collapsible-content.show').forEach(openDiv => {
+                            //     openDiv.classList.remove('show');
+                            //     // Find corresponding button and reset text if needed
+                            //     const openButton = document.querySelector(`.view-details-btn[data-target="${openDiv.id}"]`);
+                            //     if(openButton) openButton.textContent = 'View Details';
+                            // });
+                            detailsDiv.classList.add('show');
+                            button.textContent = 'Hide Details';
+                        }
                     } else {
-                        detailsDiv.classList.add('hidden');
-                        button.textContent = 'View Details';
+                        console.error(`Details element with ID '${targetId}' not found.`);
                     }
                 });
             });
 
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
-
-            // Toggle between light and dark mode
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('light')) {
-                    body.classList.remove('light');
-                    body.classList.add('dark');
-                } else {
-                    body.classList.remove('dark');
-                    body.classList.add('light');
-                }
-            });
         });
     </script>
 </body>
