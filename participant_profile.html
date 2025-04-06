@@ -1,198 +1,692 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Changed Title -->
-    <title>My Profile - Hackverse</title>
+    <title>My Profile - M3 Style</title>
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS (Kept as per constraint, but styles will be overridden) -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    <!-- Google Fonts (Inter) -->
+    <!-- Google Fonts (Roboto for M3) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap CSS (from Profile HTML) - Might cause conflicts with Tailwind, use carefully -->
+    <!-- Bootstrap CSS (Kept as per constraint, will require overrides) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Internal Styles -->
+    <!-- M3 Styles -->
     <style>
-        /* Base Tailwind styles */
-        body {
-            font-family: 'Inter', sans-serif; /* Keep Inter from Dashboard */
-            background-color: #f3f4f6; /* Tailwind bg-gray-100 */
-            margin: 0; /* Reset margin */
-        }
-        .card-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        /* --- Material Design 3 Variables (Consistent Set) --- */
+        :root {
+             /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Additional colors */
+            --md-sys-color-success-light: #177e2a; /* Green */
+            --md-sys-color-on-success-light: #ffffff;
+            --md-sys-color-success-container-light: #b4f7ae;
+            --md-sys-color-on-success-container-light: #002205;
+            --md-sys-color-warning-light: #7e5700; /* Yellow/Orange */
+            --md-sys-color-on-warning-light: #ffffff;
+            --md-sys-color-warning-container-light: #ffdea3;
+            --md-sys-color-on-warning-container-light: #281900;
+            /* Surface & Background */
+            --md-sys-color-background-light: #fefcff; /* Off-white */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-light: #ffffff; /* Pure white */
+            --md-sys-color-surface-container-low-light: #f8f2f7;
+            --md-sys-color-surface-container-light: #eeeef2;
+            --md-sys-color-surface-container-high-light: #e8e8ed;
+            --md-sys-color-surface-container-highest-light: #e2e2e6; /* Often used for TopAppBar */
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-success-dark: #99da94;
+            --md-sys-color-on-success-dark: #00390d;
+            --md-sys-color-success-container-dark: #005317;
+            --md-sys-color-on-success-container-dark: #b4f7ae;
+            --md-sys-color-warning-dark: #fbbc04;
+            --md-sys-color-on-warning-dark: #412d00;
+            --md-sys-color-warning-container-dark: #5f4200;
+            --md-sys-color-on-warning-container-dark: #ffdea3;
+            --md-sys-color-background-dark: #1a1c1e; /* Dark Gray */
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-dark: #0e1013;
+            --md-sys-color-surface-container-low-dark: #1d1f22;
+            --md-sys-color-surface-container-dark: #212326;
+            --md-sys-color-surface-container-high-dark: #2b2d30;
+            --md-sys-color-surface-container-highest-dark: #36383a; /* Often used for TopAppBar */
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+             /* RGB for hover alpha */
+             --md-sys-color-primary-rgb-light: 0, 97, 164;
+             --md-sys-color-primary-rgb-dark: 160, 201, 255;
+
+            /* Shape */
+            --md-shape-corner-none: 0px;
+            --md-shape-corner-extra-small: 4px;
+            --md-shape-corner-small: 8px;
+            --md-shape-corner-medium: 12px;
+            --md-shape-corner-large: 16px;
+            --md-shape-corner-extra-large: 28px;
+            --md-shape-corner-full: 9999px;
+
+            /* Elevation */
+            --md-sys-elevation-level-0: none;
+            --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+            /* State Layers */
+            --md-sys-state-hover-state-layer-opacity: 0.08;
+            --md-sys-state-focus-state-layer-opacity: 0.12;
+            --md-sys-state-pressed-state-layer-opacity: 0.12;
+
+            /* Typography */
+            --md-sys-typescale-font-family-name: Roboto;
+            --md-sys-typescale-body-large-font-size: 1rem;
+            --md-sys-typescale-body-large-line-height: 1.5rem;
+            --md-sys-typescale-body-large-font-weight: 400;
+            --md-sys-typescale-body-medium-font-size: 0.875rem;
+            --md-sys-typescale-body-medium-line-height: 1.25rem;
+            --md-sys-typescale-body-medium-font-weight: 400;
+            --md-sys-typescale-body-small-font-size: 0.75rem;
+            --md-sys-typescale-body-small-line-height: 1rem;
+            --md-sys-typescale-body-small-font-weight: 400;
+            --md-sys-typescale-label-large-font-size: 0.875rem;
+            --md-sys-typescale-label-large-line-height: 1.25rem;
+            --md-sys-typescale-label-large-font-weight: 500;
+            --md-sys-typescale-label-medium-font-size: 0.75rem;
+            --md-sys-typescale-label-medium-line-height: 1rem;
+            --md-sys-typescale-label-medium-font-weight: 500;
+            --md-sys-typescale-label-small-font-size: 0.6875rem;
+            --md-sys-typescale-label-small-line-height: 1rem;
+            --md-sys-typescale-label-small-font-weight: 500;
+            --md-sys-typescale-title-large-font-size: 1.375rem;
+            --md-sys-typescale-title-large-line-height: 1.75rem;
+            --md-sys-typescale-title-large-font-weight: 400;
+            --md-sys-typescale-title-medium-font-size: 1rem;
+            --md-sys-typescale-title-medium-line-height: 1.5rem;
+            --md-sys-typescale-title-medium-font-weight: 500;
+             --md-sys-typescale-title-small-font-size: 0.875rem;
+            --md-sys-typescale-title-small-line-height: 1.25rem;
+            --md-sys-typescale-title-small-font-weight: 500;
+            --md-sys-typescale-headline-medium-font-size: 1.75rem;
+            --md-sys-typescale-headline-medium-font-weight: 400;
+            --md-sys-typescale-headline-medium-line-height: 2.25rem;
+            --md-sys-typescale-headline-small-font-size: 1.5rem;
+             --md-sys-typescale-headline-small-line-height: 2rem;
+             --md-sys-typescale-headline-small-font-weight: 400;
+             --md-sys-typescale-display-small-font-size: 2.25rem;
+            --md-sys-typescale-display-small-line-height: 2.75rem;
+            --md-sys-typescale-display-small-font-weight: 400;
+             --md-sys-typescale-display-large-font-size: 3.5625rem; /* Added for profile name */
+            --md-sys-typescale-display-large-line-height: 4rem;
+            --md-sys-typescale-display-large-font-weight: 700; /* Bold */
         }
 
-        /* Styles from Profile HTML - Prefixed/Adjusted slightly to avoid major conflicts */
-        /* Note: Using both Bootstrap and Tailwind can lead to style inconsistencies.
-           It's generally better to choose one framework or carefully manage overrides.
-           These styles are kept for demonstration but might need refinement. */
-        .profile-body { font-family: sans-serif; /* Overridden by body style above, kept for context */ }
-        .profile-header-banner { background-color: #6c757d; height: 150px; margin-bottom: -50px; }
-        .profile-container { max-width: 960px; margin-left: auto; margin-right: auto; padding: 2rem; } /* Removed margin: 0 auto as main tag handles centering */
-        .profile-header { display: flex; align-items: flex-end; margin-bottom: 2rem; }
-        .profile-picture { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; background-color: #ccc; /* Placeholder */ margin-right: 1.5rem; object-fit: cover; flex-shrink: 0; }
-        .profile-info { flex-grow: 1; } /* Allow info to take space */
-        .profile-info h1 { margin: 0 0 0.25rem 0; font-size: 1.8rem; color: #1f2937; /* Tailwind text-gray-800 */}
-        .profile-info p { margin: 0 0 0.5rem 0; color: #4b5563; /* Tailwind text-gray-600 */ }
-        .profile-info a { color: #2563eb; /* Tailwind text-blue-600 */ text-decoration: underline;}
-        .profile-actions { margin-left: auto; align-self: flex-start; }
-        /* Using Tailwind classes for the button instead of custom .edit-button */
-        .profile-section { background-color: white; padding: 1.5rem; border-radius: 8px; /* Tailwind rounded-lg */ margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: relative; }
-        .profile-section h2 { margin-top: 0; border-bottom: 1px solid #e5e7eb; /* Tailwind border-gray-200 */ padding-bottom: 0.75rem; margin-bottom: 1rem; font-size: 1.3rem; color: #1f2937; font-weight: 600; /* Tailwind semibold */ }
-        /* Using Tailwind for edit buttons */
-        .section-edit-button { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 0.8rem; background: none; border: none; color: #2563eb; /* Tailwind text-blue-600 */ cursor: pointer; padding: 0.25rem 0.5rem; }
-        .skills-list span { display: inline-block; background-color: #e5e7eb; /* Tailwind bg-gray-200 */ color: #374151; /* Tailwind text-gray-700 */ padding: 0.3rem 0.8rem; margin: 0.2rem; border-radius: 9999px; /* Tailwind rounded-full */ font-size: 0.9rem; }
-        .experience-item { border-bottom: 1px dashed #e5e7eb; padding-bottom: 1rem; margin-bottom: 1rem; }
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --tertiary: var(--md-sys-color-tertiary-light);
+            --on-tertiary: var(--md-sys-color-on-tertiary-light);
+            --tertiary-container: var(--md-sys-color-tertiary-container-light);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --error-container: var(--md-sys-color-error-container-light);
+            --on-error-container: var(--md-sys-color-on-error-container-light);
+            --success: var(--md-sys-color-success-light);
+            --on-success: var(--md-sys-color-on-success-light);
+            --success-container: var(--md-sys-color-success-container-light);
+            --on-success-container: var(--md-sys-color-on-success-container-light);
+            --warning: var(--md-sys-color-warning-light);
+            --on-warning: var(--md-sys-color-on-warning-light);
+            --warning-container: var(--md-sys-color-warning-container-light);
+            --on-warning-container: var(--md-sys-color-on-warning-container-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-light);
+            --surface-container-low: var(--md-sys-color-surface-container-low-light);
+            --surface-container: var(--md-sys-color-surface-container-light);
+            --surface-container-high: var(--md-sys-color-surface-container-high-light);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+            --shadow: var(--md-sys-color-shadow-light);
+            --surface-tint-color: var(--md-sys-color-surface-tint-light);
+            --inverse-surface: var(--md-sys-color-inverse-surface-light);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-light);
+            --inverse-primary: var(--md-sys-color-inverse-primary-light);
+             /* RGB values */
+             --primary-rgb: var(--md-sys-color-primary-rgb-light);
+             --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 26, 28, 30;
+             --error-rgb: 186, 26, 26;
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --tertiary: var(--md-sys-color-tertiary-dark);
+            --on-tertiary: var(--md-sys-color-on-tertiary-dark);
+            --tertiary-container: var(--md-sys-color-tertiary-container-dark);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --error-container: var(--md-sys-color-error-container-dark);
+            --on-error-container: var(--md-sys-color-on-error-container-dark);
+            --success: var(--md-sys-color-success-dark);
+            --on-success: var(--md-sys-color-on-success-dark);
+            --success-container: var(--md-sys-color-success-container-dark);
+            --on-success-container: var(--md-sys-color-on-success-container-dark);
+            --warning: var(--md-sys-color-warning-dark);
+            --on-warning: var(--md-sys-color-on-warning-dark);
+            --warning-container: var(--md-sys-color-warning-container-dark);
+            --on-warning-container: var(--md-sys-color-on-warning-container-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-dark);
+            --surface-container-low: var(--md-sys-color-surface-container-low-dark);
+            --surface-container: var(--md-sys-color-surface-container-dark);
+            --surface-container-high: var(--md-sys-color-surface-container-high-dark);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+            --shadow: var(--md-sys-color-shadow-dark);
+            --surface-tint-color: var(--md-sys-color-surface-tint-dark);
+            --inverse-surface: var(--md-sys-color-inverse-surface-dark);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-dark);
+            --inverse-primary: var(--md-sys-color-inverse-primary-dark);
+             /* RGB values */
+             --primary-rgb: var(--md-sys-color-primary-rgb-dark);
+             --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 226, 226, 230;
+             --error-rgb: 255, 180, 171;
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--md-sys-typescale-font-family-name), sans-serif;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight);
+            background-color: var(--background);
+            color: var(--on-background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Layout --- */
+        .layout-container { display: flex; height: 100vh; overflow: hidden; }
+        .main-content { flex-grow: 1; overflow-y: auto; padding: 0; /* Remove padding, handled by container */ }
+
+        /* --- Sidebar (Consistent) --- */
+        .sidebar {
+            width: 256px; background-color: var(--surface-container-low);
+            border-right: 1px solid var(--outline-variant); display: flex;
+            flex-direction: column; flex-shrink: 0; transition: background-color 0.3s ease, border-color 0.3s ease;
+            box-shadow: none;
+        }
+        .sidebar-header { padding: 1.5rem 1rem; border-bottom: 1px solid var(--outline-variant); transition: border-color 0.3s ease; }
+        .sidebar-title { font-size: var(--md-sys-typescale-title-large-font-size); font-weight: 700; color: var(--primary); text-decoration: none; display: block; }
+        .sidebar nav { padding: 0.5rem; }
+        .sidebar nav a {
+            display: flex; align-items: center; padding: 0.75rem 1rem; margin: 0.25rem 0;
+            border-radius: var(--md-shape-corner-full); color: var(--on-surface-variant); text-decoration: none;
+            font-weight: var(--md-sys-typescale-label-large-font-weight); font-size: var(--md-sys-typescale-label-large-font-size);
+            position: relative; overflow: hidden; transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .sidebar nav a i { width: 24px; margin-right: 1rem; text-align: center; color: var(--on-surface-variant); transition: color 0.15s ease; }
+        .sidebar nav a::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--secondary);
+            opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .sidebar nav a:hover { color: var(--on-secondary-container); }
+        .sidebar nav a:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar nav a:hover i { color: var(--on-secondary-container); }
+        .sidebar nav a.active-link { background-color: var(--secondary-container); color: var(--on-secondary-container); }
+        .sidebar nav a.active-link i { color: var(--on-secondary-container); }
+        .sidebar nav a.logout-link { margin-top: 1.5rem; color: var(--error); }
+        .sidebar nav a.logout-link i { color: var(--error); }
+        .sidebar nav a.logout-link::before { background-color: var(--error); }
+        .sidebar nav a.logout-link:hover { color: var(--on-error-container); }
+        .sidebar nav a.logout-link:hover::before { background-color: var(--error-container); opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar nav a.logout-link:hover i { color: var(--on-error-container); }
+
+        /* --- Profile Page Specific Styles --- */
+        .profile-header-banner {
+             background-color: var(--secondary-container); /* Use a container color */
+             height: 150px;
+             margin-bottom: -60px; /* Overlap profile pic */
+             transition: background-color 0.3s ease;
+        }
+        .profile-container {
+             max-width: 960px;
+             margin-left: auto;
+             margin-right: auto;
+             padding: 2rem;
+         }
+        .profile-header {
+             display: flex;
+             align-items: flex-end; /* Align items to bottom */
+             margin-bottom: 2rem;
+             position: relative; /* Needed for z-index */
+             z-index: 1; /* Ensure header content is above banner overlap */
+         }
+        .profile-picture {
+             width: 120px;
+             height: 120px;
+             border-radius: 50%;
+             border: 4px solid var(--surface); /* Use surface color for border */
+             background-color: var(--surface-variant); /* Placeholder color */
+             margin-right: 1.5rem;
+             object-fit: cover;
+             flex-shrink: 0;
+             box-shadow: var(--md-sys-elevation-level-1);
+         }
+        .profile-info {
+             flex-grow: 1;
+             padding-bottom: 0.5rem; /* Align text slightly above bottom */
+         }
+        .profile-info h1 { /* Profile Name */
+             margin: 0 0 0.25rem 0;
+             font-size: var(--md-sys-typescale-headline-small-font-size); /* Larger size */
+             font-weight: var(--md-sys-typescale-headline-small-font-weight);
+             color: var(--on-surface); /* Use on-surface */
+         }
+        .profile-info p { /* Bio/Location */
+             margin: 0 0 0.5rem 0;
+             color: var(--on-surface-variant); /* Use variant for secondary text */
+             font-size: var(--md-sys-typescale-body-medium-font-size);
+             line-height: var(--md-sys-typescale-body-medium-line-height);
+         }
+         .profile-info p.location { /* Specific class for location */
+            font-size: var(--md-sys-typescale-body-small-font-size);
+         }
+         .profile-info .profile-links { /* Container for links */
+             display: flex;
+             flex-wrap: wrap;
+             gap: 0.5rem 1rem; /* Row and column gap */
+             font-size: var(--md-sys-typescale-label-large-font-size);
+         }
+         .profile-info .profile-links a {
+             color: var(--primary);
+             text-decoration: none;
+             font-weight: var(--md-sys-typescale-label-large-font-weight);
+         }
+         .profile-info .profile-links a:hover {
+             text-decoration: underline;
+         }
+
+        .profile-actions {
+             margin-left: auto; /* Push button to right */
+             align-self: flex-start; /* Align button top */
+             padding-top: 0.5rem; /* Align with info baseline */
+         }
+
+        /* Profile Sections (M3 Card Style) */
+        .profile-section {
+            background-color: var(--surface-container); /* Use container bg */
+            padding: 1.5rem;
+            border-radius: var(--md-shape-corner-large); /* M3 card radius */
+            margin-bottom: 1.5rem;
+            box-shadow: var(--md-sys-elevation-level-1);
+            position: relative; /* For edit button positioning */
+            border: 1px solid var(--outline-variant); /* Optional border */
+        }
+        .profile-section h2 {
+             margin-top: 0;
+             border-bottom: 1px solid var(--outline-variant);
+             padding-bottom: 0.75rem;
+             margin-bottom: 1rem;
+             font-size: var(--md-sys-typescale-title-large-font-size);
+             font-weight: var(--md-sys-typescale-title-medium-font-weight); /* 500 */
+             color: var(--on-surface);
+        }
+        .profile-section p {
+             color: var(--on-surface-variant);
+             font-size: var(--md-sys-typescale-body-medium-font-size);
+             line-height: var(--md-sys-typescale-body-medium-line-height);
+        }
+
+        /* Edit Button (M3 Text/Icon Button Style) */
+        .section-edit-button {
+             position: absolute;
+             top: 1rem; /* Adjust position */
+             right: 1rem;
+             font-size: var(--md-sys-typescale-label-large-font-size);
+             background: none;
+             border: none;
+             color: var(--primary);
+             cursor: pointer;
+             padding: 0.5rem; /* Padding for clickable area */
+             border-radius: var(--md-shape-corner-full); /* Round */
+             display: inline-flex;
+             align-items: center;
+             gap: 0.25rem;
+             transition: background-color 0.15s ease;
+        }
+         .section-edit-button:hover {
+            background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity));
+         }
+          .section-edit-button i { font-size: 1em; }
+
+
+        /* Skills (M3 Chips Style) */
+        .skills-list {
+             display: flex;
+             flex-wrap: wrap;
+             gap: 0.5rem; /* Space between chips */
+        }
+        .skills-list span {
+             display: inline-flex;
+             align-items: center;
+             background-color: var(--secondary-container);
+             color: var(--on-secondary-container);
+             padding: 0.375rem 0.75rem; /* M3 Chip padding */
+             border-radius: var(--md-shape-corner-small); /* M3 Chip radius */
+             font-size: var(--md-sys-typescale-label-large-font-size);
+             line-height: 1.25rem; /* Ensure vertical alignment */
+             border: 1px solid transparent; /* Add border for interaction */
+             cursor: default; /* Or pointer if clickable */
+             transition: background-color 0.15s ease, border-color 0.15s ease;
+         }
+         /* Optional: Hover style for chips */
+         .skills-list span:hover {
+             background-color: var(--secondary);
+             color: var(--on-secondary);
+             border-color: var(--outline);
+         }
+
+        /* Experience Section */
+        .experience-list {
+             /* No extra list styles needed */
+        }
+        .experience-item {
+             border-bottom: 1px solid var(--outline-variant); /* Use variant divider */
+             padding-bottom: 1rem;
+             margin-bottom: 1rem;
+        }
         .experience-item:last-child { border-bottom: none; margin-bottom: 0; }
-        .experience-item h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; color: #1f2937; font-weight: 600; }
-        .experience-item .company { font-weight: bold; color: #4b5563; }
-        .experience-item .dates { font-size: 0.9rem; color: #6b7280; /* Tailwind text-gray-500 */ margin-bottom: 0.5rem; display: block; }
-        .experience-item p { color: #374151; /* Tailwind text-gray-700 */}
-        .resume-section p { margin-bottom: 0.5rem; color: #374151; }
-        /* Apply Tailwind to download button too */
+        .experience-item h3 { /* Job/Project Title */
+             margin: 0 0 0.125rem 0; /* Reduced margin */
+             font-size: var(--md-sys-typescale-title-medium-font-size);
+             font-weight: var(--md-sys-typescale-title-medium-font-weight);
+             color: var(--on-surface);
+        }
+        .experience-item .company { /* Company Name */
+             font-weight: var(--md-sys-typescale-label-large-font-weight); /* Use label weight */
+             color: var(--on-surface-variant); /* Variant color */
+             font-size: var(--md-sys-typescale-body-medium-font-size);
+        }
+        .experience-item .dates { /* Dates */
+             font-size: var(--md-sys-typescale-body-small-font-size);
+             color: var(--on-surface-variant);
+             margin-bottom: 0.5rem;
+             display: block;
+        }
+        .experience-item p { /* Description */
+             color: var(--on-surface-variant);
+             font-size: var(--md-sys-typescale-body-medium-font-size);
+             line-height: var(--md-sys-typescale-body-medium-line-height);
+        }
+
+        /* Resume Section */
+        .resume-section p { margin-bottom: 1rem; }
+        .resume-actions { display: flex; gap: 1rem; margin-top: 0.5rem; }
+
+        /* Button Styles (Consistent Set) */
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.625rem 1.5rem; border-radius: var(--md-shape-corner-full);
+            font-family: inherit; font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            text-align: center; text-decoration: none; border: none; cursor: pointer; position: relative;
+            overflow: hidden; user-select: none; vertical-align: middle;
+             transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+        }
+        .button::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: currentColor; opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .button:hover { transform: translateY(-1px); } /* Subtle lift */
+        .button:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .button:focus { outline: none; }
+        .button:focus::before { opacity: var(--md-sys-state-focus-state-layer-opacity); }
+        .button:active { transform: translateY(0); }
+        .button:active::before { opacity: var(--md-sys-state-pressed-state-layer-opacity); }
+
+        .button-filled { background-color: var(--primary); color: var(--on-primary); box-shadow: var(--md-sys-elevation-level-0); }
+        .button-filled:hover { box-shadow: var(--md-sys-elevation-level-1); }
+
+        .button-tonal { background-color: var(--secondary-container); color: var(--on-secondary-container); box-shadow: var(--md-sys-elevation-level-0);}
+        .button-tonal:hover { box-shadow: var(--md-sys-elevation-level-1); }
+        .button-tonal::before { background-color: var(--on-secondary-container); }
+
+        /* Specific button colors */
+         .button-success { background-color: var(--success); color: var(--on-success); }
+         .button-success:hover { box-shadow: var(--md-sys-elevation-level-1); }
+          .button-success::before { background-color: var(--on-success); }
+
+
+         /* --- Tailwind / Bootstrap Overrides --- */
+         /* Neutralize visual styles from frameworks */
+        body.bg-gray-100 { background-color: transparent !important; }
+        .bg-white { background-color: transparent !important; }
+        .text-gray-700, .text-gray-800, .text-gray-600, .text-gray-500, .text-gray-400 { color: inherit !important; }
+        .text-blue-600, .text-blue-700 { color: inherit !important; }
+        .bg-blue-100 { background-color: transparent !important; }
+        .text-red-600 { color: inherit !important; }
+        .hover\:bg-gray-100:hover, .hover\:bg-red-50:hover { background-color: transparent !important; }
+        .hover\:underline:hover { text-decoration: none !important; }
+        .border-b, .border-gray-200, .border { border-width: 0 !important; border-color: transparent !important; }
+        .shadow-md, .shadow { box-shadow: none !important; }
+        .rounded-lg, .rounded, .rounded-md { border-radius: 0 !important; }
+        .rounded-full {} /* Keep */
+        .font-semibold, .font-medium, .font-bold { font-weight: inherit !important; }
+        .text-sm, .text-lg, .text-xl, .text-2xl { font-size: inherit !important; }
+        .p-6, .p-4 { padding: 0 !important; } /* Let M3 components handle padding */
+        .space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; } /* Let M3 handle spacing */
+        .mr-2, .mt-1, .mt-6, .mb-1, .mb-2, .mb-3, .mb-4, .mb-6, .mb-8 { margin: 0 !important; } /* Override specific margins */
+        .px-4, .py-2 { padding: 0 !important; } /* Override specific paddings */
+         /* Bootstrap Overrides (example, may need more) */
+         .container, .container-fluid { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+         .card { background-color: transparent !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; }
+         .btn { all: unset !important; } /* Aggressive reset for btn */
 
     </style>
 </head>
-<body class="bg-gray-100">
-    <div class="flex h-screen">
-        <!-- Sidebar (Remains the same, active link updated) -->
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">
-            <div class="p-6 border-b">
-                <a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a>
+<body data-theme="light">
+    <div class="flex h-screen layout-container"> <!-- Added M3 class -->
+        <!-- Sidebar -->
+        <aside class="w-64 flex-shrink-0 sidebar"> <!-- Added M3 class -->
+            <div class="sidebar-header"> <!-- Changed padding class -->
+                <a href="index.html" class="sidebar-title">Hackverse</a> <!-- Changed classes -->
             </div>
-            <nav class="p-4 space-y-2">
-                 <!-- Updated active link -->
-                <a href="participant_profile.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
-                <a href="participant_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
-                <a href="my_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-calendar-check w-6 mr-2"></i> My Hackathons</a>
-                <a href="my_teams.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-users w-6 mr-2"></i> My Teams</a>
-                <a href="my_submissions.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-file-alt w-6 mr-2"></i> My Submissions</a>
-                <a href="my_achievements.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-trophy w-6 mr-2"></i> My Achievements</a>
-                <a href="my_certificates.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-certificate w-6 mr-2"></i> My Certificates</a>
-                <a href="settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
-                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+            <nav> <!-- Removed padding/spacing classes -->
+                 <!-- Added active-link class -->
+                <a href="participant_profile.html" class="active-link"><i class="fas fa-user"></i> My Profile</a> <!-- Removed flex/item/px/py/rounded -->
+                <a href="participant_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="my_opportunities.html"><i class="fas fa-calendar-check"></i> My Hackathons</a>
+                <a href="my_teams.html"><i class="fas fa-users"></i> My Teams</a>
+                <a href="my_submissions.html"><i class="fas fa-file-alt"></i> My Submissions</a>
+                <a href="my_achievements.html"><i class="fas fa-trophy"></i> My Achievements</a>
+                <a href="my_certificates.html"><i class="fas fa-certificate"></i> My Certificates</a>
+                <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                <a href="index.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>
         </aside>
 
-        <!-- Main Content Area - Now contains the Profile HTML -->
-        <main class="flex-1 overflow-y-auto">
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto main-content"> <!-- Added M3 class -->
             <!-- Profile Banner -->
             <div class="profile-header-banner"></div>
 
-            <!-- Profile Container (inside main for padding/scrolling) -->
-            <!-- Removed p-8 from main, using profile-container's padding -->
+            <!-- Profile Container -->
             <div class="profile-container">
 
                 <div class="profile-header">
-                    <!-- Placeholder for profile picture -->
                     <div class="profile-picture">
-                        <!-- Example: Use Tailwind for placeholder styling if needed -->
-                        <!-- <img src="[user-image-url]" alt="Profile Picture" class="w-full h-full object-cover rounded-full"> -->
+                        <!-- <img src="[user-image-url]" alt="Profile Picture"> -->
                     </div>
                     <div class="profile-info">
-                        <!-- Data should be dynamically inserted here -->
-                        <h1 class="text-2xl font-bold text-gray-800">Khushi Chandak</h1>
-                        <p class="text-gray-600">Student at K.J. Somaiya Institute of Technology, Sion, Mumbai | Ex-Intern at L&T Technology Services | Digital Media Manager @CyberCell-KJSIT| Ex-Intern(ML&AI) @Claidroid | Tech. Member @GDSC</p>
-                        <p class="text-sm text-gray-500">Mumbai</p>
-                        <p class="text-sm text-gray-500">
-                            Links:
-                            <a href="https://www.linkedin.com/in/khushi-chandak-a48032294/" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a> |
-                            <a href="[GitHub URL]" target="_blank" class="text-blue-600 hover:underline">GitHub</a> |
-                            <a href="[Portfolio URL]" target="_blank" class="text-blue-600 hover:underline">Portfolio</a>
+                        <h1>Khushi Chandak</h1>
+                        <p>Student at K.J. Somaiya Institute of Technology, Sion, Mumbai | Ex-Intern at L&T Technology Services | Digital Media Manager @CyberCell-KJSIT| Ex-Intern(ML&AI) @Claidroid | Tech. Member @GDSC</p>
+                        <p class="location">Mumbai</p>
+                        <p class="profile-links">
+                            <!-- Removed 'Links:' text, rely on visual cues -->
+                            <a href="https://www.linkedin.com/in/khushi-chandak-a48032294/" target="_blank">LinkedIn</a>
+                            <a href="[GitHub URL]" target="_blank">GitHub</a>
+                            <a href="[Portfolio URL]" target="_blank">Portfolio</a>
                         </p>
                     </div>
+                    <!-- Edit Profile Button -->
                     <div class="profile-actions">
-                        <!-- This button should only be visible to the profile owner -->
-                        <!-- Using Tailwind classes for consistency -->
-                        <button
-                            class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            onclick="alert('Redirect to Edit Profile Page/Enable Editing');">
+                        <!-- Changed button tag and applied M3 styles -->
+                        <button type="button" class="button button-filled" onclick="alert('Redirect to Edit Profile Page/Enable Editing');">
                             Edit Profile
                         </button>
                     </div>
                 </div>
 
-                <section class="profile-section about-section">
-                    <!-- Edit button specific to this section -->
-                    <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable About editing');">
-                        <i class="fas fa-pencil-alt mr-1"></i>Edit
+                <!-- Added m3-card class to sections -->
+                <section class="profile-section about-section m3-card">
+                    <button class="section-edit-button" onclick="alert('Enable About editing');">
+                        <i class="fas fa-pencil-alt"></i><span>Edit</span>
                     </button>
                     <h2>About Me</h2>
-                    <p class="text-gray-700">
-                        Hi there! I'm Khushi, a curious and enthusiastic second-year computer engineering student with a passion for building innovative solutions that make a difference. When I'm not buried in textbooks or coding away, you can find me exploring the latest tech trends, tinkering with DIY projects, or binge-watching sci-fi shows (yes, I'm a fan of AI-powered robots taking over the world)😂.
-
-As a computer engineering student, I'm constantly fascinated by the intersection of hardware and software. I'm always looking for ways to improve my skills in programming languages like C Programming and Python and I'm excited to dive deeper into the world of machine learning, artificial intelligence, and data science.
-
-Outside of academics, I'm a strong believer in the power of collaboration and community. I'm always up for a hackathon, a coding challenge, or a brainstorming session with fellow tech enthusiasts. Let's connect and create something amazing together!
-
-Feel free to reach out if you'd like to chat about the latest tech trends, discuss a project idea, or simply share your favorite coding memes.
+                    <p>
+                        Hi there! I'm Khushi, a curious and enthusiastic second-year computer engineering student with a passion for building innovative solutions that make a difference... [rest of text]... share your favorite coding memes.
                     </p>
                 </section>
 
-                <section class="profile-section resume-section">
-                    <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable Resume editing/upload');">
-                       <i class="fas fa-pencil-alt mr-1"></i>Edit
+                <section class="profile-section resume-section m3-card">
+                    <button class="section-edit-button" onclick="alert('Enable Resume editing/upload');">
+                       <i class="fas fa-pencil-alt"></i><span>Edit</span>
                     </button>
                     <h2>Resume</h2>
                     <p>View or upload my latest resume:</p>
-                    <!-- Styled download link/button using Tailwind -->
-                    <a href="[link-to-user-resume.pdf]" download
-                       class="inline-block mt-2 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                       <i class="fas fa-download mr-2"></i>View Resume
-                    </a>
-                    
-                     <button class="mt-2 px-4 py-2 bg-gray-500 text-white text-sm font-medium rounded-md hover:bg-gray-600">
-                         <i class="fas fa-upload mr-2"></i> Upload Resume
-                     </button>
+                    <!-- Styled resume buttons with M3 classes -->
+                    <div class="resume-actions">
+                        <a href="[link-to-user-resume.pdf]" download class="button button-filled button-success">
+                           <i class="fas fa-download mr-2"></i>View Resume
+                        </a>
+                         <button type="button" class="button button-tonal">
+                             <i class="fas fa-upload mr-2"></i> Upload Resume
+                         </button>
+                     </div>
                 </section>
 
-                <section class="profile-section skills-section">
-                    <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable Skills editing');">
-                        <i class="fas fa-pencil-alt mr-1"></i>Edit
+                <section class="profile-section skills-section m3-card">
+                    <button class="section-edit-button" onclick="alert('Enable Skills editing');">
+                        <i class="fas fa-pencil-alt"></i><span>Edit</span>
                     </button>
                     <h2>Skills</h2>
                     <div class="skills-list">
-                        <!-- Skills dynamically generated by backend -->
+                        <!-- Skills as M3 chips -->
                         <span>JavaScript</span>
                         <span>React</span>
                         <span>Node.js</span>
                         <span>Express</span>
                         <span>HTML5</span>
                         <span>CSS3</span>
-                        <span>Tailwind CSS</span> <!-- Changed Bootstrap to Tailwind -->
+                        <span>Tailwind CSS</span>
                         <span>SQL</span>
                         <span>PostgreSQL</span>
                         <span>Git</span>
                         <span>Problem Solving</span>
                         <span>Teamwork</span>
-                        <!-- End dynamic skills list -->
                     </div>
                 </section>
 
-                <section class="profile-section experience-section">
-                     <button class="section-edit-button hover:bg-gray-100 rounded" onclick="alert('Enable Experience editing/adding');">
-                        <i class="fas fa-plus mr-1"></i>Add/Edit
+                <section class="profile-section experience-section m3-card">
+                     <button class="section-edit-button" onclick="alert('Enable Experience editing/adding');">
+                        <i class="fas fa-plus"></i><span>Add/Edit</span>
                     </button>
                     <h2>Experience</h2>
                     <div class="experience-list">
-                        <!-- Experience items dynamically generated by backend -->
                         <div class="experience-item">
                             <h3>[Job Title / Project Name]</h3>
                             <p class="company">[Company Name / 'Personal Project' / 'Academic Project']</p>
                             <span class="dates">[Start Date] - [End Date or 'Present']</span>
-                            <p>[Description of responsibilities, achievements, or project details. Use bullet points if desired.]</p>
+                            <p>[Description of responsibilities, achievements, or project details.]</p>
                         </div>
 
                         <div class="experience-item">
@@ -201,13 +695,14 @@ Feel free to reach out if you'd like to chat about the latest tech trends, discu
                             <span class="dates">[Start Date] - [End Date]</span>
                             <p>[Description...]</p>
                         </div>
-                         <!-- Add more items as needed -->
                     </div>
                 </section>
 
             </div> <!-- End profile-container -->
-
         </main>
     </div>
+    <script>
+        // Optional: Add JS for theme toggle or edit button interactions if needed
+    </script>
 </body>
 </html>

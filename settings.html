@@ -1,125 +1,622 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings - Participant</title>
+    <title>Settings - M3 Style</title>
+    <!-- Tailwind CSS (Kept as per constraint, but styles will be overridden) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts (Roboto for M3) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS (Kept as per constraint, will require overrides) -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> --> <!-- Removed Bootstrap as it wasn't used in original -->
+
+    <!-- M3 Styles -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
+        /* --- Material Design 3 Variables (Consistent Set) --- */
+        :root {
+             /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Additional colors */
+            --md-sys-color-success-light: #177e2a; /* Green */
+            --md-sys-color-on-success-light: #ffffff;
+            --md-sys-color-success-container-light: #b4f7ae;
+            --md-sys-color-on-success-container-light: #002205;
+            --md-sys-color-warning-light: #7e5700; /* Yellow/Orange */
+            --md-sys-color-on-warning-light: #ffffff;
+            --md-sys-color-warning-container-light: #ffdea3;
+            --md-sys-color-on-warning-container-light: #281900;
+            /* Surface & Background */
+            --md-sys-color-background-light: #fefcff; /* Off-white */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-light: #ffffff; /* Pure white */
+            --md-sys-color-surface-container-low-light: #f8f2f7;
+            --md-sys-color-surface-container-light: #eeeef2;
+            --md-sys-color-surface-container-high-light: #e8e8ed;
+            --md-sys-color-surface-container-highest-light: #e2e2e6; /* Often used for TopAppBar */
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-success-dark: #99da94;
+            --md-sys-color-on-success-dark: #00390d;
+            --md-sys-color-success-container-dark: #005317;
+            --md-sys-color-on-success-container-dark: #b4f7ae;
+            --md-sys-color-warning-dark: #fbbc04;
+            --md-sys-color-on-warning-dark: #412d00;
+            --md-sys-color-warning-container-dark: #5f4200;
+            --md-sys-color-on-warning-container-dark: #ffdea3;
+            --md-sys-color-background-dark: #1a1c1e; /* Dark Gray */
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-dark: #0e1013;
+            --md-sys-color-surface-container-low-dark: #1d1f22;
+            --md-sys-color-surface-container-dark: #212326;
+            --md-sys-color-surface-container-high-dark: #2b2d30;
+            --md-sys-color-surface-container-highest-dark: #36383a; /* Often used for TopAppBar */
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+             /* RGB for hover alpha */
+             --md-sys-color-primary-rgb-light: 0, 97, 164;
+             --md-sys-color-primary-rgb-dark: 160, 201, 255;
+             --md-sys-color-secondary-rgb-light: 83, 95, 112;
+             --md-sys-color-secondary-rgb-dark: 187, 199, 219;
+             --md-sys-color-error-rgb-light: 186, 26, 26;
+             --md-sys-color-error-rgb-dark: 255, 180, 171;
+
+            /* Shape */
+            --md-shape-corner-none: 0px;
+            --md-shape-corner-extra-small: 4px;
+            --md-shape-corner-small: 8px;
+            --md-shape-corner-medium: 12px;
+            --md-shape-corner-large: 16px;
+            --md-shape-corner-extra-large: 28px;
+            --md-shape-corner-full: 9999px;
+
+            /* Elevation */
+            --md-sys-elevation-level-0: none;
+            --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+            /* State Layers */
+            --md-sys-state-hover-state-layer-opacity: 0.08;
+            --md-sys-state-focus-state-layer-opacity: 0.12;
+            --md-sys-state-pressed-state-layer-opacity: 0.12;
+
+            /* Typography */
+            --md-sys-typescale-font-family-name: Roboto;
+            --md-sys-typescale-body-large-font-size: 1rem;
+            --md-sys-typescale-body-large-line-height: 1.5rem;
+            --md-sys-typescale-body-large-font-weight: 400;
+            --md-sys-typescale-body-medium-font-size: 0.875rem;
+            --md-sys-typescale-body-medium-line-height: 1.25rem;
+            --md-sys-typescale-body-medium-font-weight: 400;
+            --md-sys-typescale-body-small-font-size: 0.75rem;
+            --md-sys-typescale-body-small-line-height: 1rem;
+            --md-sys-typescale-body-small-font-weight: 400;
+            --md-sys-typescale-label-large-font-size: 0.875rem;
+            --md-sys-typescale-label-large-line-height: 1.25rem;
+            --md-sys-typescale-label-large-font-weight: 500;
+            --md-sys-typescale-label-medium-font-size: 0.75rem;
+            --md-sys-typescale-label-medium-line-height: 1rem;
+            --md-sys-typescale-label-medium-font-weight: 500;
+            --md-sys-typescale-label-small-font-size: 0.6875rem;
+            --md-sys-typescale-label-small-line-height: 1rem;
+            --md-sys-typescale-label-small-font-weight: 500;
+            --md-sys-typescale-title-large-font-size: 1.375rem;
+            --md-sys-typescale-title-large-line-height: 1.75rem;
+            --md-sys-typescale-title-large-font-weight: 400;
+            --md-sys-typescale-title-medium-font-size: 1rem;
+            --md-sys-typescale-title-medium-line-height: 1.5rem;
+            --md-sys-typescale-title-medium-font-weight: 500;
+             --md-sys-typescale-title-small-font-size: 0.875rem;
+            --md-sys-typescale-title-small-line-height: 1.25rem;
+            --md-sys-typescale-title-small-font-weight: 500;
+            --md-sys-typescale-headline-medium-font-size: 1.75rem;
+            --md-sys-typescale-headline-medium-font-weight: 400;
+            --md-sys-typescale-headline-medium-line-height: 2.25rem;
+            --md-sys-typescale-headline-small-font-size: 1.5rem;
+             --md-sys-typescale-headline-small-line-height: 2rem;
+             --md-sys-typescale-headline-small-font-weight: 400;
         }
-        /* --- Settings Section Card Styling --- */
+
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --tertiary: var(--md-sys-color-tertiary-light);
+            --on-tertiary: var(--md-sys-color-on-tertiary-light);
+            --tertiary-container: var(--md-sys-color-tertiary-container-light);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --error-container: var(--md-sys-color-error-container-light);
+            --on-error-container: var(--md-sys-color-on-error-container-light);
+            --success: var(--md-sys-color-success-light);
+            --on-success: var(--md-sys-color-on-success-light);
+            --success-container: var(--md-sys-color-success-container-light);
+            --on-success-container: var(--md-sys-color-on-success-container-light);
+            --warning: var(--md-sys-color-warning-light);
+            --on-warning: var(--md-sys-color-on-warning-light);
+            --warning-container: var(--md-sys-color-warning-container-light);
+            --on-warning-container: var(--md-sys-color-on-warning-container-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-light);
+            --surface-container-low: var(--md-sys-color-surface-container-low-light);
+            --surface-container: var(--md-sys-color-surface-container-light);
+            --surface-container-high: var(--md-sys-color-surface-container-high-light);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+            --shadow: var(--md-sys-color-shadow-light);
+            --surface-tint-color: var(--md-sys-color-surface-tint-light);
+            --inverse-surface: var(--md-sys-color-inverse-surface-light);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-light);
+            --inverse-primary: var(--md-sys-color-inverse-primary-light);
+             /* RGB values */
+             --primary-rgb: var(--md-sys-color-primary-rgb-light);
+             --secondary-rgb: var(--md-sys-color-secondary-rgb-light);
+             --error-rgb: var(--md-sys-color-error-rgb-light);
+             --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 26, 28, 30;
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --tertiary: var(--md-sys-color-tertiary-dark);
+            --on-tertiary: var(--md-sys-color-on-tertiary-dark);
+            --tertiary-container: var(--md-sys-color-tertiary-container-dark);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --error-container: var(--md-sys-color-error-container-dark);
+            --on-error-container: var(--md-sys-color-on-error-container-dark);
+            --success: var(--md-sys-color-success-dark);
+            --on-success: var(--md-sys-color-on-success-dark);
+            --success-container: var(--md-sys-color-success-container-dark);
+            --on-success-container: var(--md-sys-color-on-success-container-dark);
+            --warning: var(--md-sys-color-warning-dark);
+            --on-warning: var(--md-sys-color-on-warning-dark);
+            --warning-container: var(--md-sys-color-warning-container-dark);
+            --on-warning-container: var(--md-sys-color-on-warning-container-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-dark);
+            --surface-container-low: var(--md-sys-color-surface-container-low-dark);
+            --surface-container: var(--md-sys-color-surface-container-dark);
+            --surface-container-high: var(--md-sys-color-surface-container-high-dark);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+            --shadow: var(--md-sys-color-shadow-dark);
+            --surface-tint-color: var(--md-sys-color-surface-tint-dark);
+            --inverse-surface: var(--md-sys-color-inverse-surface-dark);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-dark);
+            --inverse-primary: var(--md-sys-color-inverse-primary-dark);
+             /* RGB values */
+             --primary-rgb: var(--md-sys-color-primary-rgb-dark);
+             --secondary-rgb: var(--md-sys-color-secondary-rgb-dark);
+             --error-rgb: var(--md-sys-color-error-rgb-dark);
+             --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 226, 226, 230;
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--md-sys-typescale-font-family-name), sans-serif;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight);
+            background-color: var(--background);
+            color: var(--on-background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Layout --- */
+        .layout-container { display: flex; height: 100vh; overflow: hidden; }
+        .main-content { flex-grow: 1; overflow-y: auto; padding: 2rem 3rem; /* lg:p-12 approx */ }
+        .main-content h1 {
+            font-size: var(--md-sys-typescale-headline-medium-font-size);
+            font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+            line-height: var(--md-sys-typescale-headline-medium-line-height);
+            color: var(--on-surface);
+            margin-bottom: 2.5rem; /* mb-10 */
+        }
+
+        /* --- Sidebar (Consistent) --- */
+        .sidebar {
+            width: 256px; background-color: var(--surface-container-low); /* Sidebar distinct bg */
+            border-right: 1px solid var(--outline-variant); display: flex;
+            flex-direction: column; flex-shrink: 0; transition: background-color 0.3s ease, border-color 0.3s ease;
+            box-shadow: none;
+        }
+        .sidebar-header { padding: 1.5rem 1rem; border-bottom: 1px solid var(--outline-variant); transition: border-color 0.3s ease; }
+        .sidebar-title { font-size: var(--md-sys-typescale-title-large-font-size); font-weight: 700; color: var(--primary); text-decoration: none; display: block; }
+        .sidebar nav { padding: 0.5rem; }
+        .sidebar nav a {
+            display: flex; align-items: center; padding: 0.75rem 1rem; margin: 0.25rem 0;
+            border-radius: var(--md-shape-corner-full); color: var(--on-surface-variant); text-decoration: none;
+            font-weight: var(--md-sys-typescale-label-large-font-weight); font-size: var(--md-sys-typescale-label-large-font-size);
+            position: relative; overflow: hidden; transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .sidebar nav a i { width: 24px; margin-right: 1rem; text-align: center; color: var(--on-surface-variant); transition: color 0.15s ease; }
+        .sidebar nav a::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--secondary);
+            opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .sidebar nav a:hover { color: var(--on-secondary-container); }
+        .sidebar nav a:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar nav a:hover i { color: var(--on-secondary-container); }
+        .sidebar nav a.active-link { background-color: var(--secondary-container); color: var(--on-secondary-container); }
+        .sidebar nav a.active-link i { color: var(--on-secondary-container); }
+        .sidebar nav a.logout-link { margin-top: 1.5rem; color: var(--error); }
+        .sidebar nav a.logout-link i { color: var(--error); }
+        .sidebar nav a.logout-link::before { background-color: var(--error); }
+        .sidebar nav a.logout-link:hover { color: var(--on-error-container); }
+        .sidebar nav a.logout-link:hover::before { background-color: var(--error-container); opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar nav a.logout-link:hover i { color: var(--on-error-container); }
+
+        /* --- Settings Section Card --- */
         .settings-section-card {
-            @apply bg-white rounded-xl shadow-lg mb-12 border border-gray-200 overflow-hidden transition-shadow duration-300 ease-in-out;
-            /* Added larger bottom margin (mb-12), rounded-xl, shadow-lg */
+            background-color: var(--surface-container); /* Slightly elevated */
+            border-radius: var(--md-shape-corner-extra-large); /* More rounded */
+            border: 1px solid var(--outline-variant);
+            box-shadow: var(--md-sys-elevation-level-1);
+            margin-bottom: 3rem; /* mb-12 */
+            overflow: hidden; /* Clip header/content */
+            transition: box-shadow 0.3s ease-in-out;
         }
         .settings-section-card:hover {
-            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 15px -6px rgba(0, 0, 0, 0.1); /* Enhanced hover shadow */
+             box-shadow: var(--md-sys-elevation-level-2);
         }
 
         /* --- Card Header --- */
         .settings-card-header {
-            @apply p-6 flex items-center border-b border-gray-200;
-            /* Using subtle gradients for headers */
+             padding: 1.5rem; /* p-6 */
+             display: flex;
+             align-items: center;
+             border-bottom: 1px solid var(--outline-variant); /* Use M3 divider color */
+             background-color: var(--surface-container-high); /* Slight contrast for header */
+             transition: background-color 0.3s ease;
+             /* Remove gradient backgrounds */
         }
-        .header-profile { background: linear-gradient(to right, #eff6ff 20%, white 100%); } /* blue-50 */
-        .header-security { background: linear-gradient(to right, #f5f3ff 20%, white 100%); } /* violet-50 */
-        .header-notifications { background: linear-gradient(to right, #f0fdf4 20%, white 100%); } /* green-50 */
-
         .header-icon-wrapper {
-            @apply w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0; /* Rounded-lg instead of full */
+             width: 48px; /* w-12 */
+             height: 48px; /* h-12 */
+             border-radius: var(--md-shape-corner-medium); /* rounded-lg */
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             margin-right: 1rem; /* mr-4 */
+             flex-shrink: 0;
+             /* Apply container colors directly */
         }
-        /* Icon background colors */
-        .icon-bg-profile { background-color: #dbeafe; color: #2563eb; } /* blue-200 bg, blue-600 text */
-        .icon-bg-security { background-color: #ddd6fe; color: #7c3aed; } /* violet-200 bg, violet-600 text */
-        .icon-bg-notifications { background-color: #bbf7d0; color: #16a34a; } /* green-200 bg, green-600 text */
+        .icon-bg-profile { background-color: var(--primary-container); color: var(--on-primary-container); }
+        .icon-bg-security { background-color: var(--tertiary-container); color: var(--on-tertiary-container); } /* Example using tertiary */
+        .icon-bg-notifications { background-color: var(--success-container); color: var(--on-success-container); } /* Example using success */
 
-        .header-title { @apply text-2xl font-semibold text-gray-800; }
+        .header-title {
+            font-size: var(--md-sys-typescale-title-large-font-size); /* text-2xl is closer to Title Large */
+            font-weight: var(--md-sys-typescale-title-large-font-weight); /* 400 or 500 */
+            color: var(--on-surface); /* Use on-surface for titles */
+        }
 
         /* --- Card Content --- */
-        .settings-card-content { @apply p-8 lg:p-10; } /* Generous padding */
+        .settings-card-content {
+             padding: 2rem 2.5rem; /* p-8 lg:p-10 */
+        }
+        .settings-card-content form {
+             display: flex;
+             flex-direction: column;
+             gap: 2rem; /* space-y-8 approx */
+        }
 
         /* --- Form Element Styling --- */
-        .form-label { @apply block text-sm font-medium text-gray-700 mb-2; } /* Increased margin */
-        .form-input, .form-textarea, .form-input-readonly, .form-select {
-             @apply block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-150 ease-in-out;
+         .form-field { /* Added wrapper for consistency */ }
+         .form-label {
+             display: block;
+             font-size: var(--md-sys-typescale-label-medium-font-size);
+             font-weight: var(--md-sys-typescale-label-medium-font-weight);
+             color: var(--on-surface-variant);
+             margin-bottom: 0.5rem; /* mb-2 */
+         }
+         .form-input, .form-textarea, .form-input-readonly, .form-select {
+             display: block;
+             width: 100%;
+             padding: 1rem; /* px-4 py-2.5 approx */
+             font-family: inherit;
+             font-size: var(--md-sys-typescale-body-large-font-size);
+             line-height: var(--md-sys-typescale-body-large-line-height);
+             color: var(--on-surface);
+             background-color: var(--surface-container-lowest);
+             border: 1px solid var(--outline);
+             border-radius: var(--md-shape-corner-small); /* rounded-lg */
+             box-shadow: none; /* Remove Tailwind shadow */
+             transition: border-color 0.2s ease, box-shadow 0.2s ease;
+             appearance: none;
         }
-        .form-textarea { @apply min-h-[120px]; }
-        .form-input-readonly { @apply bg-gray-100 text-gray-600 cursor-not-allowed; }
+         .form-input::placeholder, .form-textarea::placeholder { color: var(--on-surface-variant); opacity: 0.7; }
+         .form-input:focus, .form-textarea:focus, .form-select:focus {
+             outline: none;
+             border-color: var(--primary);
+             border-width: 2px;
+             padding: calc(1rem - 1px); /* Adjust padding */
+             /* Remove ring */
+        }
+         .form-textarea { min-height: 120px; resize: vertical; }
+         .form-input-readonly {
+             background-color: var(--surface-container); /* Different background */
+             color: var(--on-surface-variant);
+             cursor: not-allowed;
+             border-color: var(--outline-variant); /* Less prominent border */
+         }
+          .form-input-readonly:focus { /* Prevent focus styling */
+              border-color: var(--outline-variant); border-width: 1px; padding: 1rem;
+          }
+          /* Select dropdown arrow (Consistent) */
+          .form-select {
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23${props => props.theme.onSurfaceVariant.substring(1)}'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+              background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em; padding-right: 3rem;
+          }
+          [data-theme="light"] .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2342474e'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E"); }
+          [data-theme="dark"] .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c2c7cf'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E"); }
 
-        /* --- Enhanced Toggle Switch --- */
-        .switch-label { @apply flex items-center cursor-pointer; }
-        .switch-toggle { @apply relative; }
-        .switch-checkbox { @apply sr-only; }
-        .switch-bg { @apply block bg-gray-200 w-14 h-8 rounded-full transition-colors duration-200 ease-in-out; }
-        .switch-handle { @apply absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-200 ease-in-out shadow; }
-        .switch-checkbox:checked + .switch-bg { @apply bg-indigo-600; }
-        .switch-checkbox:checked + .switch-bg .switch-handle { @apply transform translate-x-6; }
+        /* --- M3 Switch Component --- */
+        .switch-label { display: flex; align-items: center; cursor: pointer; }
+        .switch-toggle { position: relative; }
+        .switch-checkbox { opacity: 0; width: 0; height: 0; position: absolute; }
+        .switch-track { /* Replaces switch-bg */
+            display: inline-block;
+            width: 52px; height: 32px;
+            background-color: var(--surface-container-highest);
+            border: 2px solid var(--outline);
+            border-radius: var(--md-shape-corner-full);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            position: relative; /* For handle positioning */
+        }
+        .switch-handle-wrapper { /* Container for the handle itself */
+             position: absolute;
+             top: 50%; left: 4px;
+             transform: translateY(-50%);
+             width: 16px; height: 16px;
+             border-radius: 50%;
+             background-color: var(--outline);
+             display: flex; align-items: center; justify-content: center;
+             transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease, left 0.2s ease;
+        }
+        .switch-checkbox:checked + .switch-track {
+             background-color: var(--primary);
+             border-color: var(--primary);
+        }
+         .switch-checkbox:checked + .switch-track .switch-handle-wrapper {
+             transform: translate(18px, -50%); /* Move right + account for Y center */
+             width: 24px; height: 24px; /* Larger handle when checked */
+             background-color: var(--on-primary);
+             left: 6px; /* Adjust left position for larger handle */
+         }
+        /* Optional: Icon inside handle (uncomment if needed) */
+        /* .switch-handle-icon { font-size: 12px; color: var(--surface-variant); }
+        .switch-checkbox:checked + .switch-track .switch-handle-icon { color: var(--primary); } */
 
         /* --- Notification Item Styling --- */
-        .notification-item { @apply flex items-center justify-between py-5 border-b border-gray-100 last:border-b-0; } /* Increased py */
-        .notification-item-text { @apply flex-grow flex flex-col pr-4; }
-        .notification-item-title { @apply text-sm font-medium text-gray-900; }
-        .notification-item-desc { @apply text-xs text-gray-500 mt-1; }
+        .notification-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.25rem 0; /* py-5 */
+            border-bottom: 1px solid var(--outline-variant); /* Use M3 divider */
+        }
+        .notification-item:last-of-type { border-bottom: none; }
+        .notification-item-text { flex-grow: 1; display: flex; flex-direction: column; padding-right: 1rem; /* pr-4 */ }
+        .notification-item-title { font-size: var(--md-sys-typescale-body-large-font-size); font-weight: var(--md-sys-typescale-label-large-font-weight); color: var(--on-surface); }
+        .notification-item-desc { font-size: var(--md-sys-typescale-body-small-font-size); color: var(--on-surface-variant); margin-top: 2px; /* mt-1 approx */ }
 
         /* --- Danger Zone --- */
-        /* Reusing card style but with red accents */
-        .danger-zone-card {
-            @apply settings-section-card border-l-4 border-red-500; /* Red left border */
+        .danger-zone-card { /* Inherits from settings-section-card */
+            border: 1px solid var(--error); /* Error border */
+            /* Keep left border if desired: border-left-width: 4px; */
         }
          .danger-zone-header {
-             @apply settings-card-header bg-red-50; /* Light red header bg */
+             /* Inherits from settings-card-header */
+             background-color: var(--error-container); /* Error container bg */
          }
          .danger-zone-icon-wrapper {
-             @apply header-icon-wrapper bg-red-100 text-red-600; /* Red icon bg/color */
+             /* Inherits from header-icon-wrapper */
+             background-color: var(--error); /* Use plain error */
+             color: var(--on-error);
          }
          .danger-zone-title {
-             @apply header-title text-red-800; /* Red title */
+             /* Inherits from header-title */
+             color: var(--on-error-container); /* Text on error container */
          }
-         .danger-zone-content { @apply settings-card-content; }
-
+         .danger-zone-content { /* Inherits from settings-card-content */ }
+         .danger-zone-content .danger-text-title { /* Paragraph title */
+            font-size: var(--md-sys-typescale-title-small-font-size);
+            font-weight: var(--md-sys-typescale-title-small-font-weight);
+            color: var(--error); /* Use error color for emphasis */
+         }
+          .danger-zone-content .danger-text-desc { /* Paragraph description */
+             font-size: var(--md-sys-typescale-body-medium-font-size);
+             color: var(--on-surface-variant); /* Standard variant text */
+             margin-top: 0.25rem; /* mt-1.5 */
+             line-height: var(--md-sys-typescale-body-medium-line-height);
+          }
 
         /* --- Button Styles --- */
-        .button-base { @apply inline-flex items-center justify-center px-5 py-2.5 border text-sm font-medium rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out; }
-        .button-base i { @apply mr-2 h-5 w-5; } /* Ensured margin */
-        .button-primary { @apply button-base border-transparent text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500; }
-        .button-secondary { @apply button-base border-gray-300 text-gray-700 bg-white hover:bg-gray-50 focus:ring-indigo-500; }
-        .button-danger { @apply button-base border-transparent text-white bg-red-600 hover:bg-red-700 focus:ring-red-500; }
+        /* Reusing consistent set */
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.625rem 1.5rem; border-radius: var(--md-shape-corner-full);
+            font-family: inherit; font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            text-align: center; text-decoration: none; border: 1px solid transparent; /* Base border */
+            cursor: pointer; position: relative; overflow: hidden; user-select: none; vertical-align: middle;
+             transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+        }
+        .button::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: currentColor; opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .button:hover { transform: translateY(-1px); }
+        .button:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .button:focus { outline: none; }
+        .button:focus::before { opacity: var(--md-sys-state-focus-state-layer-opacity); }
+        .button:active { transform: translateY(0); }
+        .button:active::before { opacity: var(--md-sys-state-pressed-state-layer-opacity); }
+         /* Icon margin */
+        .button i { margin-right: 0.5rem; height: 1.125rem; width: 1.125rem; /* h-5 w-5 */ font-size: 1.1em; }
+
+        .button-primary { background-color: var(--primary); color: var(--on-primary); border-color: var(--primary); box-shadow: var(--md-sys-elevation-level-0); }
+        .button-primary:hover { box-shadow: var(--md-sys-elevation-level-1); }
+
+        .button-secondary { background-color: var(--surface-container-lowest); color: var(--primary); border-color: var(--outline); }
+        .button-secondary:hover { background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity)); }
+        .button-secondary::before { background-color: var(--primary); }
+
+        .button-danger { background-color: var(--error); color: var(--on-error); border-color: var(--error); }
+        .button-danger:hover { box-shadow: var(--md-sys-elevation-level-1); }
+        .button-danger::before { background-color: var(--on-error); } /* Use on-error for ripple */
 
         /* Clearer Horizontal Rule */
         hr.section-divider {
-            @apply border-t border-gray-200 my-10; /* Increased margin */
+            border: none;
+            border-top: 1px solid var(--outline-variant); /* M3 divider */
+            margin: 2.5rem 0; /* my-10 */
         }
 
+        /* --- Tailwind/Bootstrap Overrides --- */
+        /* Neutralize visual styles from frameworks */
+        .bg-gray-100, .bg-white, .bg-gray-50, .bg-red-50, .bg-indigo-50, .bg-gray-200 { background-color: transparent !important; }
+        .text-gray-700, .text-gray-800, .text-gray-600, .text-gray-500, .text-gray-900, .text-gray-400 { color: inherit !important; }
+        .text-blue-600, .text-blue-700 { color: inherit !important; }
+        .text-red-600, .text-red-800, .text-red-700 { color: inherit !important; }
+        .text-indigo-600, .text-indigo-700 { color: inherit !important; }
+        .bg-indigo-600, .bg-red-600 { background-color: transparent !important; }
+        .hover\:bg-gray-100:hover, .hover\:bg-red-50:hover, .hover\:bg-gray-50:hover, .hover\:bg-indigo-100:hover, .hover\:bg-indigo-700:hover, .hover\:bg-red-700:hover { background-color: transparent !important; }
+        .border, .border-gray-200, .border-gray-300, .border-gray-100, .border-b, .border-l-4, .border-red-500 { border-width: 0 !important; border-color: transparent !important; border-style: solid !important; }
+        .shadow-md, .shadow-lg, .shadow, .shadow-sm { box-shadow: none !important; }
+        .rounded-lg, .rounded, .rounded-md, .rounded-xl { border-radius: 0 !important; }
+        .rounded-full {} /* Keep */
+        .focus\:ring-2, .focus\:ring-offset-2, .focus\:ring-indigo-500, .focus\:border-indigo-500, .focus\:ring-red-500, .focus\:outline-none { outline: none !important; box-shadow: none !important; }
+        .font-semibold, .font-medium, .font-bold { font-weight: inherit !important; }
+        .text-sm, .text-lg, .text-xl, .text-2xl, .text-xs { font-size: inherit !important; }
+        .placeholder-gray-400::placeholder { color: inherit !important; opacity: inherit !important; }
+        .p-6, .p-4, .p-8, .p-5, .p-10 { padding: 0 !important; }
+        .px-4, .py-2, .py-2\.5, .px-5, .py-5 { padding: 0 !important; }
+        .space-y-2 > :not([hidden]) ~ :not([hidden]), .space-y-3 > :not([hidden]) ~ :not([hidden]), .space-y-4 > :not([hidden]) ~ :not([hidden]), .space-y-6 > :not([hidden]) ~ :not([hidden]), .space-y-8 > :not([hidden]) ~ :not([hidden]), .space-y-10 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; }
+        .space-x-6 > :not([hidden]) ~ :not([hidden]) { margin-left: 0 !important; }
+        .mr-2, .mr-4, .mt-1, .mt-6, .mt-1\.5, .mt-4, .mt-2, .mb-1, .mb-2, .mb-3, .mb-4, .mb-5, .mb-6, .mb-10, .mb-12, .ml-2, .pr-4 { margin: 0 !important; }
+        .h-4, .w-4, .h-8, .w-14, .h-12, .w-12, .h-24, .w-24, .h-5, .w-5, .h-6 { height: auto !important; width: auto !important; }
+        .flex-shrink-0 { flex-shrink: inherit !important; }
+        .ring-4, .ring-offset-1, .ring-blue-100 { box-shadow: none !important; }
+        .object-cover { object-fit: initial !important; }
+        .cursor-not-allowed { cursor: default !important; }
+        .leading-relaxed { line-height: inherit !important; }
+        .last\:border-b-0:last-child { border-bottom-width: 0 !important; }
+        .min-h-\[120px\] { min-height: auto !important; }
+        .file\:mr-4, .file\:py-2, .file\:px-4, .file\:rounded-lg, .file\:border-0, .file\:text-sm, .file\:font-semibold, .file\:bg-indigo-50, .file\:text-indigo-700 { all: unset !important; } /* Reset file pseudo */
+
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
-    <div class="flex h-screen">
+<body data-theme="light">
+    <div class="flex h-screen layout-container">
         <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-md flex-shrink-0">
             <div class="p-6 border-b"> <a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a> </div>
             <nav class="p-4 space-y-2">
+                <a href="participant_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
                  <a href="participant_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
                  <a href="my_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-calendar-check w-6 mr-2"></i> My Hackathons</a>
                  <a href="my_teams.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-users w-6 mr-2"></i> My Teams</a>
                  <a href="my_submissions.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-file-alt w-6 mr-2"></i> My Submissions</a>
                  <a href="my_achievements.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-trophy w-6 mr-2"></i> My Achievements</a>
                  <a href="my_certificates.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-certificate w-6 mr-2"></i> My Certificates</a>
-                 <a href="participant_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
+                 
                  <a href="settings.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
                  <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
             </nav>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto p-8 lg:p-12">
-            <h1 class="text-3xl font-bold text-gray-800 mb-10">Settings</h1>
+        <main class="flex-1 overflow-y-auto main-content">
+            <h1>Settings</h1>
 
             <!-- Section: Profile Settings -->
             <section class="settings-section-card">
@@ -129,37 +626,37 @@
                     </div>
                     <h2 class="header-title">Profile Information</h2>
                 </div>
-                <form action="#" method="POST" id="profile-form" class="settings-card-content space-y-8"> <!-- Increased space-y -->
+                <form action="#" method="POST" id="profile-form" class="settings-card-content">
                     <!-- Profile Picture Upload -->
-                    <div class="flex items-center space-x-6 pb-6">
-                         <img class="h-24 w-24 rounded-full object-cover ring-4 ring-offset-1 ring-blue-100" src="https://via.placeholder.com/150/92C950" alt="Current profile photo">
+                    <div class="flex items-center space-x-6 pb-6 form-field">
+                         <img class="h-24 w-24 rounded-full object-cover" style="border: 4px solid var(--surface-container-lowest); background-color: var(--surface-variant);" src="https://via.placeholder.com/150/92C950" alt="Current profile photo">
                          <div class="flex-1">
                             <label for="profile_photo" class="form-label">Update Profile Photo</label>
-                            <input type="file" id="profile_photo" name="profile_photo" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"/>
-                            <p class="text-xs text-gray-500 mt-1.5">PNG, JPG, GIF up to 2MB.</p>
+                            <input type="file" id="profile_photo" name="profile_photo" class="form-input file-input"> <!-- Added .file-input for potential specific file style -->
+                            <p class="text-xs mt-1.5" style="color: var(--on-surface-variant);">PNG, JPG, GIF up to 2MB.</p>
                          </div>
                     </div>
 
                     <hr class="section-divider">
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"> <!-- Increased gaps -->
-                        <div> <label for="full_name_prof" class="form-label">Full Name</label> <input type="text" id="full_name_prof" name="full_name" value="[Participant Name]" class="form-input"> </div>
-                        <div> <label for="username_prof" class="form-label">Username</label> <input type="text" id="username_prof" value="[participant_user]" class="form-input-readonly" readonly disabled> </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                        <div class="form-field"> <label for="full_name_prof" class="form-label">Full Name</label> <input type="text" id="full_name_prof" name="full_name" value="[Participant Name]" class="form-input"> </div>
+                        <div class="form-field"> <label for="username_prof" class="form-label">Username</label> <input type="text" id="username_prof" value="[participant_user]" class="form-input-readonly" readonly disabled> </div>
                     </div>
-                    <div> <label for="email_prof" class="form-label">Email Address</label> <input type="email" id="email_prof" value="[participant@example.com]" class="form-input-readonly" readonly disabled> <p class="mt-1 text-xs text-gray-500">Email cannot be changed here.</p> </div>
-                    <div> <label for="bio_prof" class="form-label">Bio</label> <textarea id="bio_prof" name="bio" rows="4" class="form-textarea" placeholder="Share your skills, interests..."></textarea> </div>
+                    <div class="form-field"> <label for="email_prof" class="form-label">Email Address</label> <input type="email" id="email_prof" value="[participant@example.com]" class="form-input-readonly" readonly disabled> <p class="mt-1 text-xs" style="color: var(--on-surface-variant);">Email cannot be changed here.</p> </div>
+                    <div class="form-field"> <label for="bio_prof" class="form-label">Bio</label> <textarea id="bio_prof" name="bio" rows="4" class="form-textarea" placeholder="Share your skills, interests..."></textarea> </div>
 
                     <hr class="section-divider">
 
-                    <h3 class="text-xl font-semibold text-gray-700 mb-5">Social & Portfolio Links</h3> <!-- Increased size/margin -->
+                    <h3 style="font-size: var(--md-sys-typescale-title-medium-font-size); font-weight: var(--md-sys-typescale-title-medium-font-weight); color: var(--on-surface); margin-bottom: 1.25rem;">Social & Portfolio Links</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                        <div> <label for="location_prof" class="form-label">Location</label> <input type="text" id="location_prof" name="location" value="[City, Country]" placeholder="e.g., San Francisco, USA" class="form-input"> </div>
-                        <div> <label for="website_prof" class="form-label">Website/Portfolio</label> <input type="url" id="website_prof" name="website" value="[https://portfolio.com]" placeholder="https://your-website.com" class="form-input"> </div>
-                        <div> <label for="github_prof" class="form-label">GitHub URL</label> <input type="url" id="github_prof" name="github_url" value="[https://github.com/user]" placeholder="https://github.com/yourusername" class="form-input"> </div>
-                        <div> <label for="linkedin_prof" class="form-label">LinkedIn URL</label> <input type="url" id="linkedin_prof" name="linkedin_url" value="[https://linkedin.com/in/user]" placeholder="https://linkedin.com/in/yourprofile" class="form-input"> </div>
+                        <div class="form-field"> <label for="location_prof" class="form-label">Location</label> <input type="text" id="location_prof" name="location" value="[City, Country]" placeholder="e.g., San Francisco, USA" class="form-input"> </div>
+                        <div class="form-field"> <label for="website_prof" class="form-label">Website/Portfolio</label> <input type="url" id="website_prof" name="website" value="[https://portfolio.com]" placeholder="https://your-website.com" class="form-input"> </div>
+                        <div class="form-field"> <label for="github_prof" class="form-label">GitHub URL</label> <input type="url" id="github_prof" name="github_url" value="[https://github.com/user]" placeholder="https://github.com/yourusername" class="form-input"> </div>
+                        <div class="form-field"> <label for="linkedin_prof" class="form-label">LinkedIn URL</label> <input type="url" id="linkedin_prof" name="linkedin_url" value="[https://linkedin.com/in/user]" placeholder="https://linkedin.com/in/yourprofile" class="form-input"> </div>
                     </div>
-                    <div class="pt-10 flex justify-end"> <!-- Increased padding -->
-                        <button type="submit" class="button-primary"> <i class="fas fa-save"></i> Save Profile Changes </button>
+                    <div class="pt-10 flex justify-end">
+                        <button type="submit" class="button button-primary"> <i class="fas fa-save"></i> Save Profile Changes </button>
                     </div>
                 </form>
             </section>
@@ -172,38 +669,38 @@
                     </div>
                     <h2 class="header-title">Account Security</h2>
                 </div>
-                <div class="settings-card-content space-y-10"> <!-- Increased spacing -->
-                    <form action="#" method="POST" id="password-form" class="space-y-6">
-                        <h3 class="text-xl font-semibold text-gray-800">Change Password</h3> <!-- Increased size -->
-                        <div> <label for="current_password" class="form-label">Current Password</label> <input type="password" id="current_password" name="current_password" required class="form-input"> </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6"> <!-- Increased gaps -->
-                            <div>
+                <div class="settings-card-content" style="display: flex; flex-direction: column; gap: 2.5rem;"> <!-- space-y-10 -->
+                    <form action="#" method="POST" id="password-form" style="display: flex; flex-direction: column; gap: 1.5rem;"> <!-- space-y-6 -->
+                        <h3 style="font-size: var(--md-sys-typescale-title-medium-font-size); font-weight: var(--md-sys-typescale-title-medium-font-weight); color: var(--on-surface);">Change Password</h3>
+                        <div class="form-field"> <label for="current_password" class="form-label">Current Password</label> <input type="password" id="current_password" name="current_password" required class="form-input"> </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                            <div class="form-field">
                                 <label for="new_password" class="form-label">New Password</label>
                                 <input type="password" id="new_password" name="new_password" required class="form-input">
-                                <p class="mt-1.5 text-xs text-gray-500">Minimum 8 characters recommended.</p>
+                                <p class="mt-1.5 text-xs" style="color: var(--on-surface-variant);">Minimum 8 characters recommended.</p>
                             </div>
-                            <div>
+                            <div class="form-field">
                                 <label for="confirm_password" class="form-label">Confirm New Password</label>
                                 <input type="password" id="confirm_password" name="confirm_password" required class="form-input">
                             </div>
                         </div>
-                        <div class="pt-4 flex justify-end"> <!-- Increased padding -->
-                            <button type="submit" class="button-primary"> <i class="fas fa-key"></i> Update Password </button>
+                        <div class="pt-4 flex justify-end">
+                            <button type="submit" class="button button-primary"> <i class="fas fa-key"></i> Update Password </button>
                         </div>
                     </form>
 
                     <hr class="section-divider">
 
                     <div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Two-Factor Authentication (2FA)</h3> <!-- Increased size/margin -->
-                        <p class="text-sm text-gray-600 mb-5">Enhance your account security (Recommended).</p> <!-- Increased margin -->
-                        <div class="flex items-center justify-between bg-gray-50 p-6 rounded-lg border border-gray-200"> <!-- Increased padding -->
-                            <span class="flex items-center text-sm font-medium text-gray-700">
-                                <i class="fas fa-mobile-alt text-2xl mr-4 text-gray-400"></i> {/* Larger icon, more margin */}
-                                Status: <span class="ml-2 font-semibold text-red-600">Disabled</span>
-                                <!-- Or: <span class="ml-2 font-semibold text-green-600">Enabled</span> -->
+                        <h3 style="font-size: var(--md-sys-typescale-title-medium-font-size); font-weight: var(--md-sys-typescale-title-medium-font-weight); color: var(--on-surface); margin-bottom: 0.75rem;">Two-Factor Authentication (2FA)</h3>
+                        <p class="text-sm mb-5" style="color: var(--on-surface-variant);">Enhance your account security (Recommended).</p>
+                        <div class="flex items-center justify-between p-6 rounded-lg border" style="background-color: var(--surface-container-high); border-color: var(--outline-variant);">
+                            <span class="flex items-center text-sm font-medium" style="color: var(--on-surface);">
+                                <i class="fas fa-mobile-alt text-2xl mr-4" style="color: var(--on-surface-variant);"></i>
+                                Status: <span class="ml-2 font-semibold" style="color: var(--error);">Disabled</span>
+                                <!-- Or: <span class="ml-2 font-semibold" style="color: var(--success);">Enabled</span> -->
                             </span>
-                            <button type="button" class="button-secondary">Manage 2FA</button>
+                            <button type="button" class="button button-secondary">Manage 2FA</button>
                         </div>
                     </div>
                 </div>
@@ -217,57 +714,59 @@
                     </div>
                     <h2 class="header-title">Notification Preferences</h2>
                 </div>
-                <form action="#" method="POST" id="notifications-form" class="settings-card-content space-y-3"> <!-- Adjusted list spacing -->
-                    <p class="text-sm text-gray-600 mb-6">Control the emails you receive.</p> <!-- Increased margin -->
+                <form action="#" method="POST" id="notifications-form" class="settings-card-content">
+                    <p class="text-sm mb-6" style="color: var(--on-surface-variant);">Control the emails you receive.</p>
 
-                    <!-- Notification Toggle Item -->
-                     <div class="notification-item">
-                         <div class="notification-item-text"> <span class="notification-item-title">New Hackathon Announcements</span> <span class="notification-item-desc">Relevant hackathons based on interests.</span> </div>
-                         <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_new_hackathon" class="switch-checkbox" checked> <div class="switch-bg"><div class="switch-handle"></div></div> </div> </label>
-                     </div>
-                      <!-- Notification Toggle Item -->
-                      <div class="notification-item">
-                         <div class="notification-item-text"> <span class="notification-item-title">Team Invitations & Updates</span> <span class="notification-item-desc">Team invites, requests, messages.</span> </div>
-                          <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_teams" class="switch-checkbox" checked> <div class="switch-bg"><div class="switch-handle"></div></div> </div> </label>
-                     </div>
-                     <!-- Notification Toggle Item -->
-                     <div class="notification-item">
-                         <div class="notification-item-text"> <span class="notification-item-title">Submission Deadline Reminders</span> <span class="notification-item-desc">Reminders for registered hackathons.</span> </div>
-                          <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_deadlines" class="switch-checkbox" checked> <div class="switch-bg"><div class="switch-handle"></div></div> </div> </label>
-                     </div>
-                     <!-- Notification Toggle Item -->
-                     <div class="notification-item">
-                         <div class="notification-item-text"> <span class="notification-item-title">Results & Feedback</span> <span class="notification-item-desc">Hackathon results and judge feedback.</span> </div>
-                          <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_results" class="switch-checkbox"> <div class="switch-bg"><div class="switch-handle"></div></div> </div> </label>
-                     </div>
-                     <!-- Notification Toggle Item -->
-                     <div class="notification-item">
-                         <div class="notification-item-text"> <span class="notification-item-title">Platform News</span> <span class="notification-item-desc">Occasional feature updates & news.</span> </div>
-                          <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_platform" class="switch-checkbox"> <div class="switch-bg"><div class="switch-handle"></div></div> </div> </label>
-                     </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;"> <!-- space-y-3 -->
+                        <!-- Notification Toggle Item -->
+                         <div class="notification-item">
+                             <div class="notification-item-text"> <span class="notification-item-title">New Hackathon Announcements</span> <span class="notification-item-desc">Relevant hackathons based on interests.</span> </div>
+                             <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_new_hackathon" class="switch-checkbox" checked> <div class="switch-track"><div class="switch-handle-wrapper"></div></div> </div> </label>
+                         </div>
+                          <!-- Notification Toggle Item -->
+                          <div class="notification-item">
+                             <div class="notification-item-text"> <span class="notification-item-title">Team Invitations & Updates</span> <span class="notification-item-desc">Team invites, requests, messages.</span> </div>
+                              <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_teams" class="switch-checkbox" checked> <div class="switch-track"><div class="switch-handle-wrapper"></div></div> </div> </label>
+                         </div>
+                         <!-- Notification Toggle Item -->
+                         <div class="notification-item">
+                             <div class="notification-item-text"> <span class="notification-item-title">Submission Deadline Reminders</span> <span class="notification-item-desc">Reminders for registered hackathons.</span> </div>
+                              <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_deadlines" class="switch-checkbox" checked> <div class="switch-track"><div class="switch-handle-wrapper"></div></div> </div> </label>
+                         </div>
+                         <!-- Notification Toggle Item -->
+                         <div class="notification-item">
+                             <div class="notification-item-text"> <span class="notification-item-title">Results & Feedback</span> <span class="notification-item-desc">Hackathon results and judge feedback.</span> </div>
+                              <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_results" class="switch-checkbox"> <div class="switch-track"><div class="switch-handle-wrapper"></div></div> </div> </label>
+                         </div>
+                         <!-- Notification Toggle Item -->
+                         <div class="notification-item">
+                             <div class="notification-item-text"> <span class="notification-item-title">Platform News</span> <span class="notification-item-desc">Occasional feature updates & news.</span> </div>
+                              <label class="switch-label"> <div class="switch-toggle"> <input type="checkbox" id="notify_platform" class="switch-checkbox"> <div class="switch-track"><div class="switch-handle-wrapper"></div></div> </div> </label>
+                         </div>
+                    </div>
 
-                    <div class="pt-10 flex justify-end"> <!-- Increased padding -->
-                         <button type="submit" class="button-primary"> <i class="fas fa-save"></i> Save Preferences </button>
+                    <div class="pt-10 flex justify-end">
+                         <button type="submit" class="button button-primary"> <i class="fas fa-save"></i> Save Preferences </button>
                      </div>
                 </form>
             </section>
 
             <!-- Section: Account Management (Danger Zone) -->
-            <section class="danger-zone-card"> <!-- Applied new danger card style -->
-                 <div class="danger-zone-header"> <!-- Danger header style -->
-                     <div class="danger-zone-icon-wrapper">
+            <section class="danger-zone-card settings-section-card"> <!-- Added base card class -->
+                 <div class="danger-zone-header settings-card-header"> <!-- Added base header class -->
+                     <div class="danger-zone-icon-wrapper header-icon-wrapper"> <!-- Added base wrapper class -->
                          <i class="fas fa-exclamation-triangle text-xl"></i>
                      </div>
-                     <h2 class="danger-zone-title">Danger Zone</h2>
+                     <h2 class="danger-zone-title header-title">Danger Zone</h2> <!-- Added base title class -->
                  </div>
-                 <div class="danger-zone-content">
-                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5"> <!-- Increased gap -->
+                 <div class="danger-zone-content settings-card-content">
+                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
                          <div class="flex-1">
-                            <p class="text-md font-semibold text-red-800">Delete Your Account</p>
-                            <p class="text-sm text-red-700 mt-1.5 leading-relaxed">Permanently delete your account and all associated data (profile, submissions, teams, achievements, etc.). This action is irreversible and cannot be undone.</p>
+                            <p class="text-md danger-text-title">Delete Your Account</p>
+                            <p class="text-sm mt-1.5 leading-relaxed danger-text-desc">Permanently delete your account and all associated data (profile, submissions, teams, achievements, etc.). This action is irreversible and cannot be undone.</p>
                          </div>
                          <div class="flex-shrink-0 mt-4 sm:mt-0">
-                             <button type="button" class="button-danger w-full sm:w-auto"> <i class="fas fa-trash-alt"></i> Delete My Account </button>
+                             <button type="button" class="button button-danger w-full sm:w-auto"> <i class="fas fa-trash-alt"></i> Delete My Account </button>
                          </div>
                      </div>
                  </div>
@@ -275,5 +774,8 @@
 
         </main>
     </div>
+    <script>
+        // Optional: Add JS for theme toggle or form interaction if needed
+    </script>
 </body>
 </html>

@@ -1,31 +1,730 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Participant Dashboard - HackaPlatform</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Participant Dashboard - M3 Style</title>
+    <!-- Font Awesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .card-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-    </style>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Using Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Material Design 3 Variables (Consistent Set) --- */
+        :root {
+             /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Additional colors */
+            --md-sys-color-success-light: #177e2a; /* Green */
+            --md-sys-color-on-success-light: #ffffff;
+            --md-sys-color-success-container-light: #b4f7ae;
+            --md-sys-color-on-success-container-light: #002205;
+            --md-sys-color-warning-light: #7e5700; /* Yellow/Orange */
+            --md-sys-color-on-warning-light: #ffffff;
+            --md-sys-color-warning-container-light: #ffdea3;
+            --md-sys-color-on-warning-container-light: #281900;
+            /* Surface & Background */
+            --md-sys-color-background-light: #fefcff; /* Off-white */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-light: #ffffff; /* Pure white */
+            --md-sys-color-surface-container-low-light: #f8f2f7;
+            --md-sys-color-surface-container-light: #eeeef2;
+            --md-sys-color-surface-container-high-light: #e8e8ed;
+            --md-sys-color-surface-container-highest-light: #e2e2e6; /* Often used for TopAppBar */
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-success-dark: #99da94;
+            --md-sys-color-on-success-dark: #00390d;
+            --md-sys-color-success-container-dark: #005317;
+            --md-sys-color-on-success-container-dark: #b4f7ae;
+            --md-sys-color-warning-dark: #fbbc04;
+            --md-sys-color-on-warning-dark: #412d00;
+            --md-sys-color-warning-container-dark: #5f4200;
+            --md-sys-color-on-warning-container-dark: #ffdea3;
+            --md-sys-color-background-dark: #1a1c1e; /* Dark Gray */
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-dark: #0e1013;
+            --md-sys-color-surface-container-low-dark: #1d1f22;
+            --md-sys-color-surface-container-dark: #212326;
+            --md-sys-color-surface-container-high-dark: #2b2d30;
+            --md-sys-color-surface-container-highest-dark: #36383a; /* Often used for TopAppBar */
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+             /* Chart Colors - Define separately */
+             --chart-color-primary-light: var(--md-sys-color-primary-light);
+             --chart-color-secondary-light: var(--md-sys-color-secondary-light);
+             --chart-color-tertiary-light: var(--md-sys-color-tertiary-light);
+             --chart-color-success-light: #34A853; /* Explicit green */
+             --chart-color-warning-light: #FBBC04; /* Explicit yellow */
+             --chart-color-error-light: var(--md-sys-color-error-light);
+             --chart-grid-color-light: var(--md-sys-color-outline-variant-light);
+             --chart-tick-color-light: var(--md-sys-color-on-surface-variant-light);
+             --chart-legend-color-light: var(--md-sys-color-on-surface-variant-light);
+             --chart-tooltip-bg-light: var(--md-sys-color-surface-container-light);
+             --chart-tooltip-text-light: var(--md-sys-color-on-surface-variant-light);
+
+             --chart-color-primary-dark: var(--md-sys-color-primary-dark);
+             --chart-color-secondary-dark: var(--md-sys-color-secondary-dark);
+             --chart-color-tertiary-dark: var(--md-sys-color-tertiary-dark);
+             --chart-color-success-dark: #99da94; /* Use the M3 success color */
+             --chart-color-warning-dark: #fbbc04; /* Use the M3 warning color */
+             --chart-color-error-dark: var(--md-sys-color-error-dark);
+             --chart-grid-color-dark: var(--md-sys-color-outline-variant-dark);
+             --chart-tick-color-dark: var(--md-sys-color-on-surface-variant-dark);
+             --chart-legend-color-dark: var(--md-sys-color-on-surface-variant-dark);
+             --chart-tooltip-bg-dark: var(--md-sys-color-surface-container-dark);
+             --chart-tooltip-text-dark: var(--md-sys-color-on-surface-variant-dark);
+
+             /* RGB for hover alpha */
+             --md-sys-color-primary-rgb-light: 0, 97, 164;
+             --md-sys-color-primary-rgb-dark: 160, 201, 255;
+
+            /* Shape */
+            --md-shape-corner-none: 0px;
+            --md-shape-corner-extra-small: 4px;
+            --md-shape-corner-small: 8px;
+            --md-shape-corner-medium: 12px;
+            --md-shape-corner-large: 16px;
+            --md-shape-corner-extra-large: 28px;
+            --md-shape-corner-full: 9999px;
+
+            /* Elevation */
+            --md-sys-elevation-level-0: none;
+            --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+            /* State Layers */
+            --md-sys-state-hover-state-layer-opacity: 0.08;
+            --md-sys-state-focus-state-layer-opacity: 0.12;
+            --md-sys-state-pressed-state-layer-opacity: 0.12;
+
+            /* Typography */
+            --md-sys-typescale-font-family-name: Roboto;
+            --md-sys-typescale-body-large-font-size: 1rem;
+            --md-sys-typescale-body-large-line-height: 1.5rem;
+            --md-sys-typescale-body-large-font-weight: 400;
+            --md-sys-typescale-body-medium-font-size: 0.875rem;
+            --md-sys-typescale-body-medium-line-height: 1.25rem;
+            --md-sys-typescale-body-medium-font-weight: 400;
+            --md-sys-typescale-body-small-font-size: 0.75rem;
+            --md-sys-typescale-body-small-line-height: 1rem;
+            --md-sys-typescale-body-small-font-weight: 400;
+            --md-sys-typescale-label-large-font-size: 0.875rem;
+            --md-sys-typescale-label-large-line-height: 1.25rem;
+            --md-sys-typescale-label-large-font-weight: 500;
+            --md-sys-typescale-label-medium-font-size: 0.75rem;
+            --md-sys-typescale-label-medium-line-height: 1rem;
+            --md-sys-typescale-label-medium-font-weight: 500;
+            --md-sys-typescale-label-small-font-size: 0.6875rem;
+            --md-sys-typescale-label-small-line-height: 1rem;
+            --md-sys-typescale-label-small-font-weight: 500;
+            --md-sys-typescale-title-large-font-size: 1.375rem;
+            --md-sys-typescale-title-large-line-height: 1.75rem;
+            --md-sys-typescale-title-large-font-weight: 400;
+            --md-sys-typescale-title-medium-font-size: 1rem;
+            --md-sys-typescale-title-medium-line-height: 1.5rem;
+            --md-sys-typescale-title-medium-font-weight: 500;
+             --md-sys-typescale-title-small-font-size: 0.875rem;
+            --md-sys-typescale-title-small-line-height: 1.25rem;
+            --md-sys-typescale-title-small-font-weight: 500;
+            --md-sys-typescale-headline-medium-font-size: 1.75rem;
+            --md-sys-typescale-headline-medium-font-weight: 400;
+            --md-sys-typescale-headline-medium-line-height: 2.25rem;
+            --md-sys-typescale-headline-small-font-size: 1.5rem;
+             --md-sys-typescale-headline-small-line-height: 2rem;
+             --md-sys-typescale-headline-small-font-weight: 400;
+             --md-sys-typescale-display-small-font-size: 2.25rem; /* 36px */
+            --md-sys-typescale-display-small-line-height: 2.75rem; /* 44px */
+            --md-sys-typescale-display-small-font-weight: 400;
+        }
+
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --tertiary: var(--md-sys-color-tertiary-light);
+            --on-tertiary: var(--md-sys-color-on-tertiary-light);
+            --tertiary-container: var(--md-sys-color-tertiary-container-light);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --error-container: var(--md-sys-color-error-container-light);
+            --on-error-container: var(--md-sys-color-on-error-container-light);
+            --success: var(--md-sys-color-success-light);
+            --on-success: var(--md-sys-color-on-success-light);
+            --success-container: var(--md-sys-color-success-container-light);
+            --on-success-container: var(--md-sys-color-on-success-container-light);
+            --warning: var(--md-sys-color-warning-light);
+            --on-warning: var(--md-sys-color-on-warning-light);
+            --warning-container: var(--md-sys-color-warning-container-light);
+            --on-warning-container: var(--md-sys-color-on-warning-container-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-light);
+            --surface-container-low: var(--md-sys-color-surface-container-low-light);
+            --surface-container: var(--md-sys-color-surface-container-light);
+            --surface-container-high: var(--md-sys-color-surface-container-high-light);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+            --shadow: var(--md-sys-color-shadow-light);
+            --surface-tint-color: var(--md-sys-color-surface-tint-light);
+            --inverse-surface: var(--md-sys-color-inverse-surface-light);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-light);
+            --inverse-primary: var(--md-sys-color-inverse-primary-light);
+
+            /* Chart Colors */
+            --chart-primary: var(--chart-color-primary-light);
+            --chart-secondary: var(--chart-color-secondary-light);
+            --chart-tertiary: var(--chart-color-tertiary-light);
+            --chart-success: var(--chart-color-success-light);
+            --chart-warning: var(--chart-color-warning-light);
+            --chart-error: var(--chart-color-error-light);
+            --chart-grid: var(--chart-grid-color-light);
+            --chart-tick: var(--chart-tick-color-light);
+            --chart-legend: var(--chart-legend-color-light);
+            --chart-tooltip-bg: var(--chart-tooltip-bg-light);
+            --chart-tooltip-text: var(--chart-tooltip-text-light);
+            --chart-primary-bg-alpha: rgba(var(--md-sys-color-primary-rgb-light), 0.1);
+             /* RGB values */
+             --primary-rgb: var(--md-sys-color-primary-rgb-light);
+             --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 26, 28, 30;
+             --error-rgb: 186, 26, 26;
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --tertiary: var(--md-sys-color-tertiary-dark);
+            --on-tertiary: var(--md-sys-color-on-tertiary-dark);
+            --tertiary-container: var(--md-sys-color-tertiary-container-dark);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --error-container: var(--md-sys-color-error-container-dark);
+            --on-error-container: var(--md-sys-color-on-error-container-dark);
+            --success: var(--md-sys-color-success-dark);
+            --on-success: var(--md-sys-color-on-success-dark);
+            --success-container: var(--md-sys-color-success-container-dark);
+            --on-success-container: var(--md-sys-color-on-success-container-dark);
+            --warning: var(--md-sys-color-warning-dark);
+            --on-warning: var(--md-sys-color-on-warning-dark);
+            --warning-container: var(--md-sys-color-warning-container-dark);
+            --on-warning-container: var(--md-sys-color-on-warning-container-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-dark);
+            --surface-container-low: var(--md-sys-color-surface-container-low-dark);
+            --surface-container: var(--md-sys-color-surface-container-dark);
+            --surface-container-high: var(--md-sys-color-surface-container-high-dark);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+            --shadow: var(--md-sys-color-shadow-dark);
+            --surface-tint-color: var(--md-sys-color-surface-tint-dark);
+            --inverse-surface: var(--md-sys-color-inverse-surface-dark);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-dark);
+            --inverse-primary: var(--md-sys-color-inverse-primary-dark);
+
+            /* Chart Colors */
+            --chart-primary: var(--chart-color-primary-dark);
+            --chart-secondary: var(--chart-color-secondary-dark);
+            --chart-tertiary: var(--chart-color-tertiary-dark);
+            --chart-success: var(--chart-color-success-dark);
+            --chart-warning: var(--chart-color-warning-dark);
+            --chart-error: var(--chart-color-error-dark);
+            --chart-grid: var(--chart-grid-color-dark);
+            --chart-tick: var(--chart-tick-color-dark);
+            --chart-legend: var(--chart-legend-color-dark);
+            --chart-tooltip-bg: var(--chart-tooltip-bg-dark);
+            --chart-tooltip-text: var(--chart-tooltip-text-dark);
+            --chart-primary-bg-alpha: rgba(var(--md-sys-color-primary-rgb-dark), 0.2);
+             /* RGB values */
+             --primary-rgb: var(--md-sys-color-primary-rgb-dark);
+             --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 226, 226, 230;
+             --error-rgb: 255, 180, 171;
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--md-sys-typescale-font-family-name), sans-serif;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight);
+            background-color: var(--background);
+            color: var(--on-background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Layout --- */
+        .layout-container { display: flex; height: 100vh; overflow: hidden; }
+        .main-content { flex-grow: 1; overflow-y: auto; padding: 2rem; }
+        .main-content h1 {
+            font-size: var(--md-sys-typescale-headline-medium-font-size);
+            font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+            line-height: var(--md-sys-typescale-headline-medium-line-height);
+            color: var(--on-surface);
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+         /* Section headings */
+         section h2 {
+            font-size: var(--md-sys-typescale-title-large-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight); /* 500 */
+            color: var(--on-surface);
+            margin-bottom: 1rem; /* mb-4 */
+         }
+         /* Specific adjustment for section header with button */
+         .section-header {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             margin-bottom: 1rem; /* mb-4 */
+         }
+          .section-header h2 {
+             margin-bottom: 0; /* Remove margin from h2 inside flex */
+          }
+
+
+        /* --- Sidebar (Consistent) --- */
+        .sidebar {
+            width: 256px; background-color: var(--surface-container-low); /* Sidebar distinct bg */
+            border-right: 1px solid var(--outline-variant); display: flex;
+            flex-direction: column; flex-shrink: 0; transition: background-color 0.3s ease, border-color 0.3s ease;
+            box-shadow: none; /* Remove default shadow */
+        }
+        .sidebar-header { padding: 1.5rem 1rem; border-bottom: 1px solid var(--outline-variant); transition: border-color 0.3s ease; }
+        .sidebar-title { font-size: var(--md-sys-typescale-title-large-font-size); font-weight: 700; color: var(--primary); text-decoration: none; display: block; }
+        /* Removed sidebar-subtitle as it's not present */
+        .sidebar nav a {
+            display: flex; align-items: center; padding: 0.75rem 1rem; margin: 0.25rem 0;
+            border-radius: var(--md-shape-corner-full); color: var(--on-surface-variant); text-decoration: none;
+            font-weight: var(--md-sys-typescale-label-large-font-weight); font-size: var(--md-sys-typescale-label-large-font-size);
+            position: relative; overflow: hidden; transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .sidebar nav a i { width: 24px; margin-right: 1rem; text-align: center; color: var(--on-surface-variant); transition: color 0.15s ease; }
+        .sidebar nav a::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--secondary);
+            opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .sidebar nav a:hover { color: var(--on-secondary-container); }
+        .sidebar nav a:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar nav a:hover i { color: var(--on-secondary-container); }
+        .sidebar nav a.active-link { background-color: var(--secondary-container); color: var(--on-secondary-container); }
+        .sidebar nav a.active-link i { color: var(--on-secondary-container); }
+        .sidebar nav a.logout-link { margin-top: 1.5rem; color: var(--error); }
+        .sidebar nav a.logout-link i { color: var(--error); }
+        .sidebar nav a.logout-link::before { background-color: var(--error); }
+        .sidebar nav a.logout-link:hover { color: var(--on-error-container); }
+        .sidebar nav a.logout-link:hover::before { background-color: var(--error-container); opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar nav a.logout-link:hover i { color: var(--on-error-container); }
+
+         /* --- M3 Card Style --- */
+        .m3-card {
+            background-color: var(--surface-container); /* Slightly darker than page */
+            border: 1px solid var(--outline-variant);
+            box-shadow: var(--md-sys-elevation-level-0); /* Base elevation */
+            transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease-out; /* Add transform */
+            border-radius: var(--md-shape-corner-large); /* Consistent M3 radius */
+            padding: 1.5rem; /* Standard padding (Tailwind p-6) */
+        }
+        /* M3 Hover: Slight lift and shadow increase */
+        .m3-card.card-hover:hover {
+             box-shadow: var(--md-sys-elevation-level-1); /* Lift on hover */
+             transform: translateY(-2px);
+             border-color: var(--outline); /* Optional: slightly stronger border */
+        }
+
+        /* Card Content Styling (Stats Cards) */
+        .card-title-secondary {
+            color: var(--on-surface-variant);
+            font-weight: var(--md-sys-typescale-label-medium-font-weight); /* Label Medium */
+            font-size: var(--md-sys-typescale-label-medium-font-size);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem; /* Tailwind mt-1 approx */
+        }
+        .card-metric {
+             color: var(--on-surface);
+             font-weight: var(--md-sys-typescale-display-small-font-weight);
+             font-size: var(--md-sys-typescale-display-small-font-size);
+             line-height: var(--md-sys-typescale-display-small-line-height);
+        }
+        /* Text Link Button Style */
+        .card-link-button {
+             display: inline-block; /* Allow margin */
+             color: var(--primary);
+             font-weight: var(--md-sys-typescale-label-large-font-weight); /* Label Large */
+             font-size: var(--md-sys-typescale-label-small-font-size); /* Text XS size */
+             text-decoration: none;
+             margin-top: 0.5rem; /* Tailwind mt-2 */
+             padding: 4px 0; /* Add some clickable area */
+             position: relative;
+             border-radius: var(--md-shape-corner-extra-small);
+             transition: color 0.15s ease, background-color 0.15s ease;
+        }
+         .card-link-button::after { /* Underline effect */
+            content: '';
+            position: absolute;
+            bottom: 2px; left: 0; right: 0;
+            height: 1px;
+            background-color: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.2s ease;
+         }
+         .card-link-button:hover {
+            color: var(--primary); /* Keep color */
+             /* Optional: background state layer */
+             background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity));
+         }
+         .card-link-button:hover::after {
+             transform: scaleX(1);
+         }
+
+        /* Upcoming Deadlines List */
+        .deadlines-list-container {
+            background-color: var(--surface-container); /* Same as card */
+            border-radius: var(--md-shape-corner-large);
+            border: 1px solid var(--outline-variant);
+            box-shadow: var(--md-sys-elevation-level-0);
+            overflow: hidden; /* Clip corners if needed */
+        }
+        .deadlines-list {
+             list-style: none;
+        }
+        .deadlines-list li {
+             padding: 1rem 1.5rem; /* Tailwind p-4 equivalent */
+             border-bottom: 1px solid var(--outline-variant);
+             display: flex;
+             flex-direction: column;
+             gap: 0.25rem; /* Space between text lines */
+             transition: background-color 0.15s ease;
+        }
+         .deadlines-list li:last-child {
+            border-bottom: none;
+         }
+        @media (min-width: 640px) { /* sm breakpoint */
+             .deadlines-list li {
+                 flex-direction: row;
+                 justify-content: space-between;
+                 align-items: center;
+                 gap: 1rem;
+             }
+         }
+         .deadlines-list li:hover {
+             background-color: var(--surface-container-high); /* Hover effect */
+         }
+         .deadline-title {
+             color: var(--primary); /* Primary color for title */
+             font-weight: var(--md-sys-typescale-title-small-font-weight);
+             font-size: var(--md-sys-typescale-title-small-font-size);
+         }
+         .deadline-subtitle, .deadline-date {
+             color: var(--on-surface-variant);
+             font-size: var(--md-sys-typescale-body-small-font-size);
+         }
+         .deadline-date.urgent { /* Use error color for urgency */
+             color: var(--error);
+             font-weight: var(--md-sys-typescale-label-medium-font-weight); /* Medium weight */
+         }
+          .deadline-link {
+              color: var(--primary);
+              font-weight: var(--md-sys-typescale-label-large-font-weight);
+              font-size: var(--md-sys-typescale-label-large-font-size);
+              text-decoration: none;
+              align-self: flex-start; /* Align link left on mobile */
+              margin-top: 0.5rem; /* mt-2 */
+              white-space: nowrap;
+          }
+           .deadline-link:hover {
+                text-decoration: underline;
+           }
+           @media (min-width: 640px) {
+                .deadline-link { align-self: center; margin-top: 0;}
+           }
+           /* View All link */
+           .deadlines-list li.view-all-link {
+                text-align: center;
+                padding: 0.75rem 1.5rem;
+           }
+           .deadlines-list li.view-all-link a {
+                color: var(--primary);
+                text-decoration: none;
+                font-size: var(--md-sys-typescale-label-large-font-size);
+                font-weight: var(--md-sys-typescale-label-large-font-weight);
+           }
+            .deadlines-list li.view-all-link a:hover {
+                 text-decoration: underline;
+            }
+
+
+        /* Registered/Recommended Hackathon Cards */
+        .hackathon-card { /* M3 Card base + specific styles */
+            background-color: var(--surface-container);
+            border: 1px solid var(--outline-variant);
+            box-shadow: var(--md-sys-elevation-level-0);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease-out;
+            border-radius: var(--md-shape-corner-large);
+            padding: 1.25rem; /* Slightly less padding than stats */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Push link to bottom */
+        }
+        .hackathon-card.card-hover:hover {
+             box-shadow: var(--md-sys-elevation-level-1);
+             transform: translateY(-2px);
+             border-color: var(--outline);
+        }
+         .hackathon-card h3, .hackathon-card h4 { /* Title */
+            font-size: var(--md-sys-typescale-title-medium-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight);
+            color: var(--on-surface);
+            margin-bottom: 0.25rem; /* mb-1 */
+        }
+        .hackathon-card .host-info { /* Host text */
+             font-size: var(--md-sys-typescale-body-small-font-size);
+             color: var(--on-surface-variant);
+             margin-bottom: 0.75rem; /* mb-3 */
+        }
+         .hackathon-card .host-info .host-name { /* Make host name stand out */
+            font-weight: var(--md-sys-typescale-label-medium-font-weight);
+             color: var(--on-surface);
+         }
+         /* Info block (status, team, etc.) */
+         .hackathon-info-block {
+             font-size: var(--md-sys-typescale-body-small-font-size);
+             margin-bottom: 0.75rem; /* mb-3 */
+             display: flex;
+             flex-direction: column;
+             gap: 0.25rem; /* space-y-1 */
+         }
+          .hackathon-info-block .info-label {
+             font-weight: var(--md-sys-typescale-label-medium-font-weight);
+             color: var(--on-surface-variant);
+          }
+           .hackathon-info-block .info-value a { /* Team link */
+             color: var(--primary);
+             text-decoration: none;
+           }
+           .hackathon-info-block .info-value a:hover { text-decoration: underline; }
+           .hackathon-info-block .info-value.status-registered { color: var(--success); font-weight: 500; }
+           .hackathon-info-block .info-value.status-looking { color: var(--secondary); }
+           .hackathon-info-block .info-value.status-not-submitted { color: var(--warning); }
+           .hackathon-info-block .info-value.status-na { color: var(--on-surface-variant); }
+
+         /* Prize/Info Badge */
+         .info-badge {
+             display: inline-flex; /* Use inline-flex for alignment */
+             align-items: center;
+             font-size: var(--md-sys-typescale-label-small-font-size);
+             font-weight: var(--md-sys-typescale-label-small-font-weight);
+             padding: 0.25rem 0.5rem; /* px-2.5 py-0.5 approx */
+             border-radius: var(--md-shape-corner-small); /* Small radius */
+             margin-right: 0.5rem; /* mr-2 */
+         }
+          .info-badge i { margin-right: 0.25rem; font-size: 0.8em; }
+          .badge-warning { background-color: var(--warning-container); color: var(--on-warning-container); }
+          .badge-neutral { background-color: var(--surface-variant); color: var(--on-surface-variant); }
+
+          /* Date/Deadline block */
+          .hackathon-dates-block {
+              border-top: 1px solid var(--outline-variant);
+              padding-top: 0.75rem; /* pt-3 */
+              margin-top: 0.75rem; /* mt-3 */
+              font-size: var(--md-sys-typescale-label-small-font-size); /* text-xs */
+              color: var(--on-surface-variant);
+              display: flex;
+              flex-direction: column;
+              gap: 0.375rem; /* space-y-1.5 approx */
+          }
+           .hackathon-dates-block .date-item {
+               display: flex;
+               align-items: center;
+           }
+            .hackathon-dates-block .date-item i {
+                width: 1rem; /* w-4 */
+                margin-right: 0.5rem; /* mr-2 */
+                color: var(--secondary); /* Use secondary for icons */
+                text-align: center;
+            }
+             .hackathon-dates-block .date-item .icon-primary { color: var(--primary); }
+             .hackathon-dates-block .date-item .icon-error { color: var(--error); }
+             .hackathon-dates-block .date-item .deadline-text {
+                font-weight: var(--md-sys-typescale-label-medium-font-weight);
+                color: var(--error);
+             }
+
+         /* Hackathon Card Link */
+         .hackathon-card-link {
+            color: var(--primary);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            text-decoration: none;
+            align-self: flex-start; /* Keep left align */
+            margin-top: 1rem; /* mt-4 */
+         }
+         .hackathon-card-link:hover { text-decoration: underline; }
+
+         /* Recommendation Card Specifics */
+         .recommendation-card p { /* Description text */
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            color: var(--on-surface); /* Use standard text color */
+            margin-bottom: 0.75rem; /* mb-3 */
+         }
+         .recommendation-card .date-info { /* Simpler date line */
+            font-size: var(--md-sys-typescale-body-small-font-size);
+            color: var(--on-surface-variant);
+            margin-bottom: 0.75rem; /* mb-3 */
+         }
+          .recommendation-card .date-info i { margin-right: 0.25rem; }
+
+         /* Browse All Card */
+         .browse-card {
+            background-color: var(--surface-container);
+             border: 1px dashed var(--outline); /* Dashed outline */
+             box-shadow: none;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             text-align: center;
+             color: var(--primary);
+             min-height: 150px; /* Ensure decent height */
+         }
+         .browse-card:hover {
+             background-color: var(--surface-container-high);
+             border-color: var(--primary);
+         }
+          .browse-card a {
+             color: inherit;
+             text-decoration: none;
+          }
+           .browse-card i {
+              font-size: 1.5rem; /* text-2xl */
+              margin-bottom: 0.5rem; /* mb-2 */
+           }
+            .browse-card span {
+               font-size: var(--md-sys-typescale-label-large-font-size);
+               font-weight: var(--md-sys-typescale-label-large-font-weight);
+            }
+
+
+        /* --- Utility --- */
+        .hidden { display: none !important; }
+
+        /* --- Tailwind Overrides --- */
+        /* These try to neutralize Tailwind's visual styling */
+        /* Layout/Spacing/Sizing/Typography utilities are mostly kept */
+        .bg-gray-100 { background-color: transparent !important; }
+        .bg-white { background-color: transparent !important; }
+        .text-gray-700, .text-gray-800, .text-gray-600, .text-gray-500 { color: inherit !important; }
+        .text-blue-600, .text-blue-700, .text-blue-500 { color: inherit !important; }
+        .bg-blue-100 { background-color: transparent !important; }
+        .text-red-600 { color: inherit !important; }
+        .text-green-600 { color: inherit !important; }
+        .text-orange-600 { color: inherit !important; }
+        .hover\:bg-gray-100:hover, .hover\:bg-gray-50:hover { background-color: transparent !important; }
+        .hover\:text-blue-600:hover { color: inherit !important; }
+        .hover\:bg-red-50:hover { background-color: transparent !important; }
+        .hover\:underline:hover { text-decoration: none !important; } /* Let M3 links handle hover */
+        .border-b, .border-t { border-width: 0 !important; border-color: transparent !important; }
+        .border, .border-gray-200, .border-gray-300, .border-dashed { border-width: 0 !important; border-color: transparent !important; border-style: solid !important; }
+        .divide-y > :not([hidden]) ~ :not([hidden]) { border-top-width: 0 !important; border-bottom-width: 0 !important;}
+        .divide-gray-200 > :not([hidden]) ~ :not([hidden]) { border-color: transparent !important;}
+        .bg-gray-50 { background-color: transparent !important; }
+        .bg-yellow-100, .bg-gray-100 { background-color: transparent !important; } /* Badges */
+        .text-yellow-800, .text-gray-600 { color: inherit !important; } /* Badges */
+        .shadow-md, .shadow { box-shadow: none !important; }
+        .rounded-lg, .rounded { border-radius: 0 !important; }
+        .font-semibold, .font-medium, .font-bold { font-weight: inherit !important; }
+        .text-sm, .text-lg, .text-xl, .text-2xl, .text-3xl, .text-xs { font-size: inherit !important; }
+
+    </style>
 </head>
-<body class="bg-gray-100">
-    <div class="flex h-screen">
+<body data-theme="light">
+    <div class="flex h-screen layout-container">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">
-            <div class="p-6 border-b">
-                <a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a>
+        <aside class="w-64 flex-shrink-0 sidebar">
+            <div class="p-6 border-b sidebar-header">
+                <a href="index.html" class="text-2xl font-bold sidebar-title">Hackverse</a>
             </div>
             <nav class="p-4 space-y-2">
                 <a href="participant_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
@@ -36,59 +735,61 @@
                 <!-- **** NEW TAB ADDED HERE **** -->
                 <a href="my_achievements.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-trophy w-6 mr-2"></i> My Achievements</a>
                 <!-- **** END OF NEW TAB **** -->
-                
+                <a href="resumebuilder.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-id-card w-6 mr-2"></i> Resume Builder</a>
                 <a href="my_certificates.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-certificate w-6 mr-2"></i> My Certificates</a>
                 <a href="settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
                 <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
             </nav>
         </aside>
 
-        <!-- Main Content Area (Remains the same for the dashboard view) -->
-        <main class="flex-1 overflow-y-auto p-8">
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto p-8 main-content">
             <h1 class="text-3xl font-bold mb-6">Welcome, [Participant Name]!</h1>
 
             <!-- Quick Stats/Overview -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-lg shadow card-hover">
-                    <h3 class="text-gray-500 text-sm font-medium">Active Hackathons</h3>
-                    <p class="text-3xl font-bold mt-1">3</p>
-                    <a href="my_opportunities.html" class="text-xs text-blue-500 hover:underline mt-2 inline-block">View All →</a>
+                <!-- Applied m3-card and card-hover -->
+                <div class="m3-card card-hover">
+                    <h3 class="text-sm font-medium card-title-secondary">Active Hackathons</h3>
+                    <p class="text-3xl font-bold mt-1 card-metric">3</p>
+                    <a href="my_opportunities.html" class="text-xs mt-2 inline-block card-link-button">View All →</a>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow card-hover">
-                    <h3 class="text-gray-500 text-sm font-medium">Upcoming Deadlines</h3>
-                    <p class="text-3xl font-bold mt-1">2</p>
-                    <a href="#upcoming-deadlines" class="text-xs text-blue-500 hover:underline mt-2 inline-block">See Below →</a>
+                <div class="m3-card card-hover">
+                    <h3 class="text-sm font-medium card-title-secondary">Upcoming Deadlines</h3>
+                    <p class="text-3xl font-bold mt-1 card-metric">2</p>
+                    <a href="#upcoming-deadlines" class="text-xs mt-2 inline-block card-link-button">See Below →</a>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow card-hover">
-                    <h3 class="text-gray-500 text-sm font-medium">Pending Team Invitations</h3>
-                    <p class="text-3xl font-bold mt-1">1</p>
-                    <a href="my_teams.html#invitations" class="text-xs text-blue-500 hover:underline mt-2 inline-block">View Invitations →</a>
+                <div class="m3-card card-hover">
+                    <h3 class="text-sm font-medium card-title-secondary">Pending Team Invitations</h3>
+                    <p class="text-3xl font-bold mt-1 card-metric">1</p>
+                    <a href="my_teams.html#invitations" class="text-xs mt-2 inline-block card-link-button">View Invitations →</a>
                 </div>
             </div>
 
             <!-- Upcoming Deadlines -->
             <section class="mb-8" id="upcoming-deadlines">
                 <h2 class="text-xl font-semibold mb-4">Upcoming Deadlines</h2>
-                <div class="bg-white rounded-lg shadow overflow-hidden">
-                    <ul class="divide-y divide-gray-200">
-                        <li class="p-4 flex flex-col sm:flex-row justify-between sm:items-center hover:bg-gray-50">
+                <!-- Added container class -->
+                <div class="deadlines-list-container">
+                    <ul class="deadlines-list"> <!-- Added list class -->
+                        <li> <!-- Removed padding/flex etc -->
                             <div>
-                                <p class="font-medium text-blue-600">Innovate for Tomorrow - Project Submission</p>
-                                <p class="text-sm text-gray-500">Hackathon: Innovate for Tomorrow</p>
-                                <p class="text-sm text-red-600 font-medium">Due: Oct 28, 2023, 11:59 PM PST</p>
+                                <p class="font-medium deadline-title">Innovate for Tomorrow - Project Submission</p>
+                                <p class="text-sm deadline-subtitle">Hackathon: Innovate for Tomorrow</p>
+                                <p class="text-sm font-medium deadline-date urgent">Due: Oct 28, 2023, 11:59 PM PST</p>
                             </div>
-                            <a href="opportunity_detail.html#submission" class="mt-2 sm:mt-0 text-sm text-blue-500 hover:underline font-medium">Go to Submit →</a>
+                            <a href="opportunity_detail.html#submission" class="text-sm font-medium deadline-link">Go to Submit →</a>
                         </li>
-                         <li class="p-4 flex flex-col sm:flex-row justify-between sm:items-center hover:bg-gray-50">
+                         <li>
                             <div>
-                                <p class="font-medium text-blue-600">CodeSprint Hackathon - Team Formation Deadline</p>
-                                <p class="text-sm text-gray-500">Hackathon: CodeSprint Hackathon</p>
-                                <p class="text-sm text-red-600 font-medium">Due: Nov 05, 2023, 5:00 PM EST</p>
+                                <p class="font-medium deadline-title">CodeSprint Hackathon - Team Formation Deadline</p>
+                                <p class="text-sm deadline-subtitle">Hackathon: CodeSprint Hackathon</p>
+                                <p class="text-sm font-medium deadline-date urgent">Due: Nov 05, 2023, 5:00 PM EST</p>
                             </div>
-                            <a href="my_teams.html" class="mt-2 sm:mt-0 text-sm text-blue-500 hover:underline font-medium">Manage Team →</a>
+                            <a href="my_teams.html" class="text-sm font-medium deadline-link">Manage Team →</a>
                         </li>
-                         <li class="p-4 text-center text-gray-500 text-sm hover:bg-gray-50">
-                            <a href="my_opportunities.html" class="hover:underline">View all deadlines on My Hackathons page...</a>
+                         <li class="view-all-link"> <!-- Added class -->
+                            <a href="my_opportunities.html">View all deadlines on My Hackathons page...</a>
                          </li>
                     </ul>
                 </div>
@@ -96,94 +797,95 @@
 
             <!-- Registered Hackathons -->
             <section class="mb-8">
-                <div class="flex justify-between items-center mb-4">
+                 <!-- Added section-header -->
+                <div class="section-header">
                      <h2 class="text-xl font-semibold">My Registered Hackathons</h2>
-                     <a href="my_opportunities.html" class="text-sm text-blue-600 hover:underline">View All →</a>
+                     <!-- Styled link as text button -->
+                     <a href="my_opportunities.html" class="card-link-button" style="font-size: var(--md-sys-typescale-label-large-font-size);">View All →</a>
                 </div>
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Hackathon Card 1 -->
-                    <div class="bg-white rounded-lg shadow p-5 card-hover flex flex-col justify-between">
+                    <!-- Added hackathon-card and card-hover -->
+                    <div class="hackathon-card card-hover">
                         <div>
                             <h3 class="text-lg font-bold mb-1">Innovate for Tomorrow Hackathon</h3>
-                            <p class="text-sm text-gray-600 mb-3">Hosted by: <span class="font-medium">TechCorp University</span></p>
-                            <div class="text-sm mb-3 space-y-1">
-                                <p><span class="font-medium">Status:</span> <span class="text-green-600 font-semibold">Registered</span></p>
-                                <p><span class="font-medium">Team:</span> <a href="my_teams.html#team-alpha-coders" class="text-blue-600 hover:underline">Alpha Coders</a></p>
-                                <p><span class="font-medium">Submission:</span> <span class="text-orange-600">Not Submitted Yet</span></p>
-                                <p><span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded"><i class="fas fa-trophy mr-1"></i> Prizes Available</span></p>
+                            <p class="text-sm mb-3 host-info">Hosted by: <span class="host-name">TechCorp University</span></p>
+                            <div class="text-sm mb-3 hackathon-info-block">
+                                <p><span class="info-label">Status:</span> <span class="info-value status-registered">Registered</span></p>
+                                <p><span class="info-label">Team:</span> <span class="info-value"><a href="my_teams.html#team-alpha-coders">Alpha Coders</a></span></p>
+                                <p><span class="info-label">Submission:</span> <span class="info-value status-not-submitted">Not Submitted Yet</span></p>
+                                <p><span class="info-badge badge-warning"><i class="fas fa-trophy"></i> Prizes Available</span></p>
                             </div>
-                            <div class="border-t pt-3 mt-3 space-y-1.5 text-xs text-gray-600">
-                                <div class="flex items-center">
-                                    <i class="fas fa-calendar-alt w-4 mr-2 text-blue-500" title="Event Dates"></i>
+                            <div class="pt-3 mt-3 hackathon-dates-block">
+                                <div class="date-item">
+                                    <i class="fas fa-calendar-alt icon-primary"></i>
                                     <span>Event: Oct 20 - Oct 31, 2023</span>
                                 </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-hourglass-half w-4 mr-2 text-red-500" title="Next Deadline"></i>
-                                    <span class="font-medium text-red-600">Next Deadline: Submission (Oct 28)</span>
+                                <div class="date-item">
+                                    <i class="fas fa-hourglass-half icon-error"></i>
+                                    <span class="deadline-text">Next Deadline: Submission (Oct 28)</span>
                                 </div>
                             </div>
                         </div>
-                        <a href="opportunity_detail.html?id=innovate-tomorrow" class="text-sm text-blue-600 hover:underline font-medium self-start mt-4">Go to Hackathon Page →</a>
+                        <a href="opportunity_detail.html?id=innovate-tomorrow" class="text-sm font-medium hackathon-card-link">Go to Hackathon Page →</a>
                     </div>
-                     <!-- Hackathon Card 2 -->
-                     <div class="bg-white rounded-lg shadow p-5 card-hover flex flex-col justify-between">
+                     <div class="hackathon-card card-hover">
                         <div>
                             <h3 class="text-lg font-bold mb-1">CodeSprint Hackathon</h3>
-                             <p class="text-sm text-gray-600 mb-3">Hosted by: <span class="font-medium">Dev Community Hub</span></p>
-                            <div class="text-sm mb-3 space-y-1">
-                                <p><span class="font-medium">Status:</span> <span class="text-blue-600 font-semibold">Registered</span></p>
-                                <p><span class="font-medium">Team:</span> <span class="text-gray-500">Looking for Team</span></p>
-                                 <p><span class="font-medium">Submission:</span> <span class="text-gray-500">N/A Yet</span></p>
-                                 <p><span class="inline-block bg-gray-100 text-gray-600 text-xs font-medium mr-2 px-2.5 py-0.5 rounded"><i class="fas fa-trophy mr-1"></i> Prize Info Pending</span></p>
+                            <p class="text-sm mb-3 host-info">Hosted by: <span class="host-name">Dev Community Hub</span></p>
+                            <div class="text-sm mb-3 hackathon-info-block">
+                                <p><span class="info-label">Status:</span> <span class="info-value status-registered">Registered</span></p>
+                                <p><span class="info-label">Team:</span> <span class="info-value status-looking">Looking for Team</span></p>
+                                 <p><span class="info-label">Submission:</span> <span class="info-value status-na">N/A Yet</span></p>
+                                 <p><span class="info-badge badge-neutral"><i class="fas fa-trophy"></i> Prize Info Pending</span></p>
                             </div>
-                            <div class="border-t pt-3 mt-3 space-y-1.5 text-xs text-gray-600">
-                                <div class="flex items-center">
-                                    <i class="fas fa-calendar-alt w-4 mr-2 text-blue-500" title="Event Dates"></i>
+                            <div class="pt-3 mt-3 hackathon-dates-block">
+                                <div class="date-item">
+                                    <i class="fas fa-calendar-alt icon-primary"></i>
                                     <span>Event: Nov 10 - Nov 12, 2023</span>
                                 </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-hourglass-half w-4 mr-2 text-red-500" title="Next Deadline"></i>
-                                    <span class="font-medium text-red-600">Next Deadline: Team Formation (Nov 05)</span>
+                                <div class="date-item">
+                                    <i class="fas fa-hourglass-half icon-error"></i>
+                                    <span class="deadline-text">Next Deadline: Team Formation (Nov 05)</span>
                                 </div>
                             </div>
                         </div>
-                        <a href="opportunity_detail.html?id=codesprint-hackathon" class="text-sm text-blue-600 hover:underline font-medium self-start mt-4">Go to Hackathon Page →</a>
+                        <a href="opportunity_detail.html?id=codesprint-hackathon" class="text-sm font-medium hackathon-card-link">Go to Hackathon Page →</a>
                      </div>
                  </div>
             </section>
 
             <!-- Recommended Hackathons -->
             <section>
-                 <div class="flex justify-between items-center mb-4">
+                 <!-- Added section-header -->
+                 <div class="section-header">
                      <h2 class="text-xl font-semibold">Recommended Hackathons</h2>
-                      <a href="my_opportunities.html" class="text-sm text-blue-600 hover:underline">Browse All Hackathons →</a>
+                     <a href="my_opportunities.html" class="card-link-button" style="font-size: var(--md-sys-typescale-label-large-font-size);">Browse All Hackathons →</a>
                  </div>
                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                     <!-- Recommendation Card 1 -->
-                     <div class="bg-white rounded-lg shadow p-5 card-hover">
+                     <!-- Added hackathon-card, recommendation-card and card-hover -->
+                     <div class="hackathon-card recommendation-card card-hover">
                         <h4 class="font-semibold text-md mb-1">AI/ML HealthTech Hackathon</h4>
-                        <p class="text-xs text-gray-500 mb-2">Hosted by Health Innovators</p>
-                        <p class="text-sm text-gray-700 mb-3">Based on your interest in AI and Healthcare.</p>
-                         <span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded mb-3"><i class="fas fa-trophy mr-1"></i> Prizes Available</span>
-                        <div class="text-xs text-gray-500 mb-3">
-                             <span><i class="fas fa-calendar-alt mr-1"></i> Starts: Nov 15, 2023</span>
+                        <p class="text-xs mb-2 host-info">Hosted by Health Innovators</p>
+                        <p class="text-sm mb-3">Based on your interest in AI and Healthcare.</p>
+                         <span class="info-badge badge-warning mb-3"><i class="fas fa-trophy"></i> Prizes Available</span>
+                        <div class="text-xs mb-3 date-info">
+                             <span><i class="fas fa-calendar-alt"></i> Starts: Nov 15, 2023</span>
                         </div>
-                         <a href="opportunity_detail.html?id=ai-health-hack" class="text-sm text-blue-600 hover:underline font-medium">View Details →</a>
+                         <a href="opportunity_detail.html?id=ai-health-hack" class="text-sm font-medium hackathon-card-link">View Details →</a>
                      </div>
-                      <!-- Recommendation Card 2 -->
-                      <div class="bg-white rounded-lg shadow p-5 card-hover">
+                      <div class="hackathon-card recommendation-card card-hover">
                         <h4 class="font-semibold text-md mb-1">Sustainable Future Hackathon</h4>
-                        <p class="text-xs text-gray-500 mb-2">Hosted by Green Planet Org</p>
-                        <p class="text-sm text-gray-700 mb-3">Explore challenges related to sustainability.</p>
-                         <span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded mb-3"><i class="fas fa-trophy mr-1"></i> Prizes Available</span>
-                         <div class="text-xs text-gray-500 mb-3">
-                             <span><i class="fas fa-calendar-alt mr-1"></i> Starts: Nov 20, 2023</span>
+                        <p class="text-xs mb-2 host-info">Hosted by Green Planet Org</p>
+                        <p class="text-sm mb-3">Explore challenges related to sustainability.</p>
+                         <span class="info-badge badge-warning mb-3"><i class="fas fa-trophy"></i> Prizes Available</span>
+                         <div class="text-xs mb-3 date-info">
+                             <span><i class="fas fa-calendar-alt"></i> Starts: Nov 20, 2023</span>
                         </div>
-                         <a href="opportunity_detail.html?id=sustainable-future" class="text-sm text-blue-600 hover:underline font-medium">View Details →</a>
+                         <a href="opportunity_detail.html?id=sustainable-future" class="text-sm font-medium hackathon-card-link">View Details →</a>
                      </div>
-                     <!-- Placeholder to browse -->
-                     <div class="bg-white rounded-lg shadow p-4 flex items-center justify-center card-hover border border-dashed border-gray-300">
-                         <a href="my_opportunities.html" class="text-center text-blue-600 hover:underline">
+                     <!-- Added browse-card and card-hover -->
+                     <div class="browse-card card-hover">
+                         <a href="my_opportunities.html">
                              <i class="fas fa-search block text-2xl mb-2"></i>
                              <span class="text-sm font-medium">Browse All Hackathons</span>
                          </a>
@@ -193,5 +895,30 @@
 
         </main>
     </div>
+    <script>
+        // No specific JS needed for this page based on the original code
+        // Theme toggle JS can be added if the button is included
+         /*
+         document.addEventListener('DOMContentLoaded', () => {
+            const htmlElement = document.documentElement;
+            const themeToggleButton = document.getElementById('themeToggle'); // Make sure button exists
+
+            if (themeToggleButton) {
+                const setTheme = (theme) => {
+                    htmlElement.setAttribute('data-theme', theme);
+                    localStorage.setItem('theme', theme);
+                };
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                setTheme(savedTheme);
+
+                themeToggleButton.addEventListener('click', () => {
+                    const currentTheme = htmlElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                    setTheme(newTheme);
+                });
+            }
+         });
+         */
+    </script>
 </body>
 </html>

@@ -1,25 +1,439 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
-    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Hackverse</title>
-     <script src="https://cdn.tailwindcss.com"></script>
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-     <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-     <style> body { font-family: 'Inter', sans-serif; } </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - M3 Style</title>
+    <!-- Tailwind CSS (Kept as per constraint, but styles will be overridden) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome (Optional, if Navbar/Footer use icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts (Roboto for M3) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Material Design 3 Variables (Consistent Set) --- */
+        :root {
+             /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Surface & Background */
+            --md-sys-color-background-light: #fefcff; /* Off-white */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-light: #ffffff; /* Pure white */
+            --md-sys-color-surface-container-low-light: #f8f2f7;
+            --md-sys-color-surface-container-light: #eeeef2;
+            --md-sys-color-surface-container-high-light: #e8e8ed;
+            --md-sys-color-surface-container-highest-light: #e2e2e6; /* Often used for TopAppBar */
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-background-dark: #1a1c1e; /* Dark Gray */
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-dark: #0e1013;
+            --md-sys-color-surface-container-low-dark: #1d1f22;
+            --md-sys-color-surface-container-dark: #212326;
+            --md-sys-color-surface-container-high-dark: #2b2d30;
+            --md-sys-color-surface-container-highest-dark: #36383a; /* Often used for TopAppBar */
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+             /* Shape */
+             --md-shape-corner-none: 0px;
+             --md-shape-corner-extra-small: 4px;
+             --md-shape-corner-small: 8px;
+             --md-shape-corner-medium: 12px;
+             --md-shape-corner-large: 16px;
+             --md-shape-corner-extra-large: 28px;
+             --md-shape-corner-full: 9999px;
+
+             /* Elevation */
+             --md-sys-elevation-level-0: none;
+             --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+             --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+             --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+             /* Typography */
+             --md-sys-typescale-font-family-name: Roboto;
+             --md-sys-typescale-body-large-font-size: 1rem;
+             --md-sys-typescale-body-large-line-height: 1.5rem;
+             --md-sys-typescale-body-large-font-weight: 400;
+             --md-sys-typescale-body-medium-font-size: 0.875rem;
+             --md-sys-typescale-body-medium-line-height: 1.25rem;
+             --md-sys-typescale-body-medium-font-weight: 400;
+             --md-sys-typescale-body-small-font-size: 0.75rem;
+             --md-sys-typescale-body-small-line-height: 1rem;
+             --md-sys-typescale-body-small-font-weight: 400;
+             --md-sys-typescale-label-large-font-size: 0.875rem;
+             --md-sys-typescale-label-large-line-height: 1.25rem;
+             --md-sys-typescale-label-large-font-weight: 500;
+             --md-sys-typescale-label-medium-font-size: 0.75rem;
+             --md-sys-typescale-label-medium-line-height: 1rem;
+             --md-sys-typescale-label-medium-font-weight: 500;
+             --md-sys-typescale-label-small-font-size: 0.6875rem;
+             --md-sys-typescale-label-small-line-height: 1rem;
+             --md-sys-typescale-label-small-font-weight: 500;
+             --md-sys-typescale-title-large-font-size: 1.375rem;
+             --md-sys-typescale-title-large-line-height: 1.75rem;
+             --md-sys-typescale-title-large-font-weight: 400;
+             --md-sys-typescale-title-medium-font-size: 1rem;
+             --md-sys-typescale-title-medium-line-height: 1.5rem;
+             --md-sys-typescale-title-medium-font-weight: 500;
+             --md-sys-typescale-headline-large-font-size: 2rem; /* For H1 */
+             --md-sys-typescale-headline-large-line-height: 2.5rem;
+             --md-sys-typescale-headline-large-font-weight: 400;
+             --md-sys-typescale-headline-medium-font-size: 1.75rem; /* For H2 */
+             --md-sys-typescale-headline-medium-line-height: 2.25rem;
+             --md-sys-typescale-headline-medium-font-weight: 400;
+             --md-sys-typescale-headline-small-font-size: 1.5rem;
+             --md-sys-typescale-headline-small-line-height: 2rem;
+             --md-sys-typescale-headline-small-font-weight: 400;
+        }
+
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-light);
+            --surface-container-low: var(--md-sys-color-surface-container-low-light);
+            --surface-container: var(--md-sys-color-surface-container-light);
+            --surface-container-high: var(--md-sys-color-surface-container-high-light);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-dark);
+            --surface-container-low: var(--md-sys-color-surface-container-low-dark);
+            --surface-container: var(--md-sys-color-surface-container-dark);
+            --surface-container-high: var(--md-sys-color-surface-container-high-dark);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--md-sys-typescale-font-family-name), sans-serif;
+            background-color: var(--background);
+            color: var(--on-background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex; /* Needed for footer push */
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Placeholder Navbar --- */
+        .placeholder-nav {
+            background-color: var(--surface-container-highest);
+            color: var(--on-surface);
+            padding: 1rem 1.5rem;
+            box-shadow: var(--md-sys-elevation-level-1);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .placeholder-nav a {
+             color: var(--primary);
+             text-decoration: none;
+             font-weight: 500;
+        }
+
+        /* --- Main Content Area --- */
+        main {
+            flex-grow: 1; /* Allow main to grow */
+            /* Keep Tailwind container classes for structure */
+        }
+        main h1 {
+            font-size: var(--md-sys-typescale-headline-large-font-size);
+            font-weight: var(--md-sys-typescale-headline-large-font-weight);
+            line-height: var(--md-sys-typescale-headline-large-line-height);
+            color: var(--on-surface);
+            /* Keep Tailwind margin mb-6 */
+        }
+
+        /* --- Content Container --- */
+        .content-container {
+            background-color: var(--surface-container-low); /* Slightly off background */
+            color: var(--on-surface);
+            padding: 1.5rem 2rem; /* M3 padding */
+            border-radius: var(--md-shape-corner-large); /* M3 card shape */
+            box-shadow: var(--md-sys-elevation-level-1);
+            border: 1px solid var(--outline-variant);
+        }
+
+        /* M3 Typography for Content within Container */
+        .content-container h2 {
+            font-size: var(--md-sys-typescale-headline-small-font-size);
+            font-weight: var(--md-sys-typescale-headline-small-font-weight);
+            color: var(--on-surface);
+            margin-top: 1.5rem; /* Space above h2 */
+            margin-bottom: 0.75rem; /* Space below h2 */
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--outline-variant);
+        }
+        .content-container p {
+             font-size: var(--md-sys-typescale-body-large-font-size);
+             line-height: var(--md-sys-typescale-body-large-line-height);
+             color: var(--on-surface-variant); /* Use variant for body text */
+             margin-bottom: 1rem;
+         }
+         .content-container ul, .content-container ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--on-surface-variant);
+         }
+         .content-container li { margin-bottom: 0.5rem; }
+         .content-container a { color: var(--primary); text-decoration: underline; }
+         .content-container a:hover { text-decoration: none; }
+         .content-container strong, .content-container b {
+             font-weight: 700; /* Bold */
+             color: var(--on-surface); /* Slightly stronger color */
+         }
+
+        /* --- Placeholder Footer --- */
+        .placeholder-footer {
+            background-color: var(--surface-container);
+            color: var(--on-surface-variant);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            font-size: var(--md-sys-typescale-body-small-font-size);
+            border-top: 1px solid var(--outline-variant);
+        }
+
+        /* --- Tailwind/Prose Overrides --- */
+        /* Neutralize visual styles from frameworks */
+        body.bg-gray-100 { background-color: transparent !important; }
+        .bg-white { background-color: transparent !important; }
+        .text-4xl, .font-bold, .mb-6, .p-6, .rounded-lg, .shadow { /* Reset effects */
+            font-size: inherit !important;
+            font-weight: inherit !important;
+            margin: inherit !important; /* Caution: Overrides all margins */
+            padding: inherit !important; /* Caution: Overrides all paddings */
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+        /* Specific margin overrides if needed instead of blanket */
+        main.py-12 { padding-top: 0 !important; padding-bottom: 0 !important; }
+        .container { margin-left: auto !important; margin-right: auto !important; padding-left: 0 !important; padding-right: 0 !important; } /* Let M3 handle padding */
+
+        /* Prose Overrides - attempt to neutralize */
+        .prose {
+            color: inherit !important;
+            max-width: none !important; /* Keep user's max-w-none */
+        }
+        .prose h2 {
+            color: inherit !important;
+            font-size: inherit !important;
+            font-weight: inherit !important;
+            margin-top: 0 !important; margin-bottom: 0 !important;
+            padding-bottom: 0 !important; border-bottom: none !important;
+        }
+         .prose p {
+            color: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            margin-top: 0 !important; margin-bottom: 0 !important;
+         }
+         /* Add overrides for other prose elements (ul, li, a, strong) if needed */
+
+         /* Navbar/Footer Specific Overrides (If original classes were known) */
+         .bg-gray-900 { background-color: transparent !important; }
+         .text-white { color: inherit !important; }
+         .text-gray-400 { color: inherit !important; }
+         .py-10 { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+
+    </style>
 </head>
-<body class="bg-gray-100">
-    <nav class="bg-gray-900 text-white shadow-md sticky top-0 z-50">...</nav> <!-- Include Navbar -->
+<body data-theme="light"> <!-- Moved data-theme to body -->
+
+    <!-- M3 Placeholder Navbar -->
+    <nav class="placeholder-nav">
+        <a href="index.html">Hackverse</a>
+        <!-- Add other nav links if structure was known -->
+    </nav>
+
+    <!-- Keep Tailwind container classes but M3 styles apply inside -->
     <main class="container mx-auto px-4 md:px-6 py-12 min-h-[60vh]">
         <h1 class="text-4xl font-bold mb-6">Privacy Policy</h1>
-        <div class="bg-white p-6 rounded-lg shadow prose max-w-none"> <!-- Using prose for text formatting -->
-            <p>Your privacy policy details go here...</p>
+        <!-- Added content-container class -->
+        <div class="bg-white p-6 rounded-lg shadow prose max-w-none content-container">
+            <p>**(Last Updated: [Date])**</p>
+            <p>Welcome to Hackverse! We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.</p>
+
             <h2>Information We Collect</h2>
-            <p>Details about data collection...</p>
+            <p>We may collect information about you in a variety of ways. The information we may collect on the Platform includes:</p>
+            <ul>
+                 <li><strong>Personal Data:</strong> Personally identifiable information, such as your name, email address, university/organization, graduation year, skills, and profile picture, that you voluntarily give to us when you register with the Platform or when you choose to participate in various activities related to the Platform, such as hackathons, team formations, and profile updates.</li>
+                 <li><strong>Derivative Data:</strong> Information our servers automatically collect when you access the Platform, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed directly before and after accessing the Platform.</li>
+                 <li><strong>Submission Data:</strong> Information related to your project submissions, including project descriptions, code repository links, presentation files, video links, team members involved, and any other data submitted as part of a hackathon.</li>
+                 <li><strong>Communication Data:</strong> Information exchanged when you communicate with us or other users through the Platform, such as support requests or team chat messages (if applicable).</li>
+            </ul>
+
             <h2>How We Use Information</h2>
-            <p>Details about data usage...</p>
+            <p>Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Platform to:</p>
+            <ul>
+                <li>Create and manage your account.</li>
+                <li>Facilitate hackathon organization, participation, submission, and judging processes.</li>
+                <li>Enable team formation and collaboration.</li>
+                <li>Email you regarding your account or registered hackathons.</li>
+                <li>Notify you of updates to the Platform or relevant opportunities.</li>
+                <li>Monitor and analyze usage and trends to improve your experience with the Platform.</li>
+                <li>Prevent fraudulent transactions, monitor against theft, and protect against criminal activity.</li>
+                <li>Request feedback and contact you about your use of the Platform.</li>
+                <li>Resolve disputes and troubleshoot problems.</li>
+                <li>Respond to product and customer service requests.</li>
+                 <li>Compile anonymous statistical data and analysis for use internally or with third parties (like aggregated participation statistics).</li>
+            </ul>
+
+             <h2>Disclosure of Your Information</h2>
+             <p>We may share information we have collected about you in certain situations. Your information may be disclosed as follows:</p>
+             <ul>
+                 <li><strong>By Law or to Protect Rights:</strong> If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others, we may share your information as permitted or required by any applicable law, rule, or regulation.</li>
+                 <li><strong>Hackathon Organizers:</strong> Information necessary for managing a specific hackathon (like your name, email, team affiliation, submission details) will be shared with the verified organizers of that hackathon.</li>
+                 <li><strong>Team Members:</strong> If you join a team, your profile information (like name, skills) may be visible to your teammates.</li>
+                 <li><strong>Third-Party Service Providers:</strong> We may share your information with third parties that perform services for us or on our behalf, including data analysis, email delivery, hosting services, customer service, and marketing assistance. (e.g., cloud hosting providers).</li>
+                 <li><strong>Public Profile & Submissions:</strong> Certain information on your profile may be publicly visible. Hackathon submissions may be viewable by judges, organizers, and potentially other participants or the public, depending on the hackathon's rules.</li>
+                 <li><strong>Aggregated Data:</strong> We may share aggregated and anonymized data, which does not identify you personally, with partners or for research purposes.</li>
+             </ul>
+
+             <h2>Security of Your Information</h2>
+             <p>We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.</p>
+
+             <h2>Your Privacy Choices</h2>
+             <p>You may at any time review or change the information in your account or terminate your account by:</p>
+             <ul>
+                 <li>Logging into your account settings and updating your account information.</li>
+                 <li>Contacting us using the contact information provided below.</li>
+             </ul>
+             <p>Upon your request to terminate your account, we will deactivate or delete your account and information from our active databases. However, some information may be retained in our files to prevent fraud, troubleshoot problems, assist with any investigations, enforce our Terms of Service and/or comply with legal requirements.</p>
+
+             <h2>Policy for Children</h2>
+             <p>We do not knowingly solicit information from or market to children under the age of 13. If you become aware of any data we have collected from children under age 13, please contact us using the contact information provided below.</p>
+
+             <h2>Changes to This Privacy Policy</h2>
+             <p>We may update this Privacy Policy from time to time in order to reflect, for example, changes to our practices or for other operational, legal, or regulatory reasons. We will notify you of any changes by posting the new Privacy Policy on the Platform. You are advised to review this Privacy Policy periodically for any changes.</p>
+
+             <h2>Contact Us</h2>
+             <p>If you have questions or comments about this Privacy Policy, please contact us at:</p>
+             <p>Email: <a href="mailto:privacy@hackverse.example.com">privacy@hackverse.example.com</a></p>
+             <p>[Optional: Add Physical Address or other contact methods]</p>
         </div>
     </main>
-    <footer class="bg-gray-900 text-gray-400 py-10">...</footer> <!-- Include Footer -->
+
+    <!-- M3 Placeholder Footer -->
+    <footer class="placeholder-footer">
+        © 2023 Hackverse. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+    </footer>
+
+    <script>
+        // Optional: Add JS for theme toggle or other interactions if needed
+         /*
+         document.addEventListener('DOMContentLoaded', () => {
+            const htmlElement = document.documentElement;
+            const themeToggleButton = document.getElementById('themeToggle'); // Make sure button exists
+
+            if (themeToggleButton) {
+                const setTheme = (theme) => {
+                    htmlElement.setAttribute('data-theme', theme);
+                    localStorage.setItem('theme', theme);
+                };
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                setTheme(savedTheme);
+
+                themeToggleButton.addEventListener('click', () => {
+                    const currentTheme = htmlElement.getAttribute('data-theme');
+                    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                    setTheme(newTheme);
+                });
+            }
+         });
+         */
+    </script>
 </body>
 </html>

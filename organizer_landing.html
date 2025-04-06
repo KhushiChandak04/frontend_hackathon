@@ -1,84 +1,1004 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Host Your Hackathon - Hackverse</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Host Your Hackathon - Hackverse (M3 Style)</title>
+    <!-- Font Awesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Using Roboto as a common M3 font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
+        /* --- Material Design 3 Variables (Consistent Set) --- */
+        :root {
+            /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Additional colors */
+            --md-sys-color-success-light: #177e2a; /* Green */
+            --md-sys-color-on-success-light: #ffffff;
+            --md-sys-color-success-container-light: #b4f7ae;
+            --md-sys-color-on-success-container-light: #002205;
+            --md-sys-color-warning-light: #7e5700; /* Yellow/Orange */
+            --md-sys-color-on-warning-light: #ffffff;
+            --md-sys-color-warning-container-light: #ffdea3;
+            --md-sys-color-on-warning-container-light: #281900;
+            /* Surface & Background */
+            --md-sys-color-background-light: #fefcff; /* Off-white */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component backgrounds */
+            --md-sys-color-on-surface-light: #1a1c1e;
+            --md-sys-color-surface-bright-light: #f8faff; /* Slightly brighter surface */
+            --md-sys-color-surface-dim-light: #dadee3; /* Slightly dimmer surface */
+            --md-sys-color-surface-container-lowest-light: #ffffff; /* Pure white */
+            --md-sys-color-surface-container-low-light: #f8f2f7;
+            --md-sys-color-surface-container-light: #eeeef2;
+            --md-sys-color-surface-container-high-light: #e8e8ed;
+            --md-sys-color-surface-container-highest-light: #e2e2e6; /* Often used for TopAppBar */
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-success-dark: #99da94;
+            --md-sys-color-on-success-dark: #00390d;
+            --md-sys-color-success-container-dark: #005317;
+            --md-sys-color-on-success-container-dark: #b4f7ae;
+            --md-sys-color-warning-dark: #fbbc04;
+            --md-sys-color-on-warning-dark: #412d00;
+            --md-sys-color-warning-container-dark: #5f4200;
+            --md-sys-color-on-warning-container-dark: #ffdea3;
+            --md-sys-color-background-dark: #1a1c1e; /* Dark Gray */
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e; /* Component backgrounds */
+             --md-sys-color-surface-bright-dark: #36383c; /* Brighter dark */
+            --md-sys-color-surface-dim-dark: #111315; /* Dimmer dark */
+            --md-sys-color-surface-container-lowest-dark: #0e1013;
+            --md-sys-color-surface-container-low-dark: #1d1f22;
+            --md-sys-color-surface-container-dark: #212326;
+            --md-sys-color-surface-container-high-dark: #2b2d30;
+            --md-sys-color-surface-container-highest-dark: #36383a; /* Often used for TopAppBar */
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+            /* Shape */
+            --md-shape-corner-none: 0px;
+            --md-shape-corner-extra-small: 4px;
+            --md-shape-corner-small: 8px;
+            --md-shape-corner-medium: 12px;
+            --md-shape-corner-large: 16px;
+            --md-shape-corner-extra-large: 28px;
+            --md-shape-corner-full: 9999px;
+
+            /* Elevation */
+            --md-sys-elevation-level-0: none;
+            --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+            /* State Layers */
+            --md-sys-state-hover-state-layer-opacity: 0.08;
+            --md-sys-state-focus-state-layer-opacity: 0.12;
+            --md-sys-state-pressed-state-layer-opacity: 0.12;
+            --md-sys-state-dragged-state-layer-opacity: 0.16;
+
+            /* Typography */
+            --md-sys-typescale-font-family-name: Roboto; /* Base Font */
+
+            --md-sys-typescale-body-large-font-size: 1rem; /* 16px */
+            --md-sys-typescale-body-large-line-height: 1.5rem; /* 24px */
+            --md-sys-typescale-body-large-font-weight: 400;
+            --md-sys-typescale-body-medium-font-size: 0.875rem; /* 14px */
+            --md-sys-typescale-body-medium-line-height: 1.25rem; /* 20px */
+            --md-sys-typescale-body-medium-font-weight: 400;
+            --md-sys-typescale-body-small-font-size: 0.75rem; /* 12px */
+            --md-sys-typescale-body-small-line-height: 1rem; /* 16px */
+            --md-sys-typescale-body-small-font-weight: 400;
+
+            --md-sys-typescale-label-large-font-size: 0.875rem; /* 14px */
+            --md-sys-typescale-label-large-line-height: 1.25rem; /* 20px */
+            --md-sys-typescale-label-large-font-weight: 500;
+            --md-sys-typescale-label-medium-font-size: 0.75rem; /* 12px */
+            --md-sys-typescale-label-medium-line-height: 1rem; /* 16px */
+            --md-sys-typescale-label-medium-font-weight: 500;
+            --md-sys-typescale-label-small-font-size: 0.6875rem; /* 11px */
+            --md-sys-typescale-label-small-line-height: 1rem; /* 16px */
+            --md-sys-typescale-label-small-font-weight: 500;
+
+            --md-sys-typescale-title-large-font-size: 1.375rem; /* 22px */
+            --md-sys-typescale-title-large-line-height: 1.75rem; /* 28px */
+            --md-sys-typescale-title-large-font-weight: 400;
+            --md-sys-typescale-title-medium-font-size: 1rem; /* 16px */
+            --md-sys-typescale-title-medium-line-height: 1.5rem; /* 24px */
+            --md-sys-typescale-title-medium-font-weight: 500;
+            --md-sys-typescale-title-small-font-size: 0.875rem; /* 14px */
+            --md-sys-typescale-title-small-line-height: 1.25rem; /* 20px */
+            --md-sys-typescale-title-small-font-weight: 500;
+
+            --md-sys-typescale-headline-large-font-size: 2rem; /* 32px */
+            --md-sys-typescale-headline-large-line-height: 2.5rem; /* 40px */
+            --md-sys-typescale-headline-large-font-weight: 400;
+            --md-sys-typescale-headline-medium-font-size: 1.75rem; /* 28px */
+            --md-sys-typescale-headline-medium-line-height: 2.25rem; /* 36px */
+            --md-sys-typescale-headline-medium-font-weight: 400;
+            --md-sys-typescale-headline-small-font-size: 1.5rem; /* 24px */
+            --md-sys-typescale-headline-small-line-height: 2rem; /* 32px */
+            --md-sys-typescale-headline-small-font-weight: 400;
+
+            --md-sys-typescale-display-large-font-size: 3.5625rem; /* 57px */
+            --md-sys-typescale-display-large-line-height: 4rem; /* 64px */
+            --md-sys-typescale-display-large-font-weight: 400; /* Can be bolder */
+            --md-sys-typescale-display-medium-font-size: 2.8125rem; /* 45px */
+            --md-sys-typescale-display-medium-line-height: 3.25rem; /* 52px */
+            --md-sys-typescale-display-medium-font-weight: 400;
+            --md-sys-typescale-display-small-font-size: 2.25rem; /* 36px */
+            --md-sys-typescale-display-small-line-height: 2.75rem; /* 44px */
+            --md-sys-typescale-display-small-font-weight: 400;
+        }
+
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --tertiary: var(--md-sys-color-tertiary-light);
+            --on-tertiary: var(--md-sys-color-on-tertiary-light);
+            --tertiary-container: var(--md-sys-color-tertiary-container-light);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --error-container: var(--md-sys-color-error-container-light);
+            --on-error-container: var(--md-sys-color-on-error-container-light);
+            --success: var(--md-sys-color-success-light);
+            --on-success: var(--md-sys-color-on-success-light);
+            --success-container: var(--md-sys-color-success-container-light);
+            --on-success-container: var(--md-sys-color-on-success-container-light);
+            --warning: var(--md-sys-color-warning-light);
+            --on-warning: var(--md-sys-color-on-warning-light);
+            --warning-container: var(--md-sys-color-warning-container-light);
+            --on-warning-container: var(--md-sys-color-on-warning-container-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-bright: var(--md-sys-color-surface-bright-light);
+            --surface-dim: var(--md-sys-color-surface-dim-light);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-light);
+            --surface-container-low: var(--md-sys-color-surface-container-low-light);
+            --surface-container: var(--md-sys-color-surface-container-light);
+            --surface-container-high: var(--md-sys-color-surface-container-high-light);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+            --shadow: var(--md-sys-color-shadow-light);
+            --surface-tint-color: var(--md-sys-color-surface-tint-light);
+            --inverse-surface: var(--md-sys-color-inverse-surface-light);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-light);
+            --inverse-primary: var(--md-sys-color-inverse-primary-light);
+            --primary-rgb: 0, 97, 164;
+            --shadow-rgb: 0, 0, 0;
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --tertiary: var(--md-sys-color-tertiary-dark);
+            --on-tertiary: var(--md-sys-color-on-tertiary-dark);
+            --tertiary-container: var(--md-sys-color-tertiary-container-dark);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --error-container: var(--md-sys-color-error-container-dark);
+            --on-error-container: var(--md-sys-color-on-error-container-dark);
+            --success: var(--md-sys-color-success-dark);
+            --on-success: var(--md-sys-color-on-success-dark);
+            --success-container: var(--md-sys-color-success-container-dark);
+            --on-success-container: var(--md-sys-color-on-success-container-dark);
+            --warning: var(--md-sys-color-warning-dark);
+            --on-warning: var(--md-sys-color-on-warning-dark);
+            --warning-container: var(--md-sys-color-warning-container-dark);
+            --on-warning-container: var(--md-sys-color-on-warning-container-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+             --surface-bright: var(--md-sys-color-surface-bright-dark);
+            --surface-dim: var(--md-sys-color-surface-dim-dark);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-dark);
+            --surface-container-low: var(--md-sys-color-surface-container-low-dark);
+            --surface-container: var(--md-sys-color-surface-container-dark);
+            --surface-container-high: var(--md-sys-color-surface-container-high-dark);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+            --shadow: var(--md-sys-color-shadow-dark);
+            --surface-tint-color: var(--md-sys-color-surface-tint-dark);
+            --inverse-surface: var(--md-sys-color-inverse-surface-dark);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-dark);
+            --inverse-primary: var(--md-sys-color-inverse-primary-dark);
+            --primary-rgb: 160, 201, 255;
+            --shadow-rgb: 0, 0, 0;
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--md-sys-typescale-font-family-name), sans-serif;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight);
+            background-color: var(--background);
+            color: var(--on-background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        .hero-bg {
-            background-color: #4f46e5; /* Indigo */
-            background-image: linear-gradient(to bottom right, #4f46e5, #7c3aed); /* Indigo to Purple */
+        section {
+            padding: 4rem 0; /* Default vertical padding for sections */
         }
-        /* Optional: Small animation for feature icons */
-        .feature-icon:hover i {
-            transform: scale(1.1);
+        .container {
+            width: 100%;
+            max-width: 1280px; /* Consistent max width */
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem; /* Consistent horizontal padding */
+            padding-right: 1rem;
+        }
+        @media (min-width: 640px) {
+            .container { padding-left: 1.5rem; padding-right: 1.5rem; }
+        }
+        @media (min-width: 1024px) {
+             .container { padding-left: 2rem; padding-right: 2rem; }
+        }
+
+        /* --- Buttons (Consistent Set) --- */
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.625rem 1.5rem; border-radius: var(--md-shape-corner-full);
+            font-family: inherit; font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            text-align: center; text-decoration: none; border: none; cursor: pointer; position: relative;
+            overflow: hidden; user-select: none; vertical-align: middle;
+             transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+        }
+        .button::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: currentColor; opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .button:hover { transform: translateY(-1px); } /* Subtle lift */
+        .button:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .button:focus { outline: none; }
+        .button:focus::before { opacity: var(--md-sys-state-focus-state-layer-opacity); }
+        .button:active { transform: translateY(0); }
+        .button:active::before { opacity: var(--md-sys-state-pressed-state-layer-opacity); }
+
+        .button-filled { background-color: var(--primary); color: var(--on-primary); box-shadow: var(--md-sys-elevation-level-0); }
+        .button-filled:hover { box-shadow: var(--md-sys-elevation-level-1); }
+
+        .button-outlined { background-color: transparent; color: var(--primary); border: 1px solid var(--outline); }
+        .button-outlined:hover { background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity)); }
+        .button-outlined::before { background-color: var(--primary); }
+
+        .button-text { background-color: transparent; color: var(--primary); padding-left: 0.75rem; padding-right: 0.75rem; }
+        .button-text::before { background-color: var(--primary); }
+        .button-text:hover { background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity)); }
+
+        .button-tonal { background-color: var(--secondary-container); color: var(--on-secondary-container); box-shadow: var(--md-sys-elevation-level-0);}
+        .button-tonal:hover { box-shadow: var(--md-sys-elevation-level-1); }
+        .button-tonal::before { background-color: var(--on-secondary-container); }
+
+        .button-elevated { background-color: var(--surface-container-low); color: var(--primary); box-shadow: var(--md-sys-elevation-level-1);}
+        .button-elevated:hover { box-shadow: var(--md-sys-elevation-level-2); }
+        .button-elevated::before { background-color: var(--primary); }
+
+        .button-icon { padding: 0.5rem; border-radius: 50%; line-height: 0; }
+        .button-icon i { font-size: 1.25rem; }
+
+         /* Inverse buttons for dark backgrounds */
+        .button-filled-inverse { background-color: var(--inverse-primary); color: var(--on-primary); /* Or inverse on primary */ }
+        .button-outlined-inverse { background-color: transparent; color: var(--inverse-on-surface); border: 1px solid var(--inverse-on-surface); }
+        .button-outlined-inverse:hover { background-color: rgba(255, 255, 255, 0.1); } /* Adjust alpha */
+        .button-text-inverse { background-color: transparent; color: var(--inverse-on-surface); }
+        .button-text-inverse:hover { background-color: rgba(255, 255, 255, 0.1); }
+
+
+        /* --- Navigation (Top App Bar) --- */
+        .top-app-bar {
+            background-color: var(--surface-container-highest); /* Slightly off-white/dark */
+            box-shadow: var(--md-sys-elevation-level-1); /* Or use border */
+            /* border-bottom: 1px solid var(--outline-variant); */
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            transition: background-color 0.3s ease;
+        }
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px; /* M3 standard height */
+        }
+        .navbar-brand a {
+            font-size: var(--md-sys-typescale-title-large-font-size);
+            font-weight: 700; /* Bolder */
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .navbar-links {
+            display: none; /* Hidden on mobile by default */
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .navbar-links {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem; /* Space between links */
+                margin-left: 1.5rem; /* Space from brand */
+            }
+        }
+        .navbar-links a {
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--md-shape-corner-small);
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.15s ease;
+            /* Underline effect can be added with ::after */
+        }
+         .navbar-links a::before { /* State layer */
+            content: ''; position: absolute; top:0; left:0; right:0; bottom:0;
+            background-color: var(--on-surface); opacity: 0; border-radius: inherit;
+            transition: opacity 0.15s ease;
+         }
+         .navbar-links a:hover { color: var(--on-surface); }
+         .navbar-links a:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+         /* Active link indicator (optional) */
+         .navbar-links a.active {
+             color: var(--primary);
+             /* Add border-bottom or background */
+         }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* 12px */
+        }
+        .navbar-actions .login-link { /* Style the login link as text button */
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+             border-radius: var(--md-shape-corner-full);
+             transition: background-color 0.15s ease, color 0.15s ease;
+        }
+         .navbar-actions .login-link:hover {
+            color: var(--primary);
+             background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity));
+         }
+
+        .mobile-menu-button {
+            display: inline-flex; /* Use flex for icon buttons */
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: none;
+            padding: 0.5rem; /* 8px */
+            border-radius: 50%;
+            color: var(--on-surface-variant);
+            cursor: pointer;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .mobile-menu-button:hover {
+            color: var(--on-surface);
+            background-color: rgba(var(--on-surface-rgb), var(--md-sys-state-hover-state-layer-opacity));
+        }
+        .mobile-menu-button i { font-size: 1.5rem; } /* 24px icon */
+
+        @media (min-width: 640px) { /* sm breakpoint */
+             .mobile-menu-button-container { display: none; }
+        }
+
+        .mobile-menu {
+            /* display: none; */ /* Handled by JS */
+            background-color: var(--surface-container-highest);
+            border-top: 1px solid var(--outline-variant);
+            padding: 0.5rem 0;
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem; /* More padding */
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            transition: background-color 0.15s ease, color 0.15s ease;
+            border-left: 4px solid transparent;
+        }
+        .mobile-menu a:hover {
+             background-color: var(--surface-container-high);
+             color: var(--on-surface);
+             border-left-color: var(--primary);
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            background-color: var(--primary-container); /* M3 primary container */
+            /* Or keep gradient: background-image: linear-gradient(to bottom right, var(--primary), var(--tertiary)); */
+            color: var(--on-primary-container); /* Text color for container */
+            padding-top: 5rem; /* More padding */
+            padding-bottom: 6rem;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: var(--md-sys-typescale-display-medium-font-size);
+            font-weight: 700; /* Bolder for display */
+            line-height: var(--md-sys-typescale-display-medium-line-height);
+            letter-spacing: -0.5px;
+            margin-bottom: 1.5rem; /* 24px */
+        }
+        .hero-section p {
+            font-size: var(--md-sys-typescale-title-large-font-size); /* Larger body text */
+            line-height: var(--md-sys-typescale-title-large-line-height);
+            color: var(--on-primary-container); /* Match container text */
+            opacity: 0.9; /* Slightly less emphasis */
+            max-width: 700px; /* Limit width */
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2.5rem; /* 40px */
+        }
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem; /* 16px */
+        }
+        @media (min-width: 640px) {
+            .hero-actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+         /* Adjust button colors for contrast on primary-container */
+         .hero-actions .button-elevated { /* White-ish button */
+            background-color: var(--surface-container-highest);
+            color: var(--primary);
+         }
+          .hero-actions .button-filled { /* Primary button */
+            background-color: var(--primary);
+            color: var(--on-primary);
+         }
+
+
+        /* --- Features Section --- */
+        .features-section {
+            background-color: var(--surface-container-low); /* Slightly different bg */
+        }
+        .section-heading {
+            text-align: center;
+            margin-bottom: 3rem; /* 48px */
+        }
+        .section-heading .eyebrow { /* Uppercase subtitle */
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem; /* 8px */
+        }
+        .section-heading .title {
+             font-size: var(--md-sys-typescale-headline-medium-font-size);
+             font-weight: 700;
+             line-height: var(--md-sys-typescale-headline-medium-line-height);
+             color: var(--on-surface);
+             margin-bottom: 1rem; /* 16px */
+        }
+        .section-heading .subtitle {
+            font-size: var(--md-sys-typescale-title-medium-font-size);
+            line-height: var(--md-sys-typescale-title-medium-line-height);
+            color: var(--on-surface-variant);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            gap: 2.5rem; /* More gap */
+        }
+        @media (min-width: 640px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem; /* 16px */
+            align-items: flex-start; /* Align icon top */
+        }
+        .feature-icon-wrapper {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: var(--md-shape-corner-medium); /* M3 icon bg shape */
+            background-color: var(--primary-container);
+            color: var(--on-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .feature-icon-wrapper i {
+            font-size: 1.5rem; /* 24px */
             transition: transform 0.2s ease-in-out;
         }
+        .feature-item:hover .feature-icon-wrapper i {
+             transform: scale(1.1);
+        }
+        .feature-content h3 {
+            font-size: var(--md-sys-typescale-title-medium-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight);
+            color: var(--on-surface);
+            margin-bottom: 0.5rem; /* 8px */
+        }
+        .feature-content p {
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            color: var(--on-surface-variant);
+        }
+
+        /* --- How It Works Section --- */
+        .how-it-works-section {
+             background-color: var(--surface); /* White background */
+        }
+        .steps-grid {
+            display: grid;
+            gap: 2rem; /* 32px */
+            margin-top: 3rem; /* Space after heading */
+        }
+        @media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+
+        .step-item {
+            text-align: center;
+        }
+        .step-number {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--on-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1rem; /* 16px */
+            font-size: var(--md-sys-typescale-headline-small-font-size);
+            font-weight: 700;
+        }
+         .step-item h3 {
+            font-size: var(--md-sys-typescale-title-medium-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight);
+            color: var(--on-surface);
+            margin-bottom: 0.5rem;
+        }
+        .step-item p {
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            color: var(--on-surface-variant);
+        }
+
+        /* --- Testimonials Section --- */
+        .testimonials-section {
+            background-color: var(--surface-container-low);
+            overflow: hidden; /* For potential background elements */
+        }
+        .testimonial-quote {
+             margin-top: 2rem;
+        }
+        .testimonial-quote blockquote p {
+            font-size: var(--md-sys-typescale-headline-small-font-size);
+            font-weight: 400; /* Regular weight for quote */
+             line-height: var(--md-sys-typescale-headline-small-line-height);
+            color: var(--on-surface);
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .testimonial-quote footer {
+            margin-top: 2rem; /* 32px */
+        }
+        .testimonial-author-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .testimonial-author-info {
+                flex-direction: row;
+                justify-content: center;
+                gap: 0.75rem;
+            }
+        }
+        .testimonial-author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--surface-variant);
+            /* Add background-image if you have images */
+        }
+        .testimonial-author-name {
+            font-size: var(--md-sys-typescale-title-small-font-size);
+            font-weight: var(--md-sys-typescale-title-small-font-weight);
+            color: var(--on-surface);
+        }
+        .testimonial-separator { display: none; }
+        @media (min-width: 768px) {
+             .testimonial-separator {
+                display: block;
+                color: var(--primary); /* Or outline */
+             }
+        }
+        .testimonial-author-affiliation {
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            color: var(--on-surface-variant);
+        }
+        .logo-strip {
+             margin-top: 3rem;
+             text-align: center;
+        }
+        .logo-strip p {
+             font-size: var(--md-sys-typescale-body-medium-font-size);
+             color: var(--on-surface-variant);
+             margin-bottom: 1.5rem;
+             text-transform: uppercase;
+             letter-spacing: 0.5px;
+        }
+         .logo-strip-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
+         }
+         .logo-strip-items span { /* Placeholder for logos */
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            color: var(--outline);
+            opacity: 0.8;
+         }
+
+        /* --- Pricing Section --- */
+        .pricing-section {
+            background-color: var(--surface);
+        }
+        .pricing-grid {
+            display: grid;
+            gap: 2rem; /* 32px */
+            margin-top: 3rem;
+             align-items: stretch; /* Make cards equal height if needed */
+        }
+        @media (min-width: 1024px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .pricing-card {
+            background-color: var(--surface-container-low); /* Card bg */
+            border: 1px solid var(--outline-variant);
+            border-radius: var(--md-shape-corner-large); /* M3 Card shape */
+            padding: 2rem; /* 32px */
+            display: flex;
+            flex-direction: column;
+            position: relative; /* For popular badge */
+             transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+         .pricing-card:hover {
+            border-color: var(--outline);
+             box-shadow: var(--md-sys-elevation-level-1);
+         }
+
+         .pricing-card.popular {
+            border-color: var(--primary);
+            border-width: 2px;
+            background-color: var(--surface); /* Slightly different bg */
+            box-shadow: var(--md-sys-elevation-level-1);
+         }
+         .popular-badge {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--primary);
+            color: var(--on-primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--md-shape-corner-full);
+            font-size: var(--md-sys-typescale-label-small-font-size);
+            font-weight: var(--md-sys-typescale-label-small-font-weight);
+            text-transform: uppercase;
+         }
+
+        .pricing-card h3 {
+             font-size: var(--md-sys-typescale-title-large-font-size);
+             font-weight: 500;
+             color: var(--on-surface);
+             margin-bottom: 0.5rem;
+        }
+         .pricing-card > p { /* Target direct child p for description */
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            color: var(--on-surface-variant);
+            margin-bottom: 1.5rem;
+            flex-grow: 1; /* Push price/features down */
+         }
+        .price-display {
+            margin-bottom: 1.5rem;
+        }
+        .price-amount {
+             font-size: var(--md-sys-typescale-display-small-font-size);
+             font-weight: 700;
+             color: var(--on-surface);
+        }
+        .price-period {
+             font-size: var(--md-sys-typescale-body-medium-font-size);
+             color: var(--on-surface-variant);
+             margin-left: 4px;
+        }
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2rem; /* Space before button */
+             flex-grow: 2; /* Allow list to grow more */
+        }
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem; /* 12px */
+            margin-bottom: 0.75rem;
+        }
+        .feature-list li i {
+             color: var(--primary); /* Use primary for checkmark */
+             width: 20px; height: 20px;
+             flex-shrink: 0;
+             font-size: 0.875rem; /* Smaller check */
+        }
+        .feature-list li span {
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            color: var(--on-surface-variant);
+        }
+        .pricing-card .button {
+            margin-top: auto; /* Push button to bottom */
+            width: 100%;
+        }
+        /* Button styling variations per plan */
+        .pricing-card .button-outlined { /* For free plan */
+             background-color: transparent;
+             border-color: var(--outline);
+             color: var(--primary);
+        }
+         .pricing-card .button-filled { /* For popular plan */
+             background-color: var(--primary);
+             color: var(--on-primary);
+         }
+          .pricing-card .button-tonal { /* For enterprise plan */
+             background-color: var(--secondary-container);
+             color: var(--on-secondary-container);
+         }
+
+
+        /* --- Call to Action Section --- */
+        .cta-section {
+             /* Use Primary or Tertiary Container */
+            background-color: var(--primary-container);
+            color: var(--on-primary-container);
+            padding: 4rem 0;
+             text-align: center;
+        }
+        .cta-section h2 {
+            font-size: var(--md-sys-typescale-headline-medium-font-size);
+            font-weight: 700;
+            line-height: var(--md-sys-typescale-headline-medium-line-height);
+            margin-bottom: 1rem;
+        }
+         .cta-section h2 span { display: block; }
+         .cta-section p {
+            font-size: var(--md-sys-typescale-title-medium-font-size);
+            line-height: var(--md-sys-typescale-title-medium-line-height);
+            color: var(--on-primary-container);
+             opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2rem;
+         }
+         .cta-section .button {
+             /* Use contrasting button */
+            background-color: var(--primary);
+            color: var(--on-primary);
+         }
+
+        /* --- Footer --- */
+        .footer {
+             background-color: var(--surface-container); /* Slightly darker than page bg */
+             color: var(--on-surface-variant);
+             padding: 3rem 0 2rem 0; /* Vertical padding */
+        }
+         .footer-content {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             gap: 2rem;
+         }
+         @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+         }
+        .footer-social {
+            display: flex;
+            gap: 1.5rem; /* 24px */
+            order: 1; /* Social icons first on mobile */
+        }
+         @media (min-width: 768px) { .footer-social { order: 2; } }
+
+        .footer-social a {
+             color: var(--on-surface-variant);
+             text-decoration: none;
+             transition: color 0.15s ease;
+        }
+         .footer-social a:hover { color: var(--primary); }
+         .footer-social a i { font-size: 1.25rem; /* 20px */ }
+
+        .footer-copyright { /* Added copyright */
+            font-size: var(--md-sys-typescale-body-small-font-size);
+            text-align: center;
+            margin-top: 2rem;
+            order: 3;
+        }
+         @media (min-width: 768px) {
+            .footer-copyright {
+                order: 1;
+                margin-top: 0;
+                text-align: left;
+            }
+         }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1.5rem; /* Row and column gap */
+             margin-top: 2rem; /* Space below content */
+             padding-top: 2rem; /* Space above */
+             border-top: 1px solid var(--outline-variant);
+             width: 100%; /* Take full width for border */
+        }
+        .footer-nav a {
+            font-size: var(--md-sys-typescale-label-medium-font-size);
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+         .footer-nav a:hover { color: var(--primary); }
+
+
+        /* --- Utility --- */
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+        .hidden { display: none !important; }
+
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body> <!-- Removed Tailwind class -->
 
     <!-- Navigation -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a>
-                </div>
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <a href="#features" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Features</a>
-                    <a href="#how-it-works" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">How It Works</a>
-                    <a href="#testimonials" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Testimonials</a>
-                    <a href="#pricing" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Pricing</a>
-                </div>
-                <div class="flex items-center">
-                     <a href="organizer_login.html" class="text-sm font-medium text-gray-600 hover:text-blue-600 mr-4">Organizer Login</a>
-                    <a href="organizer_signup.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        Get Started Free
-                    </a>
-                </div>
-                 <!-- Mobile Menu Button (optional) -->
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button type="button" class="bg-white inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+    <nav class="top-app-bar"> <!-- Replaced classes -->
+        <div class="container navbar-container"> <!-- Added classes -->
+            <div class="navbar-brand"> <!-- Added class -->
+                <a href="index.html">Hackverse</a> <!-- Removed classes -->
+            </div>
+            <div class="navbar-links"> <!-- Replaced classes -->
+                <a href="#features">Features</a> <!-- Removed classes -->
+                <a href="#how-it-works">How It Works</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#pricing">Pricing</a>
+            </div>
+            <div class="navbar-actions"> <!-- Added class -->
+                 <a href="organizer_login.html" class="login-link">Organizer Login</a> <!-- Replaced classes -->
+                <a href="organizer_signup.html" class="button button-filled"> <!-- Replaced classes -->
+                    Get Started Free
+                </a>
+            </div>
+             <!-- Mobile Menu Button -->
+            <div class="mobile-menu-button-container"> <!-- Replaced classes -->
+                <button type="button" class="mobile-menu-button" aria-controls="mobile-menu" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <i class="fas fa-bars"></i> <!-- Icon changes via JS -->
+                </button>
             </div>
         </div>
-         <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="sm:hidden" id="mobile-menu">
-            <div class="pt-2 pb-3 space-y-1">
-                 <a href="#features" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">Features</a>
-                 <a href="#how-it-works" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">How It Works</a>
-                 <a href="#testimonials" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">Testimonials</a>
-                 <a href="#pricing" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">Pricing</a>
-            </div>
+         <!-- Mobile menu -->
+        <div class="mobile-menu hidden" id="mobile-menu"> <!-- Replaced classes -->
+            <a href="#features">Features</a> <!-- Removed classes -->
+            <a href="#how-it-works">How It Works</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#pricing">Pricing</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-bg text-white pt-20 pb-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+    <section class="hero-section"> <!-- Replaced classes -->
+        <div class="container"> <!-- Replaced classes -->
+            <h1> <!-- Removed classes -->
                 Host Engaging Hackathons with Ease
             </h1>
-            <p class="mt-6 max-w-3xl mx-auto text-xl text-indigo-100">
+            <p> <!-- Replaced classes -->
                 Focus on innovation, not logistics. Hackverse provides everything you need to plan, launch, manage, and judge successful hackathons online or in-person.
             </p>
-            <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
-                <a href="organizer_signup.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md shadow-md text-blue-700 bg-white hover:bg-indigo-50">
+            <div class="hero-actions"> <!-- Replaced classes -->
+                <a href="organizer_signup.html" class="button button-elevated"> <!-- Replaced classes -->
                     Create Your Hackathon
                 </a>
-                <a href="#features" class="w-full mt-4 sm:mt-0 sm:ml-4 sm:w-auto inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600">
+                <a href="#features" class="button button-filled"> <!-- Replaced classes -->
                     Explore Features
                 </a>
             </div>
@@ -86,104 +1006,92 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Platform Features</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+    <section id="features" class="features-section"> <!-- Replaced classes -->
+        <div class="container">
+            <div class="section-heading"> <!-- Replaced classes -->
+                <h2 class="eyebrow">Platform Features</h2> <!-- Replaced classes -->
+                <p class="title"> <!-- Replaced classes -->
                     Everything You Need to Succeed
                 </p>
-                 <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                 <p class="subtitle"> <!-- Replaced classes -->
                     From setup to judging, our tools streamline the entire hackathon lifecycle.
                  </p>
             </div>
 
-            <div class="mt-10 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="features-grid"> <!-- Replaced classes -->
                 <!-- Feature 1: Easy Setup -->
-                <div class="flex feature-icon">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                            <i class="fas fa-cogs text-xl"></i>
-                        </div>
+                <div class="feature-item"> <!-- Replaced classes -->
+                    <div class="feature-icon-wrapper"> <!-- Replaced classes -->
+                        <i class="fas fa-cogs"></i> <!-- Removed classes -->
                     </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Intuitive Setup</h3>
-                        <p class="mt-2 text-base text-gray-500">
+                    <div class="feature-content"> <!-- Added class -->
+                        <h3>Intuitive Setup</h3> <!-- Removed classes -->
+                        <p> <!-- Removed classes -->
                             Create and customize your hackathon landing page in minutes with our easy-to-use builder. No coding required.
                         </p>
                     </div>
                 </div>
 
                  <!-- Feature 2: Participant Management -->
-                <div class="flex feature-icon">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                            <i class="fas fa-users text-xl"></i>
-                        </div>
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Participant Registration</h3>
-                        <p class="mt-2 text-base text-gray-500">
+                    <div class="feature-content">
+                        <h3>Participant Registration</h3>
+                        <p>
                             Seamlessly manage registrations, collect participant info, and track attendance.
                         </p>
                     </div>
                 </div>
 
                  <!-- Feature 3: Team Formation -->
-                <div class="flex feature-icon">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                            <i class="fas fa-user-friends text-xl"></i>
-                        </div>
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-user-friends"></i>
                     </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Team Building Tools</h3>
-                        <p class="mt-2 text-base text-gray-500">
+                    <div class="feature-content">
+                        <h3>Team Building Tools</h3>
+                        <p>
                             Facilitate team formation with tools for participants to find teammates based on skills and interests.
                         </p>
                     </div>
                 </div>
 
                  <!-- Feature 4: Project Submissions -->
-                <div class="flex feature-icon">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                            <i class="fas fa-file-upload text-xl"></i>
-                        </div>
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-file-upload"></i>
                     </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Streamlined Submissions</h3>
-                        <p class="mt-2 text-base text-gray-500">
+                    <div class="feature-content">
+                        <h3>Streamlined Submissions</h3>
+                        <p>
                             Collect project details, code repositories, presentations, and videos all in one place.
                         </p>
                     </div>
                 </div>
 
                  <!-- Feature 5: Judging Portal -->
-                <div class="flex feature-icon">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                            <i class="fas fa-gavel text-xl"></i>
-                        </div>
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-gavel"></i>
                     </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Efficient Judging</h3>
-                        <p class="mt-2 text-base text-gray-500">
+                    <div class="feature-content">
+                        <h3>Efficient Judging</h3>
+                        <p>
                             Assign judges, define criteria, and enable easy scoring and feedback directly through the platform.
                         </p>
                     </div>
                 </div>
 
                  <!-- Feature 6: Communication Hub -->
-                 <div class="flex feature-icon">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
-                            <i class="fas fa-bullhorn text-xl"></i>
-                        </div>
+                 <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <i class="fas fa-bullhorn"></i>
                     </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">Communication Tools</h3>
-                        <p class="mt-2 text-base text-gray-500">
+                    <div class="feature-content">
+                        <h3>Communication Tools</h3>
+                        <p>
                             Send announcements, updates, and reminders to all participants or specific groups easily.
                         </p>
                     </div>
@@ -193,153 +1101,145 @@
     </section>
 
     <!-- How It Works Section -->
-    <section id="how-it-works" class="py-16 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                 <h2 class="text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+    <section id="how-it-works" class="how-it-works-section"> <!-- Replaced classes -->
+        <div class="container" style="max-width: 900px;"> <!-- Adjusted container size -->
+            <div class="section-heading"> <!-- Replaced classes -->
+                 <h2 class="title"> <!-- Replaced classes -->
                     Launch Your Hackathon in 4 Steps
                  </h2>
-                 <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                 <p class="subtitle"> <!-- Replaced classes -->
                     Organizing your next event is simpler than ever.
                  </p>
             </div>
 
-            <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-4 md:gap-x-8 md:gap-y-10">
+            <div class="steps-grid"> <!-- Replaced classes -->
                  <!-- Step 1 -->
-                 <div class="relative text-center">
-                     <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-500 text-white mx-auto mb-4 text-2xl font-bold">1</div>
-                     <h3 class="text-lg font-medium text-gray-900">Create Your Event</h3>
-                     <p class="mt-2 text-base text-gray-500">Define details, dates, themes, and rules for your hackathon.</p>
+                 <div class="step-item"> <!-- Replaced classes -->
+                     <div class="step-number">1</div> <!-- Replaced classes -->
+                     <h3>Create Your Event</h3> <!-- Removed classes -->
+                     <p>Define details, dates, themes, and rules for your hackathon.</p> <!-- Removed classes -->
                  </div>
                  <!-- Step 2 -->
-                 <div class="relative text-center">
-                     <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-500 text-white mx-auto mb-4 text-2xl font-bold">2</div>
-                     <h3 class="text-lg font-medium text-gray-900">Customize & Brand</h3>
-                     <p class="mt-2 text-base text-gray-500">Personalize the look and feel to match your organization's brand.</p>
+                 <div class="step-item">
+                     <div class="step-number">2</div>
+                     <h3>Customize & Brand</h3>
+                     <p>Personalize the look and feel to match your organization's brand.</p>
                  </div>
                  <!-- Step 3 -->
-                 <div class="relative text-center">
-                     <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-500 text-white mx-auto mb-4 text-2xl font-bold">3</div>
-                     <h3 class="text-lg font-medium text-gray-900">Promote & Manage</h3>
-                     <p class="mt-2 text-base text-gray-500">Share your event link, manage registrations, and engage participants.</p>
+                 <div class="step-item">
+                     <div class="step-number">3</div>
+                     <h3>Promote & Manage</h3>
+                     <p>Share your event link, manage registrations, and engage participants.</p>
                  </div>
                  <!-- Step 4 -->
-                 <div class="relative text-center">
-                      <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-500 text-white mx-auto mb-4 text-2xl font-bold">4</div>
-                     <h3 class="text-lg font-medium text-gray-900">Judge & Award</h3>
-                     <p class="mt-2 text-base text-gray-500">Utilize the judging portal to evaluate submissions and announce winners.</p>
+                 <div class="step-item">
+                      <div class="step-number">4</div>
+                     <h3>Judge & Award</h3>
+                     <p>Utilize the judging portal to evaluate submissions and announce winners.</p>
                  </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-16 bg-white overflow-hidden">
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-             <div class="text-center mb-12">
-                 <h2 class="text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+    <section id="testimonials" class="testimonials-section"> <!-- Replaced classes -->
+        <div class="container"> <!-- Replaced classes -->
+             <div class="section-heading"> <!-- Replaced classes -->
+                 <h2 class="title"> <!-- Replaced classes -->
                     Trusted by Leading Organizers
                  </h2>
              </div>
-            <div class="relative">
-                <blockquote class="mt-10">
-                    <div class="max-w-3xl mx-auto text-center text-2xl leading-9 font-medium text-gray-900">
-                        <p>
-                            “Hackverse made managing our annual university hackathon incredibly smooth. The submission and judging process saved us countless hours compared to previous years.”
-                        </p>
-                    </div>
-                    <footer class="mt-8">
-                        <div class="md:flex md:items-center md:justify-center">
-                            <div class="md:flex-shrink-0">
-                                <!-- Placeholder for speaker image -->
-                                <div class="mx-auto h-10 w-10 rounded-full bg-gray-300"></div>
-                            </div>
-                            <div class="mt-3 text-center md:mt-0 md:ml-4 md:flex md:items-center">
-                                <div class="text-base font-medium text-gray-900">Sarah Chen</div>
-                                <svg class="hidden md:block mx-1 h-5 w-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M11 0h3L9 20H6l5-20z" />
-                                </svg>
-                                <div class="text-base font-medium text-gray-500">Event Lead, Tech University</div>
+            <div class="testimonial-quote"> <!-- Replaced classes -->
+                <blockquote> <!-- Removed classes -->
+                    <p> <!-- Removed classes -->
+                        “Hackverse made managing our annual university hackathon incredibly smooth. The submission and judging process saved us countless hours compared to previous years.”
+                    </p>
+                    <footer> <!-- Removed classes -->
+                        <div class="testimonial-author-info"> <!-- Replaced classes -->
+                            <div class="testimonial-author-avatar"></div> <!-- Replaced classes -->
+                            <div class="testimonial-author-details"> <!-- Group name and affiliation -->
+                                <div class="testimonial-author-name">Sarah Chen</div> <!-- Replaced classes -->
+                                <div class="testimonial-author-affiliation">Event Lead, Tech University</div> <!-- Replaced classes -->
                             </div>
                         </div>
                     </footer>
                 </blockquote>
             </div>
-            <!-- Optional: Logos of companies/universities -->
-            <div class="mt-12">
-                <p class="text-center text-base font-medium text-gray-500">Used by teams at</p>
-                <div class="mt-6 flex flex-wrap justify-center items-center space-x-8 space-y-4 md:space-y-0">
-                     <span class="text-gray-400 font-semibold text-lg">TechCorp</span>
-                     <span class="text-gray-400 font-semibold text-lg">Innovate U</span>
-                     <span class="text-gray-400 font-semibold text-lg">Dev Community</span>
-                     <span class="text-gray-400 font-semibold text-lg">Startup Hub</span>
-                     <span class="text-gray-400 font-semibold text-lg">Global Solutions</span>
+            <!-- Optional: Logos -->
+            <div class="logo-strip"> <!-- Replaced classes -->
+                <p>Used by teams at</p> <!-- Replaced classes -->
+                <div class="logo-strip-items"> <!-- Replaced classes -->
+                     <span>TechCorp</span> <!-- Removed classes -->
+                     <span>Innovate U</span>
+                     <span>Dev Community</span>
+                     <span>Startup Hub</span>
+                     <span>Global Solutions</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section (Simple Example) -->
-     <section id="pricing" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-             <div class="text-center mb-12">
-                <h2 class="text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+    <!-- Pricing Section -->
+     <section id="pricing" class="pricing-section"> <!-- Replaced classes -->
+        <div class="container">
+             <div class="section-heading"> <!-- Replaced classes -->
+                <h2 class="title"> <!-- Replaced classes -->
                     Simple, Transparent Pricing
                 </h2>
-                 <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                 <p class="subtitle"> <!-- Replaced classes -->
                     Choose the plan that's right for your event. Get started for free.
                  </p>
             </div>
 
-            <div class="mt-10 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8">
+            <div class="pricing-grid"> <!-- Replaced classes -->
                 <!-- Free Plan -->
-                <div class="relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
-                    <h3 class="text-xl font-semibold text-gray-900">Community</h3>
-                    <p class="mt-4 text-gray-500">Perfect for small, free community events.</p>
-                    <div class="mt-6">
-                        <span class="text-4xl font-extrabold text-gray-900">$0</span>
-                        <span class="text-base font-medium text-gray-500">/ event</span>
+                <div class="pricing-card"> <!-- Replaced classes -->
+                    <h3>Community</h3> <!-- Removed classes -->
+                    <p>Perfect for small, free community events.</p> <!-- Removed classes -->
+                    <div class="price-display"> <!-- Added wrapper -->
+                        <span class="price-amount">$0</span> <!-- Replaced classes -->
+                        <span class="price-period">/ event</span> <!-- Replaced classes -->
                     </div>
-                    <ul role="list" class="mt-6 space-y-4">
-                        <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">Up to 50 Participants</span></li>
-                        <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">Basic Setup Tools</span></li>
-                         <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">Community Support</span></li>
+                    <ul role="list" class="feature-list"> <!-- Replaced classes -->
+                        <li><i class="fas fa-check"></i><span>Up to 50 Participants</span></li> <!-- Removed classes -->
+                        <li><i class="fas fa-check"></i><span>Basic Setup Tools</span></li>
+                         <li><i class="fas fa-check"></i><span>Community Support</span></li>
                     </ul>
-                    <a href="organizer_signup.html?plan=free" class="mt-8 block w-full bg-gray-800 border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900">Get Started</a>
+                    <a href="organizer_signup.html?plan=free" class="button button-outlined">Get Started</a> <!-- Replaced classes -->
                 </div>
 
                 <!-- Pro Plan (Most Popular) -->
-                <div class="relative p-8 bg-white border-2 border-blue-600 rounded-2xl shadow-xl flex flex-col">
-                     <div class="absolute top-0 py-1.5 px-4 bg-blue-600 rounded-full text-xs font-semibold uppercase tracking-wide text-white transform -translate-y-1/2">Most Popular</div>
-                    <h3 class="text-xl font-semibold text-gray-900">Professional</h3>
-                    <p class="mt-4 text-gray-500">Ideal for standard hackathons and corporate events.</p>
-                     <div class="mt-6">
-                        <span class="text-4xl font-extrabold text-gray-900">$299</span>
-                        <span class="text-base font-medium text-gray-500">/ event</span>
+                <div class="pricing-card popular"> <!-- Replaced classes, added popular -->
+                     <div class="popular-badge">Most Popular</div> <!-- Added badge -->
+                    <h3>Professional</h3>
+                    <p>Ideal for standard hackathons and corporate events.</p>
+                     <div class="price-display">
+                        <span class="price-amount">$299</span>
+                        <span class="price-period">/ event</span>
                     </div>
-                    <ul role="list" class="mt-6 space-y-4">
-                        <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">Up to 500 Participants</span></li>
-                         <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">All Core Features</span></li>
-                        <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">Advanced Customization</span></li>
-                        <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">Priority Support</span></li>
+                    <ul role="list" class="feature-list">
+                        <li><i class="fas fa-check"></i><span>Up to 500 Participants</span></li>
+                         <li><i class="fas fa-check"></i><span>All Core Features</span></li>
+                        <li><i class="fas fa-check"></i><span>Advanced Customization</span></li>
+                        <li><i class="fas fa-check"></i><span>Priority Support</span></li>
                     </ul>
-                     <a href="organizer_signup.html?plan=pro" class="mt-8 block w-full bg-blue-600 border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-blue-700">Choose Pro</a>
+                     <a href="organizer_signup.html?plan=pro" class="button button-filled">Choose Pro</a> <!-- Replaced classes -->
                 </div>
 
                 <!-- Enterprise Plan -->
-                 <div class="relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col">
-                    <h3 class="text-xl font-semibold text-gray-900">Enterprise</h3>
-                    <p class="mt-4 text-gray-500">Tailored solutions for large-scale or complex events.</p>
-                     <div class="mt-6">
-                        <span class="text-4xl font-extrabold text-gray-900">Custom</span>
+                 <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <p>Tailored solutions for large-scale or complex events.</p>
+                     <div class="price-display">
+                        <span class="price-amount">Custom</span>
                     </div>
-                    <ul role="list" class="mt-6 space-y-4">
-                        <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">Unlimited Participants</span></li>
-                        <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">Dedicated Account Manager</span></li>
-                         <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">API Access & Integrations</span></li>
-                         <li class="flex space-x-3"><i class="fas fa-check flex-shrink-0 h-5 w-5 text-green-500"></i><span class="text-sm text-gray-500">Custom SLA</span></li>
+                    <ul role="list" class="feature-list">
+                        <li><i class="fas fa-check"></i><span>Unlimited Participants</span></li>
+                        <li><i class="fas fa-check"></i><span>Dedicated Account Manager</span></li>
+                         <li><i class="fas fa-check"></i><span>API Access & Integrations</span></li>
+                         <li><i class="fas fa-check"></i><span>Custom SLA</span></li>
                     </ul>
-                    <a href="contact_sales.html" class="mt-8 block w-full bg-gray-800 border border-transparent rounded-md py-2 text-sm font-semibold text-white text-center hover:bg-gray-900">Contact Sales</a>
+                    <a href="contact_sales.html" class="button button-tonal">Contact Sales</a> <!-- Replaced classes -->
                 </div>
             </div>
         </div>
@@ -347,64 +1247,72 @@
 
 
     <!-- Call to Action Section -->
-    <section class="bg-blue-700">
-        <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-                <span class="block">Ready to launch your next hackathon?</span>
+    <section class="cta-section"> <!-- Replaced classes -->
+        <div class="container" style="max-width: 650px;"> <!-- Adjusted container size -->
+            <h2> <!-- Removed classes -->
+                <span>Ready to launch your next hackathon?</span>
             </h2>
-            <p class="mt-4 text-lg leading-6 text-indigo-100">
+            <p> <!-- Removed classes -->
                 Join hundreds of organizers simplifying their events with Hackverse.
             </p>
-             <a href="organizer_signup.html" class="mt-8 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-md text-base font-medium text-blue-700 bg-white hover:bg-indigo-50 sm:w-auto">
+             <a href="organizer_signup.html" class="button button-filled" style="background-color: var(--primary); color: var(--on-primary);"> <!-- Replaced classes, ensure contrast -->
                 Get Started for Free Today
             </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-400">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="md:flex md:items-center md:justify-between">
-                 <div class="flex justify-center space-x-6 md:order-2">
-                    <a href="#" class="hover:text-gray-300"><span class="sr-only">Facebook</span><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="hover:text-gray-300"><span class="sr-only">Twitter</span><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="hover:text-gray-300"><span class="sr-only">LinkedIn</span><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="hover:text-gray-300"><span class="sr-only">GitHub</span><i class="fab fa-github"></i></a>
+    <footer class="footer"> <!-- Replaced classes -->
+        <div class="container">
+            <div class="footer-content"> <!-- Added class -->
+                 <p class="footer-copyright">© 2023 Hackverse. All rights reserved.</p> <!-- Added copyright, moved -->
+                 <div class="footer-social"> <!-- Replaced classes -->
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a> <!-- Removed classes -->
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-             <nav class="-mx-5 -my-2 flex flex-wrap justify-center mt-8" aria-label="Footer">
-                <div class="px-5 py-2">
-                    <a href="about.html" class="text-sm hover:text-gray-300">About</a>
-                </div>
-                 <div class="px-5 py-2">
-                    <a href="contact.html" class="text-sm hover:text-gray-300">Contact</a>
-                </div>
-                 <div class="px-5 py-2">
-                    <a href="terms.html" class="text-sm hover:text-gray-300">Terms of Service</a>
-                </div>
-                 <div class="px-5 py-2">
-                    <a href="privacy.html" class="text-sm hover:text-gray-300">Privacy Policy</a>
-                </div>
-                 <div class="px-5 py-2">
-                    <a href="participant_landing.html" class="text-sm hover:text-gray-300">For Participants</a>
-                </div>
+             <nav class="footer-nav" aria-label="Footer"> <!-- Replaced classes -->
+                <a href="about.html">About</a> <!-- Removed classes -->
+                <a href="contact.html">Contact</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="participant_landing.html">For Participants</a>
             </nav>
         </div>
     </footer>
 
     <script>
-        // Basic mobile menu toggle (replace with more robust solution if needed)
+        // Basic mobile menu toggle
         const menuButton = document.querySelector('[aria-controls="mobile-menu"]');
         const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenu.style.display = 'none'; // Initially hide
 
-        menuButton.addEventListener('click', () => {
-            const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
-            menuButton.setAttribute('aria-expanded', !isExpanded);
-            mobileMenu.style.display = isExpanded ? 'none' : 'block';
-            // Optional: change icon
-            menuButton.querySelector('i').className = isExpanded ? 'fas fa-bars' : 'fas fa-times';
+        if (menuButton && mobileMenu) {
+            // mobileMenu.style.display = 'none'; // Hide using class instead if preferred
+            menuButton.addEventListener('click', () => {
+                const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+                menuButton.setAttribute('aria-expanded', String(!isExpanded));
+                mobileMenu.classList.toggle('hidden'); // Toggle utility class
+                // Change icon
+                const icon = menuButton.querySelector('i');
+                if (icon) {
+                    icon.className = isExpanded ? 'fas fa-bars' : 'fas fa-times';
+                }
+            });
+        }
+
+        // Optional: Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+        mobileMenuLinks?.forEach(link => {
+             link.addEventListener('click', () => {
+                 menuButton.setAttribute('aria-expanded', 'false');
+                 mobileMenu.classList.add('hidden');
+                 const icon = menuButton.querySelector('i');
+                 if (icon) icon.className = 'fas fa-bars';
+             });
         });
+
     </script>
 
 </body>
