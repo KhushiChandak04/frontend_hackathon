@@ -1,115 +1,571 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Submission - Hackverse</title>
+    <title>View Submission - M3 Style</title>
+    <!-- Tailwind CSS (Kept as per constraint, but styles will be overridden) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f7fafc; }
-        .detail-label { @apply text-sm font-medium text-gray-500; }
-        .detail-value { @apply mt-1 text-md text-gray-900; }
-        .detail-value a { @apply text-indigo-600 hover:text-indigo-800 hover:underline break-all; } /* Allow long links to break */
-         /* Reusing badge styles from My Submissions */
-        .badge { @apply inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium leading-4; }
-        .badge-submitted { @apply bg-blue-100 text-blue-800; }
-        .badge-judging { @apply bg-purple-100 text-purple-800; }
-        .badge-scored { @apply bg-green-100 text-green-800; }
-        .badge-winner { @apply bg-yellow-100 text-yellow-800 font-semibold; }
-    </style>
+    <!-- Google Fonts (Roboto for M3) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Material Design 3 Variables (Consistent Set) --- */
+        :root {
+             /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Additional colors */
+            --md-sys-color-success-light: #177e2a; /* Green */
+            --md-sys-color-on-success-light: #ffffff;
+            --md-sys-color-success-container-light: #b4f7ae;
+            --md-sys-color-on-success-container-light: #002205;
+            --md-sys-color-warning-light: #7e5700; /* Yellow/Orange */
+            --md-sys-color-on-warning-light: #ffffff;
+            --md-sys-color-warning-container-light: #ffdea3;
+            --md-sys-color-on-warning-container-light: #281900;
+            /* Surface & Background */
+            --md-sys-color-background-light: #fefcff; /* Off-white */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-light: #ffffff; /* Pure white */
+            --md-sys-color-surface-container-low-light: #f8f2f7;
+            --md-sys-color-surface-container-light: #eeeef2;
+            --md-sys-color-surface-container-high-light: #e8e8ed;
+            --md-sys-color-surface-container-highest-light: #e2e2e6; /* Often used for TopAppBar */
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-success-dark: #99da94;
+            --md-sys-color-on-success-dark: #00390d;
+            --md-sys-color-success-container-dark: #005317;
+            --md-sys-color-on-success-container-dark: #b4f7ae;
+            --md-sys-color-warning-dark: #fbbc04;
+            --md-sys-color-on-warning-dark: #412d00;
+            --md-sys-color-warning-container-dark: #5f4200;
+            --md-sys-color-on-warning-container-dark: #ffdea3;
+            --md-sys-color-background-dark: #1a1c1e; /* Dark Gray */
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-dark: #0e1013;
+            --md-sys-color-surface-container-low-dark: #1d1f22;
+            --md-sys-color-surface-container-dark: #212326;
+            --md-sys-color-surface-container-high-dark: #2b2d30;
+            --md-sys-color-surface-container-highest-dark: #36383a; /* Often used for TopAppBar */
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+             /* RGB for hover alpha */
+             --md-sys-color-primary-rgb-light: 0, 97, 164;
+             --md-sys-color-primary-rgb-dark: 160, 201, 255;
+             --md-sys-color-secondary-rgb-light: 83, 95, 112;
+             --md-sys-color-secondary-rgb-dark: 187, 199, 219;
+             --md-sys-color-error-rgb-light: 186, 26, 26;
+             --md-sys-color-error-rgb-dark: 255, 180, 171;
+
+            /* Shape */
+            --md-shape-corner-none: 0px;
+            --md-shape-corner-extra-small: 4px;
+            --md-shape-corner-small: 8px;
+            --md-shape-corner-medium: 12px;
+            --md-shape-corner-large: 16px;
+            --md-shape-corner-extra-large: 28px;
+            --md-shape-corner-full: 9999px;
+
+            /* Elevation */
+            --md-sys-elevation-level-0: none;
+            --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+            /* State Layers */
+            --md-sys-state-hover-state-layer-opacity: 0.08;
+            --md-sys-state-focus-state-layer-opacity: 0.12;
+            --md-sys-state-pressed-state-layer-opacity: 0.12;
+
+            /* Typography */
+            --md-sys-typescale-font-family-name: Roboto;
+            --md-sys-typescale-body-large-font-size: 1rem;
+            --md-sys-typescale-body-large-line-height: 1.5rem;
+            --md-sys-typescale-body-large-font-weight: 400;
+            --md-sys-typescale-body-medium-font-size: 0.875rem;
+            --md-sys-typescale-body-medium-line-height: 1.25rem;
+            --md-sys-typescale-body-medium-font-weight: 400;
+            --md-sys-typescale-body-small-font-size: 0.75rem;
+            --md-sys-typescale-body-small-line-height: 1rem;
+            --md-sys-typescale-body-small-font-weight: 400;
+            --md-sys-typescale-label-large-font-size: 0.875rem;
+            --md-sys-typescale-label-large-line-height: 1.25rem;
+            --md-sys-typescale-label-large-font-weight: 500;
+            --md-sys-typescale-label-medium-font-size: 0.75rem;
+            --md-sys-typescale-label-medium-line-height: 1rem;
+            --md-sys-typescale-label-medium-font-weight: 500;
+            --md-sys-typescale-label-small-font-size: 0.6875rem;
+            --md-sys-typescale-label-small-line-height: 1rem;
+            --md-sys-typescale-label-small-font-weight: 500;
+            --md-sys-typescale-title-large-font-size: 1.375rem;
+            --md-sys-typescale-title-large-line-height: 1.75rem;
+            --md-sys-typescale-title-large-font-weight: 400;
+            --md-sys-typescale-title-medium-font-size: 1rem;
+            --md-sys-typescale-title-medium-line-height: 1.5rem;
+            --md-sys-typescale-title-medium-font-weight: 500;
+             --md-sys-typescale-title-small-font-size: 0.875rem;
+            --md-sys-typescale-title-small-line-height: 1.25rem;
+            --md-sys-typescale-title-small-font-weight: 500;
+            --md-sys-typescale-headline-medium-font-size: 1.75rem;
+            --md-sys-typescale-headline-medium-font-weight: 400;
+            --md-sys-typescale-headline-medium-line-height: 2.25rem;
+            --md-sys-typescale-headline-small-font-size: 1.5rem;
+             --md-sys-typescale-headline-small-line-height: 2rem;
+             --md-sys-typescale-headline-small-font-weight: 400;
+        }
+
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --tertiary: var(--md-sys-color-tertiary-light);
+            --on-tertiary: var(--md-sys-color-on-tertiary-light);
+            --tertiary-container: var(--md-sys-color-tertiary-container-light);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --error-container: var(--md-sys-color-error-container-light);
+            --on-error-container: var(--md-sys-color-on-error-container-light);
+            --success: var(--md-sys-color-success-light);
+            --on-success: var(--md-sys-color-on-success-light);
+            --success-container: var(--md-sys-color-success-container-light);
+            --on-success-container: var(--md-sys-color-on-success-container-light);
+            --warning: var(--md-sys-color-warning-light);
+            --on-warning: var(--md-sys-color-on-warning-light);
+            --warning-container: var(--md-sys-color-warning-container-light);
+            --on-warning-container: var(--md-sys-color-on-warning-container-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-light);
+            --surface-container-low: var(--md-sys-color-surface-container-low-light);
+            --surface-container: var(--md-sys-color-surface-container-light);
+            --surface-container-high: var(--md-sys-color-surface-container-high-light);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+             /* RGB values */
+             --primary-rgb: var(--md-sys-color-primary-rgb-light);
+             --secondary-rgb: var(--md-sys-color-secondary-rgb-light);
+             --error-rgb: var(--md-sys-color-error-rgb-light);
+             --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 26, 28, 30;
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --tertiary: var(--md-sys-color-tertiary-dark);
+            --on-tertiary: var(--md-sys-color-on-tertiary-dark);
+            --tertiary-container: var(--md-sys-color-tertiary-container-dark);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --error-container: var(--md-sys-color-error-container-dark);
+            --on-error-container: var(--md-sys-color-on-error-container-dark);
+            --success: var(--md-sys-color-success-dark);
+            --on-success: var(--md-sys-color-on-success-dark);
+            --success-container: var(--md-sys-color-success-container-dark);
+            --on-success-container: var(--md-sys-color-on-success-container-dark);
+            --warning: var(--md-sys-color-warning-dark);
+            --on-warning: var(--md-sys-color-on-warning-dark);
+            --warning-container: var(--md-sys-color-warning-container-dark);
+            --on-warning-container: var(--md-sys-color-on-warning-container-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-dark);
+            --surface-container-low: var(--md-sys-color-surface-container-low-dark);
+            --surface-container: var(--md-sys-color-surface-container-dark);
+            --surface-container-high: var(--md-sys-color-surface-container-high-dark);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+             /* RGB values */
+             --primary-rgb: var(--md-sys-color-primary-rgb-dark);
+             --secondary-rgb: var(--md-sys-color-secondary-rgb-dark);
+             --error-rgb: var(--md-sys-color-error-rgb-dark);
+             --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 226, 226, 230;
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--md-sys-typescale-font-family-name), sans-serif;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight);
+            background-color: var(--background);
+            color: var(--on-background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Layout --- */
+        .layout-container { display: flex; height: 100vh; overflow: hidden; }
+        .main-content { flex-grow: 1; overflow-y: auto; padding: 2rem 2.5rem; /* lg:p-10 */ }
+        .main-content .back-link {
+             display: inline-flex; align-items: center;
+             font-size: var(--md-sys-typescale-label-large-font-size);
+             font-weight: var(--md-sys-typescale-label-large-font-weight);
+             color: var(--primary);
+             text-decoration: none;
+             margin-bottom: 1rem; /* mb-4 */
+             padding: 0.25rem 0.5rem;
+             border-radius: var(--md-shape-corner-full);
+             transition: background-color 0.15s ease;
+        }
+         .main-content .back-link:hover {
+             background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity));
+         }
+          .main-content .back-link i { margin-right: 0.5rem; /* mr-2 */ }
+
+        /* --- Sidebar (Consistent) --- */
+        .sidebar {
+            width: 256px; background-color: var(--surface-container-low);
+            border-right: 1px solid var(--outline-variant); display: flex;
+            flex-direction: column; flex-shrink: 0; transition: background-color 0.3s ease, border-color 0.3s ease;
+            box-shadow: none;
+        }
+        .sidebar-header { padding: 1.5rem 1rem; border-bottom: 1px solid var(--outline-variant); transition: border-color 0.3s ease; }
+        .sidebar-title { font-size: var(--md-sys-typescale-title-large-font-size); font-weight: 700; color: var(--primary); text-decoration: none; display: block; }
+        .sidebar nav { padding: 0.5rem; }
+        .sidebar nav a {
+            display: flex; align-items: center; padding: 0.75rem 1rem; margin: 0.25rem 0;
+            border-radius: var(--md-shape-corner-full); color: var(--on-surface-variant); text-decoration: none;
+            font-weight: var(--md-sys-typescale-label-large-font-weight); font-size: var(--md-sys-typescale-label-large-font-size);
+            position: relative; overflow: hidden; transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .sidebar nav a i { width: 24px; margin-right: 1rem; text-align: center; color: var(--on-surface-variant); transition: color 0.15s ease; }
+        .sidebar nav a::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--secondary);
+            opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .sidebar nav a:hover { color: var(--on-secondary-container); }
+        .sidebar nav a:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar nav a:hover i { color: var(--on-secondary-container); }
+        .sidebar nav a.active-link { background-color: var(--secondary-container); color: var(--on-secondary-container); }
+        .sidebar nav a.active-link i { color: var(--on-secondary-container); }
+        .sidebar nav a.logout-link { margin-top: 1.5rem; color: var(--error); }
+        .sidebar nav a.logout-link i { color: var(--error); }
+        .sidebar nav a.logout-link::before { background-color: var(--error); }
+        .sidebar nav a.logout-link:hover { color: var(--on-error-container); }
+        .sidebar nav a.logout-link:hover::before { background-color: var(--error-container); opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar nav a.logout-link:hover i { color: var(--on-error-container); }
+
+
+        /* --- Submission View Card --- */
+        .submission-header {
+             display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; /* mb-6 */
+        }
+         @media (min-width: 768px) { /* md breakpoint */
+            .submission-header { flex-direction: row; justify-content: space-between; align-items: center; }
+         }
+        .submission-header h1 {
+            font-size: var(--md-sys-typescale-headline-medium-font-size);
+            font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+            line-height: var(--md-sys-typescale-headline-medium-line-height);
+            color: var(--on-surface);
+            margin-bottom: 0; /* Reset margin as it's in flex */
+        }
+         .submission-header .project-name {
+            color: var(--primary); /* Highlight project name */
+         }
+
+        .m3-card {
+            background-color: var(--surface-container);
+            border-radius: var(--md-shape-corner-large);
+            padding: 1.5rem; /* p-6 */
+            border: 1px solid var(--outline-variant);
+            box-shadow: var(--md-sys-elevation-level-1);
+            display: flex; flex-direction: column;
+            gap: 1.5rem; /* space-y-6 */
+        }
+
+        /* Details Grid */
+        .details-grid {
+            display: grid; grid-template-columns: repeat(1, 1fr);
+            gap: 1.5rem; /* gap-6 */
+        }
+         @media (min-width: 768px) { /* md breakpoint */
+             .details-grid { grid-template-columns: repeat(2, 1fr); }
+         }
+
+        .detail-item .detail-label {
+             font-size: var(--md-sys-typescale-label-medium-font-size);
+             font-weight: var(--md-sys-typescale-label-medium-font-weight);
+             color: var(--on-surface-variant);
+             display: block;
+             margin-bottom: 0.25rem; /* mt-1 approx */
+        }
+        .detail-item .detail-value {
+             font-size: var(--md-sys-typescale-body-large-font-size); /* text-md */
+             line-height: var(--md-sys-typescale-body-large-line-height);
+             color: var(--on-surface);
+             word-break: break-word; /* Allow long values/links to break */
+        }
+         .detail-item .detail-value a {
+             color: var(--primary);
+             text-decoration: none;
+             position: relative; /* For underline effect */
+             transition: color 0.15s ease;
+         }
+         .detail-item .detail-value a:hover { text-decoration: underline; }
+         .detail-item .detail-value i { /* External link/download icon */
+            font-size: 0.8em;
+            margin-left: 0.25rem; /* ml-1 */
+            opacity: 0.7;
+         }
+         .detail-item .detail-value .not-provided { /* Style for 'Not Provided' text */
+             color: var(--on-surface-variant);
+             font-style: italic;
+         }
+
+         /* Divider */
+         .m3-divider {
+            border: none;
+            border-top: 1px solid var(--outline-variant);
+            margin: 0; /* Reset margin from potential Tailwind classes */
+             padding: 0; /* Reset padding */
+         }
+
+
+        /* M3 Badge/Chip Style */
+        .m3-badge {
+            display: inline-flex; align-items: center;
+            padding: 0.25rem 0.75rem; /* px-3 py-0.5 */
+            border-radius: var(--md-shape-corner-small); /* Rounded */
+            font-size: var(--md-sys-typescale-label-small-font-size); /* text-xs */
+            font-weight: var(--md-sys-typescale-label-medium-font-weight); /* font-medium */
+            line-height: 1; /* leading-4 approx */
+            white-space: nowrap;
+             align-self: flex-start; /* Align top on mobile */
+        }
+         @media (min-width: 768px) { /* md breakpoint */
+             .m3-badge { align-self: center; } /* Center vertically on larger screens */
+         }
+        .m3-badge i { margin-right: 0.375rem; /* mr-1.5 */ font-size: 0.9em; }
+        .badge-submitted { background-color: var(--primary-container); color: var(--on-primary-container); }
+        .badge-judging { background-color: var(--tertiary-container); color: var(--on-tertiary-container); } /* Using Tertiary */
+        .badge-scored { background-color: var(--success-container); color: var(--on-success-container); }
+        .badge-winner { background-color: var(--warning-container); color: var(--on-warning-container); font-weight: var(--md-sys-typescale-label-large-font-weight); }
+
+
+        /* --- Tailwind Overrides --- */
+        body.bg-gray-100 { background-color: transparent !important; }
+        .bg-white, .bg-gray-50 { background-color: transparent !important; }
+        .text-gray-700, .text-gray-800, .text-gray-600, .text-gray-500, .text-gray-900 { color: inherit !important; }
+        .text-blue-600, .text-blue-700, .text-blue-800 { color: inherit !important; }
+        .text-red-600 { color: inherit !important; }
+        .text-indigo-600, .text-indigo-800 { color: inherit !important; }
+        .text-purple-800 { color: inherit !important; }
+        .text-green-800 { color: inherit !important; }
+        .text-yellow-800 { color: inherit !important; }
+        .bg-blue-100, .bg-purple-100, .bg-green-100, .bg-yellow-100 { background-color: transparent !important; }
+        .hover\:bg-gray-100:hover, .hover\:bg-red-50:hover { background-color: transparent !important; }
+        .hover\:underline:hover, .hover\:text-indigo-800:hover { text-decoration: none !important; color: inherit !important; }
+        .border-b, .border-t { border-width: 0 !important; border-color: transparent !important; }
+        .shadow-md, .shadow { box-shadow: none !important; }
+        .rounded-lg, .rounded { border-radius: 0 !important; }
+        .rounded-full {} /* Keep for badges */
+        .font-semibold, .font-medium, .font-bold { font-weight: inherit !important; }
+        .text-sm, .text-lg, .text-xl, .text-3xl, .text-xs, .text-md { font-size: inherit !important; }
+        .leading-4 { line-height: inherit !important; }
+        .p-6, .p-4, .p-8, .lg\:p-10 { padding: 0 !important; }
+        .px-4, .py-2, .px-3, .py-0\.5, .pt-6 { padding: 0 !important; }
+        .space-y-2 > :not([hidden]) ~ :not([hidden]), .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; }
+        .gap-6, .gap-4 { gap: 0 !important; } /* Let M3 handle gaps */
+        .mr-1\.5, .mr-2, .ml-1, .ml-2, .mt-1, .mt-6, .mb-4, .mb-2, .md\:mb-0, .mb-6, .mb-8 { margin: 0 !important; }
+        .h-screen { height: auto !important; }
+        .w-6, .w-64 { width: auto !important; }
+        .flex-shrink-0 { flex-shrink: inherit !important; }
+        .whitespace-pre-wrap { white-space: normal !important; }
+        .inline-flex, .flex { display: inherit !important; } /* Let M3 control display */
+        .items-center { align-items: initial !important; }
+        .justify-between { justify-content: initial !important; }
+        .self-start, .md\:self-center { align-self: initial !important; }
+        .break-all { word-break: normal !important; }
+
+    </style>
 </head>
-<body class="bg-gray-100">
-    <div class="flex h-screen">
-        <!-- Sidebar (Include the same sidebar code as other pages) -->
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">
-            <div class="p-6 border-b"><a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a></div>
-            <nav class="p-4 space-y-2">
-                <a href="participant_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
-                <a href="participant_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
-                <a href="my_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-calendar-check w-6 mr-2"></i> My Hackathons</a>
-                <a href="my_teams.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-users w-6 mr-2"></i> My Teams</a>
-                <a href="my_submissions.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-file-alt w-6 mr-2"></i> My Submissions</a>
-                <a href="my_achievements.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-trophy w-6 mr-2"></i> My Achievements</a>
-                
-                <a href="my_certificates.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-certificate w-6 mr-2"></i> My Certificates</a>
-                <a href="settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
-                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
-                
+<body data-theme="light">
+    <div class="flex h-screen layout-container">
+        <!-- Sidebar -->
+        <aside class="w-64 flex-shrink-0 sidebar">
+            <div class="sidebar-header"><a href="index.html" class="sidebar-title">Hackverse</a></div>
+            <nav>
+                <a href="participant_profile.html"><i class="fas fa-user"></i> My Profile</a>
+                <a href="participant_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="my_opportunities.html"><i class="fas fa-calendar-check"></i> My Hackathons</a>
+                <a href="my_teams.html"><i class="fas fa-users"></i> My Teams</a>
+                <a href="my_submissions.html" class="active-link"><i class="fas fa-file-alt"></i> My Submissions</a>
+                <a href="my_achievements.html"><i class="fas fa-trophy"></i> My Achievements</a>
+                <a href="my_certificates.html"><i class="fas fa-certificate"></i> My Certificates</a>
+                <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                <a href="index.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto p-8 lg:p-10">
-             <a href="my_submissions.html" class="text-sm text-indigo-600 hover:underline mb-4 inline-block"><i class="fas fa-arrow-left mr-2"></i> Back to My Submissions</a>
-            <div class="flex flex-col md:flex-row justify-between md:items-center mb-6">
-                <h1 class="text-3xl font-bold text-gray-800 mb-2 md:mb-0">Submission: <span class="text-indigo-600">[Project Nightingale AI]</span></h1>
-                <!-- Placeholder: Replace project name -->
-                <!-- Status Badge -->
-                <span class="badge badge-submitted self-start md:self-center"><i class="fas fa-paper-plane mr-1.5"></i>Submitted</span> <!-- Placeholder: Replace status -->
+        <main class="flex-1 overflow-y-auto main-content">
+             <a href="my_submissions.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to My Submissions</a>
+
+             <!-- Updated header structure -->
+            <div class="submission-header">
+                <h1>Submission: <span class="project-name">[Project Nightingale AI]</span></h1>
+                <span class="m3-badge badge-submitted"><i class="fas fa-paper-plane"></i>Submitted</span>
+                 <!-- <span class="m3-badge badge-judging"><i class="fas fa-gavel"></i>Judging</span> -->
+                 <!-- <span class="m3-badge badge-scored"><i class="fas fa-check-circle"></i>Scored</span> -->
+                 <!-- <span class="m3-badge badge-winner"><i class="fas fa-trophy"></i>Winner</span> -->
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-md space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
+            <!-- Changed container to m3-card -->
+            <div class="m3-card">
+                <div class="details-grid"> <!-- Changed gap/grid classes -->
+                    <div class="detail-item"> <!-- Added wrapper -->
                         <p class="detail-label">Hackathon</p>
-                        <p class="detail-value">[Innovate for Tomorrow Hackathon]</p> <!-- Placeholder -->
+                        <p class="detail-value">[Innovate for Tomorrow Hackathon]</p>
                     </div>
-                     <div>
+                     <div class="detail-item">
                         <p class="detail-label">Team</p>
-                        <p class="detail-value">[Alpha Coders]</p> <!-- Placeholder -->
+                        <p class="detail-value">[Alpha Coders]</p>
                     </div>
-                     <div>
+                     <div class="detail-item">
                         <p class="detail-label">Project Name</p>
-                        <p class="detail-value">[Project Nightingale AI]</p> <!-- Placeholder -->
+                        <p class="detail-value">[Project Nightingale AI]</p>
                     </div>
-                     <div>
+                     <div class="detail-item">
                         <p class="detail-label">Submitted On</p>
-                        <p class="detail-value">[Oct 27, 2023, 10:15 PM PST]</p> <!-- Placeholder -->
+                        <p class="detail-value">[Oct 27, 2023, 10:15 PM PST]</p>
                     </div>
                 </div>
 
-                 <div class="border-t pt-6">
+                 <!-- Changed border/padding to divider -->
+                 <hr class="m3-divider">
+
+                 <div class="detail-item">
                     <p class="detail-label">Project Description</p>
-                    <p class="detail-value whitespace-pre-wrap">[Detailed description of the project goals, features, and technology used...]</p> <!-- Placeholder -->
+                    <p class="detail-value">[Detailed description of the project goals, features, and technology used...]</p>
                 </div>
 
-                <div class="border-t pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
+                 <hr class="m3-divider">
+
+                 <div class="details-grid"> <!-- Changed gap/grid classes -->
+                    <div class="detail-item">
                         <p class="detail-label">GitHub Repository</p>
-                        <p class="detail-value"><a href="[https://github.com/...]" target="_blank" rel="noopener noreferrer">[https://github.com/...] <i class="fas fa-external-link-alt text-xs ml-1"></i></a></p> <!-- Placeholder -->
+                        <p class="detail-value"><a href="[https://github.com/...]" target="_blank" rel="noopener noreferrer">[https://github.com/...] <i class="fas fa-external-link-alt"></i></a></p>
                     </div>
-                    <div>
+                    <div class="detail-item">
                         <p class="detail-label">Demo Link</p>
                         <p class="detail-value">
-                            <a href="[https://your-demo.com]" target="_blank" rel="noopener noreferrer">[https://your-demo.com] <i class="fas fa-external-link-alt text-xs ml-1"></i></a>
-                             <!-- Or show 'Not Provided' if empty -->
-                             <!-- <span class="text-gray-500 italic">Not Provided</span> -->
-                         </p> <!-- Placeholder -->
+                            <a href="[https://your-demo.com]" target="_blank" rel="noopener noreferrer">[https://your-demo.com] <i class="fas fa-external-link-alt"></i></a>
+                             <!-- <span class="not-provided">Not Provided</span> -->
+                         </p>
                     </div>
-                     <div>
+                     <div class="detail-item">
                         <p class="detail-label">Presentation File</p>
                         <p class="detail-value">
-                            <a href="[path/to/presentation_v1.pdf]" download class="text-indigo-600 hover:underline">[presentation_v1.pdf] <i class="fas fa-download text-xs ml-1"></i></a>
-                            <!-- Or show 'Not Provided' if empty -->
-                             <!-- <span class="text-gray-500 italic">Not Provided</span> -->
-                        </p> <!-- Placeholder -->
+                            <a href="[path/to/presentation_v1.pdf]" download>[presentation_v1.pdf] <i class="fas fa-download"></i></a>
+                            <!-- <span class="not-provided">Not Provided</span> -->
+                        </p>
+                    </div>
+                     <!-- Add other custom fields similarly -->
+                     <div class="detail-item">
+                        <p class="detail-label">[Custom Question Label]</p>
+                        <p class="detail-value">[Answer to custom question...]</p>
                     </div>
                 </div>
 
-                 <!-- Optional: Button to Edit if conditions met -->
+                 <!-- Optional: Edit Button -->
                  <!--
-                 <div class="border-t pt-6 flex justify-end">
-                     <a href="edit_submission.html?id=[submission_id]" class="inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400">
-                          <i class="fas fa-edit mr-2"></i> Edit Submission (Before Deadline)
+                 <hr class="m3-divider">
+                 <div style="display: flex; justify-content: flex-end;">
+                     <a href="edit_submission.html?id=[submission_id]" class="button button-filled" style="background-color: var(--warning); color: var(--on-warning);">
+                          <i class="fas fa-edit" style="margin-right: 0.5rem;"></i> Edit Submission (Before Deadline)
                      </a>
                  </div>
                  -->
             </div>
         </main>
     </div>
+    <script>
+        // Optional: Add JS for theme toggle or other interactions if needed
+    </script>
 </body>
 </html>

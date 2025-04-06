@@ -1,25 +1,425 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
-    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - Hackverse</title>
-     <script src="https://cdn.tailwindcss.com"></script>
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-     <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-     <style> body { font-family: 'Inter', sans-serif; } </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - M3 Style</title>
+    <!-- Tailwind CSS (Kept as per constraint, but styles will be overridden) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome (Optional, if Navbar/Footer use icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts (Roboto for M3) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Material Design 3 Variables (Consistent Set) --- */
+        :root {
+             /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Additional colors */
+            --md-sys-color-success-light: #177e2a; /* Green */
+            --md-sys-color-on-success-light: #ffffff;
+            --md-sys-color-success-container-light: #b4f7ae;
+            --md-sys-color-on-success-container-light: #002205;
+            --md-sys-color-warning-light: #7e5700; /* Yellow/Orange */
+            --md-sys-color-on-warning-light: #ffffff;
+            --md-sys-color-warning-container-light: #ffdea3;
+            --md-sys-color-on-warning-container-light: #281900;
+            /* Surface & Background */
+            --md-sys-color-background-light: #fefcff; /* Off-white */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-light: #ffffff; /* Pure white */
+            --md-sys-color-surface-container-low-light: #f8f2f7;
+            --md-sys-color-surface-container-light: #eeeef2;
+            --md-sys-color-surface-container-high-light: #e8e8ed;
+            --md-sys-color-surface-container-highest-light: #e2e2e6; /* Often used for TopAppBar */
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-success-dark: #99da94;
+            --md-sys-color-on-success-dark: #00390d;
+            --md-sys-color-success-container-dark: #005317;
+            --md-sys-color-on-success-container-dark: #b4f7ae;
+            --md-sys-color-warning-dark: #fbbc04;
+            --md-sys-color-on-warning-dark: #412d00;
+            --md-sys-color-warning-container-dark: #5f4200;
+            --md-sys-color-on-warning-container-dark: #ffdea3;
+            --md-sys-color-background-dark: #1a1c1e; /* Dark Gray */
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-dark: #0e1013;
+            --md-sys-color-surface-container-low-dark: #1d1f22;
+            --md-sys-color-surface-container-dark: #212326;
+            --md-sys-color-surface-container-high-dark: #2b2d30;
+            --md-sys-color-surface-container-highest-dark: #36383a; /* Often used for TopAppBar */
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+             /* Shape */
+             --md-shape-corner-none: 0px;
+             --md-shape-corner-extra-small: 4px;
+             --md-shape-corner-small: 8px;
+             --md-shape-corner-medium: 12px;
+             --md-shape-corner-large: 16px;
+             --md-shape-corner-extra-large: 28px;
+             --md-shape-corner-full: 9999px;
+
+             /* Elevation */
+             --md-sys-elevation-level-0: none;
+             --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+             --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+             --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+             /* Typography */
+             --md-sys-typescale-font-family-name: Roboto;
+             --md-sys-typescale-body-large-font-size: 1rem;
+             --md-sys-typescale-body-large-line-height: 1.5rem;
+             --md-sys-typescale-body-large-font-weight: 400;
+             --md-sys-typescale-body-medium-font-size: 0.875rem;
+             --md-sys-typescale-body-medium-line-height: 1.25rem;
+             --md-sys-typescale-body-medium-font-weight: 400;
+             --md-sys-typescale-body-small-font-size: 0.75rem;
+             --md-sys-typescale-body-small-line-height: 1rem;
+             --md-sys-typescale-body-small-font-weight: 400;
+             --md-sys-typescale-label-large-font-size: 0.875rem;
+             --md-sys-typescale-label-large-line-height: 1.25rem;
+             --md-sys-typescale-label-large-font-weight: 500;
+             --md-sys-typescale-title-large-font-size: 1.375rem;
+             --md-sys-typescale-title-large-line-height: 1.75rem;
+             --md-sys-typescale-title-large-font-weight: 400;
+             --md-sys-typescale-title-medium-font-size: 1rem;
+             --md-sys-typescale-title-medium-line-height: 1.5rem;
+             --md-sys-typescale-title-medium-font-weight: 500;
+             --md-sys-typescale-headline-large-font-size: 2rem; /* For H1 */
+             --md-sys-typescale-headline-large-line-height: 2.5rem;
+             --md-sys-typescale-headline-large-font-weight: 400;
+             --md-sys-typescale-headline-medium-font-size: 1.75rem; /* For H2 */
+             --md-sys-typescale-headline-medium-line-height: 2.25rem;
+             --md-sys-typescale-headline-medium-font-weight: 400;
+        }
+
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-light);
+            --surface-container-low: var(--md-sys-color-surface-container-low-light);
+            --surface-container: var(--md-sys-color-surface-container-light);
+            --surface-container-high: var(--md-sys-color-surface-container-high-light);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-dark);
+            --surface-container-low: var(--md-sys-color-surface-container-low-dark);
+            --surface-container: var(--md-sys-color-surface-container-dark);
+            --surface-container-high: var(--md-sys-color-surface-container-high-dark);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--md-sys-typescale-font-family-name), sans-serif;
+            background-color: var(--background);
+            color: var(--on-background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            display: flex; /* Needed for footer push */
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Placeholder Navbar --- */
+        .placeholder-nav {
+            background-color: var(--surface-container-highest);
+            color: var(--on-surface);
+            padding: 1rem 1.5rem;
+            box-shadow: var(--md-sys-elevation-level-1);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .placeholder-nav a {
+             color: var(--primary);
+             text-decoration: none;
+             font-weight: 500;
+        }
+
+        /* --- Main Content Area --- */
+        main {
+            flex-grow: 1; /* Allow main to grow */
+            /* Keep Tailwind container classes for structure */
+        }
+        main h1 {
+            font-size: var(--md-sys-typescale-headline-large-font-size);
+            font-weight: var(--md-sys-typescale-headline-large-font-weight);
+            line-height: var(--md-sys-typescale-headline-large-line-height);
+            color: var(--on-surface);
+            /* Keep Tailwind margin mb-6 */
+        }
+
+        /* --- Content Container --- */
+        .content-container {
+            background-color: var(--surface-container-low); /* Slightly off background */
+            color: var(--on-surface);
+            padding: 1.5rem 2rem; /* M3 padding */
+            border-radius: var(--md-shape-corner-large); /* M3 card shape */
+            box-shadow: var(--md-sys-elevation-level-1);
+            border: 1px solid var(--outline-variant);
+        }
+
+        /* M3 Typography for Content within Container */
+        .content-container h2 {
+            font-size: var(--md-sys-typescale-headline-small-font-size); /* H2 smaller than H1 */
+            font-weight: var(--md-sys-typescale-headline-small-font-weight);
+            color: var(--on-surface);
+            margin-top: 1.5rem; /* Space above h2 */
+            margin-bottom: 0.75rem; /* Space below h2 */
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--outline-variant);
+        }
+        .content-container p {
+             font-size: var(--md-sys-typescale-body-large-font-size);
+             line-height: var(--md-sys-typescale-body-large-line-height);
+             color: var(--on-surface-variant); /* Use variant for body text */
+             margin-bottom: 1rem;
+         }
+         .content-container ul, .content-container ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--on-surface-variant);
+         }
+         .content-container li { margin-bottom: 0.5rem; }
+         .content-container a { color: var(--primary); text-decoration: underline; }
+         .content-container a:hover { text-decoration: none; }
+         .content-container strong, .content-container b {
+             font-weight: 700; /* Bold */
+             color: var(--on-surface); /* Slightly stronger color */
+         }
+
+        /* --- Placeholder Footer --- */
+        .placeholder-footer {
+            background-color: var(--surface-container);
+            color: var(--on-surface-variant);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            font-size: var(--md-sys-typescale-body-small-font-size);
+            border-top: 1px solid var(--outline-variant);
+        }
+
+        /* --- Tailwind/Prose Overrides --- */
+        /* Neutralize visual styles from frameworks */
+        body.bg-gray-100 { background-color: transparent !important; }
+        .bg-white { background-color: transparent !important; }
+        .text-4xl, .font-bold, .mb-6, .p-6, .rounded-lg, .shadow { /* Reset effects */
+            font-size: inherit !important;
+            font-weight: inherit !important;
+            margin: inherit !important; /* Caution: Overrides all margins */
+            padding: inherit !important; /* Caution: Overrides all paddings */
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+        /* Specific margin overrides if needed instead of blanket */
+        main.py-12 { padding-top: 0 !important; padding-bottom: 0 !important; }
+        /* Keep container layout classes but override padding */
+        main.container { padding-left: 0 !important; padding-right: 0 !important; }
+
+        /* Prose Overrides - attempt to neutralize */
+        .prose {
+            color: inherit !important;
+            max-width: none !important; /* Keep user's max-w-none */
+        }
+        .prose h2 {
+            color: inherit !important;
+            font-size: inherit !important;
+            font-weight: inherit !important;
+            margin-top: 0 !important; margin-bottom: 0 !important;
+            padding-bottom: 0 !important; border-bottom: none !important;
+        }
+         .prose p {
+            color: inherit !important;
+            font-size: inherit !important;
+            line-height: inherit !important;
+            margin-top: 0 !important; margin-bottom: 0 !important;
+         }
+         /* Navbar/Footer Specific Overrides */
+         .bg-gray-900 { background-color: transparent !important; }
+         .text-white { color: inherit !important; }
+         .text-gray-400 { color: inherit !important; }
+         .py-10 { padding-top: 0 !important; padding-bottom: 0 !important; }
+         nav.shadow-md, nav.sticky, nav.top-0, nav.z-50 { /* Reset nav specific styles if needed */
+             box-shadow: none !important;
+             position: static !important;
+             z-index: auto !important;
+         }
+         footer.py-10 { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+    </style>
 </head>
-<body class="bg-gray-100">
-    <nav class="bg-gray-900 text-white shadow-md sticky top-0 z-50">...</nav> <!-- Include Navbar -->
+<body data-theme="light">
+
+    <!-- M3 Placeholder Navbar -->
+    <nav class="placeholder-nav">
+        <a href="index.html">Hackverse</a>
+        <!-- Add other nav links based on your actual navbar -->
+    </nav>
+
+    <!-- Keep Tailwind container classes but M3 styles apply inside -->
     <main class="container mx-auto px-4 md:px-6 py-12 min-h-[60vh]">
         <h1 class="text-4xl font-bold mb-6">Terms of Service</h1>
-         <div class="bg-white p-6 rounded-lg shadow prose max-w-none"> <!-- Using prose for text formatting -->
-             <p>Your terms of service details go here...</p>
-             <h2>User Responsibilities</h2>
-             <p>Details about user obligations...</p>
-             <h2>Platform Usage</h2>
-             <p>Details about allowed/disallowed usage...</p>
+         <!-- Added content-container class -->
+        <div class="bg-white p-6 rounded-lg shadow prose max-w-none content-container">
+             <p>**(Last Updated: [Date])**</p>
+             <p>Please read these Terms of Service ("Terms", "Terms of Service") carefully before using the Hackverse platform (the "Service") operated by [Your Company Name] ("us", "we", or "our").</p>
+             <p>Your access to and use of the Service is conditioned upon your acceptance of and compliance with these Terms. These Terms apply to all visitors, users, organizers, participants, judges, and others who wish to access or use the Service.</p>
+             <p>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you do not have permission to access the Service.</p>
+
+             <h2>1. Accounts</h2>
+             <p>When you create an account with us, you guarantee that you are above the age of 13, and that the information you provide us is accurate, complete, and current at all times. Inaccurate, incomplete, or obsolete information may result in the immediate termination of your account on the Service.</p>
+             <p>You are responsible for maintaining the confidentiality of your account and password, including but not limited to the restriction of access to your computer and/or account. You agree to accept responsibility for any and all activities or actions that occur under your account and/or password.</p>
+
+             <h2>2. User Responsibilities</h2>
+             <p>As a user (participant, organizer, judge, etc.) of Hackverse, you agree to:</p>
+             <ul>
+                 <li>Comply with all applicable laws and regulations.</li>
+                 <li>Provide accurate and truthful information during registration and hackathon participation.</li>
+                 <li>Respect the intellectual property rights of others.</li>
+                 <li>Adhere to the specific rules and code of conduct set forth by individual hackathon organizers.</li>
+                 <li>Not engage in any activity that is harmful, fraudulent, deceptive, threatening, harassing, defamatory, obscene, or otherwise objectionable.</li>
+                 <li>Not attempt to gain unauthorized access to the Service or other users' accounts.</li>
+                 <li>Not introduce viruses, trojans, worms, logic bombs, or other material that is malicious or technologically harmful.</li>
+             </ul>
+             <p>Organizers are responsible for defining clear rules, managing their events ethically, fairly judging submissions, and handling participant data in accordance with applicable privacy laws and our Privacy Policy.</p>
+
+             <h2>3. Platform Usage</h2>
+             <p>We grant you a limited, non-exclusive, non-transferable, revocable license to use the Service for its intended purposes (participating in or organizing hackathons) subject to these Terms.</p>
+             <p>You may not:</p>
+             <ul>
+                 <li>Use the Service for any illegal purpose or in violation of any local, state, national, or international law.</li>
+                 <li>Reverse engineer, decompile, disassemble, or otherwise attempt to discover the source code of the Service.</li>
+                 <li>Use any automated system, including without limitation "robots," "spiders," "offline readers," etc., to access the Service in a manner that sends more request messages to the servers than a human can reasonably produce in the same period by using a conventional on-line web browser.</li>
+                 <li>Sell, rent, lease, or sublicense the Service or access thereto.</li>
+             </ul>
+
+             <h2>4. Intellectual Property</h2>
+             <p>The Service and its original content (excluding Content provided by users), features, and functionality are and will remain the exclusive property of [Your Company Name] and its licensors. The Service is protected by copyright, trademark, and other laws of both the [Your Country] and foreign countries.</p>
+             <p>Submissions made by participants during hackathons remain the intellectual property of the participants or their respective teams, subject to any specific rules set forth by the hackathon organizer regarding IP ownership or licensing.</p>
+
+             <h2>5. Termination</h2>
+             <p>We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of the Terms.</p>
+             <p>If you wish to terminate your account, you may simply discontinue using the Service or contact us to request account deletion.</p>
+
+             <h2>6. Disclaimer of Warranties; Limitation of Liability</h2>
+             <p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis. Your use of the Service is at your sole risk. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement, or course of performance.</p>
+             <p>[Your Company Name], its subsidiaries, affiliates, and its licensors do not warrant that a) the Service will function uninterrupted, secure or available at any particular time or location; b) any errors or defects will be corrected; c) the Service is free of viruses or other harmful components; or d) the results of using the Service will meet your requirements.</p>
+             <p>In no event shall [Your Company Name], nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.</p>
+
+             <h2>7. Governing Law</h2>
+             <p>These Terms shall be governed and construed in accordance with the laws of [Your Jurisdiction, e.g., State of California, USA], without regard to its conflict of law provisions.</p>
+
+             <h2>8. Changes</h2>
+             <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+             <p>By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use the Service.</p>
+
+             <h2>9. Contact Us</h2>
+             <p>If you have any questions about these Terms, please contact us:</p>
+             <p>Email: <a href="mailto:support@hackverse.example.com">support@hackverse.example.com</a></p>
         </div>
     </main>
-    <footer class="bg-gray-900 text-gray-400 py-10">...</footer> <!-- Include Footer -->
+
+    <!-- M3 Placeholder Footer -->
+    <footer class="placeholder-footer">
+        © 2023 Hackverse. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+    </footer>
+
+    <script>
+        // Optional: Add JS for theme toggle or other interactions if needed
+    </script>
 </body>
 </html>
