@@ -1,107 +1,658 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hackathon Results - Hackverse</title>
+    <title>Hackathon Results - M3 Style</title>
+    <!-- Tailwind CSS (Kept as per constraint, but styles will be overridden) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f7fafc; }
-         /* Reusing badge styles */
-        .badge { @apply inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium leading-4; }
-        .badge-scored { @apply bg-green-100 text-green-800; }
-        .badge-winner { @apply bg-yellow-100 text-yellow-800 font-semibold; }
-        .badge-finalist { @apply bg-blue-100 text-blue-800; }
-        .badge-participant { @apply bg-gray-100 text-gray-800; }
-
-        .winner-card { @apply bg-gradient-to-r from-yellow-50 to-yellow-100 border border-yellow-200 p-4 rounded-lg mb-3; }
-        .runner-up-card { @apply bg-gray-50 border border-gray-200 p-4 rounded-lg mb-3; }
-
-        .feedback-section {
-             @apply mt-4 p-4 bg-gray-50 border border-gray-200 rounded-md;
-        }
-         .feedback-label { @apply text-sm font-semibold text-gray-700 mb-1 block; }
-         .feedback-text { @apply text-sm text-gray-600 whitespace-pre-wrap; }
-    </style>
+    <!-- Google Fonts (Roboto for M3) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Material Design 3 Variables (Consistent Set) --- */
+        :root {
+             /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Additional colors */
+            --md-sys-color-success-light: #177e2a; /* Green */
+            --md-sys-color-on-success-light: #ffffff;
+            --md-sys-color-success-container-light: #b4f7ae;
+            --md-sys-color-on-success-container-light: #002205;
+            --md-sys-color-warning-light: #7e5700; /* Yellow/Orange */
+            --md-sys-color-on-warning-light: #ffffff;
+            --md-sys-color-warning-container-light: #ffdea3;
+            --md-sys-color-on-warning-container-light: #281900;
+            /* Surface & Background */
+            --md-sys-color-background-light: #fefcff; /* Off-white */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-light: #ffffff; /* Pure white */
+            --md-sys-color-surface-container-low-light: #f8f2f7;
+            --md-sys-color-surface-container-light: #eeeef2;
+            --md-sys-color-surface-container-high-light: #e8e8ed;
+            --md-sys-color-surface-container-highest-light: #e2e2e6; /* Often used for TopAppBar */
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-success-dark: #99da94;
+            --md-sys-color-on-success-dark: #00390d;
+            --md-sys-color-success-container-dark: #005317;
+            --md-sys-color-on-success-container-dark: #b4f7ae;
+            --md-sys-color-warning-dark: #fbbc04;
+            --md-sys-color-on-warning-dark: #412d00;
+            --md-sys-color-warning-container-dark: #5f4200;
+            --md-sys-color-on-warning-container-dark: #ffdea3;
+            --md-sys-color-background-dark: #1a1c1e; /* Dark Gray */
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-dark: #0e1013;
+            --md-sys-color-surface-container-low-dark: #1d1f22;
+            --md-sys-color-surface-container-dark: #212326;
+            --md-sys-color-surface-container-high-dark: #2b2d30;
+            --md-sys-color-surface-container-highest-dark: #36383a; /* Often used for TopAppBar */
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+             /* RGB for hover alpha */
+             --md-sys-color-primary-rgb-light: 0, 97, 164;
+             --md-sys-color-primary-rgb-dark: 160, 201, 255;
+             --md-sys-color-secondary-rgb-light: 83, 95, 112;
+             --md-sys-color-secondary-rgb-dark: 187, 199, 219;
+             --md-sys-color-error-rgb-light: 186, 26, 26;
+             --md-sys-color-error-rgb-dark: 255, 180, 171;
+
+            /* Shape */
+            --md-shape-corner-none: 0px;
+            --md-shape-corner-extra-small: 4px;
+            --md-shape-corner-small: 8px;
+            --md-shape-corner-medium: 12px;
+            --md-shape-corner-large: 16px;
+            --md-shape-corner-extra-large: 28px;
+            --md-shape-corner-full: 9999px;
+
+            /* Elevation */
+            --md-sys-elevation-level-0: none;
+            --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+            /* State Layers */
+            --md-sys-state-hover-state-layer-opacity: 0.08;
+            --md-sys-state-focus-state-layer-opacity: 0.12;
+            --md-sys-state-pressed-state-layer-opacity: 0.12;
+
+            /* Typography */
+            --md-sys-typescale-font-family-name: Roboto;
+            --md-sys-typescale-body-large-font-size: 1rem;
+            --md-sys-typescale-body-large-line-height: 1.5rem;
+            --md-sys-typescale-body-large-font-weight: 400;
+            --md-sys-typescale-body-medium-font-size: 0.875rem;
+            --md-sys-typescale-body-medium-line-height: 1.25rem;
+            --md-sys-typescale-body-medium-font-weight: 400;
+            --md-sys-typescale-body-small-font-size: 0.75rem;
+            --md-sys-typescale-body-small-line-height: 1rem;
+            --md-sys-typescale-body-small-font-weight: 400;
+            --md-sys-typescale-label-large-font-size: 0.875rem;
+            --md-sys-typescale-label-large-line-height: 1.25rem;
+            --md-sys-typescale-label-large-font-weight: 500;
+            --md-sys-typescale-label-medium-font-size: 0.75rem;
+            --md-sys-typescale-label-medium-line-height: 1rem;
+            --md-sys-typescale-label-medium-font-weight: 500;
+            --md-sys-typescale-label-small-font-size: 0.6875rem;
+            --md-sys-typescale-label-small-line-height: 1rem;
+            --md-sys-typescale-label-small-font-weight: 500;
+            --md-sys-typescale-title-large-font-size: 1.375rem;
+            --md-sys-typescale-title-large-line-height: 1.75rem;
+            --md-sys-typescale-title-large-font-weight: 400;
+            --md-sys-typescale-title-medium-font-size: 1rem;
+            --md-sys-typescale-title-medium-line-height: 1.5rem;
+            --md-sys-typescale-title-medium-font-weight: 500;
+             --md-sys-typescale-title-small-font-size: 0.875rem;
+            --md-sys-typescale-title-small-line-height: 1.25rem;
+            --md-sys-typescale-title-small-font-weight: 500;
+            --md-sys-typescale-headline-medium-font-size: 1.75rem;
+            --md-sys-typescale-headline-medium-font-weight: 400;
+            --md-sys-typescale-headline-medium-line-height: 2.25rem;
+            --md-sys-typescale-headline-small-font-size: 1.5rem;
+             --md-sys-typescale-headline-small-line-height: 2rem;
+             --md-sys-typescale-headline-small-font-weight: 400;
+             --md-sys-typescale-display-small-font-size: 2.25rem;
+            --md-sys-typescale-display-small-line-height: 2.75rem;
+            --md-sys-typescale-display-small-font-weight: 400;
+        }
+
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --tertiary: var(--md-sys-color-tertiary-light);
+            --on-tertiary: var(--md-sys-color-on-tertiary-light);
+            --tertiary-container: var(--md-sys-color-tertiary-container-light);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --error-container: var(--md-sys-color-error-container-light);
+            --on-error-container: var(--md-sys-color-on-error-container-light);
+            --success: var(--md-sys-color-success-light);
+            --on-success: var(--md-sys-color-on-success-light);
+            --success-container: var(--md-sys-color-success-container-light);
+            --on-success-container: var(--md-sys-color-on-success-container-light);
+            --warning: var(--md-sys-color-warning-light);
+            --on-warning: var(--md-sys-color-on-warning-light);
+            --warning-container: var(--md-sys-color-warning-container-light);
+            --on-warning-container: var(--md-sys-color-on-warning-container-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-light);
+            --surface-container-low: var(--md-sys-color-surface-container-low-light);
+            --surface-container: var(--md-sys-color-surface-container-light);
+            --surface-container-high: var(--md-sys-color-surface-container-high-light);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+            --shadow: var(--md-sys-color-shadow-light);
+            --surface-tint-color: var(--md-sys-color-surface-tint-light);
+            --inverse-surface: var(--md-sys-color-inverse-surface-light);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-light);
+            --inverse-primary: var(--md-sys-color-inverse-primary-light);
+             /* RGB values */
+             --primary-rgb: var(--md-sys-color-primary-rgb-light);
+             --secondary-rgb: var(--md-sys-color-secondary-rgb-light);
+             --error-rgb: var(--md-sys-color-error-rgb-light);
+             --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 26, 28, 30;
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --tertiary: var(--md-sys-color-tertiary-dark);
+            --on-tertiary: var(--md-sys-color-on-tertiary-dark);
+            --tertiary-container: var(--md-sys-color-tertiary-container-dark);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --error-container: var(--md-sys-color-error-container-dark);
+            --on-error-container: var(--md-sys-color-on-error-container-dark);
+            --success: var(--md-sys-color-success-dark);
+            --on-success: var(--md-sys-color-on-success-dark);
+            --success-container: var(--md-sys-color-success-container-dark);
+            --on-success-container: var(--md-sys-color-on-success-container-dark);
+            --warning: var(--md-sys-color-warning-dark);
+            --on-warning: var(--md-sys-color-on-warning-dark);
+            --warning-container: var(--md-sys-color-warning-container-dark);
+            --on-warning-container: var(--md-sys-color-on-warning-container-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-dark);
+            --surface-container-low: var(--md-sys-color-surface-container-low-dark);
+            --surface-container: var(--md-sys-color-surface-container-dark);
+            --surface-container-high: var(--md-sys-color-surface-container-high-dark);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+            --shadow: var(--md-sys-color-shadow-dark);
+            --surface-tint-color: var(--md-sys-color-surface-tint-dark);
+            --inverse-surface: var(--md-sys-color-inverse-surface-dark);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-dark);
+            --inverse-primary: var(--md-sys-color-inverse-primary-dark);
+             /* RGB values */
+             --primary-rgb: var(--md-sys-color-primary-rgb-dark);
+             --secondary-rgb: var(--md-sys-color-secondary-rgb-dark);
+             --error-rgb: var(--md-sys-color-error-rgb-dark);
+             --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 226, 226, 230;
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--md-sys-typescale-font-family-name), sans-serif;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight);
+            background-color: var(--background);
+            color: var(--on-background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Layout --- */
+        .layout-container { display: flex; height: 100vh; overflow: hidden; }
+        .main-content { flex-grow: 1; overflow-y: auto; padding: 2rem 2.5rem; /* lg:p-10 */ }
+        .main-content .back-link {
+             display: inline-flex; align-items: center;
+             font-size: var(--md-sys-typescale-label-large-font-size);
+             font-weight: var(--md-sys-typescale-label-large-font-weight);
+             color: var(--primary);
+             text-decoration: none;
+             margin-bottom: 1rem; /* mb-4 */
+             padding: 0.25rem 0.5rem;
+             border-radius: var(--md-shape-corner-full);
+             transition: background-color 0.15s ease;
+        }
+         .main-content .back-link:hover {
+             background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity));
+         }
+          .main-content .back-link i { margin-right: 0.5rem; /* mr-2 */ }
+        .main-content h1 {
+            font-size: var(--md-sys-typescale-headline-medium-font-size);
+            font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+            line-height: var(--md-sys-typescale-headline-medium-line-height);
+            color: var(--on-surface);
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+        .main-content > .subheading { /* Target direct child p for subtitle */
+             font-size: var(--md-sys-typescale-body-large-font-size);
+             color: var(--on-surface-variant);
+             margin-bottom: 2rem; /* mb-8 */
+          }
+          .main-content > .subheading .hackathon-name { /* Make name stand out */
+             font-weight: var(--md-sys-typescale-title-small-font-weight);
+             color: var(--on-surface);
+          }
+           /* Section headings */
+         section h2 {
+            font-size: var(--md-sys-typescale-title-large-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight); /* 500 */
+            color: var(--on-surface);
+            margin-bottom: 1rem; /* mb-4 */
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--outline-variant);
+         }
+
+        /* --- Sidebar (Consistent) --- */
+        .sidebar {
+            width: 256px; background-color: var(--surface-container-low);
+            border-right: 1px solid var(--outline-variant); display: flex;
+            flex-direction: column; flex-shrink: 0; transition: background-color 0.3s ease, border-color 0.3s ease;
+            box-shadow: none;
+        }
+        .sidebar-header { padding: 1.5rem 1rem; border-bottom: 1px solid var(--outline-variant); transition: border-color 0.3s ease; }
+        .sidebar-title { font-size: var(--md-sys-typescale-title-large-font-size); font-weight: 700; color: var(--primary); text-decoration: none; display: block; }
+        .sidebar nav { padding: 0.5rem; }
+        .sidebar nav a {
+            display: flex; align-items: center; padding: 0.75rem 1rem; margin: 0.25rem 0;
+            border-radius: var(--md-shape-corner-full); color: var(--on-surface-variant); text-decoration: none;
+            font-weight: var(--md-sys-typescale-label-large-font-weight); font-size: var(--md-sys-typescale-label-large-font-size);
+            position: relative; overflow: hidden; transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .sidebar nav a i { width: 24px; margin-right: 1rem; text-align: center; color: var(--on-surface-variant); transition: color 0.15s ease; }
+        .sidebar nav a::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--secondary);
+            opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .sidebar nav a:hover { color: var(--on-secondary-container); }
+        .sidebar nav a:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar nav a:hover i { color: var(--on-secondary-container); }
+        .sidebar nav a.active-link { background-color: var(--secondary-container); color: var(--on-secondary-container); }
+        .sidebar nav a.active-link i { color: var(--on-secondary-container); }
+        .sidebar nav a.logout-link { margin-top: 1.5rem; color: var(--error); }
+        .sidebar nav a.logout-link i { color: var(--error); }
+        .sidebar nav a.logout-link::before { background-color: var(--error); }
+        .sidebar nav a.logout-link:hover { color: var(--on-error-container); }
+        .sidebar nav a.logout-link:hover::before { background-color: var(--error-container); opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar nav a.logout-link:hover i { color: var(--on-error-container); }
+
+         /* --- M3 Card Style (for summary) --- */
+        .m3-card {
+            background-color: var(--surface-container); /* Standard container */
+            border: 1px solid var(--outline-variant);
+            box-shadow: var(--md-sys-elevation-level-1); /* Slightly elevated */
+            border-radius: var(--md-shape-corner-large);
+            padding: 1.5rem; /* p-6 */
+        }
+
+        /* Summary Card Content */
+        .summary-header {
+             display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; /* mb-4 */
+        }
+         @media (min-width: 640px) { /* sm breakpoint */
+            .summary-header { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+         }
+        .summary-header .submission-title {
+             font-size: var(--md-sys-typescale-title-large-font-size);
+             font-weight: var(--md-sys-typescale-title-medium-font-weight);
+             color: var(--primary); /* Use primary for title */
+        }
+        .summary-header .team-name {
+             font-size: var(--md-sys-typescale-body-medium-font-size);
+             color: var(--on-surface-variant);
+        }
+
+        /* M3 Badge/Chip Style */
+        .m3-badge {
+            display: inline-flex; align-items: center;
+            padding: 0.25rem 0.75rem; /* px-3 py-0.5 */
+            border-radius: var(--md-shape-corner-small); /* Rounded */
+            font-size: var(--md-sys-typescale-label-small-font-size); /* text-xs */
+            font-weight: var(--md-sys-typescale-label-medium-font-weight); /* font-medium */
+            line-height: 1; /* leading-4 approx */
+            white-space: nowrap;
+        }
+        .m3-badge i { margin-right: 0.375rem; /* mr-1.5 */ font-size: 0.9em; }
+        .badge-winner { background-color: var(--warning-container); color: var(--on-warning-container); font-weight: var(--md-sys-typescale-label-large-font-weight); /* semibold */}
+        .badge-finalist { background-color: var(--primary-container); color: var(--on-primary-container); }
+        .badge-scored { background-color: var(--success-container); color: var(--on-success-container); }
+        .badge-participant { background-color: var(--surface-variant); color: var(--on-surface-variant); }
+
+        /* Rank/Score Grid */
+        .summary-metrics {
+            display: grid; grid-template-columns: repeat(1, 1fr); gap: 1rem; /* gap-4 */
+            margin-bottom: 1rem; /* mb-4 */
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+        }
+         @media (min-width: 768px) { /* md breakpoint */
+             .summary-metrics { grid-template-columns: repeat(2, 1fr); }
+         }
+         .summary-metrics .metric-label {
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            color: var(--on-surface-variant); /* Use variant color */
+         }
+          .summary-metrics .metric-value {
+            margin-left: 0.5rem; /* ml-2 */
+            font-weight: var(--md-sys-typescale-title-small-font-weight);
+            color: var(--on-surface);
+          }
+
+         /* View Submission Link */
+         .view-submission-link {
+             display: inline-flex; align-items: center;
+             font-size: var(--md-sys-typescale-label-large-font-size);
+             font-weight: var(--md-sys-typescale-label-large-font-weight);
+             color: var(--primary);
+             text-decoration: none;
+             margin-bottom: 1rem; /* mb-4 */
+             padding: 0.25rem 0.5rem;
+             border-radius: var(--md-shape-corner-full);
+             transition: background-color 0.15s ease;
+         }
+          .view-submission-link:hover {
+             background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity));
+             text-decoration: underline;
+         }
+          .view-submission-link i { margin-right: 0.25rem; /* mr-1 */ }
+
+         /* Feedback Section */
+         .feedback-section {
+            margin-top: 1rem; /* mt-4 */
+            padding: 1rem; /* p-4 */
+            background-color: var(--surface-container-low); /* Different bg */
+            border: 1px solid var(--outline-variant);
+            border-radius: var(--md-shape-corner-medium); /* rounded-md */
+         }
+         .feedback-section details summary {
+            font-weight: var(--md-sys-typescale-title-small-font-weight);
+            color: var(--on-surface);
+            cursor: pointer;
+            list-style: none; /* Remove default marker */
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Push icon to end */
+            transition: color 0.15s ease;
+         }
+         .feedback-section details summary:hover { color: var(--primary); }
+         .feedback-section details summary::-webkit-details-marker { display: none; } /* Hide Safari marker */
+         .feedback-section details summary .summary-icon {
+            font-size: 0.75rem; /* text-xs */
+            margin-left: 0.25rem; /* ml-1 */
+            transition: transform 0.2s ease-out;
+         }
+         .feedback-section details[open] summary .summary-icon { transform: rotate(180deg); }
+
+         .feedback-content { margin-top: 0.75rem; /* mt-3 */ }
+         .feedback-item { margin-bottom: 0.75rem; /* mb-3 */ }
+         .feedback-label {
+             display: block;
+             font-size: var(--md-sys-typescale-label-medium-font-size);
+             font-weight: var(--md-sys-typescale-label-medium-font-weight);
+             color: var(--on-surface-variant);
+             margin-bottom: 0.25rem; /* mb-1 */
+         }
+         .feedback-text {
+             font-size: var(--md-sys-typescale-body-medium-font-size);
+             color: var(--on-surface-variant);
+             white-space: pre-wrap; /* Preserve formatting */
+             line-height: var(--md-sys-typescale-body-medium-line-height);
+         }
+
+        /* Overall Winners Cards */
+        .winner-card { /* M3 Outlined Card Style */
+            background-color: var(--surface-container-low);
+            border: 1px solid var(--outline-variant);
+            padding: 1rem; /* p-4 */
+            border-radius: var(--md-shape-corner-large); /* rounded-lg */
+            margin-bottom: 0.75rem; /* mb-3 */
+             transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+         .winner-card:hover {
+             border-color: var(--outline);
+             box-shadow: var(--md-sys-elevation-level-1);
+         }
+        .winner-card.first-place { /* Specific style for 1st place */
+             border-color: var(--warning); /* Use warning color for border */
+             background-color: var(--warning-container); /* Lighter warning bg */
+         }
+         .winner-card .rank-title {
+             font-size: var(--md-sys-typescale-title-medium-font-size);
+             font-weight: var(--md-sys-typescale-title-medium-font-weight);
+             color: var(--on-surface);
+             display: flex; align-items: center; gap: 0.5rem; /* mr-2 */
+         }
+         .winner-card.first-place .rank-title { color: var(--on-warning-container); }
+         .winner-card .rank-title .icon-winner { color: var(--warning); }
+         .winner-card .rank-title .icon-runnerup { color: var(--secondary); }
+
+         .winner-card .project-title {
+             font-size: var(--md-sys-typescale-title-small-font-size);
+             font-weight: var(--md-sys-typescale-title-small-font-weight);
+             color: var(--on-surface);
+             margin-top: 0.25rem; /* mt-1 */
+         }
+          .winner-card.first-place .project-title { color: var(--on-warning-container); }
+
+         .winner-card .team-name {
+            font-size: var(--md-sys-typescale-body-small-font-size);
+            color: var(--on-surface-variant);
+         }
+          .winner-card.first-place .team-name { color: var(--on-warning-container); opacity: 0.8; }
+
+        /* View All Submissions Link */
+        .view-all-submissions { margin-top: 1.5rem; /* mt-6 */ text-align: center; }
+        .view-all-submissions a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+        }
+         .view-all-submissions a:hover { text-decoration: underline; }
+         .view-all-submissions i { margin-left: 0.25rem; /* ml-1 */ }
+
+        /* --- Tailwind/Prose Overrides --- */
+        /* Neutralize visual styles from frameworks */
+        body.bg-gray-100 { background-color: transparent !important; }
+        .bg-white, .bg-gray-50, .bg-gray-100, .bg-yellow-100, .bg-green-100, .bg-blue-100 { background-color: transparent !important; }
+        .bg-gradient-to-r, .from-yellow-50, .to-yellow-100 { background-image: none !important; }
+        .text-gray-700, .text-gray-800, .text-gray-600, .text-gray-500, .text-gray-900 { color: inherit !important; }
+        .text-blue-600, .text-blue-700, .text-blue-800 { color: inherit !important; }
+        .text-red-600 { color: inherit !important; }
+        .text-green-800 { color: inherit !important; }
+        .text-yellow-800, .text-yellow-900 { color: inherit !important; }
+        .text-indigo-600, .text-indigo-700 { color: inherit !important; }
+        .hover\:bg-gray-100:hover, .hover\:bg-red-50:hover, .hover\:bg-gray-50:hover { background-color: transparent !important; }
+        .hover\:underline:hover { text-decoration: none !important; }
+        .border, .border-b, .border-t, .border-gray-200, .border-yellow-200 { border-width: 0 !important; border-color: transparent !important; border-style: solid !important; }
+        .divide-y > :not([hidden]) ~ :not([hidden]) { border-top-width: 0 !important; border-bottom-width: 0 !important;}
+        .shadow-md, .shadow { box-shadow: none !important; }
+        .rounded-lg, .rounded, .rounded-md { border-radius: 0 !important; }
+        .rounded-full {} /* Keep for badges */
+        .font-semibold, .font-medium, .font-bold { font-weight: inherit !important; }
+        .text-sm, .text-lg, .text-xl, .text-2xl, .text-3xl, .text-xs { font-size: inherit !important; }
+        .leading-4 { line-height: inherit !important; }
+        .p-6, .p-4, .p-8, .lg\:p-10 { padding: 0 !important; }
+        .px-4, .py-2, .px-3, .py-0\.5, .pb-2, .pt-3, .pb-4 { padding: 0 !important; }
+        .space-y-2 > :not([hidden]) ~ :not([hidden]), .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 0 !important; }
+        .space-x-2 > :not([hidden]) ~ :not([hidden]) { margin-left: 0 !important; }
+        .mr-1\.5, .mr-2, .ml-1, .ml-2, .mt-1, .mt-2, .mt-3, .mt-4, .mt-6, .mb-1, .mb-2, .mb-3, .mb-4, .mb-6, .mb-8, .mb-10 { margin: 0 !important; }
+        .h-screen { height: auto !important; } /* Let flex handle height */
+        .w-6, .w-64 { width: auto !important; }
+        .flex-shrink-0 { flex-shrink: inherit !important; }
+        .whitespace-pre-wrap { white-space: normal !important; } /* Let M3 handle */
+        .inline-flex { display: inherit !important; } /* Let M3 badges handle */
+        .cursor-pointer { cursor: default !important; } /* Let M3 handle */
+        .group-open\:rotate-180 { transform: none !important; } /* Let M3 handle */
+        .transition-transform, .transform { transition: none !important; transform: none !important; }
+
+    </style>
 </head>
-<body class="bg-gray-100">
-    <div class="flex h-screen">
-        <!-- Sidebar (Include the same sidebar code as other pages) -->
-         <aside class="w-64 bg-white shadow-md flex-shrink-0">
-            <div class="p-6 border-b"><a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a></div>
-            <nav class="p-4 space-y-2">
-                <a href="participant_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-user w-6 mr-2"></i> My Profile</a>
-                <a href="participant_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
-                <a href="my_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-calendar-check w-6 mr-2"></i> My Hackathons</a>
-                <a href="my_teams.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-users w-6 mr-2"></i> My Teams</a>
-                <a href="my_submissions.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-file-alt w-6 mr-2"></i> My Submissions</a>
-                <a href="my_achievements.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-trophy w-6 mr-2"></i> My Achievements</a>
-                
-                <a href="my_certificates.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-certificate w-6 mr-2"></i> My Certificates</a>
-                <a href="settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
-                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
-               
+<body data-theme="light">
+    <div class="flex h-screen layout-container">
+        <!-- Sidebar -->
+        <aside class="w-64 flex-shrink-0 sidebar">
+            <div class="sidebar-header"><a href="index.html" class="sidebar-title">Hackverse</a></div>
+            <nav>
+                <a href="participant_profile.html"><i class="fas fa-user"></i> My Profile</a>
+                <a href="participant_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="my_opportunities.html"><i class="fas fa-calendar-check"></i> My Hackathons</a>
+                <a href="my_teams.html"><i class="fas fa-users"></i> My Teams</a>
+                <a href="my_submissions.html" class="active-link"><i class="fas fa-file-alt"></i> My Submissions</a>
+                <a href="my_achievements.html"><i class="fas fa-trophy"></i> My Achievements</a>
+                <a href="my_certificates.html"><i class="fas fa-certificate"></i> My Certificates</a>
+                <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                <a href="index.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto p-8 lg:p-10">
-            <a href="my_submissions.html" class="text-sm text-indigo-600 hover:underline mb-4 inline-block"><i class="fas fa-arrow-left mr-2"></i> Back to My Submissions</a>
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">Hackathon Results</h1>
-            <p class="text-lg text-gray-600 mb-8">Hackathon: <span class="font-medium">[Data Dive Challenge (Past)]</span></p> <!-- Placeholder -->
+        <main class="flex-1 overflow-y-auto main-content">
+            <a href="my_submissions.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to My Submissions</a>
+            <h1>Hackathon Results</h1>
+            <p class="subheading">Hackathon: <span class="hackathon-name">[Data Dive Challenge (Past)]</span></p>
 
 
             <!-- Section: Your Submission Summary -->
             <section class="mb-10">
-                <h2 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Your Submission Summary</h2>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex flex-col sm:flex-row justify-between sm:items-start mb-4">
+                <h2 class="text-2xl font-semibold mb-4">Your Submission Summary</h2>
+                 <!-- Added m3-card -->
+                <div class="m3-card">
+                     <!-- Added summary-header -->
+                    <div class="summary-header">
                         <div>
-                             <h3 class="text-xl font-semibold text-indigo-700">[Market Trend Predictor]</h3> <!-- Placeholder -->
-                             <p class="text-sm text-gray-600">Team: [Data Explorers]</p> <!-- Placeholder -->
+                             <h3 class="submission-title">[Market Trend Predictor]</h3>
+                             <p class="team-name">Team: [Data Explorers]</p>
                         </div>
-                         <!-- Final Status Badge -->
-                        <span class="badge badge-winner mt-2 sm:mt-0"><i class="fas fa-trophy mr-1.5"></i>1st Place Winner</span> <!-- Placeholder -->
+                         <!-- Final Status Badge - Added m3-badge -->
+                        <span class="m3-badge badge-winner"><i class="fas fa-trophy"></i>1st Place Winner</span>
                          <!-- Other examples: -->
-                         <!-- <span class="badge badge-finalist"><i class="fas fa-award mr-1.5"></i>Finalist</span> -->
-                         <!-- <span class="badge badge-scored"><i class="fas fa-check-circle mr-1.5"></i>Participant</span> -->
+                         <!-- <span class="m3-badge badge-finalist"><i class="fas fa-award"></i>Finalist</span> -->
+                         <!-- <span class="m3-badge badge-scored"><i class="fas fa-check-circle"></i>Participant</span> -->
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 text-sm">
+                     <!-- Added summary-metrics -->
+                    <div class="summary-metrics">
                          <div>
-                             <span class="font-medium text-gray-500">Rank:</span>
-                             <span class="ml-2 font-semibold text-gray-900">1 / 50</span> <!-- Placeholder -->
+                             <span class="metric-label">Rank:</span>
+                             <span class="metric-value">1 / 50</span>
                          </div>
                          <div>
-                            <span class="font-medium text-gray-500">Score:</span>
-                            <span class="ml-2 font-semibold text-gray-900">95.5 / 100</span> <!-- Placeholder, or N/A -->
+                            <span class="metric-label">Score:</span>
+                            <span class="metric-value">95.5 / 100</span>
                          </div>
                     </div>
 
-                     <a href="view_submission.html?id=[submission_id_3]" class="text-sm text-indigo-600 hover:underline inline-block mb-4">
-                        <i class="fas fa-eye mr-1"></i> View Your Submitted Project Details
+                     <a href="view_submission.html?id=[submission_id_3]" class="view-submission-link">
+                        <i class="fas fa-eye"></i> View Your Submitted Project Details
                      </a>
 
                     <!-- Judge Feedback (Optional) -->
                     <div class="feedback-section">
-                        <details> <!-- Collapsible section -->
-                            <summary class="font-semibold text-gray-800 cursor-pointer hover:text-indigo-600">
-                                Judge Feedback <i class="fas fa-chevron-down text-xs ml-1 transition-transform transform group-open:rotate-180"></i>
+                        <details>
+                            <summary>
+                                <span>Judge Feedback</span>
+                                <i class="fas fa-chevron-down summary-icon"></i>
                             </summary>
-                            <div class="mt-3">
-                                <div class="mb-3">
+                            <div class="feedback-content">
+                                <div class="feedback-item">
                                     <span class="feedback-label">Overall Comments:</span>
-                                    <p class="feedback-text">[Excellent work on the predictive model! The accuracy was impressive. Presentation was very clear.]</p> <!-- Placeholder -->
+                                    <p class="feedback-text">[Excellent work on the predictive model! The accuracy was impressive. Presentation was very clear.]</p>
                                 </div>
-                                 <div class="mb-3">
+                                 <div class="feedback-item">
                                     <span class="feedback-label">Areas for Improvement:</span>
-                                     <p class="feedback-text">[Could benefit from exploring alternative data sources for validation. UI could be slightly more intuitive.]</p> <!-- Placeholder -->
+                                     <p class="feedback-text">[Could benefit from exploring alternative data sources for validation. UI could be slightly more intuitive.]</p>
                                 </div>
-                                 <!-- Could also include criteria scores if available -->
                             </div>
                         </details>
                      </div>
@@ -110,56 +661,61 @@
 
              <!-- Section: Overall Hackathon Winners -->
             <section>
-                <h2 class="text-2xl font-semibold text-gray-700 mb-4 border-b pb-2">Overall Hackathon Winners</h2>
-                 <div class="space-y-4">
-                    <!-- 1st Place -->
+                <h2 class="text-2xl font-semibold mb-4">Overall Hackathon Winners</h2>
+                 <!-- Changed space-y-4 to gap -->
+                 <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- 1st Place - Added winner-card, first-place -->
+                    <div class="winner-card first-place">
+                        <p class="rank-title"><i class="fas fa-trophy icon-winner"></i> 1st Place</p>
+                        <p class="project-title">[Market Trend Predictor]</p>
+                        <p class="team-name">Team: [Data Explorers]</p>
+                    </div>
+
+                    <!-- 2nd Place - Added winner-card -->
                     <div class="winner-card">
-                        <p class="text-lg font-bold text-yellow-900"><i class="fas fa-trophy text-yellow-500 mr-2"></i> 1st Place</p>
-                        <p class="text-md font-semibold text-gray-800 mt-1">[Market Trend Predictor]</p> <!-- Placeholder -->
-                        <p class="text-sm text-gray-600">Team: [Data Explorers]</p> <!-- Placeholder -->
-                        <!-- Optional Link to view their (public) submission -->
-                        <!-- <a href="#" class="text-xs text-indigo-600 hover:underline mt-1 inline-block">View Submission</a> -->
+                        <p class="rank-title"><i class="fas fa-award icon-runnerup"></i> 2nd Place</p>
+                        <p class="project-title">[Project X Visualization]</p>
+                        <p class="team-name">Team: [Viz Wizards]</p>
                     </div>
 
-                    <!-- 2nd Place -->
-                    <div class="runner-up-card">
-                        <p class="text-lg font-semibold text-gray-700"><i class="fas fa-award text-gray-500 mr-2"></i> 2nd Place</p>
-                        <p class="text-md font-semibold text-gray-800 mt-1">[Project X Visualization]</p> <!-- Placeholder -->
-                        <p class="text-sm text-gray-600">Team: [Viz Wizards]</p> <!-- Placeholder -->
+                    <!-- 3rd Place - Added winner-card -->
+                     <div class="winner-card">
+                        <p class="rank-title"><i class="fas fa-award icon-runnerup" style="opacity: 0.7;"></i> 3rd Place</p>
+                        <p class="project-title">[Real-time Data Feed]</p>
+                        <p class="team-name">Team: [Stream Team]</p>
                     </div>
-
-                    <!-- 3rd Place -->
-                     <div class="runner-up-card">
-                        <p class="text-lg font-semibold text-gray-700"><i class="fas fa-award text-gray-400 mr-2"></i> 3rd Place</p>
-                        <p class="text-md font-semibold text-gray-800 mt-1">[Real-time Data Feed]</p> <!-- Placeholder -->
-                        <p class="text-sm text-gray-600">Team: [Stream Team]</p> <!-- Placeholder -->
-                    </div>
-
-                     <!-- Optional: Honorable Mentions, etc. -->
                  </div>
 
                  <!-- Optional: Link to all public submissions -->
-                 <div class="mt-6 text-center">
-                     <a href="opportunity_detail.html?id=[hackathon_id]#submissions" class="text-indigo-600 hover:underline">
-                        View all public submissions for this hackathon <i class="fas fa-arrow-right ml-1"></i>
+                 <div class="view-all-submissions">
+                     <a href="opportunity_detail.html?id=[hackathon_id]#submissions">
+                        View all public submissions for this hackathon <i class="fas fa-arrow-right"></i>
                      </a>
                  </div>
             </section>
         </main>
     </div>
-    <!-- Script for details/summary interaction if needed -->
+    <!-- Script for details/summary interaction -->
     <script>
-        // Basic JS to handle details/summary chevron rotation (optional)
         document.querySelectorAll('details').forEach((detail) => {
             detail.addEventListener('toggle', (event) => {
+                // The browser handles the open/close state automatically
+                // If custom animations were added beyond open/close, they'd go here.
+                // The chevron rotation is now handled purely by CSS if using adjacent sibling selector or similar,
+                // but keeping simple JS toggle for clarity if needed.
                 const summary = detail.querySelector('summary');
-                const icon = summary.querySelector('i');
-                if (detail.open) {
-                    icon.classList.add('rotate-180');
-                } else {
-                     icon.classList.remove('rotate-180');
+                const icon = summary.querySelector('.summary-icon'); // Target specific icon class
+                if (icon) {
+                   icon.style.transform = detail.open ? 'rotate(180deg)' : 'rotate(0deg)';
                 }
             });
+
+            // Ensure icon is correctly oriented on load
+            const summary = detail.querySelector('summary');
+            const icon = summary?.querySelector('.summary-icon');
+             if (icon) {
+                 icon.style.transform = detail.open ? 'rotate(180deg)' : 'rotate(0deg)';
+             }
         });
     </script>
 </body>

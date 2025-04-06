@@ -1,219 +1,632 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Opportunities</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Manage Opportunities - M3 Style</title>
+    <!-- Font Awesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Using Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* --- Material Design 3 Variables (Consistent Set) --- */
+        :root {
+            /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Additional colors */
+            --md-sys-color-success-light: #177e2a; /* Green */
+            --md-sys-color-on-success-light: #ffffff;
+            --md-sys-color-success-container-light: #b4f7ae;
+            --md-sys-color-on-success-container-light: #002205;
+            --md-sys-color-warning-light: #7e5700; /* Yellow/Orange */
+            --md-sys-color-on-warning-light: #ffffff;
+            --md-sys-color-warning-container-light: #ffdea3;
+            --md-sys-color-on-warning-container-light: #281900;
+            /* Surface & Background */
+            --md-sys-color-background-light: #fefcff; /* Off-white */
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-light: #ffffff; /* Pure white */
+            --md-sys-color-surface-container-low-light: #f8f2f7;
+            --md-sys-color-surface-container-light: #eeeef2;
+            --md-sys-color-surface-container-high-light: #e8e8ed;
+            --md-sys-color-surface-container-highest-light: #e2e2e6; /* Often used for TopAppBar */
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-success-dark: #99da94;
+            --md-sys-color-on-success-dark: #00390d;
+            --md-sys-color-success-container-dark: #005317;
+            --md-sys-color-on-success-container-dark: #b4f7ae;
+            --md-sys-color-warning-dark: #fbbc04;
+            --md-sys-color-on-warning-dark: #412d00;
+            --md-sys-color-warning-container-dark: #5f4200;
+            --md-sys-color-on-warning-container-dark: #ffdea3;
+            --md-sys-color-background-dark: #1a1c1e; /* Dark Gray */
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e; /* Component backgrounds */
+            --md-sys-color-surface-container-lowest-dark: #0e1013;
+            --md-sys-color-surface-container-low-dark: #1d1f22;
+            --md-sys-color-surface-container-dark: #212326;
+            --md-sys-color-surface-container-high-dark: #2b2d30;
+            --md-sys-color-surface-container-highest-dark: #36383a; /* Often used for TopAppBar */
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+            /* Shape */
+            --md-shape-corner-none: 0px;
+            --md-shape-corner-extra-small: 4px;
+            --md-shape-corner-small: 8px;
+            --md-shape-corner-medium: 12px;
+            --md-shape-corner-large: 16px;
+            --md-shape-corner-extra-large: 28px;
+            --md-shape-corner-full: 9999px;
+
+            /* Elevation */
+            --md-sys-elevation-level-0: none;
+            --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+            /* State Layers */
+            --md-sys-state-hover-state-layer-opacity: 0.08;
+            --md-sys-state-focus-state-layer-opacity: 0.12;
+            --md-sys-state-pressed-state-layer-opacity: 0.12;
+
+            /* Typography */
+            --md-sys-typescale-font-family-name: Roboto;
+            --md-sys-typescale-body-large-font-size: 1rem;
+            --md-sys-typescale-body-large-line-height: 1.5rem;
+            --md-sys-typescale-body-large-font-weight: 400;
+            --md-sys-typescale-body-medium-font-size: 0.875rem;
+            --md-sys-typescale-body-medium-line-height: 1.25rem;
+            --md-sys-typescale-body-medium-font-weight: 400;
+            --md-sys-typescale-body-small-font-size: 0.75rem;
+            --md-sys-typescale-body-small-line-height: 1rem;
+            --md-sys-typescale-body-small-font-weight: 400;
+            --md-sys-typescale-label-large-font-size: 0.875rem;
+            --md-sys-typescale-label-large-line-height: 1.25rem;
+            --md-sys-typescale-label-large-font-weight: 500;
+            --md-sys-typescale-label-medium-font-size: 0.75rem;
+            --md-sys-typescale-label-medium-line-height: 1rem;
+            --md-sys-typescale-label-medium-font-weight: 500;
+            --md-sys-typescale-label-small-font-size: 0.6875rem;
+            --md-sys-typescale-label-small-line-height: 1rem;
+            --md-sys-typescale-label-small-font-weight: 500;
+            --md-sys-typescale-title-large-font-size: 1.375rem;
+            --md-sys-typescale-title-large-line-height: 1.75rem;
+            --md-sys-typescale-title-large-font-weight: 400;
+            --md-sys-typescale-title-medium-font-size: 1rem;
+            --md-sys-typescale-title-medium-line-height: 1.5rem;
+            --md-sys-typescale-title-medium-font-weight: 500;
+             --md-sys-typescale-title-small-font-size: 0.875rem;
+            --md-sys-typescale-title-small-line-height: 1.25rem;
+            --md-sys-typescale-title-small-font-weight: 500;
+            --md-sys-typescale-headline-medium-font-size: 1.75rem;
+            --md-sys-typescale-headline-medium-font-weight: 400;
+            --md-sys-typescale-headline-medium-line-height: 2.25rem;
+            --md-sys-typescale-headline-small-font-size: 1.5rem;
+             --md-sys-typescale-headline-small-line-height: 2rem;
+             --md-sys-typescale-headline-small-font-weight: 400;
+
+        }
+
+        /* --- Theme Variable Application --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --tertiary: var(--md-sys-color-tertiary-light);
+            --on-tertiary: var(--md-sys-color-on-tertiary-light);
+            --tertiary-container: var(--md-sys-color-tertiary-container-light);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --error-container: var(--md-sys-color-error-container-light);
+            --on-error-container: var(--md-sys-color-on-error-container-light);
+            --success: var(--md-sys-color-success-light);
+            --on-success: var(--md-sys-color-on-success-light);
+            --success-container: var(--md-sys-color-success-container-light);
+            --on-success-container: var(--md-sys-color-on-success-container-light);
+            --warning: var(--md-sys-color-warning-light);
+            --on-warning: var(--md-sys-color-on-warning-light);
+            --warning-container: var(--md-sys-color-warning-container-light);
+            --on-warning-container: var(--md-sys-color-on-warning-container-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-light);
+            --surface-container-low: var(--md-sys-color-surface-container-low-light);
+            --surface-container: var(--md-sys-color-surface-container-light);
+            --surface-container-high: var(--md-sys-color-surface-container-high-light);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+            --shadow: var(--md-sys-color-shadow-light);
+            --surface-tint-color: var(--md-sys-color-surface-tint-light);
+            --inverse-surface: var(--md-sys-color-inverse-surface-light);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-light);
+            --inverse-primary: var(--md-sys-color-inverse-primary-light);
+            --primary-rgb: 0, 97, 164;
+            --shadow-rgb: 0, 0, 0;
+            --on-surface-rgb: 26, 28, 30;
+             --error-rgb: 186, 26, 26;
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --tertiary: var(--md-sys-color-tertiary-dark);
+            --on-tertiary: var(--md-sys-color-on-tertiary-dark);
+            --tertiary-container: var(--md-sys-color-tertiary-container-dark);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --error-container: var(--md-sys-color-error-container-dark);
+            --on-error-container: var(--md-sys-color-on-error-container-dark);
+            --success: var(--md-sys-color-success-dark);
+            --on-success: var(--md-sys-color-on-success-dark);
+            --success-container: var(--md-sys-color-success-container-dark);
+            --on-success-container: var(--md-sys-color-on-success-container-dark);
+            --warning: var(--md-sys-color-warning-dark);
+            --on-warning: var(--md-sys-color-on-warning-dark);
+            --warning-container: var(--md-sys-color-warning-container-dark);
+            --on-warning-container: var(--md-sys-color-on-warning-container-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-container-lowest: var(--md-sys-color-surface-container-lowest-dark);
+            --surface-container-low: var(--md-sys-color-surface-container-low-dark);
+            --surface-container: var(--md-sys-color-surface-container-dark);
+            --surface-container-high: var(--md-sys-color-surface-container-high-dark);
+            --surface-container-highest: var(--md-sys-color-surface-container-highest-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+            --shadow: var(--md-sys-color-shadow-dark);
+            --surface-tint-color: var(--md-sys-color-surface-tint-dark);
+            --inverse-surface: var(--md-sys-color-inverse-surface-dark);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-dark);
+            --inverse-primary: var(--md-sys-color-inverse-primary-dark);
+            --primary-rgb: 160, 201, 255;
+            --shadow-rgb: 0, 0, 0;
+             --on-surface-rgb: 226, 226, 230;
+             --error-rgb: 255, 180, 171;
+        }
+
+        /* --- Base Styles --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--md-sys-typescale-font-family-name), sans-serif;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight);
+            background-color: var(--background);
+            color: var(--on-background);
             transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Smooth hover transitions for table rows */
-        tr {
-            transition: all 0.3s ease-in-out;
+        /* --- Layout --- */
+        .layout-container { display: flex; height: 100vh; overflow: hidden; }
+        .main-content { flex-grow: 1; overflow-y: auto; padding: 2rem; }
+        .main-content h1 {
+            font-size: var(--md-sys-typescale-headline-medium-font-size);
+            font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+            line-height: var(--md-sys-typescale-headline-medium-line-height);
+            color: var(--on-surface);
+            margin-bottom: 1.5rem; /* 24px */
         }
+        .section-heading {
+            font-size: var(--md-sys-typescale-title-large-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight); /* 500 */
+            color: var(--on-surface);
+            margin-bottom: 1rem; /* 16px */
+         }
 
-        tr:hover {
-            background-color: #f3f4f6; /* Tailwind's gray-100 */
-            transform: scale(1.02);
+
+        /* --- Sidebar (Consistent) --- */
+        .sidebar {
+            width: 256px; background-color: var(--surface);
+            border-right: 1px solid var(--outline-variant); display: flex;
+            flex-direction: column; flex-shrink: 0; transition: background-color 0.3s ease, border-color 0.3s ease;
         }
-
-        /* Smooth modal fade-in */
-        #addOpportunityModal {
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        .sidebar-header { padding: 1.5rem 1rem; border-bottom: 1px solid var(--outline-variant); transition: border-color 0.3s ease; }
+        .sidebar-header a { font-size: var(--md-sys-typescale-title-large-font-size); font-weight: 700; color: var(--primary); text-decoration: none; display: block; }
+        .sidebar-header span { display: block; margin-top: 4px; font-size: var(--md-sys-typescale-body-small-font-size); color: var(--on-surface-variant); }
+        .sidebar-nav { padding: 0.5rem; flex-grow: 1; overflow-y: auto; }
+        .sidebar-nav a {
+            display: flex; align-items: center; padding: 0.75rem 1rem; margin: 0.25rem 0;
+            border-radius: var(--md-shape-corner-full); color: var(--on-surface-variant); text-decoration: none;
+            font-weight: var(--md-sys-typescale-label-large-font-weight); font-size: var(--md-sys-typescale-label-large-font-size);
+            position: relative; overflow: hidden; transition: background-color 0.15s ease, color 0.15s ease;
         }
-
-        #addOpportunityModal.hidden {
-            opacity: 0;
-            transform: scale(0.95);
+        .sidebar-nav a i { width: 24px; margin-right: 1rem; text-align: center; color: var(--on-surface-variant); transition: color 0.15s ease; }
+        .sidebar-nav a::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--secondary);
+            opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
         }
+        .sidebar-nav a:hover { color: var(--on-secondary-container); }
+        .sidebar-nav a:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar-nav a:hover i { color: var(--on-secondary-container); }
+        .sidebar-nav a.active { background-color: var(--secondary-container); color: var(--on-secondary-container); }
+        .sidebar-nav a.active i { color: var(--on-secondary-container); }
+        .sidebar-nav a.logout-link { margin-top: 1.5rem; color: var(--error); }
+        .sidebar-nav a.logout-link i { color: var(--error); }
+        .sidebar-nav a.logout-link::before { background-color: var(--error); }
+        .sidebar-nav a.logout-link:hover { color: var(--on-error-container); }
+        .sidebar-nav a.logout-link:hover::before { background-color: var(--error-container); opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .sidebar-nav a.logout-link:hover i { color: var(--on-error-container); }
 
-        #addOpportunityModal:not(.hidden) {
-            opacity: 1;
-            transform: scale(1);
+         /* --- Buttons (Consistent Set) --- */
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.625rem 1.5rem; border-radius: var(--md-shape-corner-full);
+            font-family: inherit; font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            text-align: center; text-decoration: none; border: none; cursor: pointer; position: relative;
+            overflow: hidden; user-select: none; vertical-align: middle;
+             transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, border-color 0.15s ease;
         }
-
-        /* Button hover effects */
-        button:hover {
-            background-color: #2563eb; /* Tailwind's blue-600 */
-            color: #ffffff;
+        .button::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: currentColor; opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
         }
+        .button:hover { transform: translateY(-1px); } /* Subtle lift */
+        .button:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .button:focus { outline: none; }
+        .button:focus::before { opacity: var(--md-sys-state-focus-state-layer-opacity); }
+        .button:active { transform: translateY(0); }
+        .button:active::before { opacity: var(--md-sys-state-pressed-state-layer-opacity); }
 
-        /* Sidebar link hover effects */
-        nav a:hover {
-            background-color: #e5e7eb; /* Tailwind's gray-200 */
-            color: #2563eb; /* Tailwind's blue-600 */
-        }
+        .button-filled { background-color: var(--primary); color: var(--on-primary); box-shadow: var(--md-sys-elevation-level-0); }
+        .button-filled:hover { box-shadow: var(--md-sys-elevation-level-1); }
 
-        /* Modal hover effects */
-        #addOpportunityModal button:hover {
-            background-color: #2563eb; /* Tailwind's blue-600 */
-            color: #ffffff;
-        }
+        .button-outlined { background-color: transparent; color: var(--primary); border: 1px solid var(--outline); }
+        .button-outlined:hover { background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity)); }
+        .button-outlined::before { background-color: var(--primary); }
 
-        /* Light Mode */
-        body.light {
-            background-color: #f9fafb;
-            color: #1f2937;
-        }
+        .button-text { background-color: transparent; color: var(--primary); padding-left: 0.75rem; padding-right: 0.75rem; }
+        .button-text::before { background-color: var(--primary); }
+        .button-text:hover { background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity)); }
 
-        .light .bg-white {
-            background-color: #ffffff;
-            color: #1f2937;
-        }
+        .button-tonal { background-color: var(--secondary-container); color: var(--on-secondary-container); box-shadow: var(--md-sys-elevation-level-0);}
+        .button-tonal:hover { box-shadow: var(--md-sys-elevation-level-1); }
+        .button-tonal::before { background-color: var(--on-secondary-container); }
 
-        /* Dark Mode */
-        body.dark {
-            background-color: #1f2937;
-            color: #f9fafb;
-        }
+        .button-icon { padding: 0.5rem; border-radius: 50%; line-height: 0; }
+        .button-icon i { font-size: 1.25rem; }
 
-        .dark .bg-white {
-            background-color: #374151;
-            color: #f9fafb;
-        }
+        /* Text buttons with specific colors */
+         .button-text-error { color: var(--error); }
+         .button-text-error::before { background-color: var(--error); }
+         .button-text-error:hover { background-color: rgba(var(--error-rgb), var(--md-sys-state-hover-state-layer-opacity)); }
 
-        /* Toggle Button */
-        .toggle-btn {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background-color: #2563eb;
-            color: #ffffff;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
 
-        .toggle-btn:hover {
-            background-color: #1d4ed8;
-        }
-
-        /* Toggle Icon */
-        .toggle-icon {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            width: 3rem;
-            height: 3rem;
-            background-color: #2563eb;
-            border-radius: 50%;
+        /* --- Page Actions Header --- */
+        .page-actions-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-bottom: 1.5rem; /* 24px */
+        }
+        .page-actions-header .section-heading {
+             margin-bottom: 0; /* Remove bottom margin if in flex */
+        }
+        .page-actions-buttons {
+             display: flex;
+             gap: 0.75rem; /* 12px */
+        }
+         .page-actions-buttons .button i {
+            margin-right: 0.5rem; /* Space between icon and text */
+            font-size: 1em; /* Match text size */
+         }
+
+        /* --- Data Table (Consistent) --- */
+        .data-table-container {
+            background-color: var(--surface-container-low); /* Use a container color */
+            border-radius: var(--md-shape-corner-large);
+            box-shadow: var(--md-sys-elevation-level-0); /* No shadow or level 1 */
+            border: 1px solid var(--outline-variant);
+            overflow: hidden;
+             margin-bottom: 2rem; /* 32px */
+        }
+         .data-table-wrapper { overflow-x: auto; }
+        .data-table { width: 100%; border-collapse: collapse; white-space: nowrap; }
+        .data-table thead { background-color: var(--surface-container); border-bottom: 1px solid var(--outline-variant); }
+        .data-table th {
+            padding: 0.75rem 1rem; text-align: left; font-size: var(--md-sys-typescale-label-medium-font-size);
+            font-weight: var(--md-sys-typescale-label-medium-font-weight); color: var(--on-surface-variant);
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .data-table tbody tr { border-bottom: 1px solid var(--outline-variant); position: relative; transition: none; } /* Remove transition from original CSS */
+        .data-table tbody tr:last-child { border-bottom: none; }
+        /* M3 Hover state via state layer */
+        .data-table tbody tr::before {
+             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+             background-color: var(--on-surface); opacity: 0; pointer-events: none;
+             transition: opacity 0.15s ease;
+        }
+         .data-table tbody tr:hover::before {
+             opacity: calc(var(--md-sys-state-hover-state-layer-opacity) / 2); /* Less intense hover for rows */
+         }
+        .data-table td {
+            padding: 0.875rem 1rem; vertical-align: middle;
+            font-size: var(--md-sys-typescale-body-medium-font-size); color: var(--on-surface);
+        }
+        .data-table td.text-muted { color: var(--on-surface-variant); }
+        .data-table td.text-primary-emphasis { color: var(--primary); font-weight: 500; }
+
+        /* Status Badges (Consistent) */
+        .status-badge {
+            display: inline-flex; align-items: center; padding: 0.25rem 0.75rem;
+            border-radius: var(--md-shape-corner-full); font-size: var(--md-sys-typescale-label-small-font-size);
+            font-weight: var(--md-sys-typescale-label-small-font-weight); line-height: 1.2;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .status-active { background-color: var(--success-container); color: var(--on-success-container); }
+        .status-inactive { background-color: var(--surface-variant); color: var(--on-surface-variant); }
+        /* Add other statuses (upcoming, draft, etc.) using warning/secondary containers */
+
+        /* Table Actions (Consistent) */
+        .table-actions { display: flex; gap: 0.5rem; }
+        .table-actions .button { padding: 0.25rem 0.5rem; font-size: var(--md-sys-typescale-label-medium-font-size); }
+        .table-actions .button-delete { color: var(--error); }
+        .table-actions .button-delete::before { background-color: var(--error); }
+        .table-actions .button-delete:hover { background-color: rgba(var(--error-rgb), var(--md-sys-state-hover-state-layer-opacity)); }
+
+
+        /* --- Recent Activity Section (Consistent) --- */
+        .activity-card { /* Renamed from container */
+            background-color: var(--surface-container-low);
+            border-radius: var(--md-shape-corner-large);
+            border: 1px solid var(--outline-variant);
+            padding: 1.5rem; /* 24px */
+        }
+        .activity-list { list-style: none; }
+        .activity-list li { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; }
+        .activity-list li:not(:last-child) { border-bottom: 1px solid var(--outline-variant); }
+        .activity-list i { width: 20px; text-align: center; flex-shrink: 0; font-size: 1rem; }
+        .activity-list .icon-success { color: var(--success); }
+        .activity-list .icon-info { color: var(--primary); }
+        .activity-list .icon-error { color: var(--error); }
+        .activity-list span {
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            color: var(--on-surface-variant);
         }
 
-        .toggle-icon:hover {
-            background-color: #1d4ed8;
-            transform: scale(1.1);
-        }
 
-        .toggle-icon svg {
-            width: 1.5rem;
-            height: 1.5rem;
-            fill: #ffffff;
-            transition: transform 0.3s ease;
+        /* --- Modal Dialog (Consistent) --- */
+        .modal-overlay {
+            position: fixed; inset: 0; background-color: rgba(var(--shadow-rgb), 0.4);
+            display: flex; align-items: center; justify-content: center; z-index: 1000;
+            opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0s linear 0.2s;
         }
+        .modal-overlay.visible { opacity: 1; visibility: visible; transition: opacity 0.2s ease, visibility 0s linear 0s; }
+        .modal-dialog {
+            background-color: var(--surface-container-high); /* Use higher container */
+            border-radius: var(--md-shape-corner-extra-large);
+            padding: 1.5rem; width: 90%; max-width: 500px;
+            box-shadow: var(--md-sys-elevation-level-3);
+            transform: scale(0.95); transition: transform 0.2s ease;
+        }
+        .modal-overlay.visible .modal-dialog { transform: scale(1); }
+        .modal-dialog .modal-title {
+            font-size: var(--md-sys-typescale-headline-small-font-size);
+            font-weight: var(--md-sys-typescale-headline-small-font-weight);
+            color: var(--on-surface); margin-bottom: 1.5rem; /* 24px */
+        }
+        .modal-dialog form .form-field { margin-bottom: 1rem; }
+        .modal-dialog form label {
+             display: block; font-size: var(--md-sys-typescale-label-medium-font-size);
+             font-weight: var(--md-sys-typescale-label-medium-font-weight);
+             color: var(--on-surface-variant); margin-bottom: 4px; padding-left: 4px;
+        }
+         /* M3 Input Field Style */
+         .modal-dialog form input[type="text"],
+         .modal-dialog form input[type="date"] {
+             display: block; width: 100%; padding: 1rem; font-family: inherit;
+             font-size: var(--md-sys-typescale-body-large-font-size);
+             color: var(--on-surface); background-color: var(--surface-container-lowest); /* Input background */
+             border: 1px solid var(--outline); border-radius: var(--md-shape-corner-extra-small);
+             transition: border-color 0.2s ease, box-shadow 0.2s ease; appearance: none;
+        }
+        .modal-dialog form input:focus {
+             outline: none; border-color: var(--primary); border-width: 2px;
+             padding: calc(1rem - 1px); /* Adjust padding */
+        }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1.5rem; }
 
-        body.dark .toggle-icon svg {
-            transform: rotate(180deg);
+
+        /* --- Theme Toggle Button (Consistent) --- */
+        .theme-toggle-button {
+            position: fixed; top: 1rem; right: 1rem; z-index: 100;
+            background-color: var(--primary-container); color: var(--on-primary-container);
+            border: none; width: 48px; height: 48px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: var(--md-sys-elevation-level-2);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
+        .theme-toggle-button:hover { box-shadow: var(--md-sys-elevation-level-3); transform: scale(1.05); }
+        .theme-toggle-button i { font-size: 1.5rem; transition: transform 0.3s ease; }
+        [data-theme="dark"] .theme-toggle-button .fa-moon { display: none; }
+        [data-theme="light"] .theme-toggle-button .fa-sun { display: none; }
+
+        /* --- Utility --- */
+        .hidden { display: none !important; }
+
     </style>
 </head>
-<body class="light bg-gray-100">
-    <div class="toggle-icon glow" id="themeToggle">
-        <!-- ...existing SVGs for moon and sun... -->
-    </div>
-    <div class="flex h-screen">
+<body> <!-- Removed Tailwind class -->
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle-button" aria-label="Toggle theme"> <!-- Removed glow class -->
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+
+    <div class="layout-container">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">
-            <div class="p-6 border-b">
-                <a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a>
-                <span class="block text-sm text-gray-500 mt-1">Organizer Panel</span>
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html">Hackverse</a>
+                <span>Organizer Panel</span>
             </div>
-            <nav class="p-4 space-y-2">
-                <a href="organizer_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-building w-6 mr-2"></i> Organization Profile</a>
-                <a href="organizer_dashboard.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
-                <a href="organizer_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-list-alt w-6 mr-2"></i> My Opportunities</a>
-                <a href="organizer_create_opportunity.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-plus-circle w-6 mr-2"></i> Create New</a>
-                <a href="organizer_analytics.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-chart-bar w-6 mr-2"></i> Analytics</a>
-                <a href="organizer_settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
-                <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+            <nav class="sidebar-nav">
+                <!-- Add 'active' class to the current page link if needed -->
+                <a href="organizer_profile.html"><i class="fas fa-building"></i> Organization Profile</a>
+                <a href="organizer_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="organizer_opportunities.html" class="active"><i class="fas fa-list-alt"></i> My Opportunities</a>
+                <a href="organizer_create_opportunity.html"><i class="fas fa-plus-circle"></i> Create New</a>
+                <a href="organizer_analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a>
+                <a href="organizer_settings.html"><i class="fas fa-cog"></i> Settings</a>
+                <a href="index.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto p-8">
-            <h1 class="text-3xl font-bold mb-6">Manage Opportunities</h1>
+        <main class="main-content">
+            <h1>Manage Opportunities</h1>
 
             <!-- Action Buttons -->
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold">Opportunities List</h2>
-                <div class="space-x-2">
-                    <button id="addOpportunityBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium">
-                        <i class="fas fa-plus mr-1"></i> Add New Opportunity
+            <div class="page-actions-header"> <!-- Replaced classes -->
+                <h2 class="section-heading">Opportunities List</h2> <!-- Added class -->
+                <div class="page-actions-buttons"> <!-- Replaced classes -->
+                    <button id="addOpportunityBtn" class="button button-filled"> <!-- Replaced classes -->
+                        <i class="fas fa-plus"></i> Add New Opportunity
                     </button>
-                    <button id="filterBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded text-sm font-medium">
-                        <i class="fas fa-filter mr-1"></i> Filter
+                    <button id="filterBtn" class="button button-tonal"> <!-- Replaced classes -->
+                        <i class="fas fa-filter"></i> Filter
                     </button>
                 </div>
             </div>
 
             <!-- Opportunities Table -->
-            <div class="bg-white rounded-lg shadow overflow-x-auto mb-8">
-                <table class="w-full table-auto">
-                    <thead class="bg-gray-50 border-b border-gray-200">
-                        <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Opportunity Name</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Sample Opportunity</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-10-01</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                <button class="text-blue-600 hover:text-blue-900 edit-btn" data-id="1">Edit</button>
-                                <button class="text-red-600 hover:text-red-900 delete-btn" data-id="1">Delete</button>
-                            </td>
-                        </tr>
-                        <!-- Additional rows can be added here -->
-                    </tbody>
-                </table>
+            <div class="data-table-container"> <!-- Replaced classes -->
+                <div class="data-table-wrapper"> <!-- Added wrapper -->
+                    <table class="data-table"> <!-- Replaced classes -->
+                        <thead> <!-- Removed classes -->
+                            <tr>
+                                <th>Opportunity Name</th> <!-- Removed classes -->
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody> <!-- Removed classes -->
+                            <tr>
+                                <td class="text-primary-emphasis">Sample Opportunity</td> <!-- Removed classes -->
+                                <td class="text-muted">2023-10-01</td> <!-- Removed classes -->
+                                <td>
+                                    <span class="status-badge status-active">Active</span> <!-- Replaced classes -->
+                                </td>
+                                <td>
+                                    <div class="table-actions"> <!-- Replaced classes -->
+                                        <button class="button button-text edit-btn" data-id="1">Edit</button> <!-- Replaced classes -->
+                                        <button class="button button-text button-delete delete-btn" data-id="1">Delete</button> <!-- Replaced classes -->
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Example Row 2 -->
+                            <tr>
+                                 <td class="text-primary-emphasis">Archived Project</td>
+                                 <td class="text-muted">2023-05-15</td>
+                                 <td><span class="status-badge status-inactive">Inactive</span></td>
+                                 <td>
+                                     <div class="table-actions">
+                                         <button class="button button-text edit-btn" data-id="2">Edit</button>
+                                         <button class="button button-text button-delete delete-btn" data-id="2">Delete</button>
+                                     </div>
+                                 </td>
+                             </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Recent Activity Section -->
             <section>
-                <h2 class="text-xl font-semibold mb-4">Recent Activity</h2>
-                <div class="bg-white rounded-lg shadow p-5">
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                            <span class="text-gray-600">Opportunity "Hackathon 2023" was updated.</span>
+                <h2 class="section-heading">Recent Activity</h2>
+                <div class="activity-card"> <!-- Replaced classes -->
+                    <ul class="activity-list"> <!-- Replaced classes -->
+                        <li>
+                            <i class="fas fa-check-circle icon-success"></i> <!-- Replaced classes -->
+                            <span>Opportunity "Hackathon 2023" was updated.</span> <!-- Removed classes -->
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-user-plus text-blue-500 mr-3"></i>
-                            <span class="text-gray-600">New registration for "Data Science Challenge".</span>
+                        <li>
+                            <i class="fas fa-user-plus icon-info"></i> <!-- Replaced classes -->
+                            <span>New registration for "Data Science Challenge".</span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-trash text-red-500 mr-3"></i>
-                            <span class="text-gray-600">Opportunity "Old Hackathon" was deleted.</span>
+                        <li>
+                            <i class="fas fa-trash icon-error"></i> <!-- Replaced classes -->
+                            <span>Opportunity "Old Hackathon" was deleted.</span>
                         </li>
                     </ul>
                 </div>
@@ -221,22 +634,23 @@
         </main>
     </div>
 
-    <!-- Modals -->
-    <div id="addOpportunityModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
-            <h3 class="text-lg font-semibold mb-4">Add New Opportunity</h3>
+    <!-- Add/Edit Opportunity Modal -->
+    <div id="addOpportunityModal" class="modal-overlay hidden"> <!-- Replaced classes -->
+        <div class="modal-dialog"> <!-- Replaced classes -->
+            <h3 class="modal-title">Add New Opportunity</h3> <!-- Replaced classes -->
             <form>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Opportunity Name</label>
-                    <input type="text" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                <div class="form-field"> <!-- Added class -->
+                    <label for="opp-name">Opportunity Name</label> <!-- Removed classes -->
+                    <input type="text" id="opp-name" required> <!-- Removed classes -->
                 </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Date</label>
-                    <input type="date" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                <div class="form-field"> <!-- Added class -->
+                    <label for="opp-date">Date</label> <!-- Removed classes -->
+                    <input type="date" id="opp-date" required> <!-- Removed classes -->
                 </div>
-                <div class="flex justify-end space-x-2">
-                    <button type="button" id="closeModalBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded">Cancel</button>
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Save</button>
+                <!-- Add more fields as needed -->
+                <div class="modal-actions"> <!-- Replaced classes -->
+                    <button type="button" id="closeModalBtn" class="button button-text">Cancel</button> <!-- Replaced classes -->
+                    <button type="submit" class="button button-filled">Save</button> <!-- Replaced classes -->
                 </div>
             </form>
         </div>
@@ -244,25 +658,84 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Add Opportunity Modal
+            const htmlElement = document.documentElement;
+            const themeToggleButton = document.getElementById('themeToggle');
             const addOpportunityBtn = document.getElementById('addOpportunityBtn');
-            const addOpportunityModal = document.getElementById('addOpportunityModal');
+            const addOpportunityModal = document.getElementById('addOpportunityModal'); // Targets overlay
             const closeModalBtn = document.getElementById('closeModalBtn');
 
-            addOpportunityBtn.addEventListener('click', () => {
-                addOpportunityModal.classList.remove('hidden');
+            // --- Theme Toggle Logic ---
+            const setTheme = (theme) => {
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            };
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+
+            themeToggleButton.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                setTheme(newTheme);
             });
 
-            closeModalBtn.addEventListener('click', () => {
-                addOpportunityModal.classList.add('hidden');
-            });
+            // --- Modal Logic ---
+            const showModal = (modalElement) => {
+                if (modalElement) modalElement.classList.add('visible');
+            };
+            const hideModal = (modalElement) => {
+                 if (modalElement) modalElement.classList.remove('visible');
+            };
 
-            // Handle Edit button clicks
+            if (addOpportunityBtn && addOpportunityModal) {
+                addOpportunityBtn.addEventListener('click', () => {
+                    // Potentially pre-fill form for edit, clear for add
+                    addOpportunityModal.querySelector('.modal-title').textContent = 'Add New Opportunity';
+                    // Clear form fields if needed
+                    addOpportunityModal.querySelector('form')?.reset();
+                    showModal(addOpportunityModal);
+                });
+            }
+
+            if (closeModalBtn && addOpportunityModal) {
+                closeModalBtn.addEventListener('click', () => {
+                    hideModal(addOpportunityModal);
+                });
+            }
+
+            // Close modal if clicking on the overlay background
+            if (addOpportunityModal) {
+                addOpportunityModal.addEventListener('click', (event) => {
+                    if (event.target === addOpportunityModal) {
+                        hideModal(addOpportunityModal);
+                    }
+                 });
+            }
+
+
+            // --- Table Action Button Logic ---
+
+            // Handle Edit button clicks (Example: Open modal and pre-fill)
             document.querySelectorAll('.edit-btn').forEach(button => {
                 button.addEventListener('click', (event) => {
                     event.preventDefault();
                     const id = button.getAttribute('data-id');
-                    alert(`Edit opportunity ID: ${id}`);
+                    console.log(`Edit opportunity ID: ${id}`);
+
+                    // Example: Fetch data for 'id' and populate modal form
+                    if (addOpportunityModal) {
+                        addOpportunityModal.querySelector('.modal-title').textContent = `Edit Opportunity (ID: ${id})`;
+                        // Simulate fetching data
+                        const sampleName = button.closest('tr')?.querySelector('td:first-child')?.textContent || 'Sample Opportunity';
+                        const sampleDate = button.closest('tr')?.querySelector('td:nth-child(2)')?.textContent || '2023-10-01';
+                        const nameInput = addOpportunityModal.querySelector('#opp-name');
+                        const dateInput = addOpportunityModal.querySelector('#opp-date');
+                        if (nameInput) nameInput.value = sampleName;
+                        if (dateInput) dateInput.value = sampleDate;
+
+                        showModal(addOpportunityModal);
+                    } else {
+                         alert(`Edit opportunity ID: ${id}`); // Fallback
+                    }
                 });
             });
 
@@ -271,26 +744,31 @@
                 button.addEventListener('click', (event) => {
                     event.preventDefault();
                     const id = button.getAttribute('data-id');
+                    const row = button.closest('tr'); // Get the table row
+
                     if (confirm(`Are you sure you want to delete opportunity ID: ${id}?`)) {
+                        console.log(`Deleting opportunity ID: ${id}`);
+                        // ----- Add logic here to call backend API to delete -----
+                        // Simulate successful deletion:
                         alert(`Opportunity ID: ${id} has been deleted.`);
-                        // Add logic to delete the opportunity from the backend
+                        if (row) row.remove(); // Remove the row from the table visually
                     }
                 });
             });
 
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
+            // Handle Modal Form Submission (Example)
+            const modalForm = addOpportunityModal?.querySelector('form');
+            if (modalForm) {
+                modalForm.addEventListener('submit', (event) => {
+                     event.preventDefault();
+                     console.log('Form submitted');
+                     // Add logic to collect form data and send to backend (create or update)
+                     // On success:
+                     hideModal(addOpportunityModal);
+                     // Optionally: Refresh table data or add/update row visually
+                });
+            }
 
-            // Toggle between light and dark mode
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('light')) {
-                    body.classList.remove('light');
-                    body.classList.add('dark');
-                } else {
-                    body.classList.remove('dark');
-                    body.classList.add('light');
-                }
-            });
         });
     </script>
 </body>

@@ -1,352 +1,924 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light"> <!-- Start with light theme -->
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"="width=device-width, initial-scale=1.0">
-    <title>Organizer Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizer Dashboard - M3 Style</title>
+    <!-- Font Awesome for Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Using Roboto as a common M3 font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* --- Material Design 3 Variables (Same as previous example) --- */
+        :root {
+            /* Light Theme Colors */
+            --md-sys-color-primary-light: #0061a4; /* Blue */
+            --md-sys-color-on-primary-light: #ffffff;
+            --md-sys-color-primary-container-light: #d1e4ff;
+            --md-sys-color-on-primary-container-light: #001d36;
+            --md-sys-color-secondary-light: #535f70; /* Neutral */
+            --md-sys-color-on-secondary-light: #ffffff;
+            --md-sys-color-secondary-container-light: #d7e3f7;
+            --md-sys-color-on-secondary-container-light: #101c2b;
+            --md-sys-color-tertiary-light: #6b5778; /* Purple */
+            --md-sys-color-on-tertiary-light: #ffffff;
+            --md-sys-color-tertiary-container-light: #f2daff;
+            --md-sys-color-on-tertiary-container-light: #251431;
+            --md-sys-color-error-light: #ba1a1a; /* Red */
+            --md-sys-color-on-error-light: #ffffff;
+            --md-sys-color-error-container-light: #ffdad6;
+            --md-sys-color-on-error-container-light: #410002;
+             /* Additional colors often needed */
+            --md-sys-color-success-light: #177e2a; /* Green */
+            --md-sys-color-on-success-light: #ffffff;
+            --md-sys-color-success-container-light: #b4f7ae;
+            --md-sys-color-on-success-container-light: #002205;
+            --md-sys-color-warning-light: #7e5700; /* Yellow/Orange */
+            --md-sys-color-on-warning-light: #ffffff;
+            --md-sys-color-warning-container-light: #ffdea3;
+            --md-sys-color-on-warning-container-light: #281900;
+            /* Surface & Background */
+            --md-sys-color-background-light: #fefcff;
+            --md-sys-color-on-background-light: #1a1c1e;
+            --md-sys-color-surface-light: #fefcff;
+            --md-sys-color-on-surface-light: #1a1c1e;
+            --md-sys-color-surface-variant-light: #dfe3eb;
+            --md-sys-color-on-surface-variant-light: #42474e;
+            --md-sys-color-outline-light: #73777f;
+            --md-sys-color-outline-variant-light: #c2c7cf;
+            --md-sys-color-shadow-light: #000000;
+            --md-sys-color-surface-tint-light: var(--md-sys-color-primary-light);
+            --md-sys-color-inverse-surface-light: #2f3033;
+            --md-sys-color-inverse-on-surface-light: #f1f0f4;
+            --md-sys-color-inverse-primary-light: #a0c9ff;
+
+            /* Dark Theme Colors */
+            --md-sys-color-primary-dark: #a0c9ff;
+            --md-sys-color-on-primary-dark: #003258;
+            --md-sys-color-primary-container-dark: #00497d;
+            --md-sys-color-on-primary-container-dark: #d1e4ff;
+            --md-sys-color-secondary-dark: #bbc7db;
+            --md-sys-color-on-secondary-dark: #253140;
+            --md-sys-color-secondary-container-dark: #3b4858;
+            --md-sys-color-on-secondary-container-dark: #d7e3f7;
+            --md-sys-color-tertiary-dark: #d6bee4;
+            --md-sys-color-on-tertiary-dark: #3b2948;
+            --md-sys-color-tertiary-container-dark: #523f5f;
+            --md-sys-color-on-tertiary-container-dark: #f2daff;
+            --md-sys-color-error-dark: #ffb4ab;
+            --md-sys-color-on-error-dark: #690005;
+            --md-sys-color-error-container-dark: #93000a;
+            --md-sys-color-on-error-container-dark: #ffdad6;
+            --md-sys-color-success-dark: #99da94;
+            --md-sys-color-on-success-dark: #00390d;
+            --md-sys-color-success-container-dark: #005317;
+            --md-sys-color-on-success-container-dark: #b4f7ae;
+            --md-sys-color-warning-dark: #fbbc04; /* Using Google yellow */
+            --md-sys-color-on-warning-dark: #412d00;
+            --md-sys-color-warning-container-dark: #5f4200;
+            --md-sys-color-on-warning-container-dark: #ffdea3;
+            --md-sys-color-background-dark: #1a1c1e;
+            --md-sys-color-on-background-dark: #e2e2e6;
+            --md-sys-color-surface-dark: #1a1c1e;
+            --md-sys-color-on-surface-dark: #e2e2e6;
+            --md-sys-color-surface-variant-dark: #42474e;
+            --md-sys-color-on-surface-variant-dark: #c2c7cf;
+            --md-sys-color-outline-dark: #8c9199;
+            --md-sys-color-outline-variant-dark: #42474e;
+            --md-sys-color-shadow-dark: #000000;
+            --md-sys-color-surface-tint-dark: var(--md-sys-color-primary-dark);
+            --md-sys-color-inverse-surface-dark: #e2e2e6;
+            --md-sys-color-inverse-on-surface-dark: #1a1c1e;
+            --md-sys-color-inverse-primary-dark: #0061a4;
+
+            /* Shape */
+            --md-shape-corner-none: 0px;
+            --md-shape-corner-extra-small: 4px;
+            --md-shape-corner-small: 8px;
+            --md-shape-corner-medium: 12px;
+            --md-shape-corner-large: 16px;
+            --md-shape-corner-extra-large: 28px;
+            --md-shape-corner-full: 9999px;
+
+            /* Elevation */
+            --md-sys-elevation-level-0: none;
+            --md-sys-elevation-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+            /* State Layers */
+            --md-sys-state-hover-state-layer-opacity: 0.08;
+            --md-sys-state-focus-state-layer-opacity: 0.12;
+            --md-sys-state-pressed-state-layer-opacity: 0.12;
+            --md-sys-state-dragged-state-layer-opacity: 0.16;
+
+            /* Typography */
+            --md-sys-typescale-body-large-font-family-name: Roboto;
+            --md-sys-typescale-body-large-font-weight: 400;
+            --md-sys-typescale-body-large-font-size: 1rem;
+            --md-sys-typescale-body-large-line-height: 1.5rem;
+            --md-sys-typescale-body-medium-font-family-name: Roboto;
+            --md-sys-typescale-body-medium-font-weight: 400;
+            --md-sys-typescale-body-medium-font-size: 0.875rem;
+            --md-sys-typescale-body-medium-line-height: 1.25rem;
+            --md-sys-typescale-body-small-font-family-name: Roboto;
+            --md-sys-typescale-body-small-font-weight: 400;
+            --md-sys-typescale-body-small-font-size: 0.75rem;
+            --md-sys-typescale-body-small-line-height: 1rem;
+            --md-sys-typescale-label-large-font-family-name: Roboto;
+            --md-sys-typescale-label-large-font-weight: 500;
+            --md-sys-typescale-label-large-font-size: 0.875rem;
+            --md-sys-typescale-label-large-line-height: 1.25rem;
+            --md-sys-typescale-label-medium-font-family-name: Roboto;
+            --md-sys-typescale-label-medium-font-weight: 500;
+            --md-sys-typescale-label-medium-font-size: 0.75rem;
+            --md-sys-typescale-label-medium-line-height: 1rem;
+             --md-sys-typescale-label-small-font-family-name: Roboto;
+            --md-sys-typescale-label-small-font-weight: 500;
+            --md-sys-typescale-label-small-font-size: 0.6875rem; /* 11px */
+            --md-sys-typescale-label-small-line-height: 1rem;
+            --md-sys-typescale-title-large-font-family-name: Roboto;
+            --md-sys-typescale-title-large-font-weight: 400;
+            --md-sys-typescale-title-large-font-size: 1.375rem;
+            --md-sys-typescale-title-large-line-height: 1.75rem;
+            --md-sys-typescale-title-medium-font-family-name: Roboto;
+            --md-sys-typescale-title-medium-font-weight: 500;
+            --md-sys-typescale-title-medium-font-size: 1rem;
+            --md-sys-typescale-title-medium-line-height: 1.5rem;
+             --md-sys-typescale-title-small-font-family-name: Roboto;
+            --md-sys-typescale-title-small-font-weight: 500;
+            --md-sys-typescale-title-small-font-size: 0.875rem;
+            --md-sys-typescale-title-small-line-height: 1.25rem;
+            --md-sys-typescale-headline-medium-font-family-name: Roboto;
+            --md-sys-typescale-headline-medium-font-weight: 400;
+            --md-sys-typescale-headline-medium-font-size: 1.75rem;
+            --md-sys-typescale-headline-medium-line-height: 2.25rem;
+             --md-sys-typescale-display-large-font-family-name: Roboto;
+            --md-sys-typescale-display-large-font-weight: 400;
+            --md-sys-typescale-display-large-font-size: 3.5625rem; /* 57px */
+            --md-sys-typescale-display-large-line-height: 4rem; /* 64px */
+            --md-sys-typescale-display-medium-font-family-name: Roboto;
+            --md-sys-typescale-display-medium-font-weight: 400;
+            --md-sys-typescale-display-medium-font-size: 2.8125rem; /* 45px */
+            --md-sys-typescale-display-medium-line-height: 3.25rem; /* 52px */
+        }
+
+        /* --- Theme Variable Application (Same as previous example) --- */
+        [data-theme="light"] {
+            --primary: var(--md-sys-color-primary-light);
+            --on-primary: var(--md-sys-color-on-primary-light);
+            --primary-container: var(--md-sys-color-primary-container-light);
+            --on-primary-container: var(--md-sys-color-on-primary-container-light);
+            --secondary: var(--md-sys-color-secondary-light);
+            --on-secondary: var(--md-sys-color-on-secondary-light);
+            --secondary-container: var(--md-sys-color-secondary-container-light);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-light);
+            --tertiary: var(--md-sys-color-tertiary-light);
+            --on-tertiary: var(--md-sys-color-on-tertiary-light);
+            --tertiary-container: var(--md-sys-color-tertiary-container-light);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-light);
+            --error: var(--md-sys-color-error-light);
+            --on-error: var(--md-sys-color-on-error-light);
+            --error-container: var(--md-sys-color-error-container-light);
+            --on-error-container: var(--md-sys-color-on-error-container-light);
+            --success: var(--md-sys-color-success-light);
+            --on-success: var(--md-sys-color-on-success-light);
+            --success-container: var(--md-sys-color-success-container-light);
+            --on-success-container: var(--md-sys-color-on-success-container-light);
+            --warning: var(--md-sys-color-warning-light);
+            --on-warning: var(--md-sys-color-on-warning-light);
+            --warning-container: var(--md-sys-color-warning-container-light);
+            --on-warning-container: var(--md-sys-color-on-warning-container-light);
+            --background: var(--md-sys-color-background-light);
+            --on-background: var(--md-sys-color-on-background-light);
+            --surface: var(--md-sys-color-surface-light);
+            --on-surface: var(--md-sys-color-on-surface-light);
+            --surface-variant: var(--md-sys-color-surface-variant-light);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-light);
+            --outline: var(--md-sys-color-outline-light);
+            --outline-variant: var(--md-sys-color-outline-variant-light);
+            --shadow: var(--md-sys-color-shadow-light);
+            --surface-tint-color: var(--md-sys-color-surface-tint-light);
+            --inverse-surface: var(--md-sys-color-inverse-surface-light);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-light);
+            --inverse-primary: var(--md-sys-color-inverse-primary-light);
+
+            /* RGB values */
+            --primary-rgb: 0, 97, 164;
+            --secondary-rgb: 83, 95, 112;
+            --surface-rgb: 254, 252, 255;
+            --on-surface-rgb: 26, 28, 30;
+            --error-rgb: 186, 26, 26;
+             --shadow-rgb: 0, 0, 0; /* Added for modal overlay */
+        }
+
+        [data-theme="dark"] {
+            --primary: var(--md-sys-color-primary-dark);
+            --on-primary: var(--md-sys-color-on-primary-dark);
+            --primary-container: var(--md-sys-color-primary-container-dark);
+            --on-primary-container: var(--md-sys-color-on-primary-container-dark);
+            --secondary: var(--md-sys-color-secondary-dark);
+            --on-secondary: var(--md-sys-color-on-secondary-dark);
+            --secondary-container: var(--md-sys-color-secondary-container-dark);
+            --on-secondary-container: var(--md-sys-color-on-secondary-container-dark);
+            --tertiary: var(--md-sys-color-tertiary-dark);
+            --on-tertiary: var(--md-sys-color-on-tertiary-dark);
+            --tertiary-container: var(--md-sys-color-tertiary-container-dark);
+            --on-tertiary-container: var(--md-sys-color-on-tertiary-container-dark);
+            --error: var(--md-sys-color-error-dark);
+            --on-error: var(--md-sys-color-on-error-dark);
+            --error-container: var(--md-sys-color-error-container-dark);
+            --on-error-container: var(--md-sys-color-on-error-container-dark);
+            --success: var(--md-sys-color-success-dark);
+            --on-success: var(--md-sys-color-on-success-dark);
+            --success-container: var(--md-sys-color-success-container-dark);
+            --on-success-container: var(--md-sys-color-on-success-container-dark);
+            --warning: var(--md-sys-color-warning-dark);
+            --on-warning: var(--md-sys-color-on-warning-dark);
+            --warning-container: var(--md-sys-color-warning-container-dark);
+            --on-warning-container: var(--md-sys-color-on-warning-container-dark);
+            --background: var(--md-sys-color-background-dark);
+            --on-background: var(--md-sys-color-on-background-dark);
+            --surface: var(--md-sys-color-surface-dark);
+            --on-surface: var(--md-sys-color-on-surface-dark);
+            --surface-variant: var(--md-sys-color-surface-variant-dark);
+            --on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
+            --outline: var(--md-sys-color-outline-dark);
+            --outline-variant: var(--md-sys-color-outline-variant-dark);
+            --shadow: var(--md-sys-color-shadow-dark);
+            --surface-tint-color: var(--md-sys-color-surface-tint-dark);
+            --inverse-surface: var(--md-sys-color-inverse-surface-dark);
+            --inverse-on-surface: var(--md-sys-color-inverse-on-surface-dark);
+            --inverse-primary: var(--md-sys-color-inverse-primary-dark);
+
+            /* RGB values */
+            --primary-rgb: 160, 201, 255;
+            --secondary-rgb: 187, 199, 219;
+            --surface-rgb: 26, 28, 30;
+            --on-surface-rgb: 226, 226, 230;
+            --error-rgb: 255, 180, 171;
+            --shadow-rgb: 0, 0, 0; /* Added for modal overlay */
+        }
+
+        /* --- Base Styles (Same as previous example) --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--md-sys-typescale-body-medium-font-family-name), sans-serif;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            line-height: var(--md-sys-typescale-body-medium-line-height);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight);
+            background-color: var(--background);
+            color: var(--on-background);
             transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Light Mode */
-        body.light {
-            background-color: #f9fafb; /* Tailwind's gray-50 */
-            color: #1f2937; /* Tailwind's gray-800 */
+        /* --- Layout (Same as previous example) --- */
+        .layout-container { display: flex; height: 100vh; overflow: hidden; }
+
+        /* --- Sidebar (Same as previous example) --- */
+        .sidebar {
+            width: 256px;
+            background-color: var(--surface);
+            border-right: 1px solid var(--outline-variant);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .sidebar-header {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid var(--outline-variant);
+            transition: border-color 0.3s ease;
+        }
+        .sidebar-header a {
+            font-size: var(--md-sys-typescale-title-large-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight);
+            color: var(--primary);
+            text-decoration: none;
+            display: block;
+        }
+        .sidebar-header span {
+            display: block;
+            margin-top: 4px;
+            font-size: var(--md-sys-typescale-body-small-font-size);
+            color: var(--on-surface-variant);
+        }
+        .sidebar-nav {
+            padding: 0.5rem;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: var(--md-shape-corner-full);
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            font-size: var(--md-sys-typescale-label-large-font-size);
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .sidebar-nav a i {
+            width: 24px;
+            margin-right: 1rem;
+            text-align: center;
+             color: var(--on-surface-variant);
+             transition: color 0.15s ease;
+        }
+        .sidebar-nav a::before { /* State Layer */
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--secondary);
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            border-radius: inherit;
+        }
+        .sidebar-nav a:hover {
+             color: var(--on-secondary-container);
+        }
+        .sidebar-nav a:hover::before {
+            opacity: var(--md-sys-state-hover-state-layer-opacity);
+        }
+        .sidebar-nav a:hover i {
+            color: var(--on-secondary-container);
+        }
+        /* Active state for sidebar */
+         .sidebar-nav a.active {
+            background-color: var(--secondary-container);
+            color: var(--on-secondary-container);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+         }
+         .sidebar-nav a.active i {
+            color: var(--on-secondary-container);
+         }
+        /* Logout link specific style */
+        .sidebar-nav a.logout-link {
+            margin-top: 1.5rem;
+            color: var(--error);
+        }
+         .sidebar-nav a.logout-link i { color: var(--error); }
+        .sidebar-nav a.logout-link::before { background-color: var(--error); }
+        .sidebar-nav a.logout-link:hover {
+            color: var(--on-error-container);
+        }
+        .sidebar-nav a.logout-link:hover::before {
+            background-color: var(--error-container);
+            opacity: var(--md-sys-state-hover-state-layer-opacity);
+        }
+        .sidebar-nav a.logout-link:hover i { color: var(--on-error-container); }
+
+        /* --- Main Content Area (Same as previous example) --- */
+        .main-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        .main-content h1 {
+            font-size: var(--md-sys-typescale-headline-medium-font-size);
+            font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+            line-height: var(--md-sys-typescale-headline-medium-line-height);
+            color: var(--on-surface);
+            margin-bottom: 0.5rem; /* Reduced margin */
+        }
+         .main-content > p { /* Target direct child p for subtitle */
+            font-size: var(--md-sys-typescale-body-large-font-size);
+            color: var(--on-surface-variant);
+            margin-bottom: 2rem; /* 32px */
+         }
+
+         /* Section headings */
+         .section-heading {
+            font-size: var(--md-sys-typescale-title-large-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight); /* 500 */
+            color: var(--on-surface);
+            margin-bottom: 1rem; /* 16px */
+         }
+
+        /* --- Grids --- */
+        .grid-container {
+            display: grid;
+            gap: 1.5rem; /* 24px */
+            margin-bottom: 2rem; /* 32px */
+        }
+        .grid-cols-1 { grid-template-columns: 1fr; }
+        .grid-cols-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } /* Responsive 2-col */
+        .grid-cols-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); } /* Responsive 3-col */
+
+
+        /* --- Cards (Stats / Features) --- */
+        .card {
+            background-color: var(--surface);
+            padding: 1.5rem; /* 24px */
+            border-radius: var(--md-shape-corner-large); /* Consistent rounding */
+            box-shadow: var(--md-sys-elevation-level-1);
+            transition: box-shadow 0.2s ease, transform 0.2s ease; /* Keep subtle hover */
+        }
+        .card:hover {
+            box-shadow: var(--md-sys-elevation-level-2);
+             transform: translateY(-2px);
+        }
+        .card .card-title { /* For stat card subtitles */
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            font-weight: var(--md-sys-typescale-label-medium-font-weight);
+            color: var(--on-surface-variant);
+            margin-bottom: 0.25rem; /* 4px */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .card .card-metric { /* For stat card numbers */
+            font-size: var(--md-sys-typescale-display-small-font-size); /* Use Display scale */
+             font-weight: var(--md-sys-typescale-display-small-font-weight);
+            line-height: var(--md-sys-typescale-display-small-line-height);
+            color: var(--primary); /* Make number prominent */
+            margin-bottom: 1rem; /* Space before button */
+        }
+         .card .card-content h3 { /* Feature card title */
+            font-size: var(--md-sys-typescale-title-medium-font-size);
+            font-weight: var(--md-sys-typescale-title-medium-font-weight);
+            color: var(--on-surface);
+            margin-bottom: 0.5rem;
+         }
+         .card .card-content p { /* Feature card description */
+             font-size: var(--md-sys-typescale-body-medium-font-size);
+             color: var(--on-surface-variant);
+             margin-bottom: 1rem;
+         }
+        .card .card-actions {
+            margin-top: auto; /* Push actions to bottom if card uses flex */
+             padding-top: 1rem;
+        }
+        .card .card-actions .button {
+            margin-top: 1rem; /* Adjust if needed */
         }
 
-        .light .bg-white {
-            background-color: #ffffff;
-            color: #1f2937;
+        /* --- Buttons (Using M3 styles from previous example) --- */
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.625rem 1.5rem; border-radius: var(--md-shape-corner-full);
+            font-family: inherit; font-size: var(--md-sys-typescale-label-large-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight);
+            text-align: center; border: none; cursor: pointer; position: relative;
+            overflow: hidden; user-select: none; vertical-align: middle;
+             transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+        }
+        .button::before { /* State Layer */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: currentColor; opacity: 0; transition: opacity 0.15s ease; border-radius: inherit;
+        }
+        .button:hover::before { opacity: var(--md-sys-state-hover-state-layer-opacity); }
+        .button:focus { outline: none; }
+        .button:focus::before { opacity: var(--md-sys-state-focus-state-layer-opacity); }
+        .button:active::before { opacity: var(--md-sys-state-pressed-state-layer-opacity); }
+
+        .button-filled { background-color: var(--primary); color: var(--on-primary); box-shadow: var(--md-sys-elevation-level-0); }
+        .button-filled:hover { box-shadow: var(--md-sys-elevation-level-1); }
+
+        .button-outlined { background-color: transparent; color: var(--primary); border: 1px solid var(--outline); }
+        .button-outlined:hover { background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity)); }
+        .button-outlined::before { background-color: var(--primary); }
+
+        .button-text { background-color: transparent; color: var(--primary); padding-left: 0.75rem; padding-right: 0.75rem; }
+        .button-text::before { background-color: var(--primary); }
+        .button-text:hover { background-color: rgba(var(--primary-rgb), var(--md-sys-state-hover-state-layer-opacity)); }
+
+        .button-icon { padding: 0.5rem; border-radius: 50%; line-height: 0; }
+        .button-icon i { font-size: 1.25rem; }
+
+        /* Button Variants by Color */
+        .button-success { background-color: var(--success); color: var(--on-success); }
+        .button-success:hover { box-shadow: var(--md-sys-elevation-level-1); }
+        .button-error { background-color: var(--error); color: var(--on-error); }
+        .button-error:hover { box-shadow: var(--md-sys-elevation-level-1); }
+        /* Add more color variants if needed */
+
+
+        /* --- Data Table --- */
+        .data-table-container {
+            background-color: var(--surface);
+            border-radius: var(--md-shape-corner-large); /* Match card rounding */
+            box-shadow: var(--md-sys-elevation-level-1);
+            overflow: hidden; /* Clip table corners */
+             margin-top: 1.5rem; /* Space above table */
+        }
+         .data-table-wrapper {
+             overflow-x: auto; /* Enable horizontal scroll on small screens */
+         }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse; /* Cleaner borders */
+            white-space: nowrap; /* Prevent text wrapping initially */
+        }
+        .data-table thead {
+             /* Subtler background */
+             background-color: rgba(var(--surface-rgb), 0.5);
+            border-bottom: 1px solid var(--outline-variant);
+        }
+        .data-table th {
+            padding: 0.75rem 1rem; /* 12px 16px */
+            text-align: left;
+            font-size: var(--md-sys-typescale-label-medium-font-size);
+            font-weight: var(--md-sys-typescale-label-medium-font-weight);
+            color: var(--on-surface-variant);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .data-table tbody tr {
+             border-bottom: 1px solid var(--outline-variant);
+             transition: background-color 0.15s ease;
+        }
+        .data-table tbody tr:last-child {
+            border-bottom: none;
+        }
+        .data-table tbody tr:hover {
+             background-color: rgba(var(--on-surface-rgb), 0.04); /* Subtle hover */
+        }
+        .data-table td {
+            padding: 0.875rem 1rem; /* 14px 16px */
+            vertical-align: middle;
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            color: var(--on-surface);
+        }
+        .data-table td.text-muted { /* For secondary text in cells */
+             color: var(--on-surface-variant);
+        }
+        .data-table td.text-primary-emphasis { /* For main item name */
+            color: var(--primary);
+            font-weight: var(--md-sys-typescale-body-medium-font-weight); /* 500 */
         }
 
-        .light nav a {
-            color: #1f2937;
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem; /* 4px 12px */
+            border-radius: var(--md-shape-corner-full);
+            font-size: var(--md-sys-typescale-label-small-font-size);
+            font-weight: var(--md-sys-typescale-label-small-font-weight);
+            line-height: 1.2; /* Adjust for small size */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-live {
+            background-color: var(--success-container);
+            color: var(--on-success-container);
+        }
+        .status-upcoming {
+            background-color: var(--warning-container);
+            color: var(--on-warning-container);
+        }
+        .status-draft {
+            background-color: var(--secondary-container);
+            color: var(--on-secondary-container);
+        }
+        .status-ended {
+            background-color: var(--surface-variant);
+            color: var(--on-surface-variant);
         }
 
-        .light nav a:hover {
-            background-color: #e5e7eb; /* Tailwind's gray-200 */
-            color: #2563eb; /* Tailwind's blue-600 */
+        /* Table Actions */
+        .table-actions {
+            display: flex;
+            gap: 0.5rem; /* 8px */
+        }
+        .table-actions .button {
+             padding: 0.25rem 0.5rem; /* Smaller padding for text buttons in table */
+             font-size: var(--md-sys-typescale-label-medium-font-size);
+        }
+         .table-actions .button-delete { /* Specific class for delete */
+            color: var(--error);
+         }
+         .table-actions .button-delete::before { background-color: var(--error); }
+          .table-actions .button-delete:hover {
+            background-color: rgba(var(--error-rgb), var(--md-sys-state-hover-state-layer-opacity));
         }
 
-        /* Dark Mode */
-        body.dark {
-            background-color: #1f2937; /* Tailwind's gray-800 */
-            color: #f9fafb; /* Tailwind's gray-50 */
+        /* Table Expandable Row */
+        .details-row td {
+             background-color: var(--surface-variant); /* Different background */
+             white-space: normal; /* Allow wrapping */
+             color: var(--on-surface-variant);
         }
-
-        .dark .bg-white {
-            background-color: #374151; /* Tailwind's gray-700 */
-            color: #f9fafb;
+        .details-row h3 {
+             font-size: var(--md-sys-typescale-title-small-font-size);
+             color: var(--on-surface);
+             margin-bottom: 0.5rem;
         }
+         .details-row ul {
+             list-style-position: inside;
+             margin-top: 0.5rem;
+             padding-left: 0.5rem;
+         }
+          .details-row li { margin-bottom: 0.25rem; }
 
-        .dark nav a {
-            color: #e5e7eb; /* Tailwind's gray-200 */
+
+        /* --- Recent Activity List --- */
+        .activity-list-container {
+            background-color: var(--surface);
+            border-radius: var(--md-shape-corner-large);
+            box-shadow: var(--md-sys-elevation-level-1);
+            padding: 1rem 0; /* Vertical padding only */
+             margin-top: 2rem;
         }
-
-        .dark nav a:hover {
-            background-color: #4b5563; /* Tailwind's gray-600 */
-            color: #60a5fa; /* Tailwind's blue-400 */
+        .activity-list {
+            list-style: none;
         }
-
-        .dark .text-gray-500 {
-            color: #9ca3af; /* Tailwind's gray-400 */
+        .activity-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.875rem 1.5rem; /* 14px 24px */
+            border-bottom: 1px solid var(--outline-variant);
         }
-
-        .dark .text-gray-800 {
-            color: #d1d5db; /* Tailwind's gray-300 */
+         .activity-list li:last-child { border-bottom: none; }
+        .activity-list .activity-text p:first-child {
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            font-weight: var(--md-sys-typescale-label-large-font-weight); /* Medium weight */
+            color: var(--on-surface);
+            margin-bottom: 2px;
         }
-
-        .dark .text-gray-900 {
-            color: #f3f4f6; /* Tailwind's gray-100 */
+        .activity-list .activity-text p:last-child {
+            font-size: var(--md-sys-typescale-body-small-font-size);
+            color: var(--on-surface-variant);
         }
+         .activity-list .button {
+            margin-left: 1rem; /* Space between text and button */
+         }
 
-        /* Sidebar active link */
-        .dark nav a.bg-blue-100 {
-            background-color: #2563eb; /* Tailwind's blue-600 */
-            color: #ffffff;
-        }
 
-        .dark nav a.bg-blue-100:hover {
-            background-color: #1d4ed8; /* Tailwind's blue-700 */
-        }
-
-        /* Toggle Icon */
-        .toggle-icon {
+        /* --- Modal Dialog --- */
+        .modal-overlay {
             position: fixed;
-            top: 1rem;
-            right: 1rem;
-            width: 3rem;
-            height: 3rem;
-            background-color: #2563eb; /* Tailwind's blue-600 */
-            border-radius: 50%;
+            inset: 0;
+            background-color: rgba(var(--shadow-rgb), 0.4); /* Use shadow color with alpha */
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .toggle-icon:hover {
-            background-color: #1d4ed8; /* Tailwind's blue-700 */
-            transform: scale(1.1);
-        }
-
-        .toggle-icon svg {
-            width: 1.5rem;
-            height: 1.5rem;
-            fill: #ffffff;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-
-        .toggle-icon .sun {
+            z-index: 1000;
             opacity: 0;
-            transform: scale(0.8) rotate(45deg);
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0s linear 0.3s;
         }
-
-        body.light .toggle-icon .moon {
-            opacity: 0;
-            transform: scale(0.8) rotate(-45deg);
-        }
-
-        body.light .toggle-icon .sun {
+        .modal-overlay.visible {
             opacity: 1;
-            transform: scale(1) rotate(0deg);
+            visibility: visible;
+            transition: opacity 0.3s ease, visibility 0s linear 0s;
         }
-
-        /* Glow Effect */
-        .toggle-icon.glow {
-            box-shadow: 0 0 15px rgba(255, 223, 0, 0.8);
-        }
-
-        body.light .toggle-icon.glow {
-            box-shadow: 0 0 15px rgba(255, 223, 0, 0.8);
-        }
-
-        body.dark .toggle-icon.glow {
-            box-shadow: 0 0 15px rgba(173, 216, 230, 0.8);
-        }
-
-        /* Smooth hover transitions */
-        a, button, .card {
-            transition: all 0.3s ease-in-out;
-        }
-
-        a:hover, button:hover, .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Button hover effects */
-        button:hover {
-            background-color: #2563eb; /* Tailwind's blue-600 */
-            color: #ffffff;
-        }
-
-        /* Sidebar link hover effects */
-        nav a:hover {
-            background-color: #e5e7eb; /* Tailwind's gray-200 */
-            color: #2563eb; /* Tailwind's blue-600 */
-        }
-
-        /* Smooth content fade-in */
-        main {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Pop-up modal styles */
-        .modal {
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-
-        .modal.hidden {
-            opacity: 0;
+        .modal-dialog {
+            background-color: var(--surface);
+            border-radius: var(--md-shape-corner-extra-large); /* M3 Dialog rounding */
+            padding: 1.5rem; /* 24px */
+            width: 90%;
+            max-width: 500px; /* Limit width */
+            box-shadow: var(--md-sys-elevation-level-3);
             transform: scale(0.95);
+            transition: transform 0.3s ease;
         }
-
-        .modal:not(.hidden) {
-            opacity: 1;
+        .modal-overlay.visible .modal-dialog {
             transform: scale(1);
         }
-
-        /* Animated elements */
-        .animated-box {
-            animation: bounce 2s infinite;
+        .modal-dialog .modal-header {
+            /* Optional: Add icon if needed */
+            margin-bottom: 1rem; /* Space below title */
         }
+        .modal-dialog .modal-title {
+            font-size: var(--md-sys-typescale-headline-small-font-size); /* Dialog title */
+             font-weight: var(--md-sys-typescale-headline-small-font-weight);
+            color: var(--on-surface);
+             margin-bottom: 1rem;
+        }
+        .modal-dialog .modal-content {
+            font-size: var(--md-sys-typescale-body-medium-font-size);
+            color: var(--on-surface-variant); /* Supporting text */
+            margin-bottom: 1.5rem; /* 24px */
+        }
+        .modal-dialog .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem; /* 8px */
+        }
+
+        /* --- Theme Toggle Button (Same as previous example) --- */
+        .theme-toggle-button {
+            position: fixed; top: 1rem; right: 1rem; z-index: 100;
+            background-color: var(--primary-container); color: var(--on-primary-container);
+            border: none; width: 48px; height: 48px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: var(--md-sys-elevation-level-2);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .theme-toggle-button:hover { box-shadow: var(--md-sys-elevation-level-3); transform: scale(1.05); }
+        .theme-toggle-button i { font-size: 1.5rem; transition: transform 0.3s ease; }
+        /* Hide/show correct icon */
+        [data-theme="dark"] .theme-toggle-button .fa-moon { display: none; }
+        [data-theme="light"] .theme-toggle-button .fa-sun { display: none; }
+        /* Optional Glow Effect */
+        .theme-toggle-button.glow {
+             box-shadow: 0 0 10px 2px var(--primary); /* Glow with primary color */
+        }
+
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .main-content { animation: fadeIn 0.5s ease-out forwards; }
 
         @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); } /* Slightly less bounce */
         }
+        .animated-bounce { /* Use a different class name */
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        /* --- Utility --- */
+        .hidden { display: none !important; } /* Ensure it overrides */
+
     </style>
 </head>
-<body class="light bg-gray-100">
-    <div class="toggle-icon glow" id="themeToggle">
-        <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M21.752 15.002A9 9 0 0 1 8.998 2.248a7 7 0 1 0 12.754 12.754z"></path>
-        </svg>
-        <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 4a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h0a1 1 0 0 1-1-1zm0 14a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h0a1 1 0 0 1-1-1zm10-6a1 1 0 0 1-1-1h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1zm-18 0a1 1 0 0 1-1-1H2a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1zm13.071-7.071a1 1 0 0 1 1.414 0l1.414 1.414a1 1 0 0 1-1.414 1.414L15.657 4.343a1 1 0 0 1 0-1.414zm-10.142 0a1 1 0 0 1 1.414 0L7.757 5.757a1 1 0 0 1-1.414 1.414L4.93 5.757a1 1 0 0 1 0-1.414zm10.142 10.142a1 1 0 0 1 1.414 0l1.414 1.414a1 1 0 0 1-1.414 1.414l-1.414-1.414a1 1 0 0 1 0-1.414zm-10.142 0a1 1 0 0 1 1.414 0l1.414 1.414a1 1 0 0 1-1.414 1.414L4.93 16.93a1 1 0 0 1 0-1.414zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"></path>
-        </svg>
-    </div>
-    <div class="flex h-screen">
+<body> <!-- Removed Tailwind class -->
+
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle-button glow" aria-label="Toggle theme"> <!-- Added glow class -->
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+
+    <div class="layout-container">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-md flex-shrink-0">
-            <div class="p-6 border-b">
-                 <a href="index.html" class="text-2xl font-bold text-blue-600">Hackverse</a>
-                 <span class="block text-sm text-gray-500 mt-1">Organizer Panel</span>
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                 <a href="index.html">Hackverse</a> <!-- Removed style classes -->
+                 <span>Organizer Panel</span> <!-- Removed style classes -->
             </div>
-            <nav class="p-4 space-y-2">
-                <a href="organizer_profile.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-building w-6 mr-2"></i> Organization Profile</a>
-                <a href="organizer_dashboard.html" class="flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded font-semibold"><i class="fas fa-tachometer-alt w-6 mr-2"></i> Dashboard</a>
-                <a href="organizer_opportunities.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-list-alt w-6 mr-2"></i> My Opportunities</a>
-                <a href="organizer_create_opportunity.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-plus-circle w-6 mr-2"></i> Create New</a>
-                <a href="organizer_analytics.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-chart-bar w-6 mr-2"></i> Analytics</a>
-                <a href="organizer_settings.html" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"><i class="fas fa-cog w-6 mr-2"></i> Settings</a>
-                 <a href="index.html" class="flex items-center px-4 py-2 text-red-600 hover:bg-red-50 rounded mt-6"><i class="fas fa-sign-out-alt w-6 mr-2"></i> Logout</a>
+            <nav class="sidebar-nav">
+                <a href="organizer_profile.html"><i class="fas fa-building"></i> Organization Profile</a>
+                <!-- Added 'active' class to current page link -->
+                <a href="organizer_dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a href="organizer_opportunities.html"><i class="fas fa-list-alt"></i> My Opportunities</a>
+                <a href="organizer_create_opportunity.html"><i class="fas fa-plus-circle"></i> Create New</a>
+                <a href="organizer_analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a>
+                <a href="organizer_settings.html"><i class="fas fa-cog"></i> Settings</a>
+                 <a href="index.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </nav>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto p-8">
-             <h1 class="text-3xl font-bold mb-6">Organizer Dashboard</h1>
-             <p class="text-lg text-gray-600 mb-8">Manage your opportunities and track performance.</p>
+        <main class="main-content">
+             <h1>Organizer Dashboard</h1> <!-- Removed style classes -->
+             <p>Manage your opportunities and track performance.</p> <!-- Removed style classes -->
 
              <!-- Quick Stats/Overview -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="card bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-sm font-medium">Active Opportunities</h3>
-                    <p class="text-3xl font-bold">5</p>
-                    <button class="text-blue-500 text-sm mt-4 hover:underline view-more-btn" data-id="active-opportunities">View Details</button>
+            <div class="grid-container grid-cols-3"> <!-- Replaced tailwind grid -->
+                <div class="card"> <!-- Replaced tailwind classes -->
+                    <h3 class="card-title">Active Opportunities</h3> <!-- Replaced tailwind classes -->
+                    <p class="card-metric">5</p> <!-- Replaced tailwind classes -->
+                    <button class="button button-text view-more-btn" data-id="active-opportunities">View Details</button> <!-- Replaced tailwind classes -->
                 </div>
-                <div class="card bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-sm font-medium">Total Registrations</h3>
-                    <p class="text-3xl font-bold">1,284</p>
-                    <button class="text-blue-500 text-sm mt-4 hover:underline view-more-btn" data-id="total-registrations">View Details</button>
+                <div class="card">
+                    <h3 class="card-title">Total Registrations</h3>
+                    <p class="card-metric">1,284</p>
+                    <button class="button button-text view-more-btn" data-id="total-registrations">View Details</button>
                 </div>
-                <div class="card bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-gray-500 text-sm font-medium">Pending Evaluations</h3>
-                    <p class="text-3xl font-bold">45</p>
-                    <button class="text-blue-500 text-sm mt-4 hover:underline view-more-btn" data-id="pending-evaluations">View Details</button>
+                <div class="card">
+                    <h3 class="card-title">Pending Evaluations</h3>
+                    <p class="card-metric">45</p>
+                    <button class="button button-text view-more-btn" data-id="pending-evaluations">View Details</button>
                 </div>
             </div>
 
             <!-- Animated Elements Section -->
             <section>
-                <h2 class="text-xl font-semibold mb-4">Interactive Features</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-lg shadow p-6 animated-box">
-                        <h3 class="text-lg font-medium text-gray-700 mb-4">Upcoming Opportunities</h3>
-                        <p class="text-sm text-gray-600">Stay tuned for upcoming hackathons and challenges.</p>
-                        <a href="explore_opportunities.html" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mt-4 inline-block">Explore</a>
+                <h2 class="section-heading">Interactive Features</h2> <!-- Replaced tailwind classes -->
+                <div class="grid-container grid-cols-2"> <!-- Replaced tailwind grid -->
+                    <div class="card animated-bounce"> <!-- Replaced classes, added new animation class -->
+                         <div class="card-content">
+                            <h3>Upcoming Opportunities</h3> <!-- Removed style classes -->
+                            <p>Stay tuned for upcoming hackathons and challenges.</p> <!-- Removed style classes -->
+                         </div>
+                         <div class="card-actions">
+                            <a href="explore_opportunities.html" class="button button-filled">Explore</a> <!-- Replaced tailwind classes -->
+                         </div>
                     </div>
-                    <div class="bg-white rounded-lg shadow p-6 animated-box">
-                        <h3 class="text-lg font-medium text-gray-700 mb-4">Community Engagement</h3>
-                        <p class="text-sm text-gray-600">Connect with participants and mentors to grow your network.</p>
-                        <a href="community_engagement.html" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mt-4 inline-block">Join Now</a>
+                    <div class="card animated-bounce">
+                        <div class="card-content">
+                            <h3>Community Engagement</h3>
+                            <p>Connect with participants and mentors to grow your network.</p>
+                        </div>
+                        <div class="card-actions">
+                            <a href="community_engagement.html" class="button button-filled button-success">Join Now</a> <!-- Replaced classes, added color variant -->
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- My Opportunities List -->
-            <section class="mt-8">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-semibold">My Opportunities</h2>
-                    <a href="organizer_create_opportunity.html" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium">
-                        <i class="fas fa-plus mr-1"></i> Create New
+            <section>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;"> <!-- Inline styles or create utility classes -->
+                    <h2 class="section-heading" style="margin-bottom: 0;">My Opportunities</h2> <!-- Removed margin -->
+                    <a href="organizer_create_opportunity.html" class="button button-filled"> <!-- Replaced classes -->
+                        <i class="fas fa-plus" style="margin-right: 0.5rem;"></i> Create New
                     </a>
                 </div>
-                <div class="bg-white rounded-lg shadow overflow-x-auto">
-                    <table class="w-full table-auto">
-                        <thead class="bg-gray-50 border-b border-gray-200">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Registrations</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Date</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Innovate for Tomorrow</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hackathon</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Live</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">350</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Oct 31, 2023</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                    <button class="text-indigo-600 hover:text-indigo-900 view-btn" data-id="1">View</button>
-                                    <a href="organizer_manage_opportunity.html" class="text-blue-600 hover:text-blue-900 manage-btn" data-id="1">Manage</a>
-                                    <a href="#" class="text-red-600 hover:text-red-900 delete-btn" data-id="1">Delete</a>
-                                </td>
-                            </tr>
-                            <tr id="details-1" class="hidden">
-                                <td colspan="6" class="bg-gray-50 px-6 py-4">
-                                    <h3 class="text-lg font-semibold mb-2">Innovate for Tomorrow</h3>
-                                    <p class="text-sm text-gray-600 mb-2">This is a detailed description of the opportunity. It includes information about the goals, requirements, and rewards for participants.</p>
-                                    <ul class="list-disc pl-5 text-sm text-gray-600">
-                                        <li>Goal: Solve real-world problems using innovative solutions.</li>
-                                        <li>Requirements: Teams of 3-5 members, registration fee $50.</li>
-                                        <li>Rewards: $10,000 cash prize, mentorship opportunities.</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Data Science Challenge</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hiring Challenge</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Upcoming</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">120</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Nov 15, 2023</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="data-table-container"> <!-- Added container -->
+                   <div class="data-table-wrapper"> <!-- Added wrapper for scroll -->
+                        <table class="data-table"> <!-- Replaced classes -->
+                            <thead> <!-- Removed classes -->
+                                <tr>
+                                    <th>Title</th> <!-- Removed classes -->
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Registrations</th>
+                                    <th>End Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody> <!-- Removed classes -->
+                                <tr>
+                                    <td class="text-primary-emphasis">Innovate for Tomorrow</td> <!-- Removed classes, added emphasis -->
+                                    <td class="text-muted">Hackathon</td> <!-- Removed classes, added mute -->
+                                    <td>
+                                        <span class="status-badge status-live">Live</span> <!-- Replaced classes -->
+                                    </td>
+                                    <td class="text-muted">350</td>
+                                    <td class="text-muted">Oct 31, 2023</td>
+                                    <td>
+                                        <div class="table-actions"> <!-- Replaced spacing classes -->
+                                            <button class="button button-text view-btn" data-id="1">View</button>
+                                            <a href="organizer_manage_opportunity.html" class="button button-text manage-btn" data-id="1">Manage</a>
+                                            <button class="button button-text button-delete delete-btn" data-id="1">Delete</button> <!-- Added button-delete -->
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Details Row -->
+                                <tr id="details-1" class="details-row hidden"> <!-- Added class -->
+                                    <td colspan="6"> <!-- Removed classes -->
+                                        <h3>Innovate for Tomorrow</h3> <!-- Removed classes -->
+                                        <p>This is a detailed description of the opportunity. It includes information about the goals, requirements, and rewards for participants.</p> <!-- Removed classes -->
+                                        <ul>
+                                            <li>Goal: Solve real-world problems using innovative solutions.</li>
+                                            <li>Requirements: Teams of 3-5 members, registration fee $50.</li>
+                                            <li>Rewards: $10,000 cash prize, mentorship opportunities.</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-primary-emphasis">Data Science Challenge</td>
+                                    <td class="text-muted">Hiring Challenge</td>
+                                    <td>
+                                         <span class="status-badge status-upcoming">Upcoming</span> <!-- Replaced classes -->
+                                    </td>
+                                    <td class="text-muted">120</td>
+                                    <td class="text-muted">Nov 15, 2023</td>
+                                    <td>
+                                         <div class="table-actions">
+                                            <button class="button button-text view-btn" data-id="2">View</button>
+                                            <a href="organizer_manage_opportunity.html" class="button button-text manage-btn" data-id="2">Manage</a>
+                                            <button class="button button-text button-delete delete-btn" data-id="2">Delete</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Details Row for second item -->
+                                <tr id="details-2" class="details-row hidden">
+                                    <td colspan="6">Detailed description for Data Science Challenge...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
             <!-- Recent Activity Section -->
-            <section class="mt-8">
-                <h2 class="text-xl font-semibold mb-4">Recent Activity</h2>
-                <div class="bg-white rounded-lg shadow p-6">
-                    <ul class="divide-y divide-gray-200">
-                        <li class="py-4 flex justify-between items-center">
-                            <div>
-                                <p class="text-sm font-medium text-gray-800">New registration for "Innovate for Tomorrow"</p>
-                                <p class="text-sm text-gray-500">John Doe registered on Oct 20, 2023</p>
+            <section>
+                <h2 class="section-heading">Recent Activity</h2>
+                <div class="activity-list-container"> <!-- Added container -->
+                    <ul class="activity-list"> <!-- Removed classes -->
+                        <li>
+                            <div class="activity-text">
+                                <p>New registration for "Innovate for Tomorrow"</p> <!-- Removed classes -->
+                                <p>John Doe registered on Oct 20, 2023</p> <!-- Removed classes -->
                             </div>
-                            <button class="text-sm text-blue-500 view-details-btn" data-id="1">View Details</button>
+                            <button class="button button-text view-details-btn" data-id="activity-1">View Details</button> <!-- Use specific ID -->
                         </li>
-                        <li class="py-4 flex justify-between items-center">
-                            <div>
-                                <p class="text-sm font-medium text-gray-800">Submission received for "Data Science Challenge"</p>
-                                <p class="text-sm text-gray-500">Team Alpha submitted their project</p>
+                        <li>
+                           <div class="activity-text">
+                                <p>Submission received for "Data Science Challenge"</p>
+                                <p>Team Alpha submitted their project</p>
                             </div>
-                            <button class="text-sm text-blue-500 view-details-btn" data-id="2">View Details</button>
+                            <button class="button button-text view-details-btn" data-id="activity-2">View Details</button>
                         </li>
+                        <!-- Add more activity items -->
                     </ul>
                 </div>
             </section>
@@ -354,84 +926,127 @@
     </div>
 
     <!-- Pop-up Modal -->
-    <div id="infoModal" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
-            <h3 class="text-lg font-semibold mb-4">Details</h3>
-            <p id="modalContent" class="text-sm text-gray-600">Placeholder for detailed information.</p>
-            <div class="flex justify-end mt-4">
-                <button id="closeModalBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Close</button>
+    <div id="infoModal" class="modal-overlay"> <!-- Changed class -->
+        <div class="modal-dialog"> <!-- Changed class -->
+            <h3 class="modal-title">Details</h3> <!-- Added class, removed others -->
+            <p id="modalContent" class="modal-content">Placeholder for detailed information.</p> <!-- Added class, removed others -->
+            <div class="modal-actions"> <!-- Added class -->
+                <button id="closeModalBtn" class="button button-filled">Close</button> <!-- Replaced classes -->
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('infoModal');
+            const htmlElement = document.documentElement;
+            const themeToggleButton = document.getElementById('themeToggle');
+            const modalOverlay = document.getElementById('infoModal'); // Target overlay
             const modalContent = document.getElementById('modalContent');
             const closeModalBtn = document.getElementById('closeModalBtn');
 
-            // Handle "View Details" button clicks
+             // --- Theme Toggle Logic (Same as previous example) ---
+             const setTheme = (theme) => {
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            };
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+
+            themeToggleButton.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                setTheme(newTheme);
+            });
+
+            // --- Modal Logic ---
+            const showModal = (content) => {
+                modalContent.textContent = content;
+                modalOverlay.classList.add('visible'); // Show overlay
+            };
+            const hideModal = () => {
+                 modalOverlay.classList.remove('visible'); // Hide overlay
+            };
+
+            // Handle "View Details" button clicks on Stats Cards
             document.querySelectorAll('.view-more-btn').forEach(button => {
                 button.addEventListener('click', () => {
                     const id = button.getAttribute('data-id');
-                    modalContent.textContent = `Detailed information about ${id.replace('-', ' ')}`;
-                    modal.classList.remove('hidden');
+                    // Replace with actual data fetching or content generation
+                    const detailedInfo = `Showing detailed information for: ${id.replace(/-/g, ' ')}. This could include charts, lists, or further breakdowns.`;
+                    showModal(detailedInfo);
+                });
+            });
+
+             // Handle "View Details" button clicks on Activity List
+             document.querySelectorAll('.view-details-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const activityId = button.getAttribute('data-id');
+                    // Fetch or generate specific activity details
+                    const activityInfo = `Details for activity ID: ${activityId}. Example: User 'John Doe' (john.doe@email.com) registered for 'Innovate for Tomorrow' via the main landing page.`;
+                     showModal(activityInfo);
                 });
             });
 
             // Handle "Close" button in modal
-            closeModalBtn.addEventListener('click', () => {
-                modal.classList.add('hidden');
-            });
+            closeModalBtn.addEventListener('click', hideModal);
 
-            // Handle Manage button clicks
-            document.querySelectorAll('.manage-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    const id = button.getAttribute('data-id');
-                    window.location.href = `organizer_manage_opportunity.html?id=${id}`;
-                });
-            });
+            // Close modal if clicking on the overlay background
+             modalOverlay.addEventListener('click', (event) => {
+                if (event.target === modalOverlay) {
+                    hideModal();
+                }
+             });
 
-            // Handle View button clicks
+            // --- Table Row Expansion Logic ---
             document.querySelectorAll('.view-btn').forEach(button => {
                 button.addEventListener('click', (event) => {
-                    event.preventDefault();
+                    event.preventDefault(); // Prevent default button action if any
                     const id = button.getAttribute('data-id');
                     const detailsRow = document.getElementById(`details-${id}`);
-                    if (detailsRow.classList.contains('hidden')) {
-                        detailsRow.classList.remove('hidden');
-                    } else {
-                        detailsRow.classList.add('hidden');
+                    if (detailsRow) {
+                        detailsRow.classList.toggle('hidden');
+                        // Optional: Change button text/icon
+                        button.textContent = detailsRow.classList.contains('hidden') ? 'View' : 'Hide';
                     }
                 });
             });
 
-            // Handle Delete button clicks
+            // --- Table Action Button Logic (Manage/Delete) ---
+            document.querySelectorAll('.manage-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    // event.preventDefault(); // Keep default link behavior
+                    const id = button.getAttribute('data-id');
+                    // Optional: Add tracking or confirmation
+                    console.log(`Navigating to manage opportunity ID: ${id}`);
+                    // Assuming the href is set correctly, just let the link work
+                     window.location.href = `organizer_manage_opportunity.html?id=${id}`; // Or use button.href
+                });
+            });
+
             document.querySelectorAll('.delete-btn').forEach(button => {
                 button.addEventListener('click', (event) => {
-                    event.preventDefault();
+                    event.preventDefault(); // Prevent default if it's a link/button submit
                     const id = button.getAttribute('data-id');
-                    if (confirm(`Are you sure you want to delete opportunity ID: ${id}?`)) {
+                    // Find the row to potentially remove later
+                    const row = button.closest('tr');
+
+                    // Use the modal for confirmation for a better UX
+                    // For simplicity, using confirm() here
+                    if (confirm(`Are you sure you want to delete opportunity ID: ${id}? This action cannot be undone.`)) {
+                        console.log(`Deleting opportunity ID: ${id}`);
+                        // Add logic here to call backend API to delete
+                        // On success:
                         alert(`Opportunity ID: ${id} has been deleted.`);
-                        // Add logic to delete the opportunity from the backend
+                        if (row) {
+                             // Also remove the details row if it exists
+                             const detailsRow = document.getElementById(`details-${id}`);
+                             if (detailsRow) detailsRow.remove();
+                             row.remove(); // Remove the row from the table
+                        }
                     }
                 });
             });
 
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
-
-            // Toggle between light and dark mode
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('light')) {
-                    body.classList.remove('light');
-                    body.classList.add('dark');
-                } else {
-                    body.classList.remove('dark');
-                    body.classList.add('light');
-                }
-            });
         });
     </script>
 </body>
